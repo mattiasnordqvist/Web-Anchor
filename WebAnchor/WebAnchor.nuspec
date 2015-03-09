@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <iconUrl>http://nuget.spinit.local/spinit-logo-nuget.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>WebAnchor assembly</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>WebAnchor</tags>
+    <releaseNotes>Initial release.</releaseNotes>   
+  </metadata>
+</package>

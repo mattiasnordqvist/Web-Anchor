@@ -1,0 +1,11 @@
+﻿using System.Net.Http;
+
+using Castle.DynamicProxy;
+
+namespace WebAnchor.RequestFactory
+{
+    public interface IHttpRequestFactory
+    {
+        HttpRequestMessage Create(IInvocation invocation);
+    }
+}
