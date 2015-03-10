@@ -87,6 +87,7 @@
     <Compile Include="RequestFactory\IHttpRequestFactory.cs" />
     <Compile Include="ResponseParser\IHttpResponseParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebAnchorException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

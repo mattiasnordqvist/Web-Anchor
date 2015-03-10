@@ -14,13 +14,18 @@ namespace WebAnchor
     {
         public static T For<T>(string baseUri, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpresponseParser = null, Action<Anchor> configure = null) where T : class
         {
+            if (!typeof(T).IsInterface)
+            {
+                throw new WebAnchorException(typeof(T).FullName + " is not an interface and cannot be used with Web Anchor");
+            }
+
             var httpClient = new HttpClient { BaseAddress = new Uri(baseUri) };
             return For<T>(httpClient, httpRequestFactory, httpresponseParser, configure);
         }
 
         public static T For<T>(HttpClient httpClient, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpresponseParser = null, Action<Anchor> configure = null) where T : class
         {
-            var httpRequestBuilder = httpRequestFactory ?? new HttpRequestFactory(new ContentSerializer());
+            var httpRequestBuilder = httpRequestFactory ?? new HttpRequestFactory(new ContentSerializer(new JsonSerializer()));
             var httpResponseParser = httpresponseParser ?? new HttpResponseParser(new JsonContentDeserializer(new JsonSerializer()));
             var configurator = configure ?? (a => { });
             var anchor = new Anchor(httpClient, httpRequestBuilder, httpResponseParser);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -11,6 +12,13 @@ namespace WebAnchor.RequestFactory
 {
     public class ContentSerializer : IContentSerializer
     {
+        private readonly JsonSerializer _jsonSerializer;
+
+        public ContentSerializer(JsonSerializer jsonSerializer)
+        {
+            _jsonSerializer = jsonSerializer;
+        }
+
         public HttpContent Serialize(Parameter payLoad)
         {
             var value = payLoad.ParameterValue;
@@ -21,8 +29,9 @@ namespace WebAnchor.RequestFactory
             }
             else
             {
-                var json = JsonConvert.SerializeObject(payLoad.ParameterValue);
-                return new StringContent(json, Encoding.UTF8, "application/json");
+                var json = new StringBuilder();
+                _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), payLoad.ParameterValue);
+                return new StringContent(json.ToString(), Encoding.UTF8, "application/json");
             }
         }
     }
