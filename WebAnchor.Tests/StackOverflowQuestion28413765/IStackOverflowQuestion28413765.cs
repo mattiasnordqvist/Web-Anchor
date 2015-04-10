@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Resolvers;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.StackOverflowQuestion28413765
 {
     public interface IStackOverflowQuestion28413765
     {

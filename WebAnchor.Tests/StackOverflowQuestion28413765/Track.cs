@@ -1,4 +1,4 @@
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.StackOverflowQuestion28413765
 {
     public class Track
     {

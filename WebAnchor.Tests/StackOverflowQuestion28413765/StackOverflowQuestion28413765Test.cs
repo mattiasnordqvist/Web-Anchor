@@ -3,7 +3,7 @@ using System.Net.Http;
 
 using NUnit.Framework;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.StackOverflowQuestion28413765
 {
     [TestFixture]
     public class StackOverflowQuestion28413765Test : WebAnchorTest
