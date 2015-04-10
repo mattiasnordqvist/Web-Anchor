@@ -14,7 +14,7 @@ namespace WebAnchor.ResponseParser
             _jsonSerializer = jsonSerializer;
         }
 
-        public T Deserialize<T>(StreamReader streamReader, HttpResponseMessage message)
+        public virtual T Deserialize<T>(StreamReader streamReader, HttpResponseMessage message)
         {
             using (var jr = new JsonTextReader(streamReader))
             {

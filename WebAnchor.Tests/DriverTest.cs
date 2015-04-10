@@ -4,16 +4,13 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
-using Castle.DynamicProxy;
 
 using NUnit.Framework;
-
-using WebAnchor.RequestFactory;
 
 namespace WebAnchor.Tests
 {
     [TestFixture]
-    public class DriverTest
+    public class DriverTest : WebAnchorTest
     {
         [Test]
         public void PlainUrl()
@@ -178,12 +175,6 @@ namespace WebAnchor.Tests
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual(string.Format("api/driver?from={0}", expectedResult), m.RequestUri.ToString());
             }));
-        }
-
-        private void Test<T>(Action<T> action, Action<HttpRequestMessage> assert, Action<HttpRequestFactory> configure = null) where T : class
-        {
-            var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new InvocationTester(assert, configure));
-            action(api);
         }
 
         private void RunWithCulture(string cultureName, Action action)
