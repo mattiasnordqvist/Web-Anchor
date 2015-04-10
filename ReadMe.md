@@ -1,5 +1,7 @@
 # WebAnchor
 
+WebAnchor provides clean and type-safe access to web resources.
+
 ## Example 1
 
 ### Api definition
