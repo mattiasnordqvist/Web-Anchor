@@ -20,7 +20,10 @@ namespace WebAnchor.Tests.IntegrationTests
         [SetUp]
         public void StartServer()
         {
-            _nancy = new NancyHost(new Uri(Host));
+            _nancy = new NancyHost(new HostConfiguration
+            {
+                                           UrlReservations = new UrlReservations { CreateAutomatically = true }
+                                       },new Uri(Host));
             _nancy.Start();
         }
 
