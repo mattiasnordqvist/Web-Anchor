@@ -5,8 +5,7 @@ WebAnchor provides clean and type-safe access to web resources.
 ## Install
 
 To install Web anchor, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
-        <p><code>PM&gt; Install-Package WebAnchor</code></p>
-
+<p><code>PM&gt; Install-Package WebAnchor</code></p>
 
 ## Use
 
