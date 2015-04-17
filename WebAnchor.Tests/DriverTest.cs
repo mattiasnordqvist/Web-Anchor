@@ -150,6 +150,17 @@ namespace WebAnchor.Tests
         }
 
         [Test]
+        public void UrlWithQueryParams_AddExtraParameter()
+        {
+            Test<IDriverApi>(api => api.GetDrivers("test"), m =>
+            {
+                Assert.AreEqual(HttpMethod.Get, m.Method);
+                Assert.AreEqual("api/driver?filter=test&extra=3", m.RequestUri.ToString());
+            },
+            x => x.DefaultParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3)));
+        }
+
+        [Test]
         public void UrlWithQueryParams_QueryStringParametersAreUrlEncoded()
         {
             Test<IDriverApi>(api => api.GetDrivers("my filter?"), m =>

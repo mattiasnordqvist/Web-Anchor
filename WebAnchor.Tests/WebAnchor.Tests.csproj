@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddExtraParameterTransformer.cs" />
     <Compile Include="ConcreteClass.cs" />
     <Compile Include="DriverTest.cs" />
     <Compile Include="IInterface.cs" />

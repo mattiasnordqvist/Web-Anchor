@@ -58,8 +58,10 @@ namespace WebAnchor.RequestFactory
                    .Where(x => invocation.GetArgumentValue(x.Index) != null)
                    .Select(x => new Parameter(x.ParameterInfo, invocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
                    .ToList();
-            var transformedParameters = DefaultParameterListTransformers
-                .Aggregate(invocationParameters, (current, transformer) => transformer.TransformParameters(current).ToList());
+
+            var transformedParameters = DefaultParameterListTransformers.Aggregate(invocationParameters,
+                (current, transformer) => transformer.TransformParameters(current)
+                                                     .ToList());
             transformedParameters.ForEach(ResolveParameter);
             return transformedParameters;
         }
@@ -116,10 +118,13 @@ namespace WebAnchor.RequestFactory
                 resolver.Resolve(parameter);
             }
             
-            var parameterResolver = parameter.ParameterInfo.GetResolverAttributesChain<ParameterResolverAttribute>();
-            foreach (var resolver in parameterResolver)
+            if(parameter.ParameterInfo != null)
             {
-                resolver.Resolve(parameter);
+                var parameterResolver = parameter.ParameterInfo.GetResolverAttributesChain<ParameterResolverAttribute>();
+                foreach (var resolver in parameterResolver)
+                {
+                    resolver.Resolve(parameter);
+                }
             }
         }
 

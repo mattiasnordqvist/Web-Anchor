@@ -9,8 +9,11 @@ namespace WebAnchor.RequestFactory.Resolvers
 
         public void Resolve(Parameter parameter)
         {
-            var name = parameter.ParameterInfo.Name;
-            parameter.Name = name;
+            if (parameter.ParameterInfo != null)
+            {
+                parameter.Name = parameter.ParameterInfo.Name;    
+            }
+            
             parameter.Value = parameter.ParameterValue == null ? null : parameter.ParameterValue.ToString();
         }
     }

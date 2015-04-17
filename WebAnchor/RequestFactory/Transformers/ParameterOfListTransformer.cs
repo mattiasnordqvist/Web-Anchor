@@ -14,7 +14,7 @@ namespace WebAnchor.RequestFactory.Transformers
                     foreach (var value in (IEnumerable)parameter.ParameterValue)
                     {
                         yield return new Parameter(parameter, value);
-                    }                    
+                    }
                 }
                 else
                 {
