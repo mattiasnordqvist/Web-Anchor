@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <description>$description$</description>
+    <authors>Spinit AB, Mattias Nordqvist, Carl Berg</authors>
+    <owners>Spinit AB, Mattias Nordqvist, Carl Berg</owners>
+    <licenseUrl>https://github.com/mattiasnordqvist/Web-Anchor/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://mattiasnordqvist.github.io/Web-Anchor/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A type-safe .NET-library for consuming web APIs</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>WebAnchor</tags>
+  </metadata>
+</package>

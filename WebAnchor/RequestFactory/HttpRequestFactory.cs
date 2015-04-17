@@ -118,7 +118,7 @@ namespace WebAnchor.RequestFactory
                 resolver.Resolve(parameter);
             }
             
-            if(parameter.ParameterInfo != null)
+            if (parameter.ParameterInfo != null)
             {
                 var parameterResolver = parameter.ParameterInfo.GetResolverAttributesChain<ParameterResolverAttribute>();
                 foreach (var resolver in parameterResolver)

@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("WebAnchor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A type-safe .NET-library for consuming web APIs")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("WebAnchor")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCompany("Spinit AB, Mattias Nordqvist, Carl Berg and contributors")]
+[assembly: AssemblyCopyright("Copyright © Spinit AB, Mattias Nordqvist, Carl Berg and contributors 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
