@@ -10,7 +10,6 @@
     <licenseUrl>https://raw.githubusercontent.com/mattiasnordqvist/web-anchor/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/mattiasnordqvist/Web-Anchor</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A type-safe .NET-library for consuming web APIs</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>WebAnchor</tags>
