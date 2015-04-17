@@ -61,10 +61,15 @@
     <Compile Include="AddExtraParameterTransformer.cs" />
     <Compile Include="ConcreteClass.cs" />
     <Compile Include="DriverTest.cs" />
+    <Compile Include="DriverWithLocation.cs" />
     <Compile Include="IInterface.cs" />
+    <Compile Include="IntegrationTests\ExtendedContentDeserializer.cs" />
     <Compile Include="IntegrationTests\FullTest.cs" />
     <Compile Include="IDriverApi.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="IntegrationTests\HeaderAttribute.cs" />
+    <Compile Include="StackOverflowQuestion28413765\StackOverflowQuestion28413765Test.cs" />
+    <Compile Include="StackOverflowQuestion28413765\IStackOverflowQuestion28413765.cs" />
     <Compile Include="IntegrationTests\TestWebServer.cs" />
     <Compile Include="InvocationTester.cs" />
     <Compile Include="MisuseTests.cs" />
@@ -73,6 +78,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReverseAttribute.cs" />
     <Compile Include="ReverseParameterListTransformers.cs" />
+    <Compile Include="StackOverflowQuestion28413765\Track.cs" />
+    <Compile Include="StackOverflowQuestion28413765\TrackSubType.cs" />
+    <Compile Include="WebAnchorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebAnchor\WebAnchor.csproj">

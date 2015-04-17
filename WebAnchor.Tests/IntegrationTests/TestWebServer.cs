@@ -25,6 +25,12 @@ namespace WebAnchor.Tests.IntegrationTests
                     var d = this.Bind<Driver>();
                     return Response.AsJson(d);
                 };
+
+            Post["api/driver/extension"] = _ =>
+            {
+                var d = this.Bind<Driver>();
+                return Response.AsJson(d).WithHeader("location", "api/driver/" + d.Id);
+            };
         }
     }
 }

@@ -56,6 +56,9 @@ namespace WebAnchor.Tests
         [Post("")]
         Task<Driver> CreateDriver2([Payload]Driver driver);
 
+        [Post("/extension")]
+        Task<DriverWithLocation> CreateDriverWithLocation([Payload]Driver driver);
+
         [Get("")]
         Task<HttpResponseMessage> MethodWithListParameter(List<string> names);
         
