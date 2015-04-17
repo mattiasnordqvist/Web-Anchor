@@ -12,7 +12,7 @@ Nuget badge here
     public interface ICustomerApi
     {
         [Get("/{id}")]
-        Task<HttpResponseMessage> GetCustomer(int id);
+        Task<Customer> GetCustomer(int id);
     }
 
     ....
