@@ -3,8 +3,6 @@ using System.Net.Http;
 
 using Castle.DynamicProxy;
 
-using Newtonsoft.Json;
-
 using WebAnchor.RequestFactory;
 using WebAnchor.ResponseParser;
 
@@ -12,7 +10,14 @@ namespace WebAnchor
 {
     public class Api
     {
-        public static T For<T>(string baseUri, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpresponseParser = null, Action<Anchor> configure = null) where T : class
+        static Api()
+        {
+            Settings = new ApiSettings();
+        }
+
+        public static ISettings Settings { get; set; }
+
+        public static T For<T>(string baseUri, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpResponseParser = null, Action<Anchor> configure = null) where T : class
         {
             if (!typeof(T).IsInterface)
             {
@@ -20,15 +25,15 @@ namespace WebAnchor
             }
 
             var httpClient = new HttpClient { BaseAddress = new Uri(baseUri) };
-            return For<T>(httpClient, httpRequestFactory, httpresponseParser, configure);
+            return For<T>(httpClient, httpRequestFactory, httpResponseParser, configure);
         }
 
-        public static T For<T>(HttpClient httpClient, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpresponseParser = null, Action<Anchor> configure = null) where T : class
+        public static T For<T>(HttpClient httpClient, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpResponseParser = null, Action<Anchor> configure = null) where T : class
         {
-            var httpRequestBuilder = httpRequestFactory ?? new HttpRequestFactory(new ContentSerializer(new JsonSerializer()));
-            var httpResponseParser = httpresponseParser ?? new HttpResponseParser(new JsonContentDeserializer(new JsonSerializer()));
+            var requestFactory = httpRequestFactory ?? Settings.RequestFactory;
+            var responseParser = httpResponseParser ?? Settings.ResponseParser;
             var configurator = configure ?? (a => { });
-            var anchor = new Anchor(httpClient, httpRequestBuilder, httpResponseParser);
+            var anchor = new Anchor(httpClient, requestFactory, responseParser);
             configurator(anchor);
             var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(anchor);
             return api;

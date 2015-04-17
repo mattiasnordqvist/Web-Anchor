@@ -62,11 +62,30 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader()
         {
-            var driverApi = Api.For<IDriverApi>(Host, httpresponseParser: new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer())));
+            var driverApi = Api.For<IDriverApi>(Host, httpResponseParser: new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer())));
             var result = await driverApi.CreateDriverWithLocation(new Driver { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual("api/driver/1", result.Location);
             Assert.AreEqual(1, result.Id);
+        }
+
+        [Test]
+        public async void PostingAJsonObject_ParsingTheLocationHeader_SupplyingResponseParserViaSettings()
+        {
+            var previousResponseParser = Api.Settings.ResponseParser;
+            try
+            {
+                Api.Settings.ResponseParser = new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer()));
+                var driverApi = Api.For<IDriverApi>(Host);
+                var result = await driverApi.CreateDriverWithLocation(new Driver { Id = 1, Name = "Mighty Gazelle" });
+                Assert.AreEqual("Mighty Gazelle", result.Name);
+                Assert.AreEqual("api/driver/1", result.Location);
+                Assert.AreEqual(1, result.Id);
+            }
+            finally
+            {
+                Api.Settings.ResponseParser = previousResponseParser;
+            }
         }
 
         [Test]
