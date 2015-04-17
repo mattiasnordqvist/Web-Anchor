@@ -7,8 +7,8 @@
     <description>$description$</description>
     <authors>Spinit AB, Mattias Nordqvist, Carl Berg</authors>
     <owners>Spinit AB, Mattias Nordqvist, Carl Berg</owners>
-    <licenseUrl>https://github.com/mattiasnordqvist/Web-Anchor/blob/master/LICENSE</licenseUrl>
-    <projectUrl>http://mattiasnordqvist.github.io/Web-Anchor/</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/mattiasnordqvist/web-anchor/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mattiasnordqvist/Web-Anchor</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A type-safe .NET-library for consuming web APIs</description>
     <releaseNotes>Initial release</releaseNotes>
