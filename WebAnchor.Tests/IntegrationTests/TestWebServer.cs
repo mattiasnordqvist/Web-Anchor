@@ -31,6 +31,12 @@ namespace WebAnchor.Tests.IntegrationTests
                 var d = this.Bind<Driver>();
                 return Response.AsJson(d).WithHeader("location", "api/driver/" + d.Id);
             };
+
+            Get["return"] = _ =>
+            {
+                var model = this.Bind<DynamicDictionary>();
+                return Response.AsJson(model);
+            };
         }
     }
 }

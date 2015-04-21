@@ -61,6 +61,15 @@ namespace WebAnchor.Tests.IntegrationTests
         }
 
         [Test]
+        public async void TestWithTypedApi()
+        {
+            var driverApi = Api.For<ITypedApi<Driver>>(Host);
+            var result = await driverApi.GetSameObject(1,"Mighty Gazelle");
+            Assert.AreEqual("Mighty Gazelle", result.Name);
+            Assert.AreEqual(1, result.Id);
+        }
+
+        [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader()
         {
             var driverApi = Api.For<IDriverApi>(Host, httpResponseParser: new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer())));
