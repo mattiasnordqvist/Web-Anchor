@@ -64,7 +64,7 @@ namespace WebAnchor.Tests.IntegrationTests
         public async void TestWithTypedApi()
         {
             var driverApi = Api.For<ITypedApi<Driver>>(Host);
-            var result = await driverApi.GetSameObject(1,"Mighty Gazelle");
+            var result = await driverApi.GetSameObject(1, "Mighty Gazelle");
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
         }

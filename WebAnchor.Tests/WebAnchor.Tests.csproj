@@ -73,6 +73,10 @@
     <Compile Include="Driver.cs" />
     <Compile Include="IntegrationTests\HeaderAttribute.cs" />
     <Compile Include="ITypedApi.cs" />
+    <Compile Include="NoCacheTests\Customer.cs" />
+    <Compile Include="NoCacheTests\INonCachedApi.cs" />
+    <Compile Include="NoCacheTests\ISomeCachedApi.cs" />
+    <Compile Include="NoCacheTests\NonCachedApiTest.cs" />
     <Compile Include="StackOverflowQuestion28413765\StackOverflowQuestion28413765Test.cs" />
     <Compile Include="StackOverflowQuestion28413765\IStackOverflowQuestion28413765.cs" />
     <Compile Include="IntegrationTests\TestWebServer.cs" />

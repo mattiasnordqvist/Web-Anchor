@@ -71,6 +71,9 @@
     <Compile Include="RequestFactory\HttpMethodAttribute.cs" />
     <Compile Include="RequestFactory\HttpRequestFactory.cs" />
     <Compile Include="RequestFactory\Resolvers\FormattableParameterResolver.cs" />
+    <Compile Include="RequestFactory\Transformers\NoCacheAttribute.cs" />
+    <Compile Include="RequestFactory\Transformers\NoCacheListTransformer.cs" />
+    <Compile Include="RequestFactory\Transformers\ParameterTransformerAttribute.cs" />
     <Compile Include="ResponseParser\ApiException.cs" />
     <Compile Include="ResponseParser\IContentDeserializer.cs" />
     <Compile Include="RequestFactory\IContentSerializer.cs" />

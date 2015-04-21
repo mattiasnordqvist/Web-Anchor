@@ -20,6 +20,11 @@ namespace WebAnchor.Tests.IntegrationTests
             return model;
         }
 
+        public bool CanBind(Type modelType)
+        {
+            return modelType == typeof(DynamicDictionary);
+        }
+
         private static IDictionary<string, object> GetDataFields(NancyContext context)
         {
             return Merge(new IDictionary<string, string>[]
@@ -54,11 +59,6 @@ namespace WebAnchor.Tests.IntegrationTests
             return dictionary.GetDynamicMemberNames().ToDictionary(
                 memberName => memberName,
                 memberName => (string)dictionary[memberName]);
-        }
-
-        public bool CanBind(Type modelType)
-        {
-            return modelType == typeof (DynamicDictionary);
         }
     }
 }

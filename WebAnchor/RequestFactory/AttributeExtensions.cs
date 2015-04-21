@@ -7,17 +7,17 @@ namespace WebAnchor.RequestFactory
 {
     public static class AttributeExtensions
     {
-        public static IEnumerable<T> GetResolverAttributesChain<T>(this ParameterInfo @this) where T : Attribute, IParameterResolver
+        public static IEnumerable<T> GetAttributesChain<T>(this ParameterInfo @this) where T : Attribute
         {
-            return @this.GetCustomAttributes<T>().Concat(GetResolverAttributesChain<T>(@this.Member));
+            return @this.GetCustomAttributes<T>().Concat(GetAttributesChain<T>(@this.Member));
         }
 
-        private static IEnumerable<T> GetResolverAttributesChain<T>(this MemberInfo @this) where T : Attribute, IParameterResolver
+        public static IEnumerable<T> GetAttributesChain<T>(this MemberInfo @this) where T : Attribute
         {
-            return @this.GetCustomAttributes<T>().Concat(GetResolverAttributesChain<T>(@this.DeclaringType));
+            return @this.GetCustomAttributes<T>().Concat(GetAttributesChain<T>(@this.DeclaringType));
         }
 
-        private static IEnumerable<T> GetResolverAttributesChain<T>(this Type @this) where T : Attribute, IParameterResolver
+        private static IEnumerable<T> GetAttributesChain<T>(this Type @this) where T : Attribute
         {
             return @this.GetCustomAttributes<T>();
         }
