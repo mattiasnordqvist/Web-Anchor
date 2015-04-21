@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ProductAssemblyInfo.cs">
+      <Link>Properties\ProductAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AddExtraParameterTransformer.cs" />
     <Compile Include="ConcreteClass.cs" />
     <Compile Include="DriverTest.cs" />
