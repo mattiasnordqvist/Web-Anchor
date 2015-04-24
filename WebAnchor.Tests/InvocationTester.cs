@@ -3,6 +3,8 @@ using System.Net.Http;
 
 using Castle.DynamicProxy;
 
+using Newtonsoft.Json;
+
 using WebAnchor.RequestFactory;
 
 namespace WebAnchor.Tests
@@ -21,7 +23,7 @@ namespace WebAnchor.Tests
 
         public void Intercept(IInvocation invocation)
         {
-            var factory = new HttpRequestFactory(null);
+            var factory = new HttpRequestFactory(new ContentSerializer(new JsonSerializer()));
             _configure(factory);
             var httpRequest = factory.Create(invocation);
             _assert(httpRequest);

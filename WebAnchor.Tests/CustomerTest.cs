@@ -10,85 +10,85 @@ using NUnit.Framework;
 namespace WebAnchor.Tests
 {
     [TestFixture]
-    public class DriverTest : WebAnchorTest
+    public class CustomerTest : WebAnchorTest
     {
         [Test]
         public void PlainUrl()
         {
-            Test<IDriverApi>(api => api.GetDrivers(), m =>
+            Test<ICustomerApi>(api => api.GetCustomers(), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlRouteSubstitution()
         {
-            Test<IDriverApi>(api => api.GetDriver(8), m =>
+            Test<ICustomerApi>(api => api.GetCustomer(8), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver/8", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer/8", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlRouteSubstitution_CustomResolver()
         {
-            Test<IDriverApi>(api => api.GetDriver2(8), m =>
+            Test<ICustomerApi>(api => api.GetCustomer2(8), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver/80", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer/80", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlWithQueryParams()
         {
-            Test<IDriverApi>(api => api.GetDrivers(filter: "drunk"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?filter=drunk", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?filter=drunk", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void AliasAttribute()
         {
-            Test<IDriverApi>(api => api.GetDrivers5(filter: "drunk"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers5(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?f=drunk", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?f=drunk", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlWithQueryParams_CustomParameterNameResolver()
         {
-            Test<IDriverApi>(api => api.GetDrivers2(filter: "drunk"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers2(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?p_filter=drunk", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?p_filter=drunk", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlWithQueryParams_CustomParameterValueResolver()
         {
-            Test<IDriverApi>(api => api.GetDrivers3(filter: "drunk"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers3(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?filter=knurd", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?filter=knurd", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlWithQueryParams_MethodScopedParameterValueResolver()
         {
-            Test<IDriverApi>(api => api.GetDrivers4(filter: "drunk"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers4(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?filter=knurd", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?filter=knurd", m.RequestUri.ToString());
             });
         }
 
@@ -105,31 +105,31 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodWithList()
         {
-            Test<IDriverApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), m =>
+            Test<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?names=abc&names=bcd&names=cde", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?names=abc&names=bcd&names=cde", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlWithQueryParams_MethodWithListOfInts()
         {
-            Test<IDriverApi>(api => api.MethodWithIntegerListParameter(new List<int> { 1, 2, 3 }), m =>
+            Test<ICustomerApi>(api => api.MethodWithIntegerListParameter(new List<int> { 1, 2, 3 }), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?values=1&values=2&values=3", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?values=1&values=2&values=3", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlWithQueryParams_MethodWithListAndDefaultReverseResolverForStrings()
         {
-            Test<IDriverApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), 
+            Test<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), 
                 m =>
                 {
                     Assert.AreEqual(HttpMethod.Get, m.Method);
-                    Assert.AreEqual("api/driver?names=cba&names=dcb&names=edc", m.RequestUri.ToString());
+                    Assert.AreEqual("api/customer?names=cba&names=dcb&names=edc", m.RequestUri.ToString());
                 },
                 x => x.DefaultParameterResolvers.Add(new ReverseAttribute()));
         }
@@ -137,11 +137,11 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_ReverseParameterOrder()
         {
-            Test<IDriverApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }),
+            Test<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }),
                 m =>
                 {
                     Assert.AreEqual(HttpMethod.Get, m.Method);
-                    Assert.AreEqual("api/driver?names=cde&names=bcd&names=abc", m.RequestUri.ToString());
+                    Assert.AreEqual("api/customer?names=cde&names=bcd&names=abc", m.RequestUri.ToString());
                 },
                 x => x.DefaultParameterListTransformers.Add(new ReverseParameterListTransformers()));
         }
@@ -149,10 +149,10 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_AddExtraParameter()
         {
-            Test<IDriverApi>(api => api.GetDrivers("test"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers("test"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?filter=test&extra=3", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?filter=test&extra=3", m.RequestUri.ToString());
             },
             x => x.DefaultParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3)));
         }
@@ -160,20 +160,20 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_QueryStringParametersAreUrlEncoded()
         {
-            Test<IDriverApi>(api => api.GetDrivers("my filter?"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers("my filter?"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver?filter=my+filter%3F", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer?filter=my+filter%3F", m.RequestUri.ToString());
             });
         }
 
         [Test]
         public void UrlWithQueryParams_RouteSegmentParametersAreUrlEncoded()
         {
-            Test<IDriverApi>(api => api.GetDrivers6("my resource"), m =>
+            Test<ICustomerApi>(api => api.GetCustomers6("my resource"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/driver/my+resource", m.RequestUri.ToString());
+                Assert.AreEqual("api/customer/my+resource", m.RequestUri.ToString());
             });
         }
 
@@ -181,10 +181,10 @@ namespace WebAnchor.Tests
         public void UrlWithQueryParams_CultureSensitiveParametersAreInvariantlyTransformed()
         {
             var expectedResult = WebUtility.UrlEncode("03/07/2014 00:00:00");
-            RunWithCulture("en-US", () => Test<IDriverApi>(api => api.GetDrivers(new DateTime(2014, 03, 07)), m =>
+            RunWithCulture("en-US", () => Test<ICustomerApi>(api => api.GetCustomers(new DateTime(2014, 03, 07)), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual(string.Format("api/driver?from={0}", expectedResult), m.RequestUri.ToString());
+                Assert.AreEqual(string.Format("api/customer?from={0}", expectedResult), m.RequestUri.ToString());
             }));
         }
 

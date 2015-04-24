@@ -96,7 +96,7 @@ namespace WebAnchor.RequestFactory
             var baseAttribute = methodInfo.DeclaringType.GetCustomAttribute<BaseLocationAttribute>();
 
             var substitutedUrl = methodAttribute.URL.Replace(
-                    ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.ParameterInfo), CreateRouteSegmentValue));
+                    ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
             var urlParams = CreateUrlParams(ResolvedParameters.QueryParameters);
 
             var resolvedUrl = (baseAttribute != null ? baseAttribute.BaseUrl : string.Empty) + substitutedUrl + urlParams;
@@ -129,9 +129,9 @@ namespace WebAnchor.RequestFactory
             }
         }
 
-        protected virtual string CreateRouteSegmentId(ParameterInfo parameter)
+        protected virtual string CreateRouteSegmentId(string name)
         {
-            return "{" + parameter.Name + "}";
+            return "{" + name + "}";
         }
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
@@ -158,7 +158,7 @@ namespace WebAnchor.RequestFactory
         {
             return parameterInfo.HasAttribute<PayloadAttribute>()
                        ? ParameterType.Payload
-                       : (url.Contains(CreateRouteSegmentId(parameterInfo))
+                       : (url.Contains(CreateRouteSegmentId(parameterInfo.Name))
                             ? ParameterType.Route
                             : ParameterType.Query);
         }

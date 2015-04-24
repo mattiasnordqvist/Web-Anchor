@@ -37,16 +37,16 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void CreatingASimpleGetRequest()
         {
-            var driverApi = Api.For<IDriverApi>(Host);
-            var result = await driverApi.GetDriver(9);
+            var customerApi = Api.For<ICustomerApi>(Host);
+            var result = await customerApi.GetCustomer(9);
             Assert.That(result.IsSuccessStatusCode);
         }
 
         [Test]
         public async void ParsingAJsonResponse()
         {
-            var driverApi = Api.For<IDriverApi>(Host);
-            var result = await driverApi.GetDriver3(9);
+            var customerApi = Api.For<ICustomerApi>(Host);
+            var result = await customerApi.GetCustomer3(9);
             Assert.AreEqual("Black Bull", result.Name);
             Assert.AreEqual(9, result.Id);
         }
@@ -54,8 +54,8 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject()
         {
-            var driverApi = Api.For<IDriverApi>(Host);
-            var result = await driverApi.CreateDriver2(new Driver { Id = 1, Name = "Mighty Gazelle" });
+            var customerApi = Api.For<ICustomerApi>(Host);
+            var result = await customerApi.CreateDriver2(new Customer { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
         }
@@ -63,8 +63,8 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void TestWithTypedApi()
         {
-            var driverApi = Api.For<ITypedApi<Driver>>(Host);
-            var result = await driverApi.GetSameObject(1, "Mighty Gazelle");
+            var customerApi = Api.For<ITypedApi<Customer>>(Host);
+            var result = await customerApi.GetSameObject(1, "Mighty Gazelle");
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
         }
@@ -72,10 +72,10 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader()
         {
-            var driverApi = Api.For<IDriverApi>(Host, httpResponseParser: new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer())));
-            var result = await driverApi.CreateDriverWithLocation(new Driver { Id = 1, Name = "Mighty Gazelle" });
+            var customerApi = Api.For<ICustomerApi>(Host, httpResponseParser: new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer())));
+            var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
-            Assert.AreEqual("api/driver/1", result.Location);
+            Assert.AreEqual("api/customer/1", result.Location);
             Assert.AreEqual(1, result.Id);
         }
 
@@ -86,10 +86,10 @@ namespace WebAnchor.Tests.IntegrationTests
             try
             {
                 Api.Settings.ResponseParser = new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer()));
-                var driverApi = Api.For<IDriverApi>(Host);
-                var result = await driverApi.CreateDriverWithLocation(new Driver { Id = 1, Name = "Mighty Gazelle" });
+                var customerApi = Api.For<ICustomerApi>(Host);
+                var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
                 Assert.AreEqual("Mighty Gazelle", result.Name);
-                Assert.AreEqual("api/driver/1", result.Location);
+                Assert.AreEqual("api/customer/1", result.Location);
                 Assert.AreEqual(1, result.Id);
             }
             finally
@@ -101,8 +101,8 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void RetrievingA404_WithTaskOFHttpResponseMessage()
         {
-            var driverApi = Api.For<IDriverApi>(Host);
-            var result = await driverApi.Get404();
+            var customerApi = Api.For<ICustomerApi>(Host);
+            var result = await customerApi.Get404();
             Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
         }
 
@@ -110,16 +110,16 @@ namespace WebAnchor.Tests.IntegrationTests
         [ExpectedException(typeof(ApiException))]
         public async void RetrievingA404_WithTaskOfT_ThrowsException()
         {
-            var driverApi = Api.For<IDriverApi>(Host);
-            await driverApi.Get404Driver();
+            var customerApi = Api.For<ICustomerApi>(Host);
+            await customerApi.Get404Driver();
         }
 
         [Test]
         [ExpectedException(typeof(JsonReaderException))]
         public async void ExpectedDataButServerReturnsNothingInContent()
         {
-            var driverApi = Api.For<IDriverApi>(Host);
-            await driverApi.GetAnObject();
+            var customerApi = Api.For<ICustomerApi>(Host);
+            await customerApi.GetAnObject();
         }
     }
 }
