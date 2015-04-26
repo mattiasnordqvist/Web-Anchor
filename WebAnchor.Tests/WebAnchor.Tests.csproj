@@ -58,16 +58,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ProductAssemblyInfo.cs">
+      <Link>Properties\ProductAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AddExtraParameterTransformer.cs" />
     <Compile Include="ConcreteClass.cs" />
-    <Compile Include="DriverTest.cs" />
-    <Compile Include="DriverWithLocation.cs" />
+    <Compile Include="CustomerTest.cs" />
+    <Compile Include="CustomerWithLocation.cs" />
+    <Compile Include="PayloadDependentUrlSegments\IDynamicTypedApi.cs" />
     <Compile Include="IInterface.cs" />
+    <Compile Include="IntegrationTests\DynamicModelBinder.cs" />
     <Compile Include="IntegrationTests\ExtendedContentDeserializer.cs" />
     <Compile Include="IntegrationTests\FullTest.cs" />
-    <Compile Include="IDriverApi.cs" />
-    <Compile Include="Driver.cs" />
+    <Compile Include="ICustomerApi.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="IntegrationTests\HeaderAttribute.cs" />
+    <Compile Include="ITypedApi.cs" />
+    <Compile Include="NoCacheTests\Customer.cs" />
+    <Compile Include="NoCacheTests\INonCachedApi.cs" />
+    <Compile Include="NoCacheTests\ISomeCachedApi.cs" />
+    <Compile Include="NoCacheTests\NonCachedApiTest.cs" />
+    <Compile Include="PayloadDependentUrlSegments\Test.cs" />
+    <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameter2Attribute.cs" />
     <Compile Include="StackOverflowQuestion28413765\StackOverflowQuestion28413765Test.cs" />
     <Compile Include="StackOverflowQuestion28413765\IStackOverflowQuestion28413765.cs" />
     <Compile Include="IntegrationTests\TestWebServer.cs" />
@@ -80,6 +92,7 @@
     <Compile Include="ReverseParameterListTransformers.cs" />
     <Compile Include="StackOverflowQuestion28413765\Track.cs" />
     <Compile Include="StackOverflowQuestion28413765\TrackSubType.cs" />
+    <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameterAttribute.cs" />
     <Compile Include="WebAnchorTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +104,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

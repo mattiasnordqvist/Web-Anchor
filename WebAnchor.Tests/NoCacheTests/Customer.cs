@@ -1,6 +1,6 @@
-﻿namespace WebAnchor.Tests
+﻿namespace WebAnchor.Tests.NoCacheTests
 {
-    public class Driver
+    public class Customer
     {
         public int Id { get; set; }
         public string Name { get; set; }

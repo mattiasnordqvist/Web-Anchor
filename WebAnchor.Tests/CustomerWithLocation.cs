@@ -2,7 +2,7 @@
 
 namespace WebAnchor.Tests
 {
-    public class DriverWithLocation : Driver
+    public class CustomerWithLocation : Customer
     {
         [Header("location")]
         public string Location { get; set; }

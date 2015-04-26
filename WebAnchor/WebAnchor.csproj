@@ -54,12 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ProductAssemblyInfo.cs">
+      <Link>Properties\ProductAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Anchor.cs" />
     <Compile Include="Api.cs" />
     <Compile Include="ApiSettings.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="RequestFactory\BaseLocationAttribute.cs" />
     <Compile Include="RequestFactory\AttributeExtensions.cs" />
+    <Compile Include="RequestFactory\ParameterTransformContext.cs" />
     <Compile Include="RequestFactory\Resolvers\AliasAttribute.cs" />
     <Compile Include="RequestFactory\ContentSerializer.cs" />
     <Compile Include="RequestFactory\Resolvers\DefaultParameterResolver.cs" />
@@ -68,6 +72,9 @@
     <Compile Include="RequestFactory\HttpMethodAttribute.cs" />
     <Compile Include="RequestFactory\HttpRequestFactory.cs" />
     <Compile Include="RequestFactory\Resolvers\FormattableParameterResolver.cs" />
+    <Compile Include="RequestFactory\Transformers\NoCacheAttribute.cs" />
+    <Compile Include="RequestFactory\Transformers\NoCacheListTransformer.cs" />
+    <Compile Include="RequestFactory\Transformers\ParameterTransformerAttribute.cs" />
     <Compile Include="ResponseParser\ApiException.cs" />
     <Compile Include="ResponseParser\IContentDeserializer.cs" />
     <Compile Include="RequestFactory\IContentSerializer.cs" />
@@ -81,8 +88,8 @@
     <Compile Include="RequestFactory\Parameters.cs" />
     <Compile Include="RequestFactory\ParameterType.cs" />
     <Compile Include="ResponseParser\HttpResponseParser.cs" />
-    <Compile Include="RequestFactory\PayloadAttribute.cs" />
-    <Compile Include="RequestFactory\PayloadType.cs" />
+    <Compile Include="RequestFactory\ContentAttribute.cs" />
+    <Compile Include="RequestFactory\ContentType.cs" />
     <Compile Include="RequestFactory\HttpAttributes\PostAttribute.cs" />
     <Compile Include="RequestFactory\HttpAttributes\PutAttribute.cs" />
     <Compile Include="RequestFactory\StringExtensions.cs" />

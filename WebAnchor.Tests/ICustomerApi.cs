@@ -17,47 +17,47 @@ namespace WebAnchor.Tests
         Task<HttpResponseMessage> GetSomething(string filter = null);
     }
 
-    [BaseLocation("api/driver")]
-    public interface IDriverApi
+    [BaseLocation("api/customer")]
+    public interface ICustomerApi
     {
         [Get("")]
-        Task<HttpResponseMessage> GetDrivers(string filter = null);
+        Task<HttpResponseMessage> GetCustomers(string filter = null);
 
         [Get("")]
-        Task<HttpResponseMessage> GetDrivers2([Prefix("p_")]string filter = null);
+        Task<HttpResponseMessage> GetCustomers2([Prefix("p_")]string filter = null);
 
         [Get("")]
-        Task<HttpResponseMessage> GetDrivers3([Reverse]string filter = null);
+        Task<HttpResponseMessage> GetCustomers3([Reverse]string filter = null);
 
         [Get(""), Reverse]
-        Task<HttpResponseMessage> GetDrivers4(string filter = null);
+        Task<HttpResponseMessage> GetCustomers4(string filter = null);
 
         [Get("")]
-        Task<HttpResponseMessage> GetDrivers5([Alias("f")]string filter = null);
+        Task<HttpResponseMessage> GetCustomers5([Alias("f")]string filter = null);
 
         [Get("/{resource}")]
-        Task<HttpResponseMessage> GetDrivers6(string resource);
+        Task<HttpResponseMessage> GetCustomers6(string resource);
 
         [Get("")]
-        Task<HttpResponseMessage> GetDrivers(DateTime from);
+        Task<HttpResponseMessage> GetCustomers(DateTime from);
 
         [Get("/{id}")]
-        Task<HttpResponseMessage> GetDriver(int id);
+        Task<HttpResponseMessage> GetCustomer(int id);
 
         [Get("/{id}")]
-        Task<HttpResponseMessage> GetDriver2([Multiply]int id);
+        Task<HttpResponseMessage> GetCustomer2([Multiply]int id);
 
         [Get("/{id}")]
-        Task<Driver> GetDriver3(int id);
+        Task<Customer> GetCustomer3(int id);
 
         [Post("")]
-        Task<Driver> CreateDriver([Payload(PayloadType.FormUrlEncoded)]Driver driver);
+        Task<Customer> CreateDriver([Content(ContentType.FormUrlEncoded)]Customer customer);
 
         [Post("")]
-        Task<Driver> CreateDriver2([Payload]Driver driver);
+        Task<Customer> CreateDriver2([Content]Customer customer);
 
         [Post("/extension")]
-        Task<DriverWithLocation> CreateDriverWithLocation([Payload]Driver driver);
+        Task<CustomerWithLocation> CreateDriverWithLocation([Content]Customer customer);
 
         [Get("")]
         Task<HttpResponseMessage> MethodWithListParameter(List<string> names);
@@ -69,9 +69,9 @@ namespace WebAnchor.Tests
         Task<HttpResponseMessage> Get404();
 
         [Get("/error/404")]
-        Task<Driver> Get404Driver();
+        Task<Customer> Get404Driver();
         
         [Get("/returnnonjson")]
-        Task<Driver> GetAnObject();
+        Task<Customer> GetAnObject();
     }
 }

@@ -32,7 +32,7 @@ namespace WebAnchor.RequestFactory
             ResolvedParameters = new Parameters(
                 resolvedParameters.Where(x => x.ParameterType == ParameterType.Route),
                 resolvedParameters.Where(x => x.ParameterType == ParameterType.Query),
-                resolvedParameters.FirstOrDefault(x => x.ParameterType == ParameterType.Payload));
+                resolvedParameters.FirstOrDefault(x => x.ParameterType == ParameterType.Content));
              
             var resolvedUrl = ResolveUrlRoute(invocation);
             var resolvedMethod = ResolveHttpMethod(invocation);
@@ -59,9 +59,10 @@ namespace WebAnchor.RequestFactory
                    .Select(x => new Parameter(x.ParameterInfo, invocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
                    .ToList();
 
-            var transformedParameters = DefaultParameterListTransformers.Aggregate(invocationParameters,
-                (current, transformer) => transformer.TransformParameters(current)
+            var transformedParameters = DefaultParameterListTransformers.Union(methodInfo.GetAttributesChain<ParameterTransformerAttribute>()).Aggregate(invocationParameters,
+                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(methodInfo))
                                                      .ToList());
+
             transformedParameters.ForEach(ResolveParameter);
             return transformedParameters;
         }
@@ -85,7 +86,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual HttpContent ResolveContent(IInvocation invocation)
         {
-            return ContentSerializer.Serialize(ResolvedParameters.PayLoad);
+            return ContentSerializer.Serialize(ResolvedParameters.Content);
         }
 
         protected virtual string ResolveUrlRoute(IInvocation invocation)
@@ -95,7 +96,7 @@ namespace WebAnchor.RequestFactory
             var baseAttribute = methodInfo.DeclaringType.GetCustomAttribute<BaseLocationAttribute>();
 
             var substitutedUrl = methodAttribute.URL.Replace(
-                    ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.ParameterInfo), CreateRouteSegmentValue));
+                    ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
             var urlParams = CreateUrlParams(ResolvedParameters.QueryParameters);
 
             var resolvedUrl = (baseAttribute != null ? baseAttribute.BaseUrl : string.Empty) + substitutedUrl + urlParams;
@@ -120,7 +121,7 @@ namespace WebAnchor.RequestFactory
             
             if (parameter.ParameterInfo != null)
             {
-                var parameterResolver = parameter.ParameterInfo.GetResolverAttributesChain<ParameterResolverAttribute>();
+                var parameterResolver = parameter.ParameterInfo.GetAttributesChain<ParameterResolverAttribute>();
                 foreach (var resolver in parameterResolver)
                 {
                     resolver.Resolve(parameter);
@@ -128,9 +129,9 @@ namespace WebAnchor.RequestFactory
             }
         }
 
-        protected virtual string CreateRouteSegmentId(ParameterInfo parameter)
+        protected virtual string CreateRouteSegmentId(string name)
         {
-            return "{" + parameter.Name + "}";
+            return "{" + name + "}";
         }
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
@@ -155,9 +156,9 @@ namespace WebAnchor.RequestFactory
 
         private ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
         {
-            return parameterInfo.HasAttribute<PayloadAttribute>()
-                       ? ParameterType.Payload
-                       : (url.Contains(CreateRouteSegmentId(parameterInfo))
+            return parameterInfo.HasAttribute<ContentAttribute>()
+                       ? ParameterType.Content
+                       : (url.Contains(CreateRouteSegmentId(parameterInfo.Name))
                             ? ParameterType.Route
                             : ParameterType.Query);
         }

@@ -7,11 +7,11 @@ namespace WebAnchor.Tests.IntegrationTests
     {
         public TestWebServer()
         {
-            Get["api/driver/returnnonjson"] = _ => "Hello World!";
+            Get["api/customer/returnnonjson"] = _ => "Hello World!";
 
-            Get["api/driver/{id}"] = _ =>
+            Get["api/customer/{id}"] = _ =>
                 {
-                    var d = new Driver
+                    var d = new Customer
                                 {
                                     Id = int.Parse(_.id.Value),
                                     Name = "Black Bull"
@@ -20,16 +20,22 @@ namespace WebAnchor.Tests.IntegrationTests
                     return Response.AsJson(d);
                 };
 
-            Post["api/driver"] = _ =>
+            Post["api/customer"] = _ =>
                 {
-                    var d = this.Bind<Driver>();
+                    var d = this.Bind<Customer>();
                     return Response.AsJson(d);
                 };
 
-            Post["api/driver/extension"] = _ =>
+            Post["api/customer/extension"] = _ =>
             {
-                var d = this.Bind<Driver>();
-                return Response.AsJson(d).WithHeader("location", "api/driver/" + d.Id);
+                var d = this.Bind<Customer>();
+                return Response.AsJson(d).WithHeader("location", "api/customer/" + d.Id);
+            };
+
+            Get["return"] = _ =>
+            {
+                var model = this.Bind<DynamicDictionary>();
+                return Response.AsJson(model);
             };
         }
     }
