@@ -11,10 +11,10 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
         public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             var list = parameters.ToList();
-            var payload = list.First(x => x.ParameterType == ParameterType.Payload);
-            list.Add(new Parameter(null, payload.ParameterValue.GetType().Name.ToLower(), ParameterType.Route)
+            var content = list.First(x => x.ParameterType == ParameterType.Content);
+            list.Add(new Parameter(null, content.ParameterValue.GetType().Name.ToLower(), ParameterType.Route)
             {
-                Name = "payloadType"
+                Name = "type"
             });
             return list;
         }

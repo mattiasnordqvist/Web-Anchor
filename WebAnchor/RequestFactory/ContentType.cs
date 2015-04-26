@@ -1,6 +1,6 @@
 ﻿namespace WebAnchor.RequestFactory
 {
-    public enum PayloadType
+    public enum ContentType
     {
         Json,
         FormUrlEncoded

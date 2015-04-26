@@ -51,13 +51,13 @@ namespace WebAnchor.Tests
         Task<Customer> GetCustomer3(int id);
 
         [Post("")]
-        Task<Customer> CreateDriver([Payload(PayloadType.FormUrlEncoded)]Customer customer);
+        Task<Customer> CreateDriver([Content(ContentType.FormUrlEncoded)]Customer customer);
 
         [Post("")]
-        Task<Customer> CreateDriver2([Payload]Customer customer);
+        Task<Customer> CreateDriver2([Content]Customer customer);
 
         [Post("/extension")]
-        Task<CustomerWithLocation> CreateDriverWithLocation([Payload]Customer customer);
+        Task<CustomerWithLocation> CreateDriverWithLocation([Content]Customer customer);
 
         [Get("")]
         Task<HttpResponseMessage> MethodWithListParameter(List<string> names);

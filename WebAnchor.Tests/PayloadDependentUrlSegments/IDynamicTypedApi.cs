@@ -10,8 +10,8 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
     [TypeNameAsUrlParameter]
     public interface IDynamicTypedApi<in T>
     {
-        [Post("/{payloadType}")]
-        Task<HttpResponseMessage> PostThis([Payload]T t);
+        [Post("/{type}")]
+        Task<HttpResponseMessage> PostThis([Content]T t);
     }
 
     [BaseLocation("/api")]
@@ -19,6 +19,6 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
     public interface IDynamicTypedApi2<in T>
     {
         [Post("/{type}")]
-        Task<HttpResponseMessage> PostThis([Payload]T t);
+        Task<HttpResponseMessage> PostThis([Content]T t);
     }
 }

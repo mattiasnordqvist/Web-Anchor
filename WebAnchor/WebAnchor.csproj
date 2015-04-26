@@ -88,8 +88,8 @@
     <Compile Include="RequestFactory\Parameters.cs" />
     <Compile Include="RequestFactory\ParameterType.cs" />
     <Compile Include="ResponseParser\HttpResponseParser.cs" />
-    <Compile Include="RequestFactory\PayloadAttribute.cs" />
-    <Compile Include="RequestFactory\PayloadType.cs" />
+    <Compile Include="RequestFactory\ContentAttribute.cs" />
+    <Compile Include="RequestFactory\ContentType.cs" />
     <Compile Include="RequestFactory\HttpAttributes\PostAttribute.cs" />
     <Compile Include="RequestFactory\HttpAttributes\PutAttribute.cs" />
     <Compile Include="RequestFactory\StringExtensions.cs" />

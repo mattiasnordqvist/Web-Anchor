@@ -19,10 +19,10 @@ namespace WebAnchor.RequestFactory
             _jsonSerializer = jsonSerializer;
         }
 
-        public HttpContent Serialize(Parameter payLoad)
+        public HttpContent Serialize(Parameter content)
         {
-            var value = payLoad.ParameterValue;
-            if (payLoad.ParameterInfo.GetAttribute<PayloadAttribute>().Type == PayloadType.FormUrlEncoded)
+            var value = content.ParameterValue;
+            if (content.ParameterInfo.GetAttribute<ContentAttribute>().Type == ContentType.FormUrlEncoded)
             {
                 var pairs = value as IEnumerable<KeyValuePair<string, string>> ?? value.GetType().GetProperties().ToDictionary(x => x.Name, x => (x.GetGetMethod().Invoke(value, null) == null ? string.Empty : x.GetGetMethod().Invoke(value, null).ToString()));
                 return new FormUrlEncodedContent(pairs);
@@ -30,7 +30,7 @@ namespace WebAnchor.RequestFactory
             else
             {
                 var json = new StringBuilder();
-                _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), payLoad.ParameterValue);
+                _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), content.ParameterValue);
                 return new StringContent(json.ToString(), Encoding.UTF8, "application/json");
             }
         }

@@ -4,6 +4,6 @@
     {
         Route,
         Query,
-        Payload
+        Content
     }
 }

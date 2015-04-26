@@ -32,7 +32,7 @@ namespace WebAnchor.RequestFactory
             ResolvedParameters = new Parameters(
                 resolvedParameters.Where(x => x.ParameterType == ParameterType.Route),
                 resolvedParameters.Where(x => x.ParameterType == ParameterType.Query),
-                resolvedParameters.FirstOrDefault(x => x.ParameterType == ParameterType.Payload));
+                resolvedParameters.FirstOrDefault(x => x.ParameterType == ParameterType.Content));
              
             var resolvedUrl = ResolveUrlRoute(invocation);
             var resolvedMethod = ResolveHttpMethod(invocation);
@@ -86,7 +86,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual HttpContent ResolveContent(IInvocation invocation)
         {
-            return ContentSerializer.Serialize(ResolvedParameters.PayLoad);
+            return ContentSerializer.Serialize(ResolvedParameters.Content);
         }
 
         protected virtual string ResolveUrlRoute(IInvocation invocation)
@@ -156,8 +156,8 @@ namespace WebAnchor.RequestFactory
 
         private ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
         {
-            return parameterInfo.HasAttribute<PayloadAttribute>()
-                       ? ParameterType.Payload
+            return parameterInfo.HasAttribute<ContentAttribute>()
+                       ? ParameterType.Content
                        : (url.Contains(CreateRouteSegmentId(parameterInfo.Name))
                             ? ParameterType.Route
                             : ParameterType.Query);
