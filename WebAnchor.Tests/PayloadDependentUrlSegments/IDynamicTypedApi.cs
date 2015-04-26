@@ -13,4 +13,12 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
         [Post("/{payloadType}")]
         Task<HttpResponseMessage> PostThis([Payload]T t);
     }
+
+    [BaseLocation("/api")]
+    [TypeNameAsUrlParameter2]
+    public interface IDynamicTypedApi2<in T>
+    {
+        [Post("/{type}")]
+        Task<HttpResponseMessage> PostThis([Payload]T t);
+    }
 }

@@ -4,6 +4,6 @@ namespace WebAnchor.RequestFactory
 {
     public interface IParameterListTransformer
     {
-        IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters);
+        IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext);
     }
 }

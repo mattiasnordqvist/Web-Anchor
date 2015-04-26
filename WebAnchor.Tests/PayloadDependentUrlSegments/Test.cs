@@ -18,5 +18,17 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
                     Assert.AreEqual("/api/customer", assertMe.RequestUri.ToString());
                 });
         }
+
+        [Test]
+        public void TestWithSuperNiceTypedApiWhereTypeChangesTheUrlImplementedInABetterWay()
+        {
+            Test<IDynamicTypedApi2<Customer>>(
+                api => api.PostThis(new Customer { Id = 1, Name = "Mighty Gazelle" }),
+                assertMe =>
+                {
+                    Assert.AreEqual(HttpMethod.Post, assertMe.Method);
+                    Assert.AreEqual("/api/customer", assertMe.RequestUri.ToString());
+                });
+        }
     }
 }

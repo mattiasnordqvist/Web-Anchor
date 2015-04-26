@@ -79,6 +79,7 @@
     <Compile Include="NoCacheTests\ISomeCachedApi.cs" />
     <Compile Include="NoCacheTests\NonCachedApiTest.cs" />
     <Compile Include="PayloadDependentUrlSegments\Test.cs" />
+    <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameter2Attribute.cs" />
     <Compile Include="StackOverflowQuestion28413765\StackOverflowQuestion28413765Test.cs" />
     <Compile Include="StackOverflowQuestion28413765\IStackOverflowQuestion28413765.cs" />
     <Compile Include="IntegrationTests\TestWebServer.cs" />

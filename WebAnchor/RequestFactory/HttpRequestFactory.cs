@@ -60,7 +60,7 @@ namespace WebAnchor.RequestFactory
                    .ToList();
 
             var transformedParameters = DefaultParameterListTransformers.Union(methodInfo.GetAttributesChain<ParameterTransformerAttribute>()).Aggregate(invocationParameters,
-                (current, transformer) => transformer.TransformParameters(current)
+                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(methodInfo))
                                                      .ToList());
 
             transformedParameters.ForEach(ResolveParameter);

@@ -7,7 +7,7 @@ namespace WebAnchor.Tests
 {
     public class ReverseParameterListTransformers : IParameterListTransformer
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             return parameters.Reverse();
         }

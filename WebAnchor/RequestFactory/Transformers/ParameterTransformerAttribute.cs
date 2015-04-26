@@ -6,6 +6,6 @@ namespace WebAnchor.RequestFactory.Transformers
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Interface)]
     public abstract class ParameterTransformerAttribute : Attribute, IParameterListTransformer
     {
-        public abstract IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters);
+        public abstract IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext);
     }
 }
