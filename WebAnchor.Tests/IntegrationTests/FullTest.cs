@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 
 using Nancy.Hosting.Self;
@@ -66,6 +67,23 @@ namespace WebAnchor.Tests.IntegrationTests
         {
             var customerApi = Api.For<ICustomerApi>(Host);
             var result = await customerApi.CreateDeepobject(new DeepObject { Deepness = 1, ShallowObject = new ShallowObject { Name = "hej" } });
+            Assert.AreEqual(1, result.Deepness);
+            Assert.AreEqual("hej", result.ShallowObject.Name);
+        }
+
+        [Test]
+        public async void PostingADeepJsonObjectAsDictionary()
+        {
+            var customerApi = Api.For<ICustomerApi>(Host);
+            var dictionary = new Dictionary<string, object>
+            {
+                { "Deepness", 1 },
+                {
+                    "ShallowObject",
+                    new Dictionary<string, object> { { "Name", "hej" } }
+                }
+            };
+            var result = await customerApi.CreateDeepobject2(dictionary);
             Assert.AreEqual(1, result.Deepness);
             Assert.AreEqual("hej", result.ShallowObject.Name);
         }

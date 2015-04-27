@@ -9,7 +9,7 @@ namespace WebAnchor.RequestFactory.Transformers
         {
             foreach (var parameter in parameters)
             {
-                if (parameter.ParameterValue is IEnumerable && parameter.Type.IsGenericType)
+                if (parameter.ParameterValue is IEnumerable && parameter.Type.IsGenericType && parameter.ParameterType != ParameterType.Content)
                 {
                     foreach (var value in (IEnumerable)parameter.ParameterValue)
                     {
