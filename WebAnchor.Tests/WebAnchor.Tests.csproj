@@ -67,6 +67,7 @@
     <Compile Include="CustomerWithLocation.cs" />
     <Compile Include="DeepObject.cs" />
     <Compile Include="IntegrationTests\ContentExtender.cs" />
+    <Compile Include="ObjectToDictionaryHelperTests.cs" />
     <Compile Include="PayloadDependentUrlSegments\IDynamicTypedApi.cs" />
     <Compile Include="IInterface.cs" />
     <Compile Include="IntegrationTests\DynamicModelBinder.cs" />
