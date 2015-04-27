@@ -56,6 +56,9 @@ namespace WebAnchor.Tests
         [Post("")]
         Task<Customer> CreateDriver2([Content]Customer customer);
 
+        [Post("/deep")]
+        Task<DeepObject> CreateDeepobject([Content]DeepObject deepobject);
+
         [Post("/extension")]
         Task<CustomerWithLocation> CreateDriverWithLocation([Content]Customer customer);
 

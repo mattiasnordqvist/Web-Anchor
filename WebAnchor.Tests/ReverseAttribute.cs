@@ -15,7 +15,7 @@ namespace WebAnchor.Tests
         {
             if (CanResolve(parameter))
             {
-                parameter.Value = parameter.Value.Reverse().Aggregate(string.Empty, (x, y) => x + y);
+                parameter.Value = parameter.Value.ToString().Reverse().Aggregate(string.Empty, (x, y) => x + y);
             }
         }
     }

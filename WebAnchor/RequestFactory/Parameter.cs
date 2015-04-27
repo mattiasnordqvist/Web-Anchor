@@ -29,6 +29,6 @@ namespace WebAnchor.RequestFactory
         public Type Type { get; private set; }
 
         public string Name { get; set; }
-        public string Value { get; set; }
+        public object Value { get; set; }
     }
 }

@@ -26,6 +26,12 @@ namespace WebAnchor.Tests.IntegrationTests
                     return Response.AsJson(d);
                 };
 
+            Post["api/customer/deep"] = _ =>
+            {
+                var d = this.Bind<DeepObject>();
+                return Response.AsJson(d);
+            };
+
             Post["api/customer/extension"] = _ =>
             {
                 var d = this.Bind<Customer>();

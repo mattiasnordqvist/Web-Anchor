@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 using NUnit.Framework;
 
+using WebAnchor.RequestFactory;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor.Tests.IntegrationTests
@@ -59,6 +60,25 @@ namespace WebAnchor.Tests.IntegrationTests
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
         }
+
+        [Test]
+        public async void PostingADeepJsonObject()
+        {
+            var customerApi = Api.For<ICustomerApi>(Host);
+            var result = await customerApi.CreateDeepobject(new DeepObject { Deepness = 1, ShallowObject = new ShallowObject { Name = "hej" } });
+            Assert.AreEqual(1, result.Deepness);
+            Assert.AreEqual("hej", result.ShallowObject.Name);
+        }
+
+        [Test]
+        public async void PostingAJsonObjectModifyingContentWithResolver()
+        {
+            var customerApi = Api.For<ICustomerApi>(Host, configure: x => ((HttpRequestFactory)x.HttpRequestBuilder).DefaultParameterResolvers.Add(new ContentExtender()));
+            var result = await customerApi.CreateDriver2(new Customer { Id = 1, Name = "Placeholder" });
+            Assert.AreEqual("Mighty Gazelle", result.Name);
+            Assert.AreEqual(1, result.Id);
+        }
+
 
         [Test]
         public async void TestWithTypedApi()
