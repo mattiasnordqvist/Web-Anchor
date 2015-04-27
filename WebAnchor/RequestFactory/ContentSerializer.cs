@@ -21,7 +21,7 @@ namespace WebAnchor.RequestFactory
 
         public HttpContent Serialize(Parameter content)
         {
-            var value = content.ParameterValue;
+            var value = content.Value;
             if (content.ParameterInfo.GetAttribute<ContentAttribute>().Type == ContentType.FormUrlEncoded)
             {
                 var pairs = value as IEnumerable<KeyValuePair<string, string>> ?? value.GetType().GetProperties().ToDictionary(x => x.Name, x => (x.GetGetMethod().Invoke(value, null) == null ? string.Empty : x.GetGetMethod().Invoke(value, null).ToString()));
@@ -30,7 +30,7 @@ namespace WebAnchor.RequestFactory
             else
             {
                 var json = new StringBuilder();
-                _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), content.ParameterValue);
+                _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), content.Value);
                 return new StringContent(json.ToString(), Encoding.UTF8, "application/json");
             }
         }

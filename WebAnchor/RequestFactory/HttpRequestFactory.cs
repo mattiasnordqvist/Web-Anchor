@@ -136,7 +136,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
-            return WebUtility.UrlEncode(parameter.Value);
+            return WebUtility.UrlEncode(parameter.Value.ToString());
         }
 
         protected virtual string CreateUrlParams(IEnumerable<Parameter> parameters)
@@ -151,7 +151,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateUrlParameter(Parameter parameter)
         {
-            return string.Format("{0}={1}", parameter.Name, WebUtility.UrlEncode(parameter.Value));
+            return string.Format("{0}={1}", parameter.Name, WebUtility.UrlEncode(parameter.Value.ToString()));
         }
 
         private ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
