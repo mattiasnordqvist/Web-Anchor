@@ -97,7 +97,6 @@ namespace WebAnchor.Tests.IntegrationTests
             Assert.AreEqual(1, result.Id);
         }
 
-
         [Test]
         public async void TestWithTypedApi()
         {

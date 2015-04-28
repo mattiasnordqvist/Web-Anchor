@@ -30,7 +30,7 @@ namespace WebAnchor.Tests
         [Test]
         public void Test2()
         {
-            var dict = new { Id = 1, Name = "Hej", Child = new {Id= 2, Name= "Hejhej" }}.ToDictionary();
+            var dict = new { Id = 1, Name = "Hej", Child = new { Id = 2, Name = "Hejhej" } }.ToDictionary();
             Assert.AreEqual(3, dict.Keys.Count);
             Assert.AreEqual(1, dict["Id"]);
             Assert.AreEqual("Hej", dict["Name"]);
@@ -42,7 +42,7 @@ namespace WebAnchor.Tests
         [Test]
         public void Test3()
         {
-            var dict = new Dictionary<string, object>{ {"Id", 1}, {"Name", "Hej"} }.ToDictionary();
+            var dict = new Dictionary<string, object> { { "Id", 1 }, { "Name", "Hej" } }.ToDictionary();
             Assert.AreEqual(2, dict.Keys.Count);
             Assert.AreEqual(1, dict["Id"]);
             Assert.AreEqual("Hej", dict["Name"]);
@@ -63,7 +63,9 @@ namespace WebAnchor.Tests
         [Test]
         public void Test5()
         {
-            var dict = new Dictionary<string, object> { { "Id", 1 }, { "Names", new List<string>(){"Hej", "Då"} } }.ToDictionary();
+            var dict =
+                new Dictionary<string, object> { { "Id", 1 }, { "Names", new List<string>() { "Hej", "Då" } } }
+                    .ToDictionary();
             Assert.AreEqual(2, dict.Keys.Count);
             Assert.AreEqual(1, dict["Id"]);
             
@@ -82,11 +84,10 @@ namespace WebAnchor.Tests
 
             Assert.IsTrue(dict["Names"] is IList<object>);
             Assert.AreEqual(2, ((IList<object>)dict["Names"]).Count);
-            Assert.AreEqual(1, ((IDictionary<string,object>)((IList<object>)dict["Names"])[0])["Id"]);
+            Assert.AreEqual(1, ((IDictionary<string, object>)((IList<object>)dict["Names"])[0])["Id"]);
             Assert.AreEqual("Hej", ((IDictionary<string, object>)((IList<object>)dict["Names"])[0])["Name"]);
             Assert.AreEqual(2, ((IDictionary<string, object>)((IList<object>)dict["Names"])[1])["Id"]);
             Assert.AreEqual("Hejhej", ((IDictionary<string, object>)((IList<object>)dict["Names"])[1])["Name"]);
-            
         }
     }
 }

@@ -13,7 +13,7 @@ namespace WebAnchor.RequestFactory.Resolvers
             {
                 foreach (var s in (IEnumerable<KeyValuePair<string, object>>)source)
                 {
-                    if (s.Value == null || s.Value.GetType().IsPrimitive || s.Value is string)
+                    if (IsPrimitive(s.Value))
                     {
                         dictionary.Add(s.Key, s.Value);
                     }
@@ -36,23 +36,20 @@ namespace WebAnchor.RequestFactory.Resolvers
             return dictionary;
         }
 
+        private static bool IsPrimitive(object value)
+        {
+            return value == null || value.GetType().IsPrimitive || value is string;
+        }
+
         private static void Add(string name, object value, Dictionary<string, object> dictionary)
         {
-            if (value == null || value.GetType().IsPrimitive || value is string)
+            if (IsPrimitive(value))
             {
                 dictionary.Add(name, value);
             }
             else if (value is IEnumerable<object>)
             {
-                dictionary.Add(name, ((IEnumerable<object>)value).Select(
-                    x =>
-                        {
-                            if (x.GetType().IsPrimitive || x is string)
-                            {
-                                return x;
-                            }
-                            return x.ToDictionary();
-                        }).ToList());
+                dictionary.Add(name, ((IEnumerable<object>)value).Select(x => IsPrimitive(x) ? x : x.ToDictionary()).ToList());
             }
             else
             {
