@@ -13,7 +13,7 @@ namespace WebAnchor.RequestFactory.Resolvers
             {
                 foreach (var s in (IEnumerable<KeyValuePair<string, object>>)source)
                 {
-                    if (s.Value.GetType().IsPrimitive || s.Value is string)
+                    if (s.Value == null || s.Value.GetType().IsPrimitive || s.Value is string)
                     {
                         dictionary.Add(s.Key, s.Value);
                     }
@@ -38,7 +38,7 @@ namespace WebAnchor.RequestFactory.Resolvers
 
         private static void Add(string name, object value, Dictionary<string, object> dictionary)
         {
-            if (value.GetType().IsPrimitive || value is string)
+            if (value == null || value.GetType().IsPrimitive || value is string)
             {
                 dictionary.Add(name, value);
             }

@@ -10,6 +10,15 @@ namespace WebAnchor.Tests
     public class ObjectToDictionaryHelperTests
     {
         [Test]
+        public void Test0()
+        {
+            var dict = new Customer { Id = 1, Name = null }.ToDictionary();
+            Assert.AreEqual(2, dict.Keys.Count);
+            Assert.AreEqual(1, dict["Id"]);
+            Assert.AreEqual(null, dict["Name"]);
+        }
+
+        [Test]
         public void Test1()
         {
             var dict = new { Id = 1, Name = "Hej" }.ToDictionary();
