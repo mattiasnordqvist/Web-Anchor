@@ -57,8 +57,17 @@ namespace WebAnchor.Tests.IntegrationTests
         public async void PostingAJsonObject()
         {
             var customerApi = Api.For<ICustomerApi>(Host);
-            var result = await customerApi.CreateDriver2(new Customer { Id = 1, Name = "Mighty Gazelle" });
+            var result = await customerApi.CreateCustomer2(new Customer { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
+            Assert.AreEqual(1, result.Id);
+        }
+
+        [Test]
+        public async void PostingAnonymousObject()
+        {
+            var customerApi = Api.For<ICustomerApi>(Host);
+            var result = await customerApi.CreateCustomer3(new { Id = 1, Name = "Anonymous Gazelle" });
+            Assert.AreEqual("Anonymous Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
         }
 
@@ -92,7 +101,7 @@ namespace WebAnchor.Tests.IntegrationTests
         public async void PostingAJsonObjectModifyingContentWithResolver()
         {
             var customerApi = Api.For<ICustomerApi>(Host, configure: x => ((HttpRequestFactory)x.HttpRequestBuilder).DefaultParameterResolvers.Add(new ContentExtender()));
-            var result = await customerApi.CreateDriver2(new Customer { Id = 1, Name = "Placeholder" });
+            var result = await customerApi.CreateCustomer2(new Customer { Id = 1, Name = "Placeholder" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
         }
