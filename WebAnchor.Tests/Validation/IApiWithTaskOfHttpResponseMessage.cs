@@ -5,7 +5,7 @@ using WebAnchor.RequestFactory.HttpAttributes;
 
 namespace WebAnchor.Tests.Validation
 {
-    public interface ApiWithTaskOfHttpResponseMessage
+    public interface IApiWithTaskOfHttpResponseMessage
     {
         [Get("")]
         Task<HttpResponseMessage> TaskOfHttpResponseMessage();

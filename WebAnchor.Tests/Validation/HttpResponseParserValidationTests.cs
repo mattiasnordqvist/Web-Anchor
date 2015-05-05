@@ -11,26 +11,26 @@ namespace WebAnchor.Tests.Validation
         [ExpectedException(typeof(WebAnchorException))]
         public void MethodsWithVoidAreNotAllowed()
         {
-            Api.For<ApiWithVoid>("http://localhost/");
+            Api.For<IApiWithVoid>("http://localhost/");
         }
 
         [Test]
         public void MethodsWithTaskOfHttpResponseMessageAreAllowed()
         {
-            Api.For<ApiWithTaskOfHttpResponseMessage>("http://localhost/");
+            Api.For<IApiWithTaskOfHttpResponseMessage>("http://localhost/");
         }
 
         [Test]
         public void MethodsWithTaskOfTAreAllowed()
         {
-            Api.For<ApiWithTaskOfT>("http://localhost/");
+            Api.For<IApiWithTaskOfT>("http://localhost/");
         }
 
         [Test]
         [ExpectedException(typeof(WebAnchorException))]
         public void MethodsWithTaskOnlyAreNotAllowed()
         {
-            Api.For<ApiWithTaskOnly>("http://localhost/");
+            Api.For<IApiWithTaskOnly>("http://localhost/");
         }
     }
 }

@@ -38,6 +38,7 @@ namespace WebAnchor
         {
             return new List<IParameterListTransformer>
             {
+                new ParameterCreatorTransformer(),
                 new ParameterOfListTransformer(),
                 new DefaultParameterResolver(),
                 new FormattableParameterResolver(),
