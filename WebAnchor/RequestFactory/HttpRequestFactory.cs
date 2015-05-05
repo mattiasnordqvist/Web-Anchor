@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 
-using Castle.Core.Internal;
 using Castle.DynamicProxy;
 
 using WebAnchor.RequestFactory.Resolvers;
@@ -47,18 +46,9 @@ namespace WebAnchor.RequestFactory
 
         protected virtual List<Parameter> ResolveParameters(IInvocation invocation)
         {
-            var methodInfo = invocation.Method;
-            var url = methodInfo.GetCustomAttribute<HttpAttribute>().URL;
-
-            var invocationParameters =
-               methodInfo.GetParameters()
-                   .Select((x, i) => new { Index = i, ParameterInfo = x })
-                   .Where(x => invocation.GetArgumentValue(x.Index) != null)
-                   .Select(x => new Parameter(x.ParameterInfo, invocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
-                   .ToList();
-
-            var transformedParameters = DefaultParameterListTransformers.Aggregate(invocationParameters,
-                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(methodInfo))
+            var parameters = new List<Parameter>();
+            var transformedParameters = DefaultParameterListTransformers.Aggregate(parameters,
+                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(new ApiInvocation(invocation)))
                                                      .ToList());
 
             return transformedParameters;
@@ -68,12 +58,12 @@ namespace WebAnchor.RequestFactory
         {
             return new List<IParameterListTransformer>
             {
+                new ParameterCreatorTransformer(),
                 new ParameterOfListTransformer(),
                 new DefaultParameterResolver(),
                 new FormattableParameterResolver(),
                 new ParameterListTransformerAttributeTransformer(),
                 new ParameterTransformerAttributeTransformer(),
-                
             };
         }
 
@@ -133,15 +123,6 @@ namespace WebAnchor.RequestFactory
                             ? parameter.Value.ToString()
                             : parameter.ParameterValue.ToString();
             return string.Format("{0}={1}", parameter.Name, WebUtility.UrlEncode(value));
-        }
-
-        private ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
-        {
-            return parameterInfo.HasAttribute<ContentAttribute>()
-                       ? ParameterType.Content
-                       : (url.Contains(CreateRouteSegmentId(parameterInfo.Name))
-                            ? ParameterType.Route
-                            : ParameterType.Query);
         }
     }
 }

@@ -61,8 +61,10 @@
     <Compile Include="Api.cs" />
     <Compile Include="ApiSettings.cs" />
     <Compile Include="ISettings.cs" />
+    <Compile Include="RequestFactory\ApiInvocation.cs" />
     <Compile Include="RequestFactory\BaseLocationAttribute.cs" />
     <Compile Include="RequestFactory\AttributeExtensions.cs" />
+    <Compile Include="RequestFactory\ParameterCreatorTransformer.cs" />
     <Compile Include="RequestFactory\ParameterListTransformerAttributeTransformer.cs" />
     <Compile Include="RequestFactory\ParameterTransformContext.cs" />
     <Compile Include="RequestFactory\Resolvers\AliasAttribute.cs" />
