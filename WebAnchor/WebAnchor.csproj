@@ -63,6 +63,7 @@
     <Compile Include="ISettings.cs" />
     <Compile Include="RequestFactory\BaseLocationAttribute.cs" />
     <Compile Include="RequestFactory\AttributeExtensions.cs" />
+    <Compile Include="RequestFactory\ParameterListTransformerAttributeTransformer.cs" />
     <Compile Include="RequestFactory\ParameterTransformContext.cs" />
     <Compile Include="RequestFactory\Resolvers\AliasAttribute.cs" />
     <Compile Include="RequestFactory\ContentSerializer.cs" />

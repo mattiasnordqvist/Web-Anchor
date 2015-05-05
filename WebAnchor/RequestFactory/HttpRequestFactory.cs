@@ -57,7 +57,7 @@ namespace WebAnchor.RequestFactory
                    .Select(x => new Parameter(x.ParameterInfo, invocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
                    .ToList();
 
-            var transformedParameters = DefaultParameterListTransformers.Union(methodInfo.GetAttributesChain<ParameterListTransformerAttribute>()).Aggregate(invocationParameters,
+            var transformedParameters = DefaultParameterListTransformers.Aggregate(invocationParameters,
                 (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(methodInfo))
                                                      .ToList());
 
@@ -71,7 +71,9 @@ namespace WebAnchor.RequestFactory
                 new ParameterOfListTransformer(),
                 new DefaultParameterResolver(),
                 new FormattableParameterResolver(),
+                new ParameterListTransformerAttributeTransformer(),
                 new ParameterTransformerAttributeTransformer(),
+                
             };
         }
 
