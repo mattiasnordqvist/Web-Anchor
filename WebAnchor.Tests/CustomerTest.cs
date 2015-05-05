@@ -125,13 +125,14 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodWithListAndDefaultReverseResolverForStrings()
         {
-            Test<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), 
+            Test<ICustomerApi>(
+                api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }),
                 m =>
-                {
-                    Assert.AreEqual(HttpMethod.Get, m.Method);
-                    Assert.AreEqual("api/customer?names=cba&names=dcb&names=edc", m.RequestUri.ToString());
-                },
-                x => x.DefaultParameterResolvers.Add(new ReverseAttribute()));
+                    {
+                        Assert.AreEqual(HttpMethod.Get, m.Method);
+                        Assert.AreEqual("api/customer?names=cba&names=dcb&names=edc", m.RequestUri.ToString());
+                    },
+            x => x.DefaultParameterListTransformers.Add(new ReverseAttribute()));
         }
 
         [Test]

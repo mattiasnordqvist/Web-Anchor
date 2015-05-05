@@ -7,7 +7,7 @@ using WebAnchor.RequestFactory.HttpAttributes;
 namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {
     [BaseLocation("/api")]
-    [TypeNameAsUrlParameter]
+    [TypeNameAsUrlParameterList]
     public interface IDynamicTypedApi<in T>
     {
         [Post("/{type}")]

@@ -6,7 +6,7 @@ using WebAnchor.RequestFactory.Transformers;
 
 namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {
-    public class TypeNameAsUrlParameterAttribute : ParameterTransformerAttribute
+    public class TypeNameAsUrlParameterListAttribute : ParameterListTransformerAttribute
     {
         public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {

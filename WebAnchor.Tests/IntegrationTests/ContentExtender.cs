@@ -1,17 +1,23 @@
 using System.Collections.Generic;
 
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Resolvers;
 
 namespace WebAnchor.Tests.IntegrationTests
 {
-    public class ContentExtender : IParameterResolver
+    public class ContentExtender : IParameterListTransformer
     {
-        public void Resolve(Parameter parameter)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            if (parameter.ParameterType == ParameterType.Content)
+            foreach (var parameter in parameters)
             {
-                ((Dictionary<string, object>)parameter.Value)["Name"] = "Mighty Gazelle";
+                if (parameter.ParameterType == ParameterType.Content)
+                {
+                    ((Dictionary<string, object>)parameter.Value)["Name"] = "Mighty Gazelle";
+                }
             }
+
+            return parameters;
         }
     }
 }

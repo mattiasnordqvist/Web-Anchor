@@ -1,8 +1,9 @@
 ﻿using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Resolvers;
 
 namespace WebAnchor.Tests
 {
-    public class PrefixAttribute : ParameterResolverAttribute
+    public class PrefixAttribute : ParameterTransformerAttribute
     {
         private readonly string _prefix;
 
@@ -11,7 +12,7 @@ namespace WebAnchor.Tests
             _prefix = prefix;
         }
 
-        public override void Resolve(Parameter parameter)
+        public override void Apply(Parameter parameter)
         {
             parameter.Name = _prefix + parameter.ParameterInfo.Name;
         }

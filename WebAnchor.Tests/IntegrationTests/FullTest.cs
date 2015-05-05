@@ -100,7 +100,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObjectModifyingContentWithResolver()
         {
-            var customerApi = Api.For<ICustomerApi>(Host, configure: x => ((HttpRequestFactory)x.HttpRequestBuilder).DefaultParameterResolvers.Add(new ContentExtender()));
+            var customerApi = Api.For<ICustomerApi>(Host, configure: x => ((HttpRequestFactory)x.HttpRequestBuilder).DefaultParameterListTransformers.Add(new ContentExtender()));
             var result = await customerApi.CreateCustomer2(new Customer { Id = 1, Name = "Placeholder" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);

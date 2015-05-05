@@ -17,12 +17,10 @@ namespace WebAnchor.RequestFactory
         public HttpRequestFactory(IContentSerializer contentSerializer)
         {
             ContentSerializer = contentSerializer;
-            DefaultParameterResolvers = CreateDefaultResolvers() ?? new List<IParameterResolver>();
             DefaultParameterListTransformers = CreateDefaultTransformers() ?? new List<IParameterListTransformer>();
         }
 
         public IContentSerializer ContentSerializer { get; set; }
-        public List<IParameterResolver> DefaultParameterResolvers { get; set; }
         public List<IParameterListTransformer> DefaultParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
 
@@ -59,28 +57,21 @@ namespace WebAnchor.RequestFactory
                    .Select(x => new Parameter(x.ParameterInfo, invocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
                    .ToList();
 
-            var transformedParameters = DefaultParameterListTransformers.Union(methodInfo.GetAttributesChain<ParameterTransformerAttribute>()).Aggregate(invocationParameters,
+            var transformedParameters = DefaultParameterListTransformers.Union(methodInfo.GetAttributesChain<ParameterListTransformerAttribute>()).Aggregate(invocationParameters,
                 (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(methodInfo))
                                                      .ToList());
 
-            transformedParameters.ForEach(ResolveParameter);
             return transformedParameters;
-        }
-
-        protected virtual List<IParameterResolver> CreateDefaultResolvers()
-        {
-            return new List<IParameterResolver>
-            {
-                new DefaultParameterResolver(),
-                new FormattableParameterResolver()
-            };
         }
 
         protected virtual List<IParameterListTransformer> CreateDefaultTransformers()
         {
             return new List<IParameterListTransformer>
             {
-                new ParameterOfListTransformer()
+                new ParameterOfListTransformer(),
+                new DefaultParameterResolver(),
+                new FormattableParameterResolver(),
+                new ParameterTransformerAttributeTransformer(),
             };
         }
 
@@ -111,24 +102,6 @@ namespace WebAnchor.RequestFactory
             return resolvedMethod;
         }
 
-        protected virtual void ResolveParameter(Parameter parameter)
-        {
-            var defaultResolvers = DefaultParameterResolvers.AsEnumerable();
-            foreach (var resolver in defaultResolvers)
-            {
-                resolver.Resolve(parameter);
-            }
-            
-            if (parameter.ParameterInfo != null)
-            {
-                var parameterResolver = parameter.ParameterInfo.GetAttributesChain<ParameterResolverAttribute>();
-                foreach (var resolver in parameterResolver)
-                {
-                    resolver.Resolve(parameter);
-                }
-            }
-        }
-
         protected virtual string CreateRouteSegmentId(string name)
         {
             return "{" + name + "}";
@@ -136,7 +109,10 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
-            return WebUtility.UrlEncode(parameter.Value.ToString());
+            var value = parameter.Value != null
+                           ? parameter.Value.ToString()
+                           : parameter.ParameterValue.ToString();
+            return WebUtility.UrlEncode(value);
         }
 
         protected virtual string CreateUrlParams(IEnumerable<Parameter> parameters)
@@ -151,7 +127,10 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateUrlParameter(Parameter parameter)
         {
-            return string.Format("{0}={1}", parameter.Name, WebUtility.UrlEncode(parameter.Value.ToString()));
+            var value = parameter.Value != null
+                            ? parameter.Value.ToString()
+                            : parameter.ParameterValue.ToString();
+            return string.Format("{0}={1}", parameter.Name, WebUtility.UrlEncode(value));
         }
 
         private ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)

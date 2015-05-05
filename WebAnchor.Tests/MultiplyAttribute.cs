@@ -1,8 +1,9 @@
 ﻿using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Resolvers;
 
 namespace WebAnchor.Tests
 {
-    public class MultiplyAttribute : ParameterResolverAttribute
+    public class MultiplyAttribute : ParameterTransformerAttribute
     {
         public bool CanResolve(Parameter parameter)
         {
@@ -10,7 +11,7 @@ namespace WebAnchor.Tests
             return parameter.ParameterValue != null && int.TryParse(parameter.ParameterValue.ToString(), out dummy);
         }
 
-        public override void Resolve(Parameter parameter)
+        public override void Apply(Parameter parameter)
         {
             if (CanResolve(parameter))
             {

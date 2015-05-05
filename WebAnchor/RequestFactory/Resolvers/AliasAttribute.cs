@@ -3,18 +3,18 @@
 namespace WebAnchor.RequestFactory.Resolvers
 {
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class AliasAttribute : ParameterResolverAttribute
+    public class AliasAttribute : ParameterTransformerAttribute
     {
-        private readonly string _alias;
-
         public AliasAttribute(string alias)
         {
-            _alias = alias;
+            Alias = alias;
         }
 
-        public override void Resolve(Parameter parameter)
+        public string Alias { get; private set; }
+
+        public override void Apply(Parameter parameter)
         {
-            parameter.Name = _alias;
+            parameter.Name = Alias;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace WebAnchor.Tests
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             var parameterList = parameters.ToList();
-            parameterList.Add(new Parameter(null, _value, ParameterType.Query) { Name = _name });
+            parameterList.Add(new Parameter(null, _value, ParameterType.Query) { Name = _name, Value = _value });
             return parameterList;
         }
     }
