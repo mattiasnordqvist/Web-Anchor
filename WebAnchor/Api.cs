@@ -32,6 +32,7 @@ namespace WebAnchor
         {
             var requestFactory = httpRequestFactory ?? Settings.RequestFactory;
             var responseParser = httpResponseParser ?? Settings.ResponseParser;
+            responseParser.ValidateApi(typeof(T));
             var configurator = configure ?? (a => { });
             var anchor = new Anchor(httpClient, requestFactory, responseParser);
             configurator(anchor);
