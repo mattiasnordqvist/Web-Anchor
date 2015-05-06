@@ -73,7 +73,6 @@ namespace WebAnchor.RequestFactory
                 new FormattableParameterResolver(),
                 new ParameterListTransformerAttributeTransformer(),
                 new ParameterTransformerAttributeTransformer(),
-                
             };
         }
 

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -14,6 +16,17 @@ namespace WebAnchor.ResponseParser
         public HttpResponseParser(IContentDeserializer contentDeserializer)
         {
             ContentDeserializer = contentDeserializer;
+        }
+
+        public virtual void ValidateApi(Type type)
+        {
+            foreach (var method in type.GetMethods())
+            {
+                if (!(method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>)))
+                {
+                    throw new WebAnchorException(string.Format("Return type of method {0} in {1} must be Task<HttpResponseMessage> or Task<T>", method.Name, method.DeclaringType.FullName));
+                }
+            }
         }
 
         public virtual void Parse(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
