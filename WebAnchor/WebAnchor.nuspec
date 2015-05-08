@@ -12,6 +12,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>WebAnchor</tags>
+    <tags>REST HTTP API JSON</tags>
   </metadata>
 </package>
