@@ -39,6 +39,9 @@ namespace WebAnchor.Tests
         [Get("/{resource}")]
         Task<HttpResponseMessage> GetCustomers6(string resource);
 
+        [Get("?extraParam=7")]
+        Task<HttpResponseMessage> GetCustomers7(string filter = null);
+
         [Get("")]
         Task<HttpResponseMessage> GetCustomers(DateTime from);
 
