@@ -1,8 +1,8 @@
 ﻿using System;
 
-using WebAnchor.RequestFactory.Transformers.Attribute;
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
 
-namespace WebAnchor.RequestFactory.Transformers.Alias
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Alias
 {
     [AttributeUsage(AttributeTargets.Parameter)]
     public class AliasAttribute : ParameterTransformerAttribute

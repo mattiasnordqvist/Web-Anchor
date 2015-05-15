@@ -4,7 +4,6 @@ using System.Linq;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
-using WebAnchor.RequestFactory.Transformers;
 
 namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {

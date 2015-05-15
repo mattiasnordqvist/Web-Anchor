@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Transformers;
-using WebAnchor.RequestFactory.Transformers.Attribute.List;
+using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
 
 namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebAnchor.RequestFactory.Transformers.Attribute.List
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Interface)]
     public abstract class ParameterListTransformerAttribute : System.Attribute

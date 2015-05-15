@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebAnchor.RequestFactory.Transformers.Attribute
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Parameter)]
     public abstract class ParameterTransformerAttribute : System.Attribute

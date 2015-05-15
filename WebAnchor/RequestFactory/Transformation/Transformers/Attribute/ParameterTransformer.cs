@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebAnchor.RequestFactory.Transformers.Attribute
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
 {
     public abstract class ParameterTransformer<T> : IParameterListTransformer
         where T : System.Attribute
