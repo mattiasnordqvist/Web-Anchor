@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor.Tests.IntegrationTests

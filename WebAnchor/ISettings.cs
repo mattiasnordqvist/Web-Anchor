@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor

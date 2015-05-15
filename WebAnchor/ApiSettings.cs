@@ -2,8 +2,12 @@
 using Newtonsoft.Json;
 
 using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Resolvers;
-using WebAnchor.RequestFactory.Transformers;
+using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
+using WebAnchor.RequestFactory.Transformation.Transformers.Default;
+using WebAnchor.RequestFactory.Transformation.Transformers.Formattable;
+using WebAnchor.RequestFactory.Transformation.Transformers.List;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor
