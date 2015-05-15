@@ -5,9 +5,9 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests.IntegrationTests
 {
-    public class ContentExtender : IParameterListTransformer
+    public class ContentExtender : ParameterListTransformerBase
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             foreach (var parameter in parameters)
             {

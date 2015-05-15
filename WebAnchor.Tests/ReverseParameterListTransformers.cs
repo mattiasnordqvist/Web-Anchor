@@ -6,9 +6,9 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests
 {
-    public class ReverseParameterListTransformers : IParameterListTransformer
+    public class ReverseParameterListTransformers : ParameterListTransformerBase
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             return parameters.Reverse();
         }

@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List
 {
-    public class ParameterListTransformerAttributeTransformer : IParameterListTransformer
+    public class ParameterListTransformerAttributeTransformer : ParameterListTransformerBase
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             return parameterTransformContext.MethodInfo.GetAttributesChain<ParameterListTransformerAttribute>().Aggregate(parameters,
                 (current, transformer) => transformer.TransformParameters(current, parameterTransformContext));

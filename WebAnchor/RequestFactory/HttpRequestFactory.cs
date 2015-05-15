@@ -4,11 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
-using System.Threading.Tasks;
 
 using Castle.Core.Internal;
 using Castle.DynamicProxy;
 using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
 namespace WebAnchor.RequestFactory
 {
@@ -26,6 +26,11 @@ namespace WebAnchor.RequestFactory
         
         public virtual void ValidateApi(Type type)
         {
+            foreach (var parameterListTransformer in ParameterListTransformers)
+            {
+                parameterListTransformer.ValidateApi(type);
+            }
+
             foreach (var method in type.GetMethods())
             {
                 if (method.GetCustomAttribute<HttpAttribute>() == null)

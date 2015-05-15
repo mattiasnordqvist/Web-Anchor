@@ -8,6 +8,8 @@ using Castle.Core.Internal;
 
 using Newtonsoft.Json;
 
+using WebAnchor.RequestFactory.Transformation.Transformers.Default;
+
 namespace WebAnchor.RequestFactory
 {
     public class ContentSerializer : IContentSerializer

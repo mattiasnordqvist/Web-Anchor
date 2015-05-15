@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 {
-    public class ParameterOfListTransformer : IParameterListTransformer
+    public class ParameterOfListTransformer : ParameterListTransformerBase
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             foreach (var parameter in parameters)
             {

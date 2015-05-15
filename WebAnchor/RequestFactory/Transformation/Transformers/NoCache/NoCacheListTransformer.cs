@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.NoCache
 {
-    public class NoCacheListTransformer : IParameterListTransformer
+    public class NoCacheListTransformer : ParameterListTransformerBase
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             var parameterList = parameters.ToList();
             parameterList.Add(new Parameter(null, Guid.NewGuid(), ParameterType.Query) { Name = "_" });

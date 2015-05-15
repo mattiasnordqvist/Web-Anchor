@@ -6,7 +6,7 @@ using Castle.Core.Internal;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 {
-    public class FormattableParameterResolver : IParameterListTransformer
+    public class FormattableParameterResolver : ParameterListTransformerBase
     {
         public void Resolve(Parameter parameter)
         {
@@ -17,7 +17,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
             }
         }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             parameters.ForEach(this.Resolve);
             return parameters;

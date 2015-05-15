@@ -1,8 +1,9 @@
 ﻿using System;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
-    public class ContentAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public class ContentAttribute : System.Attribute
     {
         public ContentAttribute(ContentType type = ContentType.Json)
         {

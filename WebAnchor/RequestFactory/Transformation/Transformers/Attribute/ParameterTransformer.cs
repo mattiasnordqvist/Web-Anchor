@@ -2,12 +2,12 @@
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
 {
-    public abstract class ParameterTransformer<T> : IParameterListTransformer
+    public abstract class ParameterTransformer<T> : ParameterListTransformerBase
         where T : System.Attribute
     {
         protected ParameterTransformContext Context { get; set; }
 
-        public virtual IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             this.Context = parameterTransformContext;
             foreach (var parameter in parameters)

@@ -103,6 +103,7 @@
     <Compile Include="Validation\ApiWithVoid.cs" />
     <Compile Include="Validation\HttpRequestFactoryValidationTests.cs" />
     <Compile Include="Validation\HttpResponseParserValidationTests.cs" />
+    <Compile Include="Validation\IApiWithMethodWithDuplicatedContentAttributes.cs" />
     <Compile Include="Validation\IApiWithoutHttpMethodAttribute.cs" />
     <Compile Include="WebAnchorTest.cs" />
   </ItemGroup>
