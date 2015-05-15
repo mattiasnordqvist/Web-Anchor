@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 
 using Castle.Core.Internal;
+using WebAnchor.RequestFactory.Transformers;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 {
@@ -19,7 +20,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            parameters.ForEach(this.Resolve);
+            parameters.ForEach(Resolve);
             return parameters;
         }
     }

@@ -8,6 +8,7 @@ using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 using WebAnchor.RequestFactory.Transformation.Transformers.Formattable;
 using WebAnchor.RequestFactory.Transformation.Transformers.List;
+using WebAnchor.RequestFactory.Transformers;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor
@@ -38,6 +39,7 @@ namespace WebAnchor
         {
             return new List<IParameterListTransformer>
             {
+                new ParameterCreatorTransformer(),
                 new ParameterOfListTransformer(),
                 new DefaultParameterResolver(),
                 new FormattableParameterResolver(),
