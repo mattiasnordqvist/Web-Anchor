@@ -7,12 +7,8 @@ using System.Reflection;
 using Castle.Core.Internal;
 using Castle.DynamicProxy;
 
-using WebAnchor.RequestFactory.Transformation;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
-using WebAnchor.RequestFactory.Transformation.Transformers.Default;
-using WebAnchor.RequestFactory.Transformation.Transformers.Formattable;
-using WebAnchor.RequestFactory.Transformation.Transformers.List;
+using WebAnchor.RequestFactory.Resolvers;
+using WebAnchor.RequestFactory.Transformers;
 
 namespace WebAnchor.RequestFactory
 {
@@ -93,19 +89,10 @@ namespace WebAnchor.RequestFactory
 
             var substitutedUrl = methodAttribute.URL.Replace(
                     ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
+            var urlParams = CreateUrlParams(ResolvedParameters.QueryParameters);
 
-            var resolvedUrl = (baseAttribute != null ? baseAttribute.BaseUrl : string.Empty) + substitutedUrl;
-            resolvedUrl = AppendUrlParams(resolvedUrl, ResolvedParameters.QueryParameters);
+            var resolvedUrl = (baseAttribute != null ? baseAttribute.BaseUrl : string.Empty) + substitutedUrl + urlParams;
             return resolvedUrl;
-        }
-
-        protected virtual string AppendUrlParams(string url, IEnumerable<Parameter> queryParameters)
-        {
-            var urlParams = ResolvedParameters.QueryParameters.Any()
-                                ? (url.Contains("?") ? "&" : "?")
-                                  + string.Join("&", ResolvedParameters.QueryParameters.Select(CreateUrlParameter))
-                                : string.Empty;
-            return url + urlParams;
         }
 
         protected virtual HttpMethod ResolveHttpMethod(IInvocation invocation)
@@ -127,6 +114,16 @@ namespace WebAnchor.RequestFactory
                            ? parameter.Value.ToString()
                            : parameter.ParameterValue.ToString();
             return WebUtility.UrlEncode(value);
+        }
+
+        protected virtual string CreateUrlParams(IEnumerable<Parameter> parameters)
+        {
+            if (parameters.Any())
+            {
+                return "?" + string.Join("&", parameters.Select(CreateUrlParameter));
+            }
+
+            return string.Empty;
         }
 
         protected virtual string CreateUrlParameter(Parameter parameter)

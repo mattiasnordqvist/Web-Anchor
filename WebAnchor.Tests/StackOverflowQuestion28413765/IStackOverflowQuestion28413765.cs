@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 using WebAnchor.RequestFactory.HttpAttributes;
-using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
+using WebAnchor.RequestFactory.Resolvers;
 
 namespace WebAnchor.Tests.StackOverflowQuestion28413765
 {

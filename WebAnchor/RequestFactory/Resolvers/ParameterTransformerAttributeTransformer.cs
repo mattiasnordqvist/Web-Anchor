@@ -1,4 +1,4 @@
-﻿namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
+﻿namespace WebAnchor.RequestFactory.Resolvers
 {
     public class ParameterTransformerAttributeTransformer : ParameterTransformer<ParameterTransformerAttribute>
     {

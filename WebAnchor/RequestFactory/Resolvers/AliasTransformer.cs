@@ -1,6 +1,4 @@
-﻿using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
-
-namespace WebAnchor.RequestFactory.Transformation.Transformers.Alias
+﻿namespace WebAnchor.RequestFactory.Resolvers
 {
     public class AliasTransformer : ParameterTransformer<AliasAttribute>
     {
