@@ -2,6 +2,7 @@
 using System.Linq;
 
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests
 {

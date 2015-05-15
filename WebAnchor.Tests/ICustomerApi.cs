@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
-using WebAnchor.RequestFactory.Resolvers;
+using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
 
 namespace WebAnchor.Tests
 {
@@ -37,6 +37,9 @@ namespace WebAnchor.Tests
 
         [Get("/{resource}")]
         Task<HttpResponseMessage> GetCustomers6(string resource);
+
+        [Get("?extraParam=7")]
+        Task<HttpResponseMessage> GetCustomers7(string filter = null);
 
         [Get("")]
         Task<HttpResponseMessage> GetCustomers(DateTime from);
