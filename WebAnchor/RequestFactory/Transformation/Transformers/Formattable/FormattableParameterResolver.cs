@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 
 using Castle.Core.Internal;
+using WebAnchor.RequestFactory.Transformers;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 {

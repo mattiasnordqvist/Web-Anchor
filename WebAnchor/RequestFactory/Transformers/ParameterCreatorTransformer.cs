@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 using Castle.Core.Internal;
 using WebAnchor.RequestFactory.Transformation;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.Transformers
 {
     public class ParameterCreatorTransformer : IParameterListTransformer
     {
@@ -24,19 +23,9 @@ namespace WebAnchor.RequestFactory
         }
 
         public virtual string CreateRouteSegmentId(string name)
-<<<<<<< HEAD:WebAnchor/RequestFactory/ParameterCreatorTransformer.cs
         {
             return "{" + name + "}";
         }
-
-        protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
-=======
->>>>>>> Refactoring:WebAnchor/RequestFactory/Transformers/ParameterCreatorTransformer.cs
-        {
-            return "{" + name + "}";
-        }
-<<<<<<< HEAD:WebAnchor/RequestFactory/ParameterCreatorTransformer.cs
-=======
 
         protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
         {
@@ -49,6 +38,5 @@ namespace WebAnchor.RequestFactory
                             ? ParameterType.Route
                             : ParameterType.Query;
         }
->>>>>>> Refactoring:WebAnchor/RequestFactory/Transformers/ParameterCreatorTransformer.cs
     }
 }
