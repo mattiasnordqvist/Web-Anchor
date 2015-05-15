@@ -7,7 +7,7 @@ namespace WebAnchor.RequestFactory
         public Parameters(IEnumerable<Parameter> routeParameters, IEnumerable<Parameter> queryParameters, Parameter content)
         {
             QueryParameters = queryParameters;
-            this.Content = content;
+            Content = content;
             RouteParameters = routeParameters;
         }
 

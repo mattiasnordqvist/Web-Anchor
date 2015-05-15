@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.Transformation.Transformers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
 using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
