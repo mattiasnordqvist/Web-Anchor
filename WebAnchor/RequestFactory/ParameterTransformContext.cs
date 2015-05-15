@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace WebAnchor.RequestFactory.Transformation
+namespace WebAnchor.RequestFactory
 {
     public class ParameterTransformContext
     {

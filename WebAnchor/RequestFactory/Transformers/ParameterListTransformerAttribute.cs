@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List
+namespace WebAnchor.RequestFactory.Transformers
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Interface)]
-    public abstract class ParameterListTransformerAttribute : System.Attribute
+    public abstract class ParameterListTransformerAttribute : Attribute
     {
         public abstract IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext);
     }

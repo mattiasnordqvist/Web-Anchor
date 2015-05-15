@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-using WebAnchor.RequestFactory.Transformation.Transformers.Default;
+using WebAnchor.RequestFactory.Resolvers;
 
 namespace WebAnchor.Tests
 {

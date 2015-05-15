@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
+namespace WebAnchor.RequestFactory.Resolvers
 {
     public abstract class ParameterTransformer<T> : IParameterListTransformer
-        where T : System.Attribute
+        where T : Attribute
     {
         protected ParameterTransformContext Context { get; set; }
 

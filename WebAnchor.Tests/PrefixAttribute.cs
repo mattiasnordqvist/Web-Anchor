@@ -1,5 +1,5 @@
 ﻿using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
+using WebAnchor.RequestFactory.Resolvers;
 
 namespace WebAnchor.Tests
 {
