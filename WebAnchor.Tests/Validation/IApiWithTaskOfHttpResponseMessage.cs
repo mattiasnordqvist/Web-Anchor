@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace WebAnchor.Tests.Validation
 {
-    public interface ApiWithTaskOfHttpResponseMessage
+    public interface IApiWithTaskOfHttpResponseMessage
     {
         Task<HttpResponseMessage> TaskOfHttpResponseMessage();
     }

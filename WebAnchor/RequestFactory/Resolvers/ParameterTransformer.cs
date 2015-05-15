@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WebAnchor.RequestFactory.Transformers;
 
 namespace WebAnchor.RequestFactory.Resolvers
 {

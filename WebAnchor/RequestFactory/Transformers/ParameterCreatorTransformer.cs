@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 using Castle.Core.Internal;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.Transformers
 {
     public class ParameterCreatorTransformer : IParameterListTransformer
     {

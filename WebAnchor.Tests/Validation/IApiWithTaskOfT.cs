@@ -2,7 +2,7 @@
 
 namespace WebAnchor.Tests.Validation
 {
-    public interface ApiWithTaskOfT
+    public interface IApiWithTaskOfT
     {
         Task<object> TaskOfT();
     }
