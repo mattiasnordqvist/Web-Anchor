@@ -6,26 +6,20 @@ using System.Reflection;
 
 using Castle.Core.Internal;
 using Castle.DynamicProxy;
-
 using WebAnchor.RequestFactory.Transformation;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
-using WebAnchor.RequestFactory.Transformation.Transformers.Default;
-using WebAnchor.RequestFactory.Transformation.Transformers.Formattable;
-using WebAnchor.RequestFactory.Transformation.Transformers.List;
 
 namespace WebAnchor.RequestFactory
 {
     public class HttpRequestFactory : IHttpRequestFactory
     {
-        public HttpRequestFactory(IContentSerializer contentSerializer)
+        public HttpRequestFactory(IContentSerializer contentSerializer, IList<IParameterListTransformer> transformers)
         {
             ContentSerializer = contentSerializer;
-            DefaultParameterListTransformers = CreateDefaultTransformers() ?? new List<IParameterListTransformer>();
+            ParameterListTransformers = transformers ?? new List<IParameterListTransformer>();
         }
 
         public IContentSerializer ContentSerializer { get; set; }
-        public List<IParameterListTransformer> DefaultParameterListTransformers { get; set; }
+        public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
 
         public virtual HttpRequestMessage Create(IInvocation invocation)
@@ -61,23 +55,11 @@ namespace WebAnchor.RequestFactory
                    .Select(x => new Parameter(x.ParameterInfo, invocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
                    .ToList();
 
-            var transformedParameters = DefaultParameterListTransformers.Aggregate(invocationParameters,
+            var transformedParameters = ParameterListTransformers.Aggregate(invocationParameters,
                 (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(methodInfo))
                                                      .ToList());
 
             return transformedParameters;
-        }
-
-        protected virtual List<IParameterListTransformer> CreateDefaultTransformers()
-        {
-            return new List<IParameterListTransformer>
-            {
-                new ParameterOfListTransformer(),
-                new DefaultParameterResolver(),
-                new FormattableParameterResolver(),
-                new ParameterListTransformerAttributeTransformer(),
-                new ParameterTransformerAttributeTransformer(),
-            };
         }
 
         protected virtual HttpContent ResolveContent(IInvocation invocation)

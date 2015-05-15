@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 
@@ -100,7 +101,9 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObjectModifyingContentWithResolver()
         {
-            var customerApi = Api.For<ICustomerApi>(Host, configure: x => ((HttpRequestFactory)x.HttpRequestBuilder).DefaultParameterListTransformers.Add(new ContentExtender()));
+            var settings = new TestSettings();
+            settings.ListTransformers.Add(new ContentExtender());
+            var customerApi = Api.For<ICustomerApi>(Host, settings);
             var result = await customerApi.CreateCustomer2(new Customer { Id = 1, Name = "Placeholder" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
@@ -118,30 +121,72 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader()
         {
-            var customerApi = Api.For<ICustomerApi>(Host, httpResponseParser: new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer())));
+            var settings = new TestSettings().OverrideContentDeserializer(new ExtendedContentDeserializer(new JsonSerializer()));
+            var customerApi = Api.For<ICustomerApi>(Host, settings);
             var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual("api/customer/1", result.Location);
             Assert.AreEqual(1, result.Id);
         }
 
+        public class TestSettings : ApiSettings
+        {
+            private IContentSerializer _contentSerializer;
+            private IContentDeserializer _contentDeserializer;
+
+            public TestSettings()
+            {
+                ListTransformers = base.CreateParameterListTransformers();
+            }
+
+            public IList<IParameterListTransformer> ListTransformers { get; protected set; }
+
+            public TestSettings OverrideContentSerializer(IContentSerializer serializer)
+            {
+                _contentSerializer = serializer;
+                return this;
+            }
+
+            public TestSettings OverrideContentDeserializer(IContentDeserializer deserializer)
+            {
+                _contentDeserializer = deserializer;
+                return this;
+            }
+
+            public override IContentSerializer CreateContentSerializer()
+            {
+                return _contentSerializer ?? base.CreateContentSerializer();
+            }
+
+            public override IContentDeserializer CreateContentDeserializer()
+            {
+                return _contentDeserializer ?? base.CreateContentDeserializer();
+            }
+
+            public override IList<IParameterListTransformer> CreateParameterListTransformers()
+            {
+                return ListTransformers;
+            }
+        }
+
         [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader_SupplyingResponseParserViaSettings()
         {
-            var previousResponseParser = Api.Settings.ResponseParser;
-            try
-            {
-                Api.Settings.ResponseParser = new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer()));
-                var customerApi = Api.For<ICustomerApi>(Host);
+            //var previousResponseParser = Api.Settings.ResponseParser;
+            //try
+            //{
+                var settings = new TestSettings().OverrideContentDeserializer(new ExtendedContentDeserializer(new JsonSerializer()));
+                //Api.Settings.ResponseParser = new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer()));
+                var customerApi = Api.For<ICustomerApi>(Host, settings);
                 var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
                 Assert.AreEqual("Mighty Gazelle", result.Name);
                 Assert.AreEqual("api/customer/1", result.Location);
                 Assert.AreEqual(1, result.Id);
-            }
-            finally
-            {
-                Api.Settings.ResponseParser = previousResponseParser;
-            }
+            //}
+            //finally
+            //{
+            //    Api.Settings.ResponseParser = previousResponseParser;
+            //}
         }
 
         [Test]
