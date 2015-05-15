@@ -28,6 +28,7 @@ namespace WebAnchor
         public static T For<T>(HttpClient httpClient, ISettings settings = null) where T : class
         {
             var requestFactory = settings == null ? Settings.GetRequestFactory() : settings.GetRequestFactory();
+            requestFactory.ValidateApi(typeof(T));
             var responseParser = settings == null ? Settings.GetResponseParser() : settings.GetResponseParser();
             responseParser.ValidateApi(typeof(T));
             var anchor = new Anchor(httpClient, requestFactory, responseParser);

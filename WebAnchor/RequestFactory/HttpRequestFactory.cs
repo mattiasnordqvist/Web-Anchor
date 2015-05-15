@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading.Tasks;
 
 using Castle.Core.Internal;
 using Castle.DynamicProxy;
@@ -21,6 +23,17 @@ namespace WebAnchor.RequestFactory
         public IContentSerializer ContentSerializer { get; set; }
         public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
+        
+        public virtual void ValidateApi(Type type)
+        {
+            foreach (var method in type.GetMethods())
+            {
+                if (method.GetCustomAttribute<HttpAttribute>() == null)
+                {
+                    throw new WebAnchorException(string.Format("The method {0} in {1} must be have an {2}", method.Name, method.DeclaringType.FullName, typeof(HttpAttribute).FullName));
+                }
+            }
+        }
 
         public virtual HttpRequestMessage Create(IInvocation invocation)
         {

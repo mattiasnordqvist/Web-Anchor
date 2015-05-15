@@ -1,11 +1,12 @@
 ﻿using NUnit.Framework;
 
+using WebAnchor.RequestFactory.HttpAttributes;
+
 namespace WebAnchor.Tests.Validation
 {
     [TestFixture]
     public class HttpResponseParserValidationTests
     {
-
         [Test]
         [ExpectedException(typeof(WebAnchorException))]
         public void MethodsWithVoidAreNotAllowed()
