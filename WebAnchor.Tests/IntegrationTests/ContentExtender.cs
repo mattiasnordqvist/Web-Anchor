@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Resolvers;
+using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests.IntegrationTests
 {

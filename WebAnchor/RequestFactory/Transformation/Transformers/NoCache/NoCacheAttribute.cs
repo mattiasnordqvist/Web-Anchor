@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
-namespace WebAnchor.RequestFactory.Transformers
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
+
+namespace WebAnchor.RequestFactory.Transformation.Transformers.NoCache
 {
     public class NoCacheAttribute : ParameterListTransformerAttribute
     {

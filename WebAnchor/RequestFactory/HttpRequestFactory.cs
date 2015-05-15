@@ -7,8 +7,12 @@ using System.Reflection;
 using Castle.Core.Internal;
 using Castle.DynamicProxy;
 
-using WebAnchor.RequestFactory.Resolvers;
 using WebAnchor.RequestFactory.Transformers;
+using WebAnchor.RequestFactory.Transformers.Attribute;
+using WebAnchor.RequestFactory.Transformers.Attribute.List;
+using WebAnchor.RequestFactory.Transformers.Default;
+using WebAnchor.RequestFactory.Transformers.Formattable;
+using WebAnchor.RequestFactory.Transformers.List;
 
 namespace WebAnchor.RequestFactory
 {

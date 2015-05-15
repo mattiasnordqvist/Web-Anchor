@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using Castle.Core.Internal;
 
-namespace WebAnchor.RequestFactory.Resolvers
+namespace WebAnchor.RequestFactory.Transformers.Default
 {
     public class DefaultParameterResolver : IParameterListTransformer
     {
@@ -25,7 +25,7 @@ namespace WebAnchor.RequestFactory.Resolvers
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            parameters.ForEach(this.Resolve);
+            parameters.ForEach(Resolve);
             return parameters;
         }
     }
