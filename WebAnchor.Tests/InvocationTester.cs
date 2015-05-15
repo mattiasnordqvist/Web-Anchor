@@ -23,7 +23,8 @@ namespace WebAnchor.Tests
 
         public void Intercept(IInvocation invocation)
         {
-            var factory = new HttpRequestFactory(new ContentSerializer(new JsonSerializer()));
+            var listTransformers = new ApiSettings().CreateParameterListTransformers();
+            var factory = new HttpRequestFactory(new ContentSerializer(new JsonSerializer()), listTransformers);
             _configure(factory);
             var httpRequest = factory.Create(invocation);
             _assert(httpRequest);

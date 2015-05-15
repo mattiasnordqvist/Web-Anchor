@@ -3,9 +3,6 @@ using System.Net.Http;
 
 using Castle.DynamicProxy;
 
-using WebAnchor.RequestFactory;
-using WebAnchor.ResponseParser;
-
 namespace WebAnchor
 {
     public class Api
@@ -17,7 +14,7 @@ namespace WebAnchor
 
         public static ISettings Settings { get; set; }
 
-        public static T For<T>(string baseUri, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpResponseParser = null, Action<Anchor> configure = null) where T : class
+        public static T For<T>(string baseUri, ISettings settings = null) where T : class
         {
             if (!typeof(T).IsInterface)
             {
@@ -25,17 +22,16 @@ namespace WebAnchor
             }
 
             var httpClient = new HttpClient { BaseAddress = new Uri(baseUri) };
-            return For<T>(httpClient, httpRequestFactory, httpResponseParser, configure);
+            return For<T>(httpClient, settings);
         }
 
-        public static T For<T>(HttpClient httpClient, IHttpRequestFactory httpRequestFactory = null, IHttpResponseParser httpResponseParser = null, Action<Anchor> configure = null) where T : class
+        public static T For<T>(HttpClient httpClient, ISettings settings = null) where T : class
         {
-            var requestFactory = httpRequestFactory ?? Settings.RequestFactory;
-            var responseParser = httpResponseParser ?? Settings.ResponseParser;
+            var requestFactory = settings == null ? Settings.GetRequestFactory() : settings.GetRequestFactory();
+            requestFactory.ValidateApi(typeof(T));
+            var responseParser = settings == null ? Settings.GetResponseParser() : settings.GetResponseParser();
             responseParser.ValidateApi(typeof(T));
-            var configurator = configure ?? (a => { });
             var anchor = new Anchor(httpClient, requestFactory, responseParser);
-            configurator(anchor);
             var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(anchor);
             return api;
         }

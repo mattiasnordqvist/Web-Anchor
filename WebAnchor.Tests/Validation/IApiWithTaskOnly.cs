@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace WebAnchor.Tests.Validation
 {
-    public interface ApiWithTaskOnly
+    public interface IApiWithTaskOnly
     {
         Task TaskOnly();
     }

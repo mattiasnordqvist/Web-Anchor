@@ -1,19 +1,51 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.Transformation.Transformers;
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
+using WebAnchor.RequestFactory.Transformation.Transformers.Default;
+using WebAnchor.RequestFactory.Transformation.Transformers.Formattable;
+using WebAnchor.RequestFactory.Transformation.Transformers.List;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor
 {
     public class ApiSettings : ISettings
     {
-        public ApiSettings()
+        public IHttpRequestFactory GetRequestFactory()
         {
-            RequestFactory = new HttpRequestFactory(new ContentSerializer(new JsonSerializer()));
-            ResponseParser = new HttpResponseParser(new JsonContentDeserializer(new JsonSerializer()));
+            return new HttpRequestFactory(CreateContentSerializer(), CreateParameterListTransformers());
         }
 
-        public IHttpRequestFactory RequestFactory { get; set; }
-        public IHttpResponseParser ResponseParser { get; set; }
+        public IHttpResponseParser GetResponseParser()
+        {
+            return new HttpResponseParser(CreateContentDeserializer());
+        }
+
+        public virtual IContentSerializer CreateContentSerializer()
+        {
+            return new ContentSerializer(new JsonSerializer());
+        }
+
+        public virtual IContentDeserializer CreateContentDeserializer()
+        {
+            return new JsonContentDeserializer(new JsonSerializer());
+        }
+
+        public virtual IList<IParameterListTransformer> CreateParameterListTransformers()
+        {
+            return new List<IParameterListTransformer>
+            {
+                new ParameterCreatorTransformer(),
+                new ParameterOfListTransformer(),
+                new DefaultParameterResolver(),
+                new FormattableParameterResolver(),
+                new ParameterListTransformerAttributeTransformer(),
+                new ParameterTransformerAttributeTransformer(),
+            };
+        }
     }
 }

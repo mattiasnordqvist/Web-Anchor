@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Castle.Core.Internal;
+using WebAnchor.RequestFactory.Transformers;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {

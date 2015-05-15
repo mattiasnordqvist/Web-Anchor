@@ -1,32 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading.Tasks;
 
-using Castle.Core.Internal;
 using Castle.DynamicProxy;
-
 using WebAnchor.RequestFactory.Transformation;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
-using WebAnchor.RequestFactory.Transformation.Transformers.Default;
-using WebAnchor.RequestFactory.Transformation.Transformers.Formattable;
-using WebAnchor.RequestFactory.Transformation.Transformers.List;
 
 namespace WebAnchor.RequestFactory
 {
     public class HttpRequestFactory : IHttpRequestFactory
     {
-        public HttpRequestFactory(IContentSerializer contentSerializer)
+        public HttpRequestFactory(IContentSerializer contentSerializer, IList<IParameterListTransformer> transformers)
         {
             ContentSerializer = contentSerializer;
-            DefaultParameterListTransformers = CreateDefaultTransformers() ?? new List<IParameterListTransformer>();
+            ParameterListTransformers = transformers ?? new List<IParameterListTransformer>();
         }
 
         public IContentSerializer ContentSerializer { get; set; }
-        public List<IParameterListTransformer> DefaultParameterListTransformers { get; set; }
+        public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
+        
+        public virtual void ValidateApi(Type type)
+        {
+            foreach (var method in type.GetMethods())
+            {
+                if (method.GetCustomAttribute<HttpAttribute>() == null)
+                {
+                    throw new WebAnchorException(string.Format("The method {0} in {1} must be have an {2}", method.Name, method.DeclaringType.FullName, typeof(HttpAttribute).FullName));
+                }
+            }
+        }
 
         public virtual HttpRequestMessage Create(IInvocation invocation)
         {
@@ -51,33 +57,12 @@ namespace WebAnchor.RequestFactory
 
         protected virtual List<Parameter> ResolveParameters(IInvocation invocation)
         {
-            var methodInfo = invocation.Method;
-            var url = methodInfo.GetCustomAttribute<HttpAttribute>().URL;
-
-            var invocationParameters =
-               methodInfo.GetParameters()
-                   .Select((x, i) => new { Index = i, ParameterInfo = x })
-                   .Where(x => invocation.GetArgumentValue(x.Index) != null)
-                   .Select(x => new Parameter(x.ParameterInfo, invocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
-                   .ToList();
-
-            var transformedParameters = DefaultParameterListTransformers.Aggregate(invocationParameters,
-                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(methodInfo))
+            var parameters = new List<Parameter>();
+            var transformedParameters = ParameterListTransformers.Aggregate(parameters,
+                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(new ApiInvocation(invocation)))
                                                      .ToList());
 
             return transformedParameters;
-        }
-
-        protected virtual List<IParameterListTransformer> CreateDefaultTransformers()
-        {
-            return new List<IParameterListTransformer>
-            {
-                new ParameterOfListTransformer(),
-                new DefaultParameterResolver(),
-                new FormattableParameterResolver(),
-                new ParameterListTransformerAttributeTransformer(),
-                new ParameterTransformerAttributeTransformer(),
-            };
         }
 
         protected virtual HttpContent ResolveContent(IInvocation invocation)
@@ -135,15 +120,6 @@ namespace WebAnchor.RequestFactory
                             ? parameter.Value.ToString()
                             : parameter.ParameterValue.ToString();
             return string.Format("{0}={1}", parameter.Name, WebUtility.UrlEncode(value));
-        }
-
-        private ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
-        {
-            return parameterInfo.HasAttribute<ContentAttribute>()
-                       ? ParameterType.Content
-                       : (url.Contains(CreateRouteSegmentId(parameterInfo.Name))
-                            ? ParameterType.Route
-                            : ParameterType.Query);
         }
     }
 }

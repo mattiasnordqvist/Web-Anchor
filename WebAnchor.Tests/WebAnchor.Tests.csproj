@@ -97,11 +97,14 @@
     <Compile Include="StackOverflowQuestion28413765\Track.cs" />
     <Compile Include="StackOverflowQuestion28413765\TrackSubType.cs" />
     <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameterListAttribute.cs" />
-    <Compile Include="Validation\ApiWithTaskOfHttpResponseMessage.cs" />
-    <Compile Include="Validation\ApiWithTaskOfT.cs" />
-    <Compile Include="Validation\ApiWithTaskOnly.cs" />
-    <Compile Include="Validation\ApiWithVoid.cs" />
+    <Compile Include="Validation\HttpRequestFactoryValidationTests.cs" />
+    <Compile Include="TestSettings.cs" />
+    <Compile Include="Validation\IApiWithTaskOfHttpResponseMessage.cs" />
+    <Compile Include="Validation\IApiWithTaskOfT.cs" />
+    <Compile Include="Validation\IApiWithTaskOnly.cs" />
+    <Compile Include="Validation\IApiWithVoid.cs" />
     <Compile Include="Validation\HttpResponseParserValidationTests.cs" />
+    <Compile Include="Validation\IApiWithoutHttpMethodAttribute.cs" />
     <Compile Include="WebAnchorTest.cs" />
   </ItemGroup>
   <ItemGroup>

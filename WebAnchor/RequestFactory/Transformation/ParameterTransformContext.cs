@@ -4,11 +4,13 @@ namespace WebAnchor.RequestFactory.Transformation
 {
     public class ParameterTransformContext
     {
-        public ParameterTransformContext(MethodInfo methodInfo)
+        public ParameterTransformContext(ApiInvocation apiInvocation)
         {
-            this.MethodInfo = methodInfo;
+            MethodInfo = apiInvocation.Method;
+            ApiInvocation = apiInvocation;
         }
 
         public MethodInfo MethodInfo { get; private set; }
+        public ApiInvocation ApiInvocation { get; private set; }
     }
 }

@@ -4,7 +4,7 @@
     {
         protected override void Transform(Parameter parameter, ParameterTransformerAttribute attribute)
         {
-            attribute.Context = this.Context;
+            attribute.Context = Context;
             attribute.Apply(parameter);
         }
     }
