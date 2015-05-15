@@ -9,8 +9,9 @@ namespace WebAnchor.RequestFactory
     {
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            return parameterTransformContext.MethodInfo.GetAttributesChain<ParameterListTransformerAttribute>().Aggregate(parameters,
-                (current, transformer) => transformer.TransformParameters(current, parameterTransformContext));
+            return parameterTransformContext.MethodInfo.GetAttributesChain<ParameterListTransformerAttribute>()
+                                            .Aggregate(parameters, (current, transformer) =>
+                                                transformer.TransformParameters(current, parameterTransformContext));
         }
     }
 }

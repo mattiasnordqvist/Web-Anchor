@@ -6,8 +6,8 @@ namespace WebAnchor.RequestFactory
     {
         public ParameterTransformContext(ApiInvocation apiInvocation)
         {
-            this.MethodInfo = apiInvocation.Method;
-            this.ApiInvocation = apiInvocation;
+            MethodInfo = apiInvocation.Method;
+            ApiInvocation = apiInvocation;
         }
 
         public MethodInfo MethodInfo { get; private set; }

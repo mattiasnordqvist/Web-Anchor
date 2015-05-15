@@ -10,10 +10,10 @@ namespace WebAnchor.RequestFactory.Resolvers
 
         public virtual IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            this.Context = parameterTransformContext;
+            Context = parameterTransformContext;
             foreach (var parameter in parameters)
             {
-                this.ResolveParameter(parameter);
+                ResolveParameter(parameter);
             }
 
             return parameters;

@@ -12,7 +12,7 @@ namespace WebAnchor.RequestFactory
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            this.Context = parameterTransformContext;
+            Context = parameterTransformContext;
             var url = Context.MethodInfo.GetCustomAttribute<HttpAttribute>().URL;
             return
                 Context.MethodInfo.GetParameters()
@@ -22,18 +22,21 @@ namespace WebAnchor.RequestFactory
                    .ToList();
         }
 
-        protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
-        {
-            return parameterInfo.HasAttribute<ContentAttribute>()
-                       ? ParameterType.Content
-                       : (url.Contains(CreateRouteSegmentId(parameterInfo.Name))
-                            ? ParameterType.Route
-                            : ParameterType.Query);
-        }
-
         public virtual string CreateRouteSegmentId(string name)
         {
             return "{" + name + "}";
+        }
+
+        protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
+        {
+            if (parameterInfo.HasAttribute<ContentAttribute>())
+            {
+                return ParameterType.Content;
+            }
+
+            return url.Contains(CreateRouteSegmentId(parameterInfo.Name))
+                            ? ParameterType.Route
+                            : ParameterType.Query;
         }
     }
 }

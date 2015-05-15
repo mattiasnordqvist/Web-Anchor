@@ -19,7 +19,7 @@ namespace WebAnchor.RequestFactory.Resolvers
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            parameters.ForEach(this.Resolve);
+            parameters.ForEach(Resolve);
             return parameters;
         }
     }
