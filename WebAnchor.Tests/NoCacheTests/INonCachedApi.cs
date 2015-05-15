@@ -1,5 +1,5 @@
 ﻿using WebAnchor.RequestFactory.HttpAttributes;
-using WebAnchor.RequestFactory.Transformers;
+using WebAnchor.RequestFactory.Transformation.Transformers.NoCache;
 
 namespace WebAnchor.Tests.NoCacheTests
 {

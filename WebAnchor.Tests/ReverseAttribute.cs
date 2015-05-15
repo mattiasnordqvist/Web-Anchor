@@ -2,8 +2,8 @@
 using System.Linq;
 
 using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Resolvers;
-using WebAnchor.RequestFactory.Transformers;
+using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
 
 namespace WebAnchor.Tests
 {

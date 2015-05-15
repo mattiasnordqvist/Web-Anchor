@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Castle.Core.Internal;
 using WebAnchor.RequestFactory.Transformers;
 
-namespace WebAnchor.RequestFactory.Resolvers
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
     public class DefaultParameterResolver : IParameterListTransformer
     {

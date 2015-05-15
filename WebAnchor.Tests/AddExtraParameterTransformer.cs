@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Transformers;
+using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests
 {

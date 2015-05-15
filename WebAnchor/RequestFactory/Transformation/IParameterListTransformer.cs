@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebAnchor.RequestFactory.Transformers
+namespace WebAnchor.RequestFactory.Transformation
 {
     public interface IParameterListTransformer
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 
@@ -9,6 +10,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor.Tests.IntegrationTests
@@ -100,7 +102,9 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObjectModifyingContentWithResolver()
         {
-            var customerApi = Api.For<ICustomerApi>(Host, configure: x => ((HttpRequestFactory)x.HttpRequestBuilder).DefaultParameterListTransformers.Add(new ContentExtender()));
+            var settings = new TestSettings();
+            settings.ListTransformers.Add(new ContentExtender());
+            var customerApi = Api.For<ICustomerApi>(Host, settings);
             var result = await customerApi.CreateCustomer2(new Customer { Id = 1, Name = "Placeholder" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
@@ -118,7 +122,8 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader()
         {
-            var customerApi = Api.For<ICustomerApi>(Host, httpResponseParser: new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer())));
+            var settings = new TestSettings().OverrideContentDeserializer(new ExtendedContentDeserializer(new JsonSerializer()));
+            var customerApi = Api.For<ICustomerApi>(Host, settings);
             var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual("api/customer/1", result.Location);
@@ -128,20 +133,12 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader_SupplyingResponseParserViaSettings()
         {
-            var previousResponseParser = Api.Settings.ResponseParser;
-            try
-            {
-                Api.Settings.ResponseParser = new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer()));
-                var customerApi = Api.For<ICustomerApi>(Host);
-                var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
-                Assert.AreEqual("Mighty Gazelle", result.Name);
-                Assert.AreEqual("api/customer/1", result.Location);
-                Assert.AreEqual(1, result.Id);
-            }
-            finally
-            {
-                Api.Settings.ResponseParser = previousResponseParser;
-            }
+            var settings = new TestSettings().OverrideContentDeserializer(new ExtendedContentDeserializer(new JsonSerializer()));
+            var customerApi = Api.For<ICustomerApi>(Host, settings);
+            var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
+            Assert.AreEqual("Mighty Gazelle", result.Name);
+            Assert.AreEqual("api/customer/1", result.Location);
+            Assert.AreEqual(1, result.Id);
         }
 
         [Test]

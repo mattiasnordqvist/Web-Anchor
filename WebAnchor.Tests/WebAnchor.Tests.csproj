@@ -62,6 +62,7 @@
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AddExtraParameterTransformer.cs" />
+    <Compile Include="TestSettings.cs" />
     <Compile Include="ConcreteClass.cs" />
     <Compile Include="CustomerTest.cs" />
     <Compile Include="CustomerWithLocation.cs" />

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Castle.Core.Internal;
+using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.RequestFactory.Transformers
 {

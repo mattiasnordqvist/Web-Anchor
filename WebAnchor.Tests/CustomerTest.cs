@@ -132,7 +132,7 @@ namespace WebAnchor.Tests
                         Assert.AreEqual(HttpMethod.Get, m.Method);
                         Assert.AreEqual("api/customer?names=cba&names=dcb&names=edc", m.RequestUri.ToString());
                     },
-            x => x.DefaultParameterListTransformers.Add(new ReverseAttribute()));
+            x => x.ParameterListTransformers.Add(new ReverseAttribute()));
         }
 
         [Test]
@@ -144,7 +144,7 @@ namespace WebAnchor.Tests
                     Assert.AreEqual(HttpMethod.Get, m.Method);
                     Assert.AreEqual("api/customer?names=cde&names=bcd&names=abc", m.RequestUri.ToString());
                 },
-                x => x.DefaultParameterListTransformers.Add(new ReverseParameterListTransformers()));
+                x => x.ParameterListTransformers.Add(new ReverseParameterListTransformers()));
         }
 
         [Test]
@@ -155,7 +155,7 @@ namespace WebAnchor.Tests
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?filter=test&extra=3", m.RequestUri.ToString());
             },
-            x => x.DefaultParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3)));
+            x => x.ParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3)));
         }
 
         [Test]

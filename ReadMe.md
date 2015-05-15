@@ -29,8 +29,8 @@ Does this get you started? Head over to the [wiki](https://github.com/mattiasnor
 ## Collaborate
 Web Anchor is open-sourced to the max and free to use and modify, even for commercial projects. We would love to hear from you if you're using Web Anchor.
 
-Also, if you like Web Anchor so much that you would like to contribute in any way, please visit us on [GitHub](https://github.com/mattiasnordqvist/Web-Anchor). :) 
+Also, if you like (or hate) Web Anchor so much that you would like to contribute in any way, please visit us on [GitHub](https://github.com/mattiasnordqvist/Web-Anchor). :) 
 
 ## Alternatives
 
-Although Web Anchor is off course the best framework for accessing web apis, there are alternatives in the .Net ecosystem you might be interested in. Web Anchor is more or less inspired by [ReFit](https://github.com/paulcbetts/refit/). ReFit uses a completely different approach on how the implementation of your api interfaces is created. While Web Anchor generates an implementation in `runtime` using Castle Windsor DynamicProxy, ReFit generates code at `compile time`. ReFit says it supports platforms like Xamarin. Web Anchor as only been tested on windows desktops and servers. If you´ve used Web Anchor successfully on any other platform, let us know! :)
+Although Web Anchor is off course the best framework for accessing web apis, there are alternatives in the .Net ecosystem you might be interested in. Web Anchor is more or less inspired by [ReFit](https://github.com/paulcbetts/refit/). ReFit uses a completely different approach on how the implementation of your api interfaces is created. While Web Anchor generates an implementation in `runtime` using Castle Windsor DynamicProxy, ReFit generates code at `compile time`. ReFit says it supports platforms like Xamarin. Web Anchor has only been tested on windows desktops and servers. If you´ve used Web Anchor successfully on any other platform, let us know! :) There is also [RestSharp](http://restsharp.org/) which I have never tried. It seems to work in a very different way from both ReFit and Web Anchor
