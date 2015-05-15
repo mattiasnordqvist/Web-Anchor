@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace WebAnchor.RequestFactory.Resolvers
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
     public static class ObjectToDictionaryHelper
     {

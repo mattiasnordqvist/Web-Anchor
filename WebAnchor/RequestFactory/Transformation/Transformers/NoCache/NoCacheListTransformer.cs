@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WebAnchor.RequestFactory.Transformers
+namespace WebAnchor.RequestFactory.Transformation.Transformers.NoCache
 {
     public class NoCacheListTransformer : IParameterListTransformer
     {

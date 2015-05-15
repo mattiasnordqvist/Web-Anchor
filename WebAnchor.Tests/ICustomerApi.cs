@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
-using WebAnchor.RequestFactory.Resolvers;
+using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
 
 namespace WebAnchor.Tests
 {

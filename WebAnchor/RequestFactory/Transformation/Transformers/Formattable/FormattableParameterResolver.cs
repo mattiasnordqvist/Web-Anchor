@@ -4,7 +4,7 @@ using System.Globalization;
 
 using Castle.Core.Internal;
 
-namespace WebAnchor.RequestFactory.Resolvers
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 {
     public class FormattableParameterResolver : IParameterListTransformer
     {

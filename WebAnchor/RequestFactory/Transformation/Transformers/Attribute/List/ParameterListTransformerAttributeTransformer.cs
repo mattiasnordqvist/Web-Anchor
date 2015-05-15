@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using WebAnchor.RequestFactory.Transformers;
-
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List
 {
     public class ParameterListTransformerAttributeTransformer : IParameterListTransformer
     {
