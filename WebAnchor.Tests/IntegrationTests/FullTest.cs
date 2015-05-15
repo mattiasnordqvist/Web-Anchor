@@ -173,21 +173,12 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject_ParsingTheLocationHeader_SupplyingResponseParserViaSettings()
         {
-            //var previousResponseParser = Api.Settings.ResponseParser;
-            //try
-            //{
-                var settings = new TestSettings().OverrideContentDeserializer(new ExtendedContentDeserializer(new JsonSerializer()));
-                //Api.Settings.ResponseParser = new HttpResponseParser(new ExtendedContentDeserializer(new JsonSerializer()));
-                var customerApi = Api.For<ICustomerApi>(Host, settings);
-                var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
-                Assert.AreEqual("Mighty Gazelle", result.Name);
-                Assert.AreEqual("api/customer/1", result.Location);
-                Assert.AreEqual(1, result.Id);
-            //}
-            //finally
-            //{
-            //    Api.Settings.ResponseParser = previousResponseParser;
-            //}
+            var settings = new TestSettings().OverrideContentDeserializer(new ExtendedContentDeserializer(new JsonSerializer()));
+            var customerApi = Api.For<ICustomerApi>(Host, settings);
+            var result = await customerApi.CreateDriverWithLocation(new Customer { Id = 1, Name = "Mighty Gazelle" });
+            Assert.AreEqual("Mighty Gazelle", result.Name);
+            Assert.AreEqual("api/customer/1", result.Location);
+            Assert.AreEqual(1, result.Id);
         }
 
         [Test]
