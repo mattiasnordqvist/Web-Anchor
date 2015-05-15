@@ -41,6 +41,7 @@ namespace WebAnchor.Tests
                 Assert.AreEqual("api/customer/80", m.RequestUri.ToString());
             });
         }
+
         [Test]
         public void PlainUrlWithFixedQueryStringParam()
         {
@@ -50,6 +51,7 @@ namespace WebAnchor.Tests
                 Assert.AreEqual("api/customer?extraParam=7&filter=hej", m.RequestUri.ToString());
             });
         }
+
         [Test]
         public void UrlWithQueryParams()
         {
