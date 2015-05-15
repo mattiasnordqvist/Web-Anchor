@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
+namespace WebAnchor.RequestFactory.Transformation.Transformers
 {
     [AttributeUsage(AttributeTargets.Parameter)]
     public class ContentAttribute : System.Attribute

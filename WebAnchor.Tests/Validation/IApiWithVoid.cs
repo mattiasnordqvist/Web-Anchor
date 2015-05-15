@@ -1,6 +1,6 @@
 ﻿namespace WebAnchor.Tests.Validation
 {
-    public interface ApiWithVoid
+    public interface IApiWithVoid
     {
         void Void();
     }

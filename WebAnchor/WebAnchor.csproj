@@ -61,9 +61,11 @@
     <Compile Include="Api.cs" />
     <Compile Include="ApiSettings.cs" />
     <Compile Include="ISettings.cs" />
+    <Compile Include="RequestFactory\ApiInvocation.cs" />
     <Compile Include="RequestFactory\BaseLocationAttribute.cs" />
     <Compile Include="RequestFactory\AttributeExtensions.cs" />
     <Compile Include="RequestFactory\Transformation\ParameterListTransformerBase.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\ParameterCreatorTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\List\ParameterListTransformerAttributeTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\ParameterTransformContext.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Alias\AliasAttribute.cs" />
@@ -93,7 +95,7 @@
     <Compile Include="RequestFactory\Parameters.cs" />
     <Compile Include="RequestFactory\ParameterType.cs" />
     <Compile Include="ResponseParser\HttpResponseParser.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\ContentAttribute.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\ContentAttribute.cs" />
     <Compile Include="RequestFactory\ContentType.cs" />
     <Compile Include="RequestFactory\HttpAttributes\PostAttribute.cs" />
     <Compile Include="RequestFactory\HttpAttributes\PutAttribute.cs" />

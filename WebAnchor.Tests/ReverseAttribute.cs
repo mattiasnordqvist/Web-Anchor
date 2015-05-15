@@ -27,7 +27,7 @@ namespace WebAnchor.Tests
         {
             foreach (var parameter in parameters)
             {
-                this.Apply(parameter);
+                Apply(parameter);
             }
 
             return parameters;

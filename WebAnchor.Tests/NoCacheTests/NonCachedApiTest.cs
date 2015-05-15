@@ -10,7 +10,7 @@ namespace WebAnchor.Tests.NoCacheTests
         [Test]
         public void TestOnApiLevel()
         {
-            this.Test<INonCachedApi>(
+            Test<INonCachedApi>(
                 api => api.Get(),
                 m =>
                     {
@@ -22,7 +22,7 @@ namespace WebAnchor.Tests.NoCacheTests
         [Test]
         public void TestOnMethodLevel_IsCached()
         {
-            this.Test<ISomeCachedApi>(
+            Test<ISomeCachedApi>(
                 api => api.Cached(),
                 m =>
                 {
@@ -34,7 +34,7 @@ namespace WebAnchor.Tests.NoCacheTests
         [Test]
         public void TestOnMethodLevel_IsNotCached()
         {
-            this.Test<ISomeCachedApi>(
+            Test<ISomeCachedApi>(
                 api => api.NotCached(),
                 m =>
                 {

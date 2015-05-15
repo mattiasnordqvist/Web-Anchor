@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
 {
@@ -9,10 +9,10 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
 
         public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            this.Context = parameterTransformContext;
+            Context = parameterTransformContext;
             foreach (var parameter in parameters)
             {
-                this.ResolveParameter(parameter);
+                ResolveParameter(parameter);
             }
 
             return parameters;
