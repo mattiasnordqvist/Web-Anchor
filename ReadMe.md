@@ -28,7 +28,7 @@ Does this get you started? Head over to the [wiki](https://github.com/mattiasnor
 
 ## Collaborate
 [![Build status](https://ci.appveyor.com/api/projects/status/98vo2qacd6o53wer?svg=true)](https://ci.appveyor.com/project/mattiasnordqvist/web-anchor)
-
+[![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)
 Web Anchor is open-sourced to the max and free to use and modify, even for commercial projects. We would love to hear from you if you're using Web Anchor.
 
 Also, if you like (or hate) Web Anchor so much that you would like to contribute in any way, please visit us on [GitHub](https://github.com/mattiasnordqvist/Web-Anchor). :) 
