@@ -67,7 +67,8 @@
     <Compile Include="CustomerWithLocation.cs" />
     <Compile Include="DeepObject.cs" />
     <Compile Include="IntegrationTests\ContentExtender.cs" />
-    <Compile Include="ObjectToDictionaryHelperTests.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\Fixtures\Entity.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\ObjectToDictionaryHelperTests.cs" />
     <Compile Include="PayloadDependentUrlSegments\IDynamicTypedApi.cs" />
     <Compile Include="IInterface.cs" />
     <Compile Include="IntegrationTests\DynamicModelBinder.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="ITypedApi.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithNoCacheOnApiLevel.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithBothCachedAndNonCachedMethods.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\NoCache\NoCacheTest.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\NoCache\NoCacheTests.cs" />
     <Compile Include="PayloadDependentUrlSegments\Test.cs" />
     <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameter2Attribute.cs" />
     <Compile Include="ShallowObject.cs" />

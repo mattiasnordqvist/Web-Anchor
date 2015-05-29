@@ -7,7 +7,7 @@ using WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache.Fixture
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache
 {
     [TestFixture]
-    public class NoCacheTest : WebAnchorTest
+    public class NoCacheTests : WebAnchorTest
     {
         [Test]
         public void TestWithNoCacheAttributeOnApiLevel()
