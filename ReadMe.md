@@ -1,4 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/98vo2qacd6o53wer/branch/master?svg=true)](https://ci.appveyor.com/project/mattiasnordqvist/web-anchor/branch/master)
 # Web Anchor
 
 Web Anchor provides easy, clean and type-safe access to web resources.
