@@ -77,10 +77,9 @@
     <Compile Include="Customer.cs" />
     <Compile Include="IntegrationTests\HeaderAttribute.cs" />
     <Compile Include="ITypedApi.cs" />
-    <Compile Include="NoCacheTests\Customer.cs" />
-    <Compile Include="NoCacheTests\INonCachedApi.cs" />
-    <Compile Include="NoCacheTests\ISomeCachedApi.cs" />
-    <Compile Include="NoCacheTests\NonCachedApiTest.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithNoCacheOnApiLevel.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithBothCachedAndNonCachedMethods.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\NoCache\NoCacheTest.cs" />
     <Compile Include="PayloadDependentUrlSegments\Test.cs" />
     <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameter2Attribute.cs" />
     <Compile Include="ShallowObject.cs" />

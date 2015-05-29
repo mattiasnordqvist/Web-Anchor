@@ -9,7 +9,7 @@ namespace WebAnchor.Tests
 {
     public class WebAnchorTest
     {
-        protected void Test<T>(Action<T> action, Action<HttpRequestMessage> assert, Action<HttpRequestFactory> configure = null) where T : class
+        protected void TestTheRequestMessage<T>(Action<T> action, Action<HttpRequestMessage> assert, Action<HttpRequestFactory> configure = null) where T : class
         {
             var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new InvocationTester(assert, configure));
             action(api);

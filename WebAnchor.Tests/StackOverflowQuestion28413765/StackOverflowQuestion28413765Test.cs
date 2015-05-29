@@ -11,7 +11,7 @@ namespace WebAnchor.Tests.StackOverflowQuestion28413765
         [Test]
         public void StackoverflowQuestion28413765Test()
         {
-            Test<IStackOverflowQuestion28413765>(api => api.GetAll(new List<TrackSubType> { TrackSubType.Type1, TrackSubType.Type3 }),
+            TestTheRequestMessage<IStackOverflowQuestion28413765>(api => api.GetAll(new List<TrackSubType> { TrackSubType.Type1, TrackSubType.Type3 }),
                 m =>
                     {
                         Assert.AreEqual(HttpMethod.Get, m.Method);
