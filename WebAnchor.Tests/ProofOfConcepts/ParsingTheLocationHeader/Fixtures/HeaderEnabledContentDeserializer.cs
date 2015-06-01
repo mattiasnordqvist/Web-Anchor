@@ -9,12 +9,13 @@ using Castle.Core.Internal;
 using Newtonsoft.Json;
 
 using WebAnchor.ResponseParser;
+using WebAnchor.Tests.IntegrationTests;
 
-namespace WebAnchor.Tests.IntegrationTests
+namespace WebAnchor.Tests.ProofOfConcepts.HeaderExtraction.Fixtures
 {
-    public class ExtendedContentDeserializer : JsonContentDeserializer
+    public class HeaderEnabledContentDeserializer : JsonContentDeserializer
     {
-        public ExtendedContentDeserializer(JsonSerializer jsonSerializer)
+        public HeaderEnabledContentDeserializer(JsonSerializer jsonSerializer)
             : base(jsonSerializer)
         {
         }

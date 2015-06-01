@@ -7,6 +7,7 @@ using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
+using WebAnchor.Tests.ProofOfConcepts.HeaderExtraction;
 
 namespace WebAnchor.Tests
 {
@@ -67,9 +68,6 @@ namespace WebAnchor.Tests
         Task<DeepObject> CreateDeepobject([Content]DeepObject deepobject);
         [Post("/deep")]
         Task<DeepObject> CreateDeepobject2([Content]Dictionary<string, object> deepobject);
-
-        [Post("/extension")]
-        Task<CustomerWithLocation> CreateDriverWithLocation([Content]Customer customer);
 
         [Get("")]
         Task<HttpResponseMessage> MethodWithListParameter(List<string> names);
