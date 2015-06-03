@@ -17,6 +17,9 @@ deploy:
   api_key:
     secure: t9gnOzMJGESwOqdD5Tfpv5hmGYPp4TixcGyUPukiO7+6b75pl0RiaABU75GaHQH5
   skip_symbols: true
+  on:
+    branch: master
+    appveyor_repo_tag: true
 notifications:
 - provider: Email
   to:
