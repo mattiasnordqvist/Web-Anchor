@@ -1,8 +1,11 @@
 version: 0.4.{build}
+branches:
+  only:
+  - master
 configuration: Release
 assembly_info:
   patch: true
-  file: 'ProductAssemblyInfo.*'
+  file: '**\ProductAssemblyInfo.*'
   assembly_version: '{version}'
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
@@ -14,20 +17,14 @@ deploy:
   api_key:
     secure: t9gnOzMJGESwOqdD5Tfpv5hmGYPp4TixcGyUPukiO7+6b75pl0RiaABU75GaHQH5
   skip_symbols: true
+  on:
+    branch: master
+    appveyor_repo_tag: true
 notifications:
 - provider: Email
   to:
   - mattias.nordqvist@spinit.se
   - carl@carl-berg.se
-  subject: web anchor build success
   on_build_success: true
-  on_build_failure: false
-  on_build_status_changed: false
-- provider: Email
-  to:
-  - mattias.nordqvist@spinit.se
-  - carl@carl-berg.se
-  subject: web anchor build failure
-  on_build_success: false
   on_build_failure: true
   on_build_status_changed: false
