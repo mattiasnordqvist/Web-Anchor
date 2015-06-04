@@ -3,15 +3,17 @@ using System.Net.Http;
 
 using NUnit.Framework;
 
-namespace WebAnchor.Tests.StackOverflowQuestion28413765
+using WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765.Fixtures;
+
+namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765
 {
     [TestFixture]
-    public class StackOverflowQuestion28413765Test : WebAnchorTest
+    public class Tests : WebAnchorTest
     {
         [Test]
         public void StackoverflowQuestion28413765Test()
         {
-            TestTheRequestMessage<IStackOverflowQuestion28413765>(api => api.GetAll(new List<TrackSubType> { TrackSubType.Type1, TrackSubType.Type3 }),
+            TestTheRequestMessage<IApi>(api => api.GetAll(new List<TrackSubType> { TrackSubType.Type1, TrackSubType.Type3 }),
                 m =>
                     {
                         Assert.AreEqual(HttpMethod.Get, m.Method);

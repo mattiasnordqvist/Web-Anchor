@@ -1,4 +1,4 @@
-namespace WebAnchor.Tests.StackOverflowQuestion28413765
+namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765.Fixtures
 {
     public enum TrackSubType
     {

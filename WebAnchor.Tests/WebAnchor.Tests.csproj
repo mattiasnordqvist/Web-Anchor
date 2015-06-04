@@ -87,8 +87,8 @@
     <Compile Include="PayloadDependentUrlSegments\Test.cs" />
     <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameter2Attribute.cs" />
     <Compile Include="ShallowObject.cs" />
-    <Compile Include="StackOverflowQuestion28413765\StackOverflowQuestion28413765Test.cs" />
-    <Compile Include="StackOverflowQuestion28413765\IStackOverflowQuestion28413765.cs" />
+    <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Tests.cs" />
+    <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\IApi.cs" />
     <Compile Include="IntegrationTests\TestWebServer.cs" />
     <Compile Include="InvocationTester.cs" />
     <Compile Include="MisuseTests.cs" />
@@ -97,8 +97,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReverseAttribute.cs" />
     <Compile Include="ReverseParameterListTransformers.cs" />
-    <Compile Include="StackOverflowQuestion28413765\Track.cs" />
-    <Compile Include="StackOverflowQuestion28413765\TrackSubType.cs" />
+    <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\Track.cs" />
+    <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\TrackSubType.cs" />
     <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameterListAttribute.cs" />
     <Compile Include="Validation\HttpRequestFactoryValidationTests.cs" />
     <Compile Include="TestSettings.cs" />

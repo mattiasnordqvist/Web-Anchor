@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
 
-namespace WebAnchor.Tests.StackOverflowQuestion28413765
+namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765.Fixtures
 {
-    public interface IStackOverflowQuestion28413765
+    public interface IApi
     {
         [Get("/track/")]
         Task<IList<Track>> GetAll([Alias("content-type[]")] IEnumerable<TrackSubType> contentTypes = null);

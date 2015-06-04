@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 
@@ -9,8 +8,6 @@ using Newtonsoft.Json;
 
 using NUnit.Framework;
 
-using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor.Tests.IntegrationTests
