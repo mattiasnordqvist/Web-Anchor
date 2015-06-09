@@ -75,7 +75,10 @@ namespace WebAnchor.Tests
         Task<HttpResponseMessage> MethodWithListParameter(List<string> names);
         
         [Get("")]
-        Task<HttpResponseMessage> MethodWithIntegerListParameter(List<int> values);        
+        Task<HttpResponseMessage> MethodWithIntegerListParameter(List<int> values);
+
+        [Get("")]
+        Task<HttpResponseMessage> MethodWithIntegerArrayParameter(int[] values);
 
         [Get("/error/404")]
         Task<HttpResponseMessage> Get404();

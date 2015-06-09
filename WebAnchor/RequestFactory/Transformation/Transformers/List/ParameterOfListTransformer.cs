@@ -9,7 +9,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
         {
             foreach (var parameter in parameters)
             {
-                if (parameter.ParameterValue is IEnumerable && parameter.Type.IsGenericType && parameter.ParameterType != ParameterType.Content)
+                if (ParameterIsEnumerable(parameter) && parameter.ParameterType != ParameterType.Content)
                 {
                     foreach (var value in (IEnumerable)parameter.ParameterValue)
                     {
@@ -21,6 +21,11 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
                     yield return parameter;
                 }
             }
+        }
+
+        protected bool ParameterIsEnumerable(Parameter parameter)
+        {
+            return parameter.ParameterValue is IEnumerable && (parameter.Type.IsGenericType || parameter.Type.IsArray);
         }
     }
 }
