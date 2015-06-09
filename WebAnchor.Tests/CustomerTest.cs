@@ -133,6 +133,16 @@ namespace WebAnchor.Tests
         }
 
         [Test]
+        public void UrlWithQueryParams_MethodWithArrayOfInts()
+        {
+            Test<ICustomerApi>(api => api.MethodWithIntegerArrayParameter(new[] { 1, 2, 3 }), m =>
+            {
+                Assert.AreEqual(HttpMethod.Get, m.Method);
+                Assert.AreEqual("api/customer?values=1&values=2&values=3", m.RequestUri.ToString());
+            });
+        }
+
+        [Test]
         public void UrlWithQueryParams_MethodWithListAndDefaultReverseResolverForStrings()
         {
             TestTheRequestMessage<ICustomerApi>(
