@@ -23,6 +23,16 @@ namespace WebAnchor.Tests
         }
 
         [Test]
+        public void PostWithoutPayload()
+        {
+            Test<ICustomerApi>(api => api.PostWithoutPayload(), m =>
+            {
+                Assert.AreEqual(HttpMethod.Post, m.Method);
+                Assert.AreEqual("api/customer", m.RequestUri.ToString());
+            });
+        }
+
+        [Test]
         public void UrlRouteSubstitution()
         {
             Test<ICustomerApi>(api => api.GetCustomer(8), m =>

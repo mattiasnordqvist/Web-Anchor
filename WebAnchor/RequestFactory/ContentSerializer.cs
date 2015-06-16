@@ -24,6 +24,11 @@ namespace WebAnchor.RequestFactory
 
         public HttpContent Serialize(Parameter content)
         {
+            if (content == null)
+            {
+                return null;
+            }
+
             var value = content.Value;
             if (content.ParameterInfo.GetAttribute<ContentAttribute>().Type == ContentType.FormUrlEncoded)
             {
