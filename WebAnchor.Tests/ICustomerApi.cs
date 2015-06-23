@@ -22,6 +22,9 @@ namespace WebAnchor.Tests
     [BaseLocation("api/customer")]
     public interface ICustomerApi
     {
+        [Post("")]
+        Task<HttpResponseMessage> PostWithoutPayload();
+
         [Get("")]
         Task<HttpResponseMessage> GetCustomers(string filter = null);
 
