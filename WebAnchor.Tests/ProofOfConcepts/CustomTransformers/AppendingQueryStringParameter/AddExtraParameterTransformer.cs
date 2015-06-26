@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.ProofOfConcepts.CustomTransformers.AppendingQueryStringParameter
 {
     public class AddExtraParameterTransformer : ParameterListTransformerBase
     {

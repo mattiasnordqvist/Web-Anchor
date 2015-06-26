@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-using WebAnchor.Tests.ProofOfConcepts.HeaderExtraction.Fixtures;
+using WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures;
 
 namespace WebAnchor.Tests.ProofOfConcepts.HeaderExtraction
 {
@@ -13,7 +13,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.HeaderExtraction
         public async void ParsingTheLocationHeaderFromResponseBodyViaCustomResponseParser()
         {
             var settings = new TestSettings().OverrideContentDeserializer(new HeaderEnabledContentDeserializer(new JsonSerializer()));
-            var customerApi = Api.For<Fixtures.ICustomerApi>(Host, settings);
+            var customerApi = Api.For<ParsingTheLocationHeader.Fixtures.ICustomerApi>(Host, settings);
             var result = await customerApi.CreateCustomer(new Customer { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual("api/customer/1", result.Location);

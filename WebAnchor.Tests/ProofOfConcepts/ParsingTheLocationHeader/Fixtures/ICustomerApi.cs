@@ -4,7 +4,7 @@ using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers;
 
-namespace WebAnchor.Tests.ProofOfConcepts.HeaderExtraction.Fixtures
+namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures
 {
     [BaseLocation("api/customer")]
     public interface ICustomerApi

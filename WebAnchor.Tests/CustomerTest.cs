@@ -25,7 +25,7 @@ namespace WebAnchor.Tests
         [Test]
         public void PostWithoutPayload()
         {
-            Test<ICustomerApi>(api => api.PostWithoutPayload(), m =>
+            TestTheRequestMessage<ICustomerApi>(api => api.PostWithoutPayload(), m =>
             {
                 Assert.AreEqual(HttpMethod.Post, m.Method);
                 Assert.AreEqual("api/customer", m.RequestUri.ToString());
@@ -145,7 +145,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodWithArrayOfInts()
         {
-            Test<ICustomerApi>(api => api.MethodWithIntegerArrayParameter(new[] { 1, 2, 3 }), m =>
+            TestTheRequestMessage<ICustomerApi>(api => api.MethodWithIntegerArrayParameter(new[] { 1, 2, 3 }), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?values=1&values=2&values=3", m.RequestUri.ToString());
@@ -175,17 +175,6 @@ namespace WebAnchor.Tests
                     Assert.AreEqual("api/customer?names=cde&names=bcd&names=abc", m.RequestUri.ToString());
                 },
                 x => x.ParameterListTransformers.Add(new ReverseParameterListTransformers()));
-        }
-
-        [Test]
-        public void UrlWithQueryParams_AddExtraParameter()
-        {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers("test"), m =>
-            {
-                Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/customer?filter=test&extra=3", m.RequestUri.ToString());
-            },
-            x => x.ParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3)));
         }
 
         [Test]

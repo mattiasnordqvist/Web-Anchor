@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using WebAnchor.ResponseParser;
 using WebAnchor.Tests.IntegrationTests;
 
-namespace WebAnchor.Tests.ProofOfConcepts.HeaderExtraction.Fixtures
+namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures
 {
     public class HeaderEnabledContentDeserializer : JsonContentDeserializer
     {

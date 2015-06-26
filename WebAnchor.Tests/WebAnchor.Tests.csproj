@@ -61,12 +61,13 @@
     <Compile Include="..\ProductAssemblyInfo.cs">
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AddExtraParameterTransformer.cs" />
+    <Compile Include="ProofOfConcepts\CustomTransformers\AppendingQueryStringParameter\AddExtraParameterTransformer.cs" />
     <Compile Include="ConcreteClass.cs" />
     <Compile Include="CustomerTest.cs" />
     <Compile Include="DeepObject.cs" />
     <Compile Include="IntegrationTests\ContentExtender.cs" />
     <Compile Include="IntegrationTest.cs" />
+    <Compile Include="ProofOfConcepts\CustomTransformers\AppendingQueryStringParameter\Tests.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\CustomerWithLocation.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\HeaderEnabledContentDeserializer.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\ICustomerApi.cs" />
