@@ -7,7 +7,6 @@ using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
-using WebAnchor.Tests.ProofOfConcepts.HeaderExtraction;
 
 namespace WebAnchor.Tests
 {
@@ -27,9 +26,6 @@ namespace WebAnchor.Tests
 
         [Get("")]
         Task<HttpResponseMessage> GetCustomers(string filter = null);
-
-        [Get("")]
-        Task<HttpResponseMessage> GetCustomers2([Prefix("p_")]string filter = null);
 
         [Get("")]
         Task<HttpResponseMessage> GetCustomers3([Reverse]string filter = null);

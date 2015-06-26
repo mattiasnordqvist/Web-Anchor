@@ -68,6 +68,8 @@
     <Compile Include="IntegrationTests\ContentExtender.cs" />
     <Compile Include="IntegrationTest.cs" />
     <Compile Include="ProofOfConcepts\CustomTransformers\AppendingQueryStringParameter\Tests.cs" />
+    <Compile Include="ProofOfConcepts\CustomTransformers\ChangingQueryStringParameter\Fixtures\ICustomerApi.cs" />
+    <Compile Include="ProofOfConcepts\CustomTransformers\ChangingQueryStringParameter\Tests.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\CustomerWithLocation.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\HeaderEnabledContentDeserializer.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\ICustomerApi.cs" />
@@ -96,7 +98,7 @@
     <Compile Include="MultiplyAttribute.cs" />
     <Compile Include="PrefixAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReverseAttribute.cs" />
+    <Compile Include="ProofOfConcepts\CustomTransformers\ChangingQueryStringParameter\Fixtures\ReverseAttribute.cs" />
     <Compile Include="ReverseParameterListTransformers.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\Track.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\TrackSubType.cs" />

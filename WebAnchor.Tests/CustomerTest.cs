@@ -83,16 +83,6 @@ namespace WebAnchor.Tests
         }
 
         [Test]
-        public void UrlWithQueryParams_CustomParameterNameResolver()
-        {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers2(filter: "drunk"), m =>
-            {
-                Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/customer?p_filter=drunk", m.RequestUri.ToString());
-            });
-        }
-
-        [Test]
         public void UrlWithQueryParams_CustomParameterValueResolver()
         {
             TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers3(filter: "drunk"), m =>
