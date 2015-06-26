@@ -61,15 +61,16 @@
     <Compile Include="..\ProductAssemblyInfo.cs">
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ProofOfConcepts\CustomTransformers\AppendingQueryStringParameter\AddExtraParameterTransformer.cs" />
+    <Compile Include="RequestFactory\Transformation\Custom\AddExtraParameterTransformer.cs" />
     <Compile Include="ConcreteClass.cs" />
     <Compile Include="CustomerTest.cs" />
     <Compile Include="DeepObject.cs" />
     <Compile Include="IntegrationTests\ContentExtender.cs" />
     <Compile Include="IntegrationTest.cs" />
-    <Compile Include="ProofOfConcepts\CustomTransformers\AppendingQueryStringParameter\Tests.cs" />
-    <Compile Include="ProofOfConcepts\CustomTransformers\ChangingQueryStringParameter\Fixtures\ICustomerApi.cs" />
-    <Compile Include="ProofOfConcepts\CustomTransformers\ChangingQueryStringParameter\Tests.cs" />
+    <Compile Include="RequestFactory\Transformation\Custom\ICustomerApi.cs" />
+    <Compile Include="RequestFactory\Transformation\Custom\Tests.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\Fixtures\ICustomerApiWithAttributedMethods.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\Tests.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\CustomerWithLocation.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\HeaderEnabledContentDeserializer.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\ICustomerApi.cs" />
@@ -98,7 +99,7 @@
     <Compile Include="MultiplyAttribute.cs" />
     <Compile Include="PrefixAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProofOfConcepts\CustomTransformers\ChangingQueryStringParameter\Fixtures\ReverseAttribute.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\Fixtures\ReverseAttribute.cs" />
     <Compile Include="ReverseParameterListTransformers.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\Track.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\TrackSubType.cs" />

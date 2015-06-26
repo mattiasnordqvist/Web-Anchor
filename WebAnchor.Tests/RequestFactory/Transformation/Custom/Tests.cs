@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-namespace WebAnchor.Tests.ProofOfConcepts.CustomTransformers.AppendingQueryStringParameter
+namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {
     [TestFixture]
     public class Tests : WebAnchorTest

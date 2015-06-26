@@ -4,7 +4,7 @@ using System.Linq;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 
-namespace WebAnchor.Tests.ProofOfConcepts.CustomTransformers.AppendingQueryStringParameter
+namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {
     public class AddExtraParameterTransformer : ParameterListTransformerBase
     {

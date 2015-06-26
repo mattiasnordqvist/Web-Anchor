@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 using WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures;
 
-namespace WebAnchor.Tests.ProofOfConcepts.HeaderExtraction
+namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
 {
     [TestFixture]
     public class Tests : IntegrationTest
