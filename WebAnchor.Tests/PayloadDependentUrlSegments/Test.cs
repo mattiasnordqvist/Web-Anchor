@@ -2,6 +2,9 @@
 
 using NUnit.Framework;
 
+using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
+using WebAnchor.Tests.TestUtils;
+
 namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {
     [TestFixture]

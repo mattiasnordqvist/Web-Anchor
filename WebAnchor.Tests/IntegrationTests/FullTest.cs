@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 
 using WebAnchor.ResponseParser;
+using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
+using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.IntegrationTests
 {
@@ -38,7 +40,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void CreatingASimpleGetRequest()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             var result = await customerApi.GetCustomer(9);
             Assert.That(result.IsSuccessStatusCode);
         }
@@ -46,7 +48,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void ParsingAJsonResponse()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             var result = await customerApi.GetCustomer3(9);
             Assert.AreEqual("Black Bull", result.Name);
             Assert.AreEqual(9, result.Id);
@@ -55,7 +57,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAJsonObject()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             var result = await customerApi.CreateCustomer2(new Customer { Id = 1, Name = "Mighty Gazelle" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
@@ -64,7 +66,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingAnonymousObject()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             var result = await customerApi.CreateCustomer3(new { Id = 1, Name = "Anonymous Gazelle" });
             Assert.AreEqual("Anonymous Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
@@ -73,7 +75,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingADeepJsonObject()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             var result = await customerApi.CreateDeepobject(new DeepObject { Deepness = 1, ShallowObject = new ShallowObject { Name = "hej" } });
             Assert.AreEqual(1, result.Deepness);
             Assert.AreEqual("hej", result.ShallowObject.Name);
@@ -82,7 +84,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void PostingADeepJsonObjectAsDictionary()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             var dictionary = new Dictionary<string, object>
             {
                 { "Deepness", 1 },
@@ -101,7 +103,7 @@ namespace WebAnchor.Tests.IntegrationTests
         {
             var settings = new TestSettings();
             settings.ListTransformers.Add(new ContentExtender());
-            var customerApi = Api.For<ICustomerApi>(Host, settings);
+            var customerApi = Api.For<ITestApi>(Host, settings);
             var result = await customerApi.CreateCustomer2(new Customer { Id = 1, Name = "Placeholder" });
             Assert.AreEqual("Mighty Gazelle", result.Name);
             Assert.AreEqual(1, result.Id);
@@ -119,7 +121,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [Test]
         public async void RetrievingA404_WithTaskOFHttpResponseMessage()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             var result = await customerApi.Get404();
             Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
         }
@@ -128,7 +130,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [ExpectedException(typeof(ApiException))]
         public async void RetrievingA404_WithTaskOfT_ThrowsException()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             await customerApi.Get404Driver();
         }
 
@@ -136,7 +138,7 @@ namespace WebAnchor.Tests.IntegrationTests
         [ExpectedException(typeof(JsonReaderException))]
         public async void ExpectedDataButServerReturnsNothingInContent()
         {
-            var customerApi = Api.For<ICustomerApi>(Host);
+            var customerApi = Api.For<ITestApi>(Host);
             await customerApi.GetAnObject();
         }
     }

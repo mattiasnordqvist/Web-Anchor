@@ -5,7 +5,7 @@ using Castle.DynamicProxy;
 
 using WebAnchor.RequestFactory;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.TestUtils
 {
     public class WebAnchorTest
     {

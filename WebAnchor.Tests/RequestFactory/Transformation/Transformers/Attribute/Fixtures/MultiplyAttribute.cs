@@ -1,7 +1,7 @@
 ﻿using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures
 {
     public class MultiplyAttribute : ParameterTransformerAttribute
     {

@@ -1,6 +1,9 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
 
+using WebAnchor.Tests.ACollectionOfRandomTests;
+using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
+
 namespace WebAnchor.Tests.IntegrationTests
 {
     public class TestWebServer : NancyModule

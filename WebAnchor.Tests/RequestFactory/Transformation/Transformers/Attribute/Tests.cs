@@ -3,12 +3,23 @@
 using NUnit.Framework;
 
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
+using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute
 {
     [TestFixture]
     public class Tests : WebAnchorTest
     {
+        [Test]
+        public void UrlRouteSubstitution_AttributeDrivenParameterValueResolver()
+        {
+            TestTheRequestMessage<ICustomerApiWithAttributedMethods>(api => api.GetCustomer_PrefixedQueryParamValue(8), m =>
+            {
+                Assert.AreEqual(HttpMethod.Get, m.Method);
+                Assert.AreEqual("api/customer/80", m.RequestUri.ToString());
+            });
+        }
+
         [Test]
         public void UrlWithQueryParams_AttributeDrivenParameterNameResolver()
         {

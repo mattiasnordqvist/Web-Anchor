@@ -9,7 +9,7 @@ using WebAnchor.RequestFactory.Transformation.Transformers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures
 {
     [BaseLocation("api/reversed")]
     [Reverse]
@@ -20,7 +20,7 @@ namespace WebAnchor.Tests
     }
 
     [BaseLocation("api/customer")]
-    public interface ICustomerApi
+    public interface ITestApi
     {
         [Post("")]
         Task<HttpResponseMessage> PostWithoutPayload();
@@ -47,9 +47,6 @@ namespace WebAnchor.Tests
         Task<HttpResponseMessage> GetCustomer(int id);
 
         [Get("/{id}")]
-        Task<HttpResponseMessage> GetCustomer2([Multiply]int id);
-
-        [Get("/{id}")]
         Task<Customer> GetCustomer3(int id);
 
         [Post("")]
@@ -63,6 +60,7 @@ namespace WebAnchor.Tests
 
         [Post("/deep")]
         Task<DeepObject> CreateDeepobject([Content]DeepObject deepobject);
+
         [Post("/deep")]
         Task<DeepObject> CreateDeepobject2([Content]Dictionary<string, object> deepobject);
 

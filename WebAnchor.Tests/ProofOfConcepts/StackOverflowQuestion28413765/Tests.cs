@@ -4,6 +4,7 @@ using System.Net.Http;
 using NUnit.Framework;
 
 using WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765.Fixtures;
+using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765
 {

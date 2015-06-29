@@ -1,4 +1,4 @@
-﻿namespace WebAnchor.Tests
+﻿namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures
 {
     public class ShallowObject
     {

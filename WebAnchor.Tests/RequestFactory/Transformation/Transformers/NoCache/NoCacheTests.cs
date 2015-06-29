@@ -3,6 +3,7 @@ using System.Net.Http;
 using NUnit.Framework;
 
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache.Fixtures;
+using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache
 {

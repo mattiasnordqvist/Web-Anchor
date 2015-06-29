@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 using WebAnchor.RequestFactory;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.TestUtils
 {
     public class InvocationTester : IInterceptor
     {

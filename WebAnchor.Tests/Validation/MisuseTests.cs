@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.Validation
 {
     [TestFixture]
     public class MisuseTests

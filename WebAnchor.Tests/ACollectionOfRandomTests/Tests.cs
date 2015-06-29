@@ -7,17 +7,19 @@ using System.Threading;
 
 using NUnit.Framework;
 
+using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
+using WebAnchor.Tests.TestUtils;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.ACollectionOfRandomTests
 {
     [TestFixture]
-    public class CustomerTest : WebAnchorTest
+    public class Tests : WebAnchorTest
     {
         [Test]
         public void PlainUrl()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers(), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomers(), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer", m.RequestUri.ToString());
@@ -27,7 +29,7 @@ namespace WebAnchor.Tests
         [Test]
         public void PostWithoutPayload()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.PostWithoutPayload(), m =>
+            TestTheRequestMessage<ITestApi>(api => api.PostWithoutPayload(), m =>
             {
                 Assert.AreEqual(HttpMethod.Post, m.Method);
                 Assert.AreEqual("api/customer", m.RequestUri.ToString());
@@ -37,7 +39,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlRouteSubstitution()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomer(8), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomer(8), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer/8", m.RequestUri.ToString());
@@ -45,19 +47,9 @@ namespace WebAnchor.Tests
         }
 
         [Test]
-        public void UrlRouteSubstitution_CustomResolver()
-        {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomer2(8), m =>
-            {
-                Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual("api/customer/80", m.RequestUri.ToString());
-            });
-        }
-
-        [Test]
         public void PlainUrlWithFixedQueryStringParam()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers7("hej"), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomers7("hej"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?extraParam=7&filter=hej", m.RequestUri.ToString());
@@ -67,7 +59,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers(filter: "drunk"), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomers(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?filter=drunk", m.RequestUri.ToString());
@@ -77,7 +69,7 @@ namespace WebAnchor.Tests
         [Test]
         public void AliasAttribute()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers5(filter: "drunk"), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomers5(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?f=drunk", m.RequestUri.ToString());
@@ -87,7 +79,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodScopedParameterValueResolver()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers4(filter: "drunk"), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomers4(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?filter=knurd", m.RequestUri.ToString());
@@ -107,7 +99,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodWithList()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), m =>
+            TestTheRequestMessage<ITestApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?names=abc&names=bcd&names=cde", m.RequestUri.ToString());
@@ -117,7 +109,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodWithListOfInts()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.MethodWithIntegerListParameter(new List<int> { 1, 2, 3 }), m =>
+            TestTheRequestMessage<ITestApi>(api => api.MethodWithIntegerListParameter(new List<int> { 1, 2, 3 }), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?values=1&values=2&values=3", m.RequestUri.ToString());
@@ -127,7 +119,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodWithArrayOfInts()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.MethodWithIntegerArrayParameter(new[] { 1, 2, 3 }), m =>
+            TestTheRequestMessage<ITestApi>(api => api.MethodWithIntegerArrayParameter(new[] { 1, 2, 3 }), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?values=1&values=2&values=3", m.RequestUri.ToString());
@@ -137,7 +129,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_MethodWithListAndDefaultReverseResolverForStrings()
         {
-            TestTheRequestMessage<ICustomerApi>(
+            TestTheRequestMessage<ITestApi>(
                 api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }),
                 m =>
                     {
@@ -148,21 +140,9 @@ namespace WebAnchor.Tests
         }
 
         [Test]
-        public void UrlWithQueryParams_ReverseParameterOrder()
-        {
-            TestTheRequestMessage<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }),
-                m =>
-                {
-                    Assert.AreEqual(HttpMethod.Get, m.Method);
-                    Assert.AreEqual("api/customer?names=cde&names=bcd&names=abc", m.RequestUri.ToString());
-                },
-                x => x.ParameterListTransformers.Add(new ReverseParameterListTransformers()));
-        }
-
-        [Test]
         public void UrlWithQueryParams_QueryStringParametersAreUrlEncoded()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers("my filter?"), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomers("my filter?"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?filter=my+filter%3F", m.RequestUri.ToString());
@@ -172,7 +152,7 @@ namespace WebAnchor.Tests
         [Test]
         public void UrlWithQueryParams_RouteSegmentParametersAreUrlEncoded()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers6("my resource"), m =>
+            TestTheRequestMessage<ITestApi>(api => api.GetCustomers6("my resource"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer/my+resource", m.RequestUri.ToString());
@@ -183,7 +163,7 @@ namespace WebAnchor.Tests
         public void UrlWithQueryParams_CultureSensitiveParametersAreInvariantlyTransformed()
         {
             var expectedResult = WebUtility.UrlEncode("03/07/2014 00:00:00");
-            RunWithCulture("en-US", () => TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers(new DateTime(2014, 03, 07)), m =>
+            RunWithCulture("en-US", () => TestTheRequestMessage<ITestApi>(api => api.GetCustomers(new DateTime(2014, 03, 07)), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual(string.Format("api/customer?from={0}", expectedResult), m.RequestUri.ToString());

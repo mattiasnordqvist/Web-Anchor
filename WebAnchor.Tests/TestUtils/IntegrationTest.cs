@@ -4,7 +4,7 @@ using Nancy.Hosting.Self;
 
 using NUnit.Framework;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.TestUtils
 {
     public class IntegrationTest
     {

@@ -2,7 +2,7 @@
 
 using WebAnchor.RequestFactory.HttpAttributes;
 
-namespace WebAnchor.Tests
+namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures
 {
     public interface ITypedApi<T>
     {

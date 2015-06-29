@@ -9,6 +9,9 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
     [BaseLocation("api/customer")]
     public interface ICustomerApiWithAttributedMethods
     {
+        [Get("/{id}")]
+        Task<HttpResponseMessage> GetCustomer_PrefixedQueryParamValue([Multiply]int id);
+
         [Get("")]
         Task<HttpResponseMessage> GetCustomers_PrefixedQueryParamName([Prefix("p_")]string filter = null);
 
