@@ -14,7 +14,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765
         [Test]
         public void StackoverflowQuestion28413765Test()
         {
-            TestTheRequestMessage<IApi>(api => api.GetAll(new List<TrackSubType> { TrackSubType.Type1, TrackSubType.Type3 }),
+            TestTheRequest<IApi>(api => api.GetAll(new List<TrackSubType> { TrackSubType.Type1, TrackSubType.Type3 }),
                 m =>
                     {
                         Assert.AreEqual(HttpMethod.Get, m.Method);

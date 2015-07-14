@@ -6,9 +6,9 @@ using Castle.Core.Internal;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
-    public class DefaultParameterResolver : IParameterListTransformer
+    public class DefaultParameterTransformer : IParameterListTransformer
     {
-        public void Resolve(Parameter parameter)
+        public void Resolve(Parameter parameter, ParameterTransformContext parameterTransformContext)
         {
             if (parameter.ParameterInfo != null)
             {
@@ -17,7 +17,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
             if (parameter.ParameterType == ParameterType.Content)
             {
-                parameter.Value = parameter.ParameterValue.ToDictionary();
+                parameter.Value = ShouldCreateDictionaryFromContent(parameter) ? parameter.ParameterValue.ToDictionary() : parameter.ParameterValue;
             }
             else
             {
@@ -27,7 +27,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            parameters.ForEach(Resolve);
+            parameters.ForEach(x => Resolve(x, parameterTransformContext));
             return parameters;
         }
 
@@ -41,6 +41,26 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
                     throw new WebAnchorException(string.Format("The method {0} in {1} cannot have more than one {2}", method.Name, method.DeclaringType.FullName, typeof(ContentAttribute).FullName));
                 }
             }
+        }
+
+        private bool ShouldCreateDictionaryFromContent(Parameter parameter)
+        {
+            if (parameter.ParameterInfo.GetFirstAttributeInChain<AsDictionaryAttribute>() != null)
+            {
+                return true;
+            }
+
+            return IsParameterDeclaredWithAsDictionary(parameter);
+        }
+
+        private bool IsParameterDeclaredWithAsDictionary(Parameter parameter)
+        {
+            if (parameter.ParameterValue.GetType().HasAttribute<AsDictionaryAttribute>())
+            {
+                return true;
+            }
+
+            return parameter.ParentParameter != null && IsParameterDeclaredWithAsDictionary(parameter.ParentParameter);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute
         [Test]
         public void UrlRouteSubstitution_AttributeDrivenParameterValueResolver()
         {
-            TestTheRequestMessage<ICustomerApiWithAttributedMethods>(api => api.GetCustomer_PrefixedQueryParamValue(8), m =>
+            TestTheRequest<ICustomerApiWithAttributedMethods>(api => api.GetCustomer_PrefixedQueryParamValue(8), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer/80", m.RequestUri.ToString());
@@ -23,7 +23,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute
         [Test]
         public void UrlWithQueryParams_AttributeDrivenParameterNameResolver()
         {
-            TestTheRequestMessage<ICustomerApiWithAttributedMethods>(api => api.GetCustomers_PrefixedQueryParamName(filter: "drunk"), m =>
+            TestTheRequest<ICustomerApiWithAttributedMethods>(api => api.GetCustomers_PrefixedQueryParamName(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?p_filter=drunk", m.RequestUri.ToString());
@@ -33,7 +33,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute
         [Test]
         public void UrlWithQueryParams_AttributeDrivenParameterValueResolver()
         {
-            TestTheRequestMessage<ICustomerApiWithAttributedMethods>(api => api.GetCustomers_ReversedQueryParamValue(filter: "drunk"), m =>
+            TestTheRequest<ICustomerApiWithAttributedMethods>(api => api.GetCustomers_ReversedQueryParamValue(filter: "drunk"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?filter=knurd", m.RequestUri.ToString());

@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
-namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default
+namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.ObjectToDictionary
 {
     [TestFixture]
     public class ObjectToDictionaryHelperTests
@@ -12,7 +12,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default
         [Test]
         public void FlatObjectWithNullValues()
         {
-            var dictionary = new Fixtures.Entity { Id = 1, Name = null }.ToDictionary();
+            var dictionary = new Entity { Id = 1, Name = null }.ToDictionary();
             
             Assert.AreEqual(2, dictionary.Keys.Count);
             Assert.AreEqual(1, dictionary["Id"]);

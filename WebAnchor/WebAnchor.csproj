@@ -65,13 +65,14 @@
     <Compile Include="RequestFactory\BaseLocationAttribute.cs" />
     <Compile Include="RequestFactory\AttributeExtensions.cs" />
     <Compile Include="RequestFactory\Transformation\ParameterListTransformerBase.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttribute.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\ParameterCreatorTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\List\ParameterListTransformerAttributeTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\ParameterTransformContext.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Alias\AliasAttribute.cs" />
     <Compile Include="RequestFactory\ContentSerializer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Alias\AliasTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultParameterResolver.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultParameterTransformer.cs" />
     <Compile Include="RequestFactory\HttpAttributes\DeleteAttribute.cs" />
     <Compile Include="RequestFactory\HttpAttributes\GetAttribute.cs" />
     <Compile Include="RequestFactory\HttpMethodAttribute.cs" />

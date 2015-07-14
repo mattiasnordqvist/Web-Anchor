@@ -41,7 +41,7 @@ namespace WebAnchor
             {
                 new ParameterCreatorTransformer(),
                 new ParameterOfListTransformer(),
-                new DefaultParameterResolver(),
+                new DefaultParameterTransformer(),
                 new FormattableParameterResolver(),
                 new ParameterListTransformerAttributeTransformer(),
                 new ParameterTransformerAttributeTransformer(),

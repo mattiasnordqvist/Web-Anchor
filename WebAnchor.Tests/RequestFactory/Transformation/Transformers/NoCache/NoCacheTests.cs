@@ -13,7 +13,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache
         [Test]
         public void TestWithNoCacheAttributeOnApiLevel()
         {
-            TestTheRequestMessage<IApiWithNoCacheOnApiLevel>(
+            TestTheRequest<IApiWithNoCacheOnApiLevel>(
                 api => api.Get(),
                 req =>
                     {
@@ -25,7 +25,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache
         [Test]
         public void TestOnMethodThatDoesNotHaveNoCacheAttribute()
         {
-            TestTheRequestMessage<IApiWithBothCachedAndNonCachedMethods>(
+            TestTheRequest<IApiWithBothCachedAndNonCachedMethods>(
                 api => api.Cached(),
                 req =>
                 {
@@ -37,7 +37,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache
         [Test]
         public void TestOnMethodThatDoHaveNoCacheAttribute()
         {
-            TestTheRequestMessage<IApiWithBothCachedAndNonCachedMethods>(
+            TestTheRequest<IApiWithBothCachedAndNonCachedMethods>(
                 api => api.NotCached(),
                 req =>
                 {

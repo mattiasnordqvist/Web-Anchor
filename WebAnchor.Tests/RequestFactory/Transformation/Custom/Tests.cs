@@ -13,7 +13,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
         [Test]
         public void UrlWithQueryParams_AddExtraParameter()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.GetCustomers("test"), m =>
+            TestTheRequest<ICustomerApi>(api => api.GetCustomers("test"), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer?filter=test&extra=3", m.RequestUri.ToString());
@@ -24,7 +24,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
         [Test]
         public void UrlWithQueryParams_AddAnExtraTransformer()
         {
-            TestTheRequestMessage<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }),
+            TestTheRequest<ICustomerApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }),
                 m =>
                 {
                     Assert.AreEqual(HttpMethod.Get, m.Method);

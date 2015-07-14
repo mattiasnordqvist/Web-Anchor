@@ -13,7 +13,7 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
         [Test]
         public void TestWithSuperNiceTypedApiWhereTypeChangesTheUrl()
         {
-            TestTheRequestMessage<IDynamicTypedApi<Customer>>(
+            TestTheRequest<IDynamicTypedApi<Customer>>(
                 api => api.PostThis(new Customer { Id = 1, Name = "Mighty Gazelle" }),
                 assertMe =>
                 {
@@ -25,7 +25,7 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
         [Test]
         public void TestWithSuperNiceTypedApiWhereTypeChangesTheUrlImplementedInABetterWay()
         {
-            TestTheRequestMessage<IDynamicTypedApi2<Customer>>(
+            TestTheRequest<IDynamicTypedApi2<Customer>>(
                 api => api.PostThis(new Customer { Id = 1, Name = "Mighty Gazelle" }),
                 assertMe =>
                 {

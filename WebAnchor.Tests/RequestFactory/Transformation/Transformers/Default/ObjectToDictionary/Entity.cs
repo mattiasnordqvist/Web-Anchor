@@ -1,4 +1,4 @@
-namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.Fixtures
+namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.ObjectToDictionary
 {
     public class Entity
     {

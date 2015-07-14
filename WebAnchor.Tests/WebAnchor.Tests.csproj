@@ -62,6 +62,10 @@
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="RequestFactory\Transformation\Custom\AddExtraParameterTransformer.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\AClass.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\ApiInterface.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\Tests.cs" />
+    <Compile Include="TestUtils\TestTransformer.cs" />
     <Compile Include="Validation\ConcreteClass.cs" />
     <Compile Include="ACollectionOfRandomTests\Tests.cs" />
     <Compile Include="ACollectionOfRandomTests\Fixtures\DeepObject.cs" />
@@ -75,8 +79,8 @@
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\HeaderEnabledContentDeserializer.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Fixtures\ICustomerApi.cs" />
     <Compile Include="ProofOfConcepts\ParsingTheLocationHeader\Tests.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\Fixtures\Entity.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\ObjectToDictionaryHelperTests.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\ObjectToDictionary\Entity.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\ObjectToDictionary\ObjectToDictionaryHelperTests.cs" />
     <Compile Include="PayloadDependentUrlSegments\IDynamicTypedApi.cs" />
     <Compile Include="Validation\IInterface.cs" />
     <Compile Include="IntegrationTests\DynamicModelBinder.cs" />
