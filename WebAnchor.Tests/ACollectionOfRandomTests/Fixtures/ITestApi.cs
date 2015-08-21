@@ -77,7 +77,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures
         Task<HttpResponseMessage> Get404();
 
         [Get("/error/404")]
-        Task<Customer> Get404Driver();
+        Task<Customer> Get404Customer();
         
         [Get("/returnnonjson")]
         Task<Customer> GetAnObject();

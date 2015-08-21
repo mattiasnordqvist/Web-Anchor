@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="RequestFactory\Transformation\Custom\AddExtraParameterTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\AClass.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\AClassAsDictionary.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\ApiInterface.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\Tests.cs" />
     <Compile Include="TestUtils\TestTransformer.cs" />

@@ -86,9 +86,12 @@
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\NoCacheListTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\List\ParameterListTransformerAttribute.cs" />
     <Compile Include="ResponseParser\ApiException.cs" />
+    <Compile Include="ResponseParser\ResponseHandlers\AsyncDeserializingResponseHandler.cs" />
+    <Compile Include="ResponseParser\ResponseHandlers\AsyncHttpResponseMessageResponseHandler.cs" />
     <Compile Include="ResponseParser\IContentDeserializer.cs" />
     <Compile Include="RequestFactory\IContentSerializer.cs" />
     <Compile Include="RequestFactory\Transformation\IParameterListTransformer.cs" />
+    <Compile Include="ResponseParser\IResponseHandler.cs" />
     <Compile Include="ResponseParser\JsonContentDeserializer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\List\ParameterOfListTransformer.cs" />
     <Compile Include="RequestFactory\NameValueItem.cs" />

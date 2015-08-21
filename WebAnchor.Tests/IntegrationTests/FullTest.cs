@@ -131,7 +131,7 @@ namespace WebAnchor.Tests.IntegrationTests
         public async void RetrievingA404_WithTaskOfT_ThrowsException()
         {
             var customerApi = Api.For<ITestApi>(Host);
-            await customerApi.Get404Driver();
+            await customerApi.Get404Customer();
         }
 
         [Test]

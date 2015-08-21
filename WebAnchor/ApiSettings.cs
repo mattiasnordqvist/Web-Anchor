@@ -10,6 +10,7 @@ using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 using WebAnchor.RequestFactory.Transformation.Transformers.Formattable;
 using WebAnchor.RequestFactory.Transformation.Transformers.List;
 using WebAnchor.ResponseParser;
+using WebAnchor.ResponseParser.ResponseHandlers;
 
 namespace WebAnchor
 {
@@ -22,7 +23,7 @@ namespace WebAnchor
 
         public IHttpResponseParser GetResponseParser()
         {
-            return new HttpResponseParser(CreateContentDeserializer());
+            return new HttpResponseParser(CreateResponseHandlers());
         }
 
         public virtual IContentSerializer CreateContentSerializer()
@@ -46,6 +47,15 @@ namespace WebAnchor
                 new ParameterListTransformerAttributeTransformer(),
                 new ParameterTransformerAttributeTransformer(),
             };
+        }
+
+        public virtual IList<IResponseHandler> CreateResponseHandlers()
+        {
+            return new List<IResponseHandler>
+                       {
+                           new AsyncHttpResponseMessageResponseHandler(),
+                           new AsyncDeserializingResponseHandler(CreateContentDeserializer()),
+                       };
         }
     }
 }
