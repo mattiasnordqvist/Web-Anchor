@@ -66,6 +66,8 @@
     <Compile Include="RequestFactory\AttributeExtensions.cs" />
     <Compile Include="RequestFactory\Transformation\ParameterListTransformerBase.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttribute.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultParameterListTransformers.cs" />
+    <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultResponseHandlers.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\ParameterCreatorTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\List\ParameterListTransformerAttributeTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\ParameterTransformContext.cs" />

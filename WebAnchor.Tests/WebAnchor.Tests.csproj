@@ -110,7 +110,6 @@
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\TrackSubType.cs" />
     <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameterListAttribute.cs" />
     <Compile Include="Validation\HttpRequestFactoryValidationTests.cs" />
-    <Compile Include="TestUtils\TestSettings.cs" />
     <Compile Include="Validation\IApiWithTaskOfHttpResponseMessage.cs" />
     <Compile Include="Validation\IApiWithTaskOfT.cs" />
     <Compile Include="Validation\IApiWithTaskOnly.cs" />

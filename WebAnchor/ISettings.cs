@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Transformation;
+﻿using WebAnchor.RequestFactory;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor
@@ -9,8 +7,5 @@ namespace WebAnchor
     {
         IHttpRequestFactory GetRequestFactory();
         IHttpResponseParser GetResponseParser();
-        IContentSerializer CreateContentSerializer();
-        IContentDeserializer CreateContentDeserializer();
-        IList<IParameterListTransformer> CreateParameterListTransformers();
     }
 }

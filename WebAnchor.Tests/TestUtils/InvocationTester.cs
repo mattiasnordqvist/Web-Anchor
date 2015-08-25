@@ -28,9 +28,9 @@ namespace WebAnchor.Tests.TestUtils
 
         public void Intercept(IInvocation invocation)
         {
-            var listTransformers = new ApiSettings().CreateParameterListTransformers();
-            listTransformers.Add(new TestTransformer(_pipelineAction));
-            var factory = new HttpRequestFactory(new ContentSerializer(new JsonSerializer()), listTransformers);
+            var settings = new ApiSettings();
+            settings.ParameterListTransformers.Add(new TestTransformer(_pipelineAction));
+            var factory = (HttpRequestFactory)settings.GetRequestFactory();
             _configure(factory);
             var httpRequest = factory.Create(invocation);
             _assert(httpRequest);
