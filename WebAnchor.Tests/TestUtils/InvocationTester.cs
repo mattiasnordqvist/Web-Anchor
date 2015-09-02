@@ -4,8 +4,6 @@ using System.Net.Http;
 
 using Castle.DynamicProxy;
 
-using Newtonsoft.Json;
-
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 
@@ -19,8 +17,11 @@ namespace WebAnchor.Tests.TestUtils
 
         private readonly Action<IEnumerable<Parameter>, ParameterTransformContext> _pipelineAction;
 
-        public InvocationTester(Action<HttpRequestMessage> assert = null, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> pipelineAction = null)
+        private readonly ApiSettings _settings;
+
+        public InvocationTester(Action<HttpRequestMessage> assert = null, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> pipelineAction = null, ApiSettings settings = null)
         {
+            _settings = settings ?? new ApiSettings();
             _assert = assert ?? (a => { });
             _configure = configure ?? (a => { });
             _pipelineAction = pipelineAction ?? ((a, b) => { });
@@ -28,9 +29,8 @@ namespace WebAnchor.Tests.TestUtils
 
         public void Intercept(IInvocation invocation)
         {
-            var settings = new ApiSettings();
-            settings.ParameterListTransformers.Add(new TestTransformer(_pipelineAction));
-            var factory = (HttpRequestFactory)settings.GetRequestFactory();
+            _settings.ParameterListTransformers.Add(new TestTransformer(_pipelineAction));
+            var factory = (HttpRequestFactory)_settings.GetRequestFactory();
             _configure(factory);
             var httpRequest = factory.Create(invocation);
             _assert(httpRequest);
