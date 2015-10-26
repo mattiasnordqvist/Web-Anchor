@@ -81,10 +81,8 @@ namespace WebAnchor.RequestFactory
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
             var baseAttribute = methodInfo.DeclaringType.GetCustomAttribute<BaseLocationAttribute>();
 
-            var substitutedUrl = methodAttribute.URL.Replace(
-                    ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
-
-            var resolvedUrl = (baseAttribute != null ? baseAttribute.BaseUrl : string.Empty) + substitutedUrl;
+            var resolvedUrl = (baseAttribute != null ? baseAttribute.BaseUrl : string.Empty) + methodAttribute.URL;
+            resolvedUrl = resolvedUrl.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
             resolvedUrl = AppendUrlParams(resolvedUrl, ResolvedParameters.QueryParameters);
             return resolvedUrl;
         }

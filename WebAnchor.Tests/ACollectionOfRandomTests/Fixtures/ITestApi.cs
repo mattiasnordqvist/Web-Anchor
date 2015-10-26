@@ -11,6 +11,13 @@ using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtu
 
 namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures
 {
+    [BaseLocation("api/{version}")]
+    public interface IBaseLocationSubstitution
+    {
+        [Get("")]
+        Task<HttpResponseMessage> Get();
+    }
+
     [BaseLocation("api/reversed")]
     [Reverse]
     public interface IReversedApi
