@@ -7,7 +7,9 @@ using System.Threading;
 
 using NUnit.Framework;
 
+using WebAnchor.RequestFactory;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
+using WebAnchor.Tests.RequestFactory.Transformation.Custom;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
 using WebAnchor.Tests.TestUtils;
 
@@ -44,6 +46,18 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                 Assert.AreEqual(HttpMethod.Get, m.Method);
                 Assert.AreEqual("api/customer/8", m.RequestUri.ToString());
             });
+        }
+
+        [Test]
+        public void BaseLocationSubstitution()
+        {
+            TestTheRequest<IBaseLocationSubstitution>(api => api.Get(), 
+                configure: x => x.ParameterListTransformers.Add(new AddExtraParameterTransformer("version", "v2", ParameterType.Route)),
+                assertHttpRequestMessage: m =>
+                {
+                    Assert.AreEqual(HttpMethod.Get, m.Method);
+                    Assert.AreEqual("api/v2", m.RequestUri.ToString());
+                });
         }
 
         [Test]
