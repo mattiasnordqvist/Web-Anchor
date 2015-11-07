@@ -5,21 +5,21 @@ namespace WebAnchor.RequestFactory
 {
     public class Parameter
     {
-        public Parameter(Parameter parentParameter, object value)
+        public Parameter(Parameter parentParameter, object parameterValue)
         {
             ParentParameter = parentParameter;
             ParameterInfo = parentParameter.ParameterInfo;
-            ParameterValue = value;
-            Type = value.GetType();
+            ParameterValue = parameterValue;
+            Type = parameterValue.GetType();
             ParameterType = parentParameter.ParameterType;
         }
 
-        public Parameter(ParameterInfo parameterInfo, object value, ParameterType parameterType)
+        public Parameter(ParameterInfo parameterInfo, object parameterValue, ParameterType parameterType)
         {
             ParameterInfo = parameterInfo;
-            ParameterValue = value;
+            ParameterValue = parameterValue;
             ParameterType = parameterType;
-            Type = value.GetType();
+            Type = parameterValue.GetType();
         }
 
         public object ParameterValue { get; private set; }
@@ -27,7 +27,6 @@ namespace WebAnchor.RequestFactory
         public Parameter ParentParameter { get; private set; }
         public ParameterType ParameterType { get; private set; }
         public Type Type { get; private set; }
-
         public string Name { get; set; }
         public object Value { get; set; }
     }

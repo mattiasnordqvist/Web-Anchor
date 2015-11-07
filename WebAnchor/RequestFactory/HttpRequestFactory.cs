@@ -7,7 +7,6 @@ using System.Reflection;
 
 using Castle.DynamicProxy;
 using WebAnchor.RequestFactory.Transformation;
-using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
 namespace WebAnchor.RequestFactory
 {

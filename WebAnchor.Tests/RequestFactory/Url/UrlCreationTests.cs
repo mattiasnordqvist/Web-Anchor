@@ -2,7 +2,6 @@
 
 using NUnit.Framework;
 
-using WebAnchor.Tests.RequestFactory.Transformation.Custom;
 using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.RequestFactory.Url

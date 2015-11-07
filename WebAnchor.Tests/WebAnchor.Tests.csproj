@@ -63,6 +63,7 @@
     <Compile Include="..\ProductAssemblyInfo.cs">
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="RequestFactory\Transformation\Custom\AddExtraParameterSettings.cs" />
     <Compile Include="RequestFactory\Transformation\Custom\AddExtraParameterTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\AClass.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\AClassAsDictionary.cs" />
