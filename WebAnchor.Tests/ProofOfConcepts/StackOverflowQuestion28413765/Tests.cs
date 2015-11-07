@@ -18,7 +18,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765
                 m =>
                     {
                         Assert.AreEqual(HttpMethod.Get, m.Method);
-                        Assert.AreEqual("/track/?content-type[]=Type1&content-type[]=Type3", m.RequestUri.ToString());
+                        Assert.AreEqual("/track?content-type[]=Type1&content-type[]=Type3", m.RequestUri.ToString());
                     });
         }
     }

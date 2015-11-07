@@ -68,6 +68,8 @@
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\AClassAsDictionary.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\ApiInterface.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\Tests.cs" />
+    <Compile Include="RequestFactory\Url\IApi.cs" />
+    <Compile Include="RequestFactory\Url\UrlCreationTests.cs" />
     <Compile Include="TestUtils\TestTransformer.cs" />
     <Compile Include="Validation\ConcreteClass.cs" />
     <Compile Include="ACollectionOfRandomTests\Tests.cs" />

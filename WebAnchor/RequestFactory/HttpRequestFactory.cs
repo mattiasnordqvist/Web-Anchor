@@ -17,12 +17,14 @@ namespace WebAnchor.RequestFactory
         {
             ContentSerializer = contentSerializer;
             ParameterListTransformers = transformers ?? new List<IParameterListTransformer>();
+            InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
         }
 
         public IContentSerializer ContentSerializer { get; set; }
         public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
-        
+        public bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
+
         public virtual void ValidateApi(Type type)
         {
             foreach (var parameterListTransformer in ParameterListTransformers)
@@ -81,8 +83,10 @@ namespace WebAnchor.RequestFactory
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
             var baseAttribute = methodInfo.DeclaringType.GetCustomAttribute<BaseLocationAttribute>();
 
-            var resolvedUrl = (baseAttribute != null ? baseAttribute.BaseUrl : string.Empty) + methodAttribute.URL;
+            var resolvedUrl = ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).Replace("//", "/").Replace("/?", "?").TrimEnd('/');
+
             resolvedUrl = resolvedUrl.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
+
             resolvedUrl = AppendUrlParams(resolvedUrl, ResolvedParameters.QueryParameters);
             return resolvedUrl;
         }
