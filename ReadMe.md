@@ -1,7 +1,7 @@
 # Web Anchor
 [![Build status](https://ci.appveyor.com/api/projects/status/98vo2qacd6o53wer?svg=true)](https://ci.appveyor.com/project/mattiasnordqvist/web-anchor)
 [![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)  
-Web Anchor provides easy, clean and type-safe access to web resources.
+Web Anchor provides type-safe, testable and crisp access to web resources.
 
 ## Install
 
