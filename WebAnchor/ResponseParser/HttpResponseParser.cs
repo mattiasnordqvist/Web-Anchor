@@ -30,8 +30,7 @@ namespace WebAnchor.ResponseParser
             }
             else
             {
-                var result = handler.Handle(httpResponseMessage, invocation);
-                invocation.ReturnValue = result;
+                handler.Handle(httpResponseMessage, invocation);
             }
         }
     }

@@ -21,7 +21,7 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
             return invocation.Method.ReturnType.IsGenericType && invocation.Method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
         }
 
-        public object Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
+        public void Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
         {
             var genericArgument = invocation.Method.ReturnType.GetGenericArguments()[0];
 
@@ -29,15 +29,15 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
 
             var method = typeof(AsyncDeserializingResponseHandler).GetMethod("InternalDeserialize", Flags).MakeGenericMethod(genericArgument);
 
-            return method.Invoke(this, new[] { httpResponseMessage });
+            invocation.ReturnValue = method.Invoke(this, new[] { httpResponseMessage });
         }
 
         private async Task<T> InternalDeserialize<T>(Task<HttpResponseMessage> task)
         {
-            var httpResponseMessage = await task;
+            var httpResponseMessage = await task.ConfigureAwait(false);
             if (httpResponseMessage.IsSuccessStatusCode)
             {
-                using (var tr = new StreamReader(await httpResponseMessage.Content.ReadAsStreamAsync()))
+                using (var tr = new StreamReader(await httpResponseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false)))
                 {
                     return ContentDeserializer.Deserialize<T>(tr, task.Result);
                 }

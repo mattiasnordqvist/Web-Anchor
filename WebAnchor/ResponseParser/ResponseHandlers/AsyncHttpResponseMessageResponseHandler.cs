@@ -12,9 +12,9 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
             return invocation.Method.ReturnType == typeof(Task<HttpResponseMessage>);
         }
 
-        public object Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
+        public void Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
         {
-            return httpResponseMessage;
+            invocation.ReturnValue = httpResponseMessage;
         }
     }
 }
