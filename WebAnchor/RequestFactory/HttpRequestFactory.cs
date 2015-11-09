@@ -42,11 +42,7 @@ namespace WebAnchor.RequestFactory
 
         public virtual HttpRequestMessage Create(IInvocation invocation)
         {
-            var resolvedParameters = ResolveParameters(invocation);
-            ResolvedParameters = new Parameters(
-                resolvedParameters.Where(x => x.ParameterType == ParameterType.Route),
-                resolvedParameters.Where(x => x.ParameterType == ParameterType.Query),
-                resolvedParameters.FirstOrDefault(x => x.ParameterType == ParameterType.Content));
+            ResolvedParameters = ResolveParameters(invocation);
              
             var resolvedUrl = ResolveUrlRoute(invocation);
             var resolvedMethod = ResolveHttpMethod(invocation);
@@ -58,17 +54,42 @@ namespace WebAnchor.RequestFactory
                 request.Content = ResolveContent(invocation);
             }
 
+            foreach (var headerParameter in ResolvedParameters.HeaderParameters)
+            {
+                var headerValue = headerParameter.Value as string;
+                if (headerValue != null)
+                {
+                    request.Headers.Add(headerParameter.Name, headerValue);
+                }
+                else
+                {
+                    var headerValues = headerParameter.Value as IEnumerable<string>;
+                    if (headerValues != null)
+                    {
+                        request.Headers.Add(headerParameter.Name, headerValues);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("A header value can be of type string or IEnumerable<string>, not " + headerParameter.Value.GetType());
+                    }
+                }
+            }
+
             return request;
         }
 
-        protected virtual List<Parameter> ResolveParameters(IInvocation invocation)
+        protected virtual Parameters ResolveParameters(IInvocation invocation)
         {
             var parameters = new List<Parameter>();
             var transformedParameters = ParameterListTransformers.Aggregate(parameters,
                 (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(new ApiInvocation(invocation)))
                                                      .ToList());
 
-            return transformedParameters;
+            return new Parameters(
+                transformedParameters.Where(x => x.ParameterType == ParameterType.Route),
+                transformedParameters.Where(x => x.ParameterType == ParameterType.Query),
+                transformedParameters.Where(x => x.ParameterType == ParameterType.Header),
+                transformedParameters.FirstOrDefault(x => x.ParameterType == ParameterType.Content));
         }
 
         protected virtual HttpContent ResolveContent(IInvocation invocation)
@@ -83,9 +104,7 @@ namespace WebAnchor.RequestFactory
             var baseAttribute = methodInfo.DeclaringType.GetCustomAttribute<BaseLocationAttribute>();
 
             var resolvedUrl = ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).Replace("//", "/").Replace("/?", "?").TrimEnd('/');
-
             resolvedUrl = resolvedUrl.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
-
             resolvedUrl = AppendUrlParams(resolvedUrl, ResolvedParameters.QueryParameters);
             return resolvedUrl;
         }

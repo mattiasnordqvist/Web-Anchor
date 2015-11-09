@@ -63,6 +63,10 @@
     <Compile Include="..\ProductAssemblyInfo.cs">
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="RequestFactory\Headers\HeaderAttributeOnParameterTest.cs" />
+    <Compile Include="RequestFactory\Headers\HeaderAttributeOnMethodTest.cs" />
+    <Compile Include="RequestFactory\Headers\HeaderAttributeOnInterfaceTest.cs" />
+    <Compile Include="RequestFactory\Headers\HeaderTransformerTests.cs" />
     <Compile Include="RequestFactory\Transformation\Custom\AddExtraParameterSettings.cs" />
     <Compile Include="RequestFactory\Transformation\Custom\AddExtraParameterTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\AClass.cs" />
