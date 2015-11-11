@@ -4,6 +4,7 @@
     {
         Route,
         Query,
-        Content
+        Content,
+        Header
     }
 }

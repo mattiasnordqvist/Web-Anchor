@@ -25,7 +25,7 @@ namespace WebAnchor.RequestFactory
         public object ParameterValue { get; private set; }
         public ParameterInfo ParameterInfo { get; private set; }
         public Parameter ParentParameter { get; private set; }
-        public ParameterType ParameterType { get; private set; }
+        public ParameterType ParameterType { get; set; }
         public Type Type { get; private set; }
         public string Name { get; set; }
         public object Value { get; set; }
