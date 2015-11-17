@@ -16,6 +16,7 @@ namespace WebAnchor
             ResponseHandlers = new DefaultResponseHandlers();
             ContentSerializer = new ContentSerializer(new JsonSerializer());
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
+            PreservePathInUrlSegmentParameters = true;
         }
 
         public virtual List<IParameterListTransformer> ParameterListTransformers { get; set; }
@@ -23,11 +24,13 @@ namespace WebAnchor
         public virtual IContentSerializer ContentSerializer { get; set; }
 
         public virtual bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
+        public virtual bool PreservePathInUrlSegmentParameters { get; set; }
 
         public IHttpRequestFactory GetRequestFactory()
         {
             var requestFactory = new HttpRequestFactory(ContentSerializer, ParameterListTransformers);
             requestFactory.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl;
+            requestFactory.PreservePathInUrlSegmentParameters = PreservePathInUrlSegmentParameters;
             return requestFactory;
         }
 

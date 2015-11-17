@@ -10,6 +10,31 @@ namespace WebAnchor.Tests.RequestFactory.Url
     public class UrlCreationTests : WebAnchorTest
     {
         [Test]
+        public void PathSlashesAreNotUrlEncoded()
+        {
+            TestTheRequest<IApi>(
+                api => api.Get3("a/path/with/preserved/slashes"),
+                a =>
+                    {
+                        Assert.AreEqual(HttpMethod.Get, a.Method);
+                        Assert.AreEqual("base/a/path/with/preserved/slashes", a.RequestUri.ToString());
+                    });
+        }
+
+        [Test]
+        public void PathSlashesAreNotUrlEncoded_UnlessYouSaySo()
+        {
+            TestTheRequest<IApi>(
+                api => api.Get3("a/path/with/url/encoded/slashes"),
+                settings: new UrlEncodeSlashesSettings(), 
+                assertHttpRequestMessage: a =>
+                {
+                    Assert.AreEqual(HttpMethod.Get, a.Method);
+                    Assert.AreEqual("base/a%2Fpath%2Fwith%2Furl%2Fencoded%2Fslashes", a.RequestUri.ToString());
+                });
+        }
+
+        [Test]
         public void ConcatBaseLocationWithVerb()
         {
             TestTheRequest<IApi>(

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Windows.Markup;
 
 using Castle.DynamicProxy;
 using WebAnchor.RequestFactory.Transformation;
@@ -17,12 +18,14 @@ namespace WebAnchor.RequestFactory
             ContentSerializer = contentSerializer;
             ParameterListTransformers = transformers ?? new List<IParameterListTransformer>();
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
+            PreservePathInUrlSegmentParameters = true;
         }
 
         public IContentSerializer ContentSerializer { get; set; }
         public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
         public bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
+        public bool PreservePathInUrlSegmentParameters { get; set; }
 
         public virtual void ValidateApi(Type type)
         {
@@ -136,7 +139,9 @@ namespace WebAnchor.RequestFactory
             var value = parameter.Value != null
                            ? parameter.Value.ToString()
                            : parameter.ParameterValue.ToString();
-            return WebUtility.UrlEncode(value);
+            return PreservePathInUrlSegmentParameters 
+                ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode)) 
+                : WebUtility.UrlEncode(value);
         }
 
         protected virtual string CreateUrlParameter(Parameter parameter)

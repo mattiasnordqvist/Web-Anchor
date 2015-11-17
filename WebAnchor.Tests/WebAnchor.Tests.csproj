@@ -75,6 +75,7 @@
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttributeTest\Tests.cs" />
     <Compile Include="RequestFactory\Url\IApi.cs" />
     <Compile Include="RequestFactory\Url\UrlCreationTests.cs" />
+    <Compile Include="RequestFactory\Url\UrlEncodeSlashesSettings.cs" />
     <Compile Include="TestUtils\TestTransformer.cs" />
     <Compile Include="Validation\ConcreteClass.cs" />
     <Compile Include="ACollectionOfRandomTests\Tests.cs" />
