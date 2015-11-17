@@ -64,6 +64,7 @@
     <Compile Include="..\ProductAssemblyInfo.cs">
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="IntegrationTests\AssertEx.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnParameterTest.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnMethodTest.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnInterfaceTest.cs" />
