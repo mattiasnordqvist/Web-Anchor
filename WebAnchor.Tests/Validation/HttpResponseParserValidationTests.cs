@@ -8,10 +8,9 @@ namespace WebAnchor.Tests.Validation
     public class HttpResponseParserValidationTests
     {
         [Test]
-        [ExpectedException(typeof(WebAnchorException))]
         public void MethodsWithVoidAreNotAllowed()
         {
-            Api.For<IApiWithVoid>("http://localhost/");
+            Assert.Throws<WebAnchorException>(() => Api.For<IApiWithVoid>("http://localhost/"));
         }
 
         [Test]
@@ -27,10 +26,9 @@ namespace WebAnchor.Tests.Validation
         }
 
         [Test]
-        [ExpectedException(typeof(WebAnchorException))]
         public void MethodsWithTaskOnlyAreNotAllowed()
         {
-            Api.For<IApiWithTaskOnly>("http://localhost/");
+            Assert.Throws<WebAnchorException>(() => Api.For<IApiWithTaskOnly>("http://localhost/"));
         }
     }
 }

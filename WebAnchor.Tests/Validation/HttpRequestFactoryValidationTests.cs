@@ -6,17 +6,15 @@ namespace WebAnchor.Tests.Validation
     public class HttpRequestFactoryValidationTests
     {
         [Test]
-        [ExpectedException(typeof(WebAnchorException))]
         public void MethodWithoutHttpMethodAttributeThrowsExceptions()
         {
-            Api.For<IApiWithoutHttpMethodAttribute>("http://localhost/");
+            Assert.Throws<WebAnchorException>(() => Api.For<IApiWithoutHttpMethodAttribute>("http://localhost/"));
         }
 
         [Test]
-        [ExpectedException(typeof(WebAnchorException))]
         public void MethodWithDuplicatedContentAttributesThrowsExceptions()
         {
-            Api.For<IApiWithMethodWithDuplicatedContentAttributes>("http://localhost/");
+            Assert.Throws<WebAnchorException>(() => Api.For<IApiWithMethodWithDuplicatedContentAttributes>("http://localhost/"));
         }
     }
 }

@@ -127,19 +127,17 @@ namespace WebAnchor.Tests.IntegrationTests
         }
 
         [Test]
-        [ExpectedException(typeof(ApiException))]
         public async void RetrievingA404_WithTaskOfT_ThrowsException()
         {
             var customerApi = Api.For<ITestApi>(Host);
-            await customerApi.Get404Customer();
+            await AssertEx.ThrowsAsync<ApiException>(customerApi.Get404Customer);
         }
 
         [Test]
-        [ExpectedException(typeof(JsonReaderException))]
         public async void ExpectedDataButServerReturnsNothingInContent()
         {
             var customerApi = Api.For<ITestApi>(Host);
-            await customerApi.GetAnObject();
+            await AssertEx.ThrowsAsync<JsonReaderException>(customerApi.GetAnObject);
         }
     }
 }
