@@ -3,8 +3,6 @@
 [![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)  
 Web Anchor provides type-safe, testable and crisp access to web resources.
 
-NB! Don't be alarmed by the red building-badge. AppVeyor doesn't support nunit 3 out of the box it seems, that's all.
-
 ## Install
 NB! There is currently a problem with the Json.NET dependency. After installation of Web Anchor, you need to update Json.NET to v7.0.1. See https://github.com/mattiasnordqvist/Web-Anchor/issues/58  
 To install Web Anchor, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
