@@ -17,14 +17,14 @@ namespace WebAnchor.Tests.IntegrationTests
     public class SomeResponseTests : WebAnchorTest
     {
         [Test]
-        public async void CreatingASimpleGetRequest2()
+        public async Task CreatingASimpleGetRequest2()
         {
             var result = await GetResponse<ITestApi, Task<HttpResponseMessage>>(api => api.GetCustomer(9), new HttpResponseMessage(HttpStatusCode.OK));
             Assert.That(result.IsSuccessStatusCode);
         }
 
         [Test]
-        public async void ParsingAJsonResponse()
+        public async Task ParsingAJsonResponse()
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -37,7 +37,7 @@ namespace WebAnchor.Tests.IntegrationTests
         }
 
         [Test]
-        public async void RetrievingA404_WithTaskOFHttpResponseMessage()
+        public async Task RetrievingA404_WithTaskOFHttpResponseMessage()
         {
             var response = new HttpResponseMessage(HttpStatusCode.NotFound);
 
@@ -46,7 +46,7 @@ namespace WebAnchor.Tests.IntegrationTests
         }
 
         [Test]
-        public async void RetrievingA404_WithTaskOfT_ThrowsException()
+        public async Task RetrievingA404_WithTaskOfT_ThrowsException()
         {
             var response = new HttpResponseMessage(HttpStatusCode.NotFound);
 
@@ -56,7 +56,7 @@ namespace WebAnchor.Tests.IntegrationTests
         }
 
         [Test]
-        public async void ExpectedDataButServerReturnsNothingInContent()
+        public async Task ExpectedDataButServerReturnsNothingInContent()
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Hello World!") };
 
