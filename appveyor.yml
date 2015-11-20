@@ -3,6 +3,10 @@ branches:
   only:
   - master
 configuration: Release
+install:
+  - cmd: appveyor DownloadFile https://github.com/nunit/nunit/releases/download/3.0.0-beta-3/nunit-3.0.0-beta-3.zip
+  - cmd: 7z x -oC:\Tools\NUnit3 nunit-3.0.0-beta-3.zip > NUL
+  - cmd: set PATH=C:\Tools\NUnit3\bin;%PATH%
 assembly_info:
   patch: true
   file: '**\ProductAssemblyInfo.*'
