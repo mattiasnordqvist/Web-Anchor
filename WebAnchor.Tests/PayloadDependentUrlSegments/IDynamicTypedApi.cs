@@ -1,10 +1,10 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers;
-using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
 namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {
@@ -22,5 +22,13 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
     {
         [Post("/{type}")]
         Task<HttpResponseMessage> PostThis([Content]T t);
+    }
+
+    [BaseLocation("/api")]
+    [UseTypeInUrl]
+    public interface IAnyResourceApi<T>
+    {
+        [Get("/{type}/{id}")]
+        Task<T> Get(int id);
     }
 }

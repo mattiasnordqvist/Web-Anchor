@@ -33,5 +33,17 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
                     Assert.AreEqual("/api/customer", assertMe.RequestUri.ToString());
                 });
         }
+
+        [Test]
+        public void TestGetterAlso()
+        {
+            TestTheRequest<IAnyResourceApi<Customer>>(
+                api => api.Get(1),
+                assertMe =>
+                {
+                    Assert.AreEqual(HttpMethod.Get, assertMe.Method);
+                    Assert.AreEqual("/api/customer/1", assertMe.RequestUri.ToString());
+                });
+        }
     }
 }

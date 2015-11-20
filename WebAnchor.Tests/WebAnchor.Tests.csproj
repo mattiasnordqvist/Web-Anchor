@@ -35,14 +35,6 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nancy.1.4.1\lib\net40\Nancy.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Nancy.Hosting.Self, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Nancy.Hosting.Self.1.4.1\lib\net40\Nancy.Hosting.Self.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -65,6 +57,8 @@
       <Link>Properties\ProductAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="IntegrationTests\AssertEx.cs" />
+    <Compile Include="IntegrationTests\HeaderAttribute.cs" />
+    <Compile Include="PayloadDependentUrlSegments\UseTypeInUrlAttribute.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnParameterTest.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnMethodTest.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnInterfaceTest.cs" />
@@ -78,12 +72,12 @@
     <Compile Include="RequestFactory\Url\IApi.cs" />
     <Compile Include="RequestFactory\Url\UrlCreationTests.cs" />
     <Compile Include="RequestFactory\Url\UrlEncodeSlashesSettings.cs" />
+    <Compile Include="TestUtils\InvocationTester2.cs" />
     <Compile Include="TestUtils\TestTransformer.cs" />
     <Compile Include="Validation\ConcreteClass.cs" />
     <Compile Include="ACollectionOfRandomTests\Tests.cs" />
     <Compile Include="ACollectionOfRandomTests\Fixtures\DeepObject.cs" />
     <Compile Include="IntegrationTests\ContentExtender.cs" />
-    <Compile Include="TestUtils\IntegrationTest.cs" />
     <Compile Include="RequestFactory\Transformation\Custom\ICustomerApi.cs" />
     <Compile Include="RequestFactory\Transformation\Custom\Tests.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\Fixtures\ICustomerApiWithAttributedMethods.cs" />
@@ -96,11 +90,9 @@
     <Compile Include="RequestFactory\Transformation\Transformers\Default\ObjectToDictionary\ObjectToDictionaryHelperTests.cs" />
     <Compile Include="PayloadDependentUrlSegments\IDynamicTypedApi.cs" />
     <Compile Include="Validation\IInterface.cs" />
-    <Compile Include="IntegrationTests\DynamicModelBinder.cs" />
-    <Compile Include="IntegrationTests\FullTest.cs" />
+    <Compile Include="IntegrationTests\SomeResponseTests.cs" />
     <Compile Include="ACollectionOfRandomTests\Fixtures\ITestApi.cs" />
     <Compile Include="ACollectionOfRandomTests\Fixtures\Customer.cs" />
-    <Compile Include="IntegrationTests\HeaderAttribute.cs" />
     <Compile Include="ACollectionOfRandomTests\Fixtures\ITypedApi.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithNoCacheOnApiLevel.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithBothCachedAndNonCachedMethods.cs" />
@@ -110,7 +102,6 @@
     <Compile Include="ACollectionOfRandomTests\Fixtures\ShallowObject.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Tests.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\IApi.cs" />
-    <Compile Include="IntegrationTests\TestWebServer.cs" />
     <Compile Include="TestUtils\InvocationTester.cs" />
     <Compile Include="Validation\MisuseTests.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\Fixtures\MultiplyAttribute.cs" />

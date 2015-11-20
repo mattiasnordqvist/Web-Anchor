@@ -11,10 +11,17 @@ namespace WebAnchor.Tests.TestUtils
 {
     public class WebAnchorTest
     {
-        protected void TestTheRequest<T>(Action<T> action, Action<HttpRequestMessage> assertHttpRequestMessage, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> assertParametersAndContext = null, ApiSettings settings = null) where T : class
+        protected void TestTheRequest<T>(Action<T> apiCall, Action<HttpRequestMessage> assertHttpRequestMessage, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> assertParametersAndContext = null, ApiSettings settings = null) where T : class
         {
             var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new InvocationTester(assertHttpRequestMessage, configure, assertParametersAndContext, settings));
-            action(api);
+            apiCall(api);
+        }
+
+        protected TReturn GetResponse<T, TReturn>(Func<T, TReturn> apiCall, HttpResponseMessage responseMessage, ApiSettings settings = null)
+            where T : class
+        {
+            var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new InvocationTester2(responseMessage, settings));
+            return apiCall(api);
         }
     }
 }
