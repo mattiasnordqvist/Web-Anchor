@@ -17,7 +17,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
     public class Tests : WebAnchorTest
     {
         [Test]
-        public async void ParsingTheLocationHeaderFromResponseBodyViaCustomResponseParser()
+        public async Task ParsingTheLocationHeaderFromResponseBodyViaCustomResponseParser()
         {
             var settings = new ApiSettings();
             var index = settings.ResponseHandlers.FindIndex(x => x is AsyncDeserializingResponseHandler);
