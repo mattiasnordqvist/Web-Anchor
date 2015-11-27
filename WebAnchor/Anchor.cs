@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+﻿using System;
 
 using Castle.DynamicProxy;
 
@@ -9,22 +9,38 @@ namespace WebAnchor
 {
     public class Anchor : IInterceptor
     {
-        public Anchor(HttpClient httpClient, IHttpRequestFactory httpRequestBuilder, IHttpResponseParser httpResponseParser)
+        private readonly bool _shouldDisposeHttpClient;
+
+        public Anchor(IHttpClient httpClient, IHttpRequestFactory httpRequestBuilder, IHttpResponseParser httpResponseParser, bool shouldDisposeHttpClient)
         {
+            _shouldDisposeHttpClient = shouldDisposeHttpClient;
             HttpClient = httpClient;
             HttpRequestBuilder = httpRequestBuilder;
             HttpResponseParser = httpResponseParser;
         }
 
-        public HttpClient HttpClient { get; set; }
+        public IHttpClient HttpClient { get; set; }
         public IHttpRequestFactory HttpRequestBuilder { get; set; }
         public IHttpResponseParser HttpResponseParser { get; set; }
 
         public void Intercept(IInvocation invocation)
         {
-            var request = HttpRequestBuilder.Create(invocation);
-            var httpResponseMessage = HttpClient.SendAsync(request);
-            HttpResponseParser.Parse(httpResponseMessage, invocation);
+            if (HttpRequestBuilder.IsHttpRequestInvocation(invocation))
+            {
+                var request = HttpRequestBuilder.Create(invocation);
+                var httpResponseMessage = HttpClient.SendAsync(request);
+                HttpResponseParser.Parse(httpResponseMessage, invocation);
+            }
+            else
+            {
+                if (invocation.Method.GetBaseDefinition().DeclaringType == typeof(IDisposable))
+                {
+                    if (_shouldDisposeHttpClient)
+                    {
+                        HttpClient.Dispose();
+                    }
+                }
+            }
         }
     }
 }
