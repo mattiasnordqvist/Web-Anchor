@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
-using System.Windows.Markup;
 
 using Castle.DynamicProxy;
 using WebAnchor.RequestFactory.Transformation;
@@ -41,6 +40,11 @@ namespace WebAnchor.RequestFactory
                     throw new WebAnchorException(string.Format("The method {0} in {1} must be have an {2}", method.Name, method.DeclaringType.FullName, typeof(HttpAttribute).FullName));
                 }
             }
+        }
+
+        public bool IsHttpRequestInvocation(IInvocation invocation)
+        {
+            return invocation.Method.IsDefined(typeof(HttpAttribute), false);
         }
 
         public virtual HttpRequestMessage Create(IInvocation invocation)

@@ -54,7 +54,10 @@
     </Compile>
     <Compile Include="Anchor.cs" />
     <Compile Include="Api.cs" />
+    <Compile Include="ApiFactory.cs" />
     <Compile Include="ApiSettings.cs" />
+    <Compile Include="HttpClientWrapper.cs" />
+    <Compile Include="IHttpClient.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="RequestFactory\ApiInvocation.cs" />
     <Compile Include="RequestFactory\BaseLocationAttribute.cs" />

@@ -10,5 +10,7 @@ namespace WebAnchor.RequestFactory
         HttpRequestMessage Create(IInvocation invocation);
 
         void ValidateApi(Type type);
+
+        bool IsHttpRequestInvocation(IInvocation invocation);
     }
 }
