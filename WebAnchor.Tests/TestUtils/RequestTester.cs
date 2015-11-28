@@ -9,7 +9,7 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests.TestUtils
 {
-    public class InvocationTester : IInterceptor
+    public class RequestTester : IInterceptor
     {
         private readonly Action<HttpRequestMessage> _assert;
 
@@ -19,7 +19,7 @@ namespace WebAnchor.Tests.TestUtils
 
         private readonly ApiSettings _settings;
 
-        public InvocationTester(Action<HttpRequestMessage> assert = null, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> pipelineAction = null, ApiSettings settings = null)
+        public RequestTester(Action<HttpRequestMessage> assert = null, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> pipelineAction = null, ApiSettings settings = null)
         {
             _settings = settings ?? new ApiSettings();
             _assert = assert ?? (a => { });

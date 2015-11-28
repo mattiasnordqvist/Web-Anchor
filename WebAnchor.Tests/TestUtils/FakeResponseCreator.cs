@@ -5,13 +5,13 @@ using Castle.DynamicProxy;
 
 namespace WebAnchor.Tests.TestUtils
 {
-    public class InvocationTester2 : IInterceptor
+    public class FakeResponseCreator : IInterceptor
     {
         private readonly HttpResponseMessage _response;
 
         private readonly ApiSettings _settings;
 
-        public InvocationTester2(HttpResponseMessage response, ApiSettings settings = null)
+        public FakeResponseCreator(HttpResponseMessage response, ApiSettings settings = null)
         {
             _response = response;
             _settings = settings ?? new ApiSettings();

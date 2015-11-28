@@ -68,7 +68,7 @@
     <Compile Include="RequestFactory\Url\IApi.cs" />
     <Compile Include="RequestFactory\Url\UrlCreationTests.cs" />
     <Compile Include="RequestFactory\Url\UrlEncodeSlashesSettings.cs" />
-    <Compile Include="TestUtils\InvocationTester2.cs" />
+    <Compile Include="TestUtils\FakeResponseCreator.cs" />
     <Compile Include="TestUtils\TestTransformer.cs" />
     <Compile Include="Validation\ConcreteClass.cs" />
     <Compile Include="ACollectionOfRandomTests\Tests.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="ACollectionOfRandomTests\Fixtures\ShallowObject.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Tests.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\IApi.cs" />
-    <Compile Include="TestUtils\InvocationTester.cs" />
+    <Compile Include="TestUtils\RequestTester.cs" />
     <Compile Include="Validation\MisuseTests.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\Fixtures\MultiplyAttribute.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Attribute\Fixtures\PrefixAttribute.cs" />

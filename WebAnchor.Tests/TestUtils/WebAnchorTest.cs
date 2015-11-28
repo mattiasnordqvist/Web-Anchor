@@ -13,14 +13,14 @@ namespace WebAnchor.Tests.TestUtils
     {
         protected void TestTheRequest<T>(Action<T> apiCall, Action<HttpRequestMessage> assertHttpRequestMessage, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> assertParametersAndContext = null, ApiSettings settings = null) where T : class
         {
-            var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new InvocationTester(assertHttpRequestMessage, configure, assertParametersAndContext, settings));
+            var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new RequestTester(assertHttpRequestMessage, configure, assertParametersAndContext, settings));
             apiCall(api);
         }
 
         protected TReturn GetResponse<T, TReturn>(Func<T, TReturn> apiCall, HttpResponseMessage responseMessage, ApiSettings settings = null)
             where T : class
         {
-            var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new InvocationTester2(responseMessage, settings));
+            var api = new ProxyGenerator().CreateInterfaceProxyWithoutTarget<T>(new FakeResponseCreator(responseMessage, settings));
             return apiCall(api);
         }
     }
