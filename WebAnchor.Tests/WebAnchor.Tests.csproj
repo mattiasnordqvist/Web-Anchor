@@ -61,6 +61,12 @@
     <Compile Include="IntegrationTests\AssertEx.cs" />
     <Compile Include="IntegrationTests\HeaderAttribute.cs" />
     <Compile Include="PayloadDependentUrlSegments\UseTypeInUrlAttribute.cs" />
+    <Compile Include="ProofOfConcepts\GeckoBoardBarChart\BarChart\BarDataItem.cs" />
+    <Compile Include="ProofOfConcepts\GeckoBoardBarChart\BarChart\MinimumOfGeckoBarChartToReproduceError.cs" />
+    <Compile Include="ProofOfConcepts\GeckoBoardBarChart\BarChart\XAxis.cs" />
+    <Compile Include="ProofOfConcepts\GeckoBoardBarChart\BarChart\XAxisType.cs" />
+    <Compile Include="ProofOfConcepts\GeckoBoardBarChart\BarChart\YAxis.cs" />
+    <Compile Include="ProofOfConcepts\GeckoBoardBarChart\Tests.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnParameterTest.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnMethodTest.cs" />
     <Compile Include="RequestFactory\Headers\HeaderAttributeOnInterfaceTest.cs" />
@@ -131,7 +137,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

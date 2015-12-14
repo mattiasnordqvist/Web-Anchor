@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -50,6 +51,10 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
             else if (value is IEnumerable<object>)
             {
                 dictionary.Add(name, ((IEnumerable<object>)value).Select(x => IsPrimitive(x) ? x : x.ToDictionary()).ToList());
+            }
+            else if (value is IEnumerable)
+            {
+                dictionary.Add(name, value);
             }
             else
             {
