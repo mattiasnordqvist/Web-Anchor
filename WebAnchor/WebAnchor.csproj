@@ -65,7 +65,7 @@
     <Compile Include="RequestFactory\Transformation\ParameterListTransformerBase.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttribute.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultParameterListTransformers.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultResponseHandlers.cs" />
+    <Compile Include="ResponseParser\DefaultResponseHandlers.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Headers\AddAuthorizationTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Headers\AddHeaderTransformer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\Headers\AuthorizationAttribute.cs" />

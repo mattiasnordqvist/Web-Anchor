@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+
 using Newtonsoft.Json;
-using WebAnchor.ResponseParser;
+
 using WebAnchor.ResponseParser.ResponseHandlers;
 
-namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
+namespace WebAnchor.ResponseParser
 {
     public class DefaultResponseHandlers : List<IResponseHandler>
     {
