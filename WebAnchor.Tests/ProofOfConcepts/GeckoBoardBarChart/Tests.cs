@@ -6,6 +6,7 @@ using NUnit.Framework;
 using PushApiTest.Entities.Gecko.BarChart;
 
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
+using WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart.BarChart;
 
 namespace WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart
 {
