@@ -180,7 +180,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             RunWithCulture("en-US", () => TestTheRequest<ITestApi>(api => api.GetCustomers(new DateTime(2014, 03, 07)), m =>
             {
                 Assert.AreEqual(HttpMethod.Get, m.Method);
-                Assert.AreEqual(string.Format("api/customer?from={0}", expectedResult), m.RequestUri.ToString());
+                Assert.AreEqual($"api/customer?from={expectedResult}", m.RequestUri.ToString());
             }));
         }
 

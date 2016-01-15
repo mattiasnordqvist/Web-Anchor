@@ -1,4 +1,4 @@
-﻿namespace PushApiTest.Entities.Gecko.BarChart
+﻿namespace WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart.BarChart
 {
     public enum XAxisType
     {

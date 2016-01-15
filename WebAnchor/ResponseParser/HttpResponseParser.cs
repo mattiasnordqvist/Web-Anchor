@@ -26,7 +26,7 @@ namespace WebAnchor.ResponseParser
             var handler = _responseHandlers.First(x => x.CanHandle(httpResponseMessage, invocation));
             if (handler == null)
             {
-                throw new WebAnchorException(string.Format("Return type of method {0} in {1} cannot be handled by any of the registered response handlers.", invocation.Method.Name, invocation.Method.DeclaringType.FullName));
+                throw new WebAnchorException($"Return type of method {invocation.Method.Name} in {invocation.Method.DeclaringType.FullName} cannot be handled by any of the registered response handlers.");
             }
             else
             {

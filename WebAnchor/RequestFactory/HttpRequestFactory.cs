@@ -37,7 +37,7 @@ namespace WebAnchor.RequestFactory
             {
                 if (method.GetCustomAttribute<HttpAttribute>() == null)
                 {
-                    throw new WebAnchorException(string.Format("The method {0} in {1} must be have an {2}", method.Name, method.DeclaringType.FullName, typeof(HttpAttribute).FullName));
+                    throw new WebAnchorException($"The method {method.Name} in {method.DeclaringType.FullName} must be have an {typeof(HttpAttribute).FullName}");
                 }
             }
         }
@@ -140,9 +140,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
-            var value = parameter.Value != null
-                           ? parameter.Value.ToString()
-                           : parameter.ParameterValue.ToString();
+            var value = parameter.Value?.ToString() ?? parameter.ParameterValue.ToString();
             return PreservePathInUrlSegmentParameters 
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode)) 
                 : WebUtility.UrlEncode(value);
@@ -150,10 +148,8 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateUrlParameter(Parameter parameter)
         {
-            var value = parameter.Value != null
-                            ? parameter.Value.ToString()
-                            : parameter.ParameterValue.ToString();
-            return string.Format("{0}={1}", parameter.Name, WebUtility.UrlEncode(value));
+            var value = parameter.Value?.ToString() ?? parameter.ParameterValue.ToString();
+            return $"{parameter.Name}={WebUtility.UrlEncode(value)}";
         }
     }
 }

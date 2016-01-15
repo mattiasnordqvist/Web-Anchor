@@ -86,7 +86,6 @@
     <Compile Include="TestUtils\TestTransformer.cs" />
     <Compile Include="Validation\ConcreteClass.cs" />
     <Compile Include="ACollectionOfRandomTests\Tests.cs" />
-    <Compile Include="ACollectionOfRandomTests\Fixtures\DeepObject.cs" />
     <Compile Include="IntegrationTests\ContentExtender.cs" />
     <Compile Include="RequestFactory\Transformation\Custom\ICustomerApi.cs" />
     <Compile Include="RequestFactory\Transformation\Custom\Tests.cs" />
@@ -103,13 +102,11 @@
     <Compile Include="IntegrationTests\SomeResponseTests.cs" />
     <Compile Include="ACollectionOfRandomTests\Fixtures\ITestApi.cs" />
     <Compile Include="ACollectionOfRandomTests\Fixtures\Customer.cs" />
-    <Compile Include="ACollectionOfRandomTests\Fixtures\ITypedApi.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithNoCacheOnApiLevel.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\Fixtures\IApiWithBothCachedAndNonCachedMethods.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\NoCache\NoCacheTests.cs" />
     <Compile Include="PayloadDependentUrlSegments\Test.cs" />
     <Compile Include="PayloadDependentUrlSegments\TypeNameAsUrlParameter2Attribute.cs" />
-    <Compile Include="ACollectionOfRandomTests\Fixtures\ShallowObject.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Tests.cs" />
     <Compile Include="ProofOfConcepts\StackOverflowQuestion28413765\Fixtures\IApi.cs" />
     <Compile Include="TestUtils\RequestTester.cs" />

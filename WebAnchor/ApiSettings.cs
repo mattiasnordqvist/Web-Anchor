@@ -28,9 +28,11 @@ namespace WebAnchor
 
         public IHttpRequestFactory GetRequestFactory()
         {
-            var requestFactory = new HttpRequestFactory(ContentSerializer, ParameterListTransformers);
-            requestFactory.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl;
-            requestFactory.PreservePathInUrlSegmentParameters = PreservePathInUrlSegmentParameters;
+            var requestFactory = new HttpRequestFactory(ContentSerializer, ParameterListTransformers)
+            {
+                InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl,
+                PreservePathInUrlSegmentParameters = PreservePathInUrlSegmentParameters
+            };
             return requestFactory;
         }
 

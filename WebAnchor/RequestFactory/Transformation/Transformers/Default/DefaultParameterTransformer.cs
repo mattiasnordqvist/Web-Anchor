@@ -21,7 +21,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
             }
             else
             {
-                parameter.Value = parameter.ParameterValue == null ? null : parameter.ParameterValue.ToString();
+                parameter.Value = parameter.ParameterValue?.ToString();
             }
         }
 
@@ -38,7 +38,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
                 if (method.GetParameters()
                     .Count(x => x.GetCustomAttributes(typeof(ContentAttribute), false).Any()) > 1)
                 {
-                    throw new WebAnchorException(string.Format("The method {0} in {1} cannot have more than one {2}", method.Name, method.DeclaringType.FullName, typeof(ContentAttribute).FullName));
+                    throw new WebAnchorException($"The method {method.Name} in {method.DeclaringType.FullName} cannot have more than one {typeof(ContentAttribute).FullName}");
                 }
             }
         }

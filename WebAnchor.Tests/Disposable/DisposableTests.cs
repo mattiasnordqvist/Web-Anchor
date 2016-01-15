@@ -10,7 +10,7 @@ namespace WebAnchor.Tests.Disposable
     public class DisposableTests : WebAnchorTest
     {
         [Test]
-        public void ShouldDispose()
+        public void ShouldDisposeHttpClient_WhenHttpClientIsCreatedInternally()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
             var api = new ApiFactory().Create<IApi>(fakeHttpClient, true);
@@ -19,7 +19,7 @@ namespace WebAnchor.Tests.Disposable
         }
 
         [Test]
-        public void ShouldNotDispose()
+        public void ShouldNotDisposeHttpClient_WhenHttpClientIsProvidedByConsumer()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
             var api = new ApiFactory().Create<IApi>(fakeHttpClient, false);
@@ -28,7 +28,7 @@ namespace WebAnchor.Tests.Disposable
         }
 
         [Test]
-        public void ShouldAlsoNotDispose()
+        public void ShouldNeverDisposeHttpClient_WhenDisposeIsNotInvokedOnIApi()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
             new ApiFactory().Create<IApi>(fakeHttpClient, true);

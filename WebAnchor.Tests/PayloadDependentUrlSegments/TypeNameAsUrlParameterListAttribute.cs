@@ -17,6 +17,7 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
             {
                 Name = "type"
             });
+
             return list;
         }
     }

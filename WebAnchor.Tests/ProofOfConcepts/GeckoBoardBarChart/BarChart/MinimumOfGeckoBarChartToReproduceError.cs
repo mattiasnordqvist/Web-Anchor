@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-using PushApiTest.Entities.Gecko.BarChart;
-
 namespace WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart.BarChart
 {
     [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "Because we want to test that web anchor works with inconsistent naming.")]

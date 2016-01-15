@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
-using WebAnchor.RequestFactory.Transformation.Transformers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
 
@@ -55,21 +54,6 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures
 
         [Get("/{id}")]
         Task<Customer> GetCustomer3(int id);
-
-        [Post("")]
-        Task<Customer> CreateDriver([Content(ContentType.FormUrlEncoded)]Customer customer);
-
-        [Post("")]
-        Task<Customer> CreateCustomer2([Content]Customer customer);
-
-        [Post("")]
-        Task<Customer> CreateCustomer3([Content]object customer);
-
-        [Post("/deep")]
-        Task<DeepObject> CreateDeepobject([Content]DeepObject deepobject);
-
-        [Post("/deep")]
-        Task<DeepObject> CreateDeepobject2([Content]Dictionary<string, object> deepobject);
 
         [Get("")]
         Task<HttpResponseMessage> MethodWithListParameter(List<string> names);

@@ -13,13 +13,7 @@ namespace WebAnchor.RequestFactory
             _invocation = invocation;
         }
 
-        public MethodInfo Method
-        {
-            get
-            {
-                return _invocation.Method;
-            }
-        }
+        public MethodInfo Method => _invocation.Method;
 
         public object GetArgumentValue(int index)
         {
