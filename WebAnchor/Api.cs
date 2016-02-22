@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Net.Http;
+using Castle.DynamicProxy;
 
 namespace WebAnchor
 {
     public class Api
     {
+        private static ProxyGenerator _proxyGenerator;
+
+        protected static ProxyGenerator ProxyGenerator => _proxyGenerator ?? (_proxyGenerator = new ProxyGenerator());
+
         public static T For<T>(string baseUri, ISettings settings = null) where T : class
         {
             if (!typeof(T).IsInterface)
@@ -13,12 +18,12 @@ namespace WebAnchor
             }
 
             var httpClient = new HttpClient { BaseAddress = new Uri(baseUri) };
-            return new ApiFactory().Create<T>(new HttpClientWrapper(httpClient), true, settings);
+            return new ApiFactory(ProxyGenerator).Create<T>(new HttpClientWrapper(httpClient), true, settings);
         }
 
         public static T For<T>(HttpClient httpClient, ISettings settings = null) where T : class
         {
-            return new ApiFactory().Create<T>(new HttpClientWrapper(httpClient), false, settings);
+            return new ApiFactory(ProxyGenerator).Create<T>(new HttpClientWrapper(httpClient), false, settings);
         }
     }
 }
