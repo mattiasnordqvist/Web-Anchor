@@ -38,6 +38,6 @@ Although Web Anchor is off course the best framework for accessing web apis, the
 
 ## Caveats
 
-When working with HttpClient in any way, you should know some things. Read up on how the HttpClient works and how it is intended to be used, because your intuition is probably wrong.
+When working with HttpClient in any way, you should know some things. Read up on how the HttpClient works and how it is intended to be used, because your intuition is probably wrong.  
 http://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/  
 http://byterot.blogspot.se/2016/07/singleton-httpclient-dns.html  
