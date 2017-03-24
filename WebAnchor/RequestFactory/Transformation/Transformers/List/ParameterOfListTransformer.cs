@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 {
@@ -25,7 +26,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 
         protected bool ParameterIsEnumerable(Parameter parameter)
         {
-            return parameter.ParameterValue is IEnumerable && (parameter.Type.IsGenericType || parameter.Type.IsArray);
+            return parameter.ParameterValue is IEnumerable && (parameter.Type.GetTypeInfo().IsGenericType || parameter.Type.IsArray);
         }
     }
 }

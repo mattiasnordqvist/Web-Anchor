@@ -28,7 +28,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
 
         protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
         {
-            if (parameterInfo.HasAttribute<ContentAttribute>())
+            if (parameterInfo.GetCustomAttribute<ContentAttribute>() != null)
             {
                 return ParameterType.Content;
             }

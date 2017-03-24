@@ -1,59 +1,58 @@
 ﻿using System.Net.Http;
 
-using NUnit.Framework;
+using Xunit;
 
 using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.RequestFactory.NullableQueryStringParams
 {
-    [TestFixture]
     public class NullableQueryStringParamsTests : WebAnchorTest
     {
-        [Test]
+        [Fact]
         public void NullableIntWithNullValueShouldBeOmitted()
         {
             TestTheRequest<IApi>(
                 api => api.Get(null),
                 m =>
                     {
-                        Assert.AreEqual(HttpMethod.Get, m.Method);
-                        Assert.AreEqual("base/path1", m.RequestUri.ToString());
+                        Assert.Equal(HttpMethod.Get, m.Method);
+                        Assert.Equal("base/path1", m.RequestUri.ToString());
                     });
         }
 
-        [Test]
+        [Fact]
         public void NullableIntWithValueShouldNotBeOmitted()
         {
             TestTheRequest<IApi>(
                 api => api.Get(1),
                 m =>
                 {
-                    Assert.AreEqual(HttpMethod.Get, m.Method);
-                    Assert.AreEqual("base/path1?i=1", m.RequestUri.ToString());
+                    Assert.Equal(HttpMethod.Get, m.Method);
+                    Assert.Equal("base/path1?i=1", m.RequestUri.ToString());
                 });
         }
 
-        [Test]
+        [Fact]
         public void NonNullableStringWithNullValueShouldBeOmitted()
         {
             TestTheRequest<IApi>(
                 api => api.Get2(null),
                 m =>
                 {
-                    Assert.AreEqual(HttpMethod.Get, m.Method);
-                    Assert.AreEqual("base/path1", m.RequestUri.ToString());
+                    Assert.Equal(HttpMethod.Get, m.Method);
+                    Assert.Equal("base/path1", m.RequestUri.ToString());
                 });
         }
 
-        [Test]
+        [Fact]
         public void NonNullableStringWithValueShouldNotBeOmitted()
         {
             TestTheRequest<IApi>(
                 api => api.Get2("1"),
                 m =>
                 {
-                    Assert.AreEqual(HttpMethod.Get, m.Method);
-                    Assert.AreEqual("base/path1?s=1", m.RequestUri.ToString());
+                    Assert.Equal(HttpMethod.Get, m.Method);
+                    Assert.Equal("base/path1?s=1", m.RequestUri.ToString());
                 });
         }
     }

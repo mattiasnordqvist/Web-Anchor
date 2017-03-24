@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-using NUnit.Framework;
+using Xunit;
 using WebAnchor.ResponseParser.ResponseHandlers;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures;
@@ -13,10 +13,9 @@ using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
 {
-    [TestFixture]
     public class Tests : WebAnchorTest
     {
-        [Test]
+        [Fact]
         public async Task ParsingTheLocationHeaderFromResponseBodyViaCustomResponseParser()
         {
             var settings = new ApiSettings();
@@ -34,9 +33,9 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
                 fakedResponse,
                 settings);
 
-            Assert.AreEqual("Mighty Gazelle", result.Name);
-            Assert.AreEqual("api/customer/1", result.Location);
-            Assert.AreEqual(1, result.Id);
+            Assert.Equal("Mighty Gazelle", result.Name);
+            Assert.Equal("api/customer/1", result.Location);
+            Assert.Equal(1, result.Id);
         }
     }
 }

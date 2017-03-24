@@ -1,138 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B1DD962D-1A42-435C-8FBD-0DDF3390BE53}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebAnchor</RootNamespace>
-    <AssemblyName>WebAnchor</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Compile Include="..\ProductAssemblyInfo.cs" Link="Properties\ProductAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\ProductAssemblyInfo.cs">
-      <Link>Properties\ProductAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Anchor.cs" />
-    <Compile Include="Api.cs" />
-    <Compile Include="ApiFactory.cs" />
-    <Compile Include="ApiSettings.cs" />
-    <Compile Include="HttpClientWrapper.cs" />
-    <Compile Include="IHttpClient.cs" />
-    <Compile Include="ISettings.cs" />
-    <Compile Include="RequestFactory\ApiInvocation.cs" />
-    <Compile Include="RequestFactory\BaseLocationAttribute.cs" />
-    <Compile Include="RequestFactory\AttributeExtensions.cs" />
-    <Compile Include="RequestFactory\Transformation\ParameterListTransformerBase.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\AsDictionaryAttribute.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultParameterListTransformers.cs" />
-    <Compile Include="ResponseParser\DefaultResponseHandlers.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Headers\AddAuthorizationTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Headers\AddHeaderTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Headers\AuthorizationAttribute.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Headers\Dynamic\AuthorizationAttribute.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Headers\Dynamic\HeaderAttribute.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Headers\HeaderAttribute.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\ParameterCreatorTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\List\ParameterListTransformerAttributeTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\ParameterTransformContext.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Alias\AliasAttribute.cs" />
-    <Compile Include="RequestFactory\ContentSerializer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Alias\AliasTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\DefaultParameterTransformer.cs" />
-    <Compile Include="RequestFactory\HttpAttributes\DeleteAttribute.cs" />
-    <Compile Include="RequestFactory\HttpAttributes\GetAttribute.cs" />
-    <Compile Include="RequestFactory\HttpMethodAttribute.cs" />
-    <Compile Include="RequestFactory\HttpRequestFactory.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Formattable\FormattableParameterResolver.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Default\ObjectToDictionaryHelper.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\ParameterTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\ParameterTransformerAttribute.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\ParameterTransformerAttributeTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\NoCache\NoCacheAttribute.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\NoCache\NoCacheListTransformer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\Attribute\List\ParameterListTransformerAttribute.cs" />
-    <Compile Include="ResponseParser\ApiException.cs" />
-    <Compile Include="ResponseParser\ResponseHandlers\AsyncDeserializingResponseHandler.cs" />
-    <Compile Include="ResponseParser\ResponseHandlers\AsyncHttpResponseMessageResponseHandler.cs" />
-    <Compile Include="ResponseParser\IContentDeserializer.cs" />
-    <Compile Include="RequestFactory\IContentSerializer.cs" />
-    <Compile Include="RequestFactory\Transformation\IParameterListTransformer.cs" />
-    <Compile Include="ResponseParser\IResponseHandler.cs" />
-    <Compile Include="ResponseParser\JsonContentDeserializer.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\List\ParameterOfListTransformer.cs" />
-    <Compile Include="RequestFactory\NameValueItem.cs" />
-    <Compile Include="RequestFactory\Parameter.cs" />
-    <Compile Include="RequestFactory\Parameters.cs" />
-    <Compile Include="RequestFactory\ParameterType.cs" />
-    <Compile Include="ResponseParser\HttpResponseParser.cs" />
-    <Compile Include="RequestFactory\Transformation\Transformers\ContentAttribute.cs" />
-    <Compile Include="RequestFactory\ContentType.cs" />
-    <Compile Include="RequestFactory\HttpAttributes\PostAttribute.cs" />
-    <Compile Include="RequestFactory\HttpAttributes\PutAttribute.cs" />
-    <Compile Include="RequestFactory\StringExtensions.cs" />
-    <Compile Include="RequestFactory\IHttpRequestFactory.cs" />
-    <Compile Include="ResponseParser\IHttpResponseParser.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebAnchorException.cs" />
+    <PackageReference Include="Castle.Core" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="WebAnchor.nuspec" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  
 </Project>
