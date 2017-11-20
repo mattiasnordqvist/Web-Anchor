@@ -101,7 +101,6 @@
     <Compile Include="ResponseParser\IResponseHandler.cs" />
     <Compile Include="ResponseParser\JsonContentDeserializer.cs" />
     <Compile Include="RequestFactory\Transformation\Transformers\List\ParameterOfListTransformer.cs" />
-    <Compile Include="RequestFactory\NameValueItem.cs" />
     <Compile Include="RequestFactory\Parameter.cs" />
     <Compile Include="RequestFactory\Parameters.cs" />
     <Compile Include="RequestFactory\ParameterType.cs" />
