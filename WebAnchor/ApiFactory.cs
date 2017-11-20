@@ -2,22 +2,19 @@ using Castle.DynamicProxy;
 
 namespace WebAnchor
 {
+    /// <summary>
+    /// Not intended to be used by WebAnchor consumers. Use Api instead.
+    /// </summary>
     public class ApiFactory
     {
-        public ApiFactory(ProxyGenerator proxyGenerator)
-        {
-            Settings = new ApiSettings();
-            ProxyGenerator = proxyGenerator;
-        }
+        private static ProxyGenerator _proxyGenerator;
+        protected static ProxyGenerator ProxyGenerator => _proxyGenerator ?? (_proxyGenerator = new ProxyGenerator());
 
-        public ISettings Settings { get; set; }
-        protected ProxyGenerator ProxyGenerator { get; set; }
-
-        public T Create<T>(IHttpClient httpClient, bool shouldDisposeHttpClient, ISettings settings = null) where T : class
+        public T Create<T>(IHttpClient httpClient, bool shouldDisposeHttpClient, ISettings settings) where T : class
         {
-            var requestFactory = settings == null ? Settings.GetRequestFactory() : settings.GetRequestFactory();
+            var requestFactory = settings.GetRequestFactory();
             requestFactory.ValidateApi(typeof(T));
-            var responseParser = settings == null ? Settings.GetResponseParser() : settings.GetResponseParser();
+            var responseParser = settings.GetResponseParser();
             responseParser.ValidateApi(typeof(T));
             var anchor = new Anchor(httpClient, requestFactory, responseParser, shouldDisposeHttpClient);
             var api = ProxyGenerator.CreateInterfaceProxyWithoutTarget<T>(anchor);

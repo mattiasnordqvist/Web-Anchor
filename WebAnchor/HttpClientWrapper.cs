@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace WebAnchor
 {
-    public class HttpClientWrapper : IHttpClient
+    internal class HttpClientWrapper : IHttpClient
     {
         private readonly HttpClient _httpClient;
 
