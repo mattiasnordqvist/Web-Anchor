@@ -12,7 +12,7 @@ To install Web Anchor, run the following command in the [Package Manager Console
 [BaseLocation("api/customer")]
 public interface ICustomerApi
 {
-    [Get("/{id}")]
+    [Get("{id}")]
     Task<Customer> GetCustomer(int id);
 }
 
