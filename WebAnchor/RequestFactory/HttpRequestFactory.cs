@@ -140,7 +140,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
-            var value = parameter.Value?.ToString() ?? parameter.ParameterValue.ToString();
+            var value = parameter.Value?.ToString() ?? parameter.SourceValue.ToString();
             return PreservePathInUrlSegmentParameters 
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode)) 
                 : WebUtility.UrlEncode(value);
@@ -148,7 +148,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateUrlParameter(Parameter parameter)
         {
-            var value = parameter.Value?.ToString() ?? parameter.ParameterValue.ToString();
+            var value = parameter.Value?.ToString() ?? parameter.SourceValue.ToString();
             return $"{parameter.Name}={WebUtility.UrlEncode(value)}";
         }
     }

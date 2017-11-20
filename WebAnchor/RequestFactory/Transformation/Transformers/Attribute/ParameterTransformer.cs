@@ -22,9 +22,9 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute
 
         private void ResolveParameter(Parameter parameter)
         {
-            if (parameter.ParameterInfo != null)
+            if (parameter.SourceParameterInfo != null)
             {
-                var attributes = parameter.ParameterInfo.GetAttributesChain<T>();
+                var attributes = parameter.SourceParameterInfo.GetAttributesChain<T>();
                 foreach (var attribute in attributes)
                 {
                     Transform(parameter, attribute);

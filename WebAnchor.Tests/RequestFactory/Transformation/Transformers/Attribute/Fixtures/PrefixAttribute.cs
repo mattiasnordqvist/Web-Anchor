@@ -14,7 +14,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
 
         public override void Apply(Parameter parameter)
         {
-            parameter.Name = _prefix + parameter.ParameterInfo.Name;
+            parameter.Name = _prefix + parameter.SourceParameterInfo.Name;
         }
     }
 }

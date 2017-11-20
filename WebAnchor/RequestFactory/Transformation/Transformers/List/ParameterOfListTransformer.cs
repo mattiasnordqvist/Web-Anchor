@@ -11,7 +11,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
             {
                 if (ParameterIsEnumerable(parameter) && parameter.ParameterType != ParameterType.Content)
                 {
-                    foreach (var value in (IEnumerable)parameter.ParameterValue)
+                    foreach (var value in (IEnumerable)parameter.SourceValue)
                     {
                         yield return new Parameter(parameter, value);
                     }
@@ -25,7 +25,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 
         protected bool ParameterIsEnumerable(Parameter parameter)
         {
-            return parameter.ParameterValue is IEnumerable && (parameter.Type.IsGenericType || parameter.Type.IsArray);
+            return parameter.SourceValue is IEnumerable && (parameter.SourceType.IsGenericType || parameter.SourceType.IsArray);
         }
     }
 }

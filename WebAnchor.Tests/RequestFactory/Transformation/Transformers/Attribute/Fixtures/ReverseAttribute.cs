@@ -12,7 +12,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
     {
         public bool CanResolve(Parameter parameter)
         {
-            return parameter.ParameterValue is string;
+            return parameter.SourceValue is string;
         }
 
         public override void Apply(Parameter parameter)
