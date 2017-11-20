@@ -7,6 +7,7 @@ using NUnit.Framework;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers;
+using WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic;
 using WebAnchor.Tests.TestUtils;
 
 namespace WebAnchor.Tests.RequestFactory.Headers
@@ -17,6 +18,22 @@ namespace WebAnchor.Tests.RequestFactory.Headers
         public interface IApi
         {
             [Get("resource")]
+            Task<HttpResponseMessage> Get();
+        }
+
+        [BaseLocation("location")]
+        [AddHeader("Authorization", "Basic 79iou342qkras9")]
+        public interface IApi2
+        {
+            [Get("resource")]
+            Task<HttpResponseMessage> Get();
+        }
+
+        [BaseLocation("location")]
+        public interface IApi3
+        {
+            [Get("resource")]
+            [AddHeader("Authorization", "Basic 79iou342qkras9")]
             Task<HttpResponseMessage> Get();
         }
 
@@ -31,6 +48,30 @@ namespace WebAnchor.Tests.RequestFactory.Headers
                         Assert.That(request.Headers.Contains("Authorization"));
                         Assert.AreEqual("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                     });
+        }
+
+        [Test]
+        public void TestAddHeaderAttributeOnApiTransformer()
+        {
+            TestTheRequest<IApi2>(
+                api => api.Get(),
+                assertHttpRequestMessage: request =>
+                {
+                    Assert.That(request.Headers.Contains("Authorization"));
+                    Assert.AreEqual("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
+                });
+        }
+
+        [Test]
+        public void TestAddHeaderAttributeOnMethodTransformer()
+        {
+            TestTheRequest<IApi3>(
+                api => api.Get(),
+                assertHttpRequestMessage: request =>
+                {
+                    Assert.That(request.Headers.Contains("Authorization"));
+                    Assert.AreEqual("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
+                });
         }
 
         [Test]
