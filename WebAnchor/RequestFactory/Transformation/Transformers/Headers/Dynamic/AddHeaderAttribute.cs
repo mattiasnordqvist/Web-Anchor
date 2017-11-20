@@ -4,7 +4,6 @@ using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic
 {
-
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Interface)]
     public class AddHeaderAttribute : ParameterListTransformerAttribute
     {
@@ -19,7 +18,5 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic
         {
             return _transformer.TransformParameters(parameters, parameterTransformContext);
         }
-
-
     }
 }
