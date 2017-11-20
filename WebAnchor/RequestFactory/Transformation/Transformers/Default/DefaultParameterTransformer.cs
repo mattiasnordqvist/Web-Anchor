@@ -45,7 +45,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         private bool ShouldCreateDictionaryFromContent(Parameter parameter)
         {
-            if (parameter.SourceParameterInfo.GetFirstAttributeInChain<AsDictionaryAttribute>() != null)
+            if (parameter.SourceParameterInfo.GetFirstAttributeInChain<ContentAsDictionaryAttribute>() != null)
             {
                 return true;
             }
@@ -55,7 +55,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         private bool IsParameterDeclaredWithAsDictionary(Parameter parameter)
         {
-            if (parameter.SourceValue.GetType().HasAttribute<AsDictionaryAttribute>())
+            if (parameter.SourceValue.GetType().HasAttribute<ContentAsDictionaryAttribute>())
             {
                 return true;
             }

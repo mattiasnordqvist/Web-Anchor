@@ -2,7 +2,7 @@
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.AsDictionaryAttributeTest
 {
-    [AsDictionary]
+    [ContentAsDictionary]
     public class AClassAsDictionary
     {
         public string A { get; set; }
