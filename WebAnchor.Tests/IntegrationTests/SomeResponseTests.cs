@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-using Xunit;
-
 using WebAnchor.ResponseParser;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.IntegrationTests
 {

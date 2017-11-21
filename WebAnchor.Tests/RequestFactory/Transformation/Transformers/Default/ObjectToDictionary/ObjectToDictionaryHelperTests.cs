@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-using Xunit;
-
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
+
+using Xunit;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.ObjectToDictionary
 {

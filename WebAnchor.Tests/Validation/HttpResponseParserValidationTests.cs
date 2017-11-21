@@ -1,7 +1,5 @@
 ﻿using Xunit;
 
-using WebAnchor.RequestFactory.HttpAttributes;
-
 namespace WebAnchor.Tests.Validation
 {
     public class HttpResponseParserValidationTests

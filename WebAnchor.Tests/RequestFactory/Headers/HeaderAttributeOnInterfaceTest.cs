@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using Xunit;
-
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers;
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.RequestFactory.Headers
 {

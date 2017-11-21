@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 
-using Xunit;
-
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {

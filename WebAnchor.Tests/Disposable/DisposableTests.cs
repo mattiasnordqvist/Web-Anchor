@@ -1,9 +1,8 @@
-using Castle.DynamicProxy;
 using FakeItEasy;
 
-using Xunit;
-
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.Disposable
 {

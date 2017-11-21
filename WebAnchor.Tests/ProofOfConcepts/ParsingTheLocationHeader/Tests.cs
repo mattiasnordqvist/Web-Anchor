@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-using Xunit;
 using WebAnchor.ResponseParser.ResponseHandlers;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures;
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
 {

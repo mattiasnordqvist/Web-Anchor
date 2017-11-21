@@ -28,7 +28,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            foreach(var parameter in parameters)
+            foreach (var parameter in parameters)
             {
                 Resolve(parameter, parameterTransformContext);
                 yield return parameter;

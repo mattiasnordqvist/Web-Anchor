@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Xunit;
-
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 using WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart.BarChart;
+
+using Xunit;
 
 namespace WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart
 {

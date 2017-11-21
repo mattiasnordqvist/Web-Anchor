@@ -4,13 +4,13 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 
-using Xunit;
-
 using WebAnchor.RequestFactory;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.RequestFactory.Transformation.Custom;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.ACollectionOfRandomTests
 {
@@ -49,7 +49,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
         [Fact]
         public void BaseLocationSubstitution()
         {
-            TestTheRequest<IBaseLocationSubstitution>(api => api.Get(), 
+            TestTheRequest<IBaseLocationSubstitution>(api => api.Get(),
                 configure: x => x.ParameterListTransformers.Add(new AddExtraParameterTransformer("version", "v2", ParameterType.Route)),
                 assertHttpRequestMessage: m =>
                 {

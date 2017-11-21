@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Net.Http;
 
-using Xunit;
-
 using WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765.Fixtures;
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765
 {
