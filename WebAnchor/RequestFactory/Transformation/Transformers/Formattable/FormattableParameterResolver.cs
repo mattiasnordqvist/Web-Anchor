@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -10,20 +10,20 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
     {
         public void Resolve(Parameter parameter)
         {
-            if (parameter.ParameterValue is IFormattable)
+            if (parameter.SourceValue is IFormattable)
             {
-                parameter.Value = ((IFormattable)parameter.ParameterValue)
+                parameter.Value = ((IFormattable)parameter.SourceValue)
                     .ToString(null, CultureInfo.InvariantCulture);
             }
         }
 
         public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
-        {            
-            foreach (var parameter in parameters)
+        {
+            foreach(var parameter in parameters)
             {
                 Resolve(parameter);
+                yield return parameter;
             }
-            return parameters;
         }
     }
 }

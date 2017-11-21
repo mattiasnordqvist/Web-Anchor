@@ -13,7 +13,7 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
         {
             var list = parameters.ToList();
             var content = list.First(x => x.ParameterType == ParameterType.Content);
-            list.Add(new Parameter(null, content.ParameterValue.GetType().Name.ToLower(), ParameterType.Route)
+            list.Add(new Parameter(null, content.SourceValue.GetType().Name.ToLower(), ParameterType.Route)
             {
                 Name = "type"
             });

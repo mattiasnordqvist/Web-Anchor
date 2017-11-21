@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -12,7 +12,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
             {
                 if (ParameterIsEnumerable(parameter) && parameter.ParameterType != ParameterType.Content)
                 {
-                    foreach (var value in (IEnumerable)parameter.ParameterValue)
+                    foreach (var value in (IEnumerable)parameter.SourceValue)
                     {
                         yield return new Parameter(parameter, value);
                     }
@@ -26,7 +26,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 
         protected bool ParameterIsEnumerable(Parameter parameter)
         {
-            return parameter.ParameterValue is IEnumerable && (parameter.Type.GetTypeInfo().IsGenericType || parameter.Type.IsArray);
+            return parameter.SourceValue is IEnumerable && (parameter.SourceType.GetTypeInfo().IsGenericType || parameter.SourceType.IsArray);
         }
     }
 }

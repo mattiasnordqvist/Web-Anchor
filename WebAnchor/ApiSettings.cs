@@ -31,7 +31,7 @@ namespace WebAnchor
             var requestFactory = new HttpRequestFactory(ContentSerializer, ParameterListTransformers)
             {
                 InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl,
-                PreservePathInUrlSegmentParameters = PreservePathInUrlSegmentParameters
+                TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = PreservePathInUrlSegmentParameters
             };
             return requestFactory;
         }

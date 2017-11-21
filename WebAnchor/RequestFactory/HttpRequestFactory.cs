@@ -17,14 +17,21 @@ namespace WebAnchor.RequestFactory
             ContentSerializer = contentSerializer;
             ParameterListTransformers = transformers ?? new List<IParameterListTransformer>();
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
-            PreservePathInUrlSegmentParameters = true;
+            TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = true;
         }
 
         public IContentSerializer ContentSerializer { get; set; }
         public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
         public bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
-        public bool PreservePathInUrlSegmentParameters { get; set; }
+
+        /// <summary>
+        /// Decides if path seperators ("/") in url segment parameters should be considered a part of the url AS PATH SEPERATORS or just as characters.
+        /// If you use [BaseLocation({location})] and location is replaced by "api/v2" by some substitution, you probably want the "/" to seperate one path segment "api"
+        /// from path segment "v2". If that is how you like it, leave this setting as it is (true). If you want the "/" to be encoded as "%2F" and not look like a path segments 
+        /// seperator, set this setting to false.
+        /// </summary>
+        public bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
 
         public virtual void ValidateApi(Type type)
         {
@@ -110,7 +117,7 @@ namespace WebAnchor.RequestFactory
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
             var baseAttribute = methodInfo.DeclaringType.GetTypeInfo().GetCustomAttribute<BaseLocationAttribute>();
 
-            var resolvedUrl = ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).Replace("//", "/").Replace("/?", "?").TrimEnd('/');
+            var resolvedUrl = ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
             resolvedUrl = resolvedUrl.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
             resolvedUrl = AppendUrlParams(resolvedUrl, ResolvedParameters.QueryParameters);
             return resolvedUrl;
@@ -140,15 +147,15 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
-            var value = parameter.Value?.ToString() ?? parameter.ParameterValue.ToString();
-            return PreservePathInUrlSegmentParameters 
+            var value = parameter.Value?.ToString() ?? parameter.SourceValue.ToString();
+            return TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators 
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode)) 
                 : WebUtility.UrlEncode(value);
         }
 
         protected virtual string CreateUrlParameter(Parameter parameter)
         {
-            var value = parameter.Value?.ToString() ?? parameter.ParameterValue.ToString();
+            var value = parameter.Value?.ToString() ?? parameter.SourceValue.ToString();
             return $"{parameter.Name}={WebUtility.UrlEncode(value)}";
         }
     }

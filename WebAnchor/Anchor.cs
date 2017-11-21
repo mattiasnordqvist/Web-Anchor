@@ -7,7 +7,7 @@ using WebAnchor.ResponseParser;
 
 namespace WebAnchor
 {
-    public class Anchor : IInterceptor
+    internal class Anchor : IInterceptor
     {
         private readonly bool _shouldDisposeHttpClient;
 

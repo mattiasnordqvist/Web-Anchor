@@ -137,3 +137,7 @@ App_Data/*.ldf
 WebAnchor/PushToNuGet.ps1
 WebAnchor/*.nupkg
 WebAnchor/NuGet.exe
+.vs/WebAnchor/v15/Server/sqlite3/db.lock
+.vs/WebAnchor/v15/Server/sqlite3/storage.ide
+.vs/WebAnchor/v15/Server/sqlite3/storage.ide-shm
+.vs/WebAnchor/v15/Server/sqlite3/storage.ide-wal

@@ -8,14 +8,14 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
         public bool CanResolve(Parameter parameter)
         {
             int dummy;
-            return parameter.ParameterValue != null && int.TryParse(parameter.ParameterValue.ToString(), out dummy);
+            return parameter.SourceValue != null && int.TryParse(parameter.SourceValue.ToString(), out dummy);
         }
 
         public override void Apply(Parameter parameter)
         {
             if (CanResolve(parameter))
             {
-                parameter.Value = (((int)parameter.ParameterValue) * 10).ToString();
+                parameter.Value = (((int)parameter.SourceValue) * 10).ToString();
             }
         }
     }

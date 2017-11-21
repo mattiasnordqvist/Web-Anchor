@@ -11,28 +11,28 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
     {
         public void Resolve(Parameter parameter, ParameterTransformContext parameterTransformContext)
         {
-            if (parameter.ParameterInfo != null)
+            if (parameter.SourceParameterInfo != null)
             {
-                parameter.Name = parameter.ParameterInfo.Name;    
+                parameter.Name = parameter.SourceParameterInfo.Name;    
             }
 
             if (parameter.ParameterType == ParameterType.Content)
             {
-                parameter.Value = ShouldCreateDictionaryFromContent(parameter) ? parameter.ParameterValue.ToDictionary() : parameter.ParameterValue;
+                parameter.Value = ShouldCreateDictionaryFromContent(parameter) ? parameter.SourceValue.ToDictionary() : parameter.SourceValue;
             }
             else
             {
-                parameter.Value = parameter.ParameterValue?.ToString();
+                parameter.Value = parameter.SourceValue?.ToString();
             }
         }
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            foreach (var parameter in parameters)
+            foreach(var parameter in parameters)
             {
                 Resolve(parameter, parameterTransformContext);
-            }                
-            return parameters;
+                yield return parameter;
+            }
         }
 
         public void ValidateApi(Type type)
@@ -49,7 +49,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         private bool ShouldCreateDictionaryFromContent(Parameter parameter)
         {
-            if (parameter.ParameterInfo.GetFirstAttributeInChain<AsDictionaryAttribute>() != null)
+            if (parameter.SourceParameterInfo.GetFirstAttributeInChain<ContentAsDictionaryAttribute>() != null)
             {
                 return true;
             }
@@ -59,7 +59,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         private bool IsParameterDeclaredWithAsDictionary(Parameter parameter)
         {
-            if (parameter.ParameterValue.GetType().GetTypeInfo().GetCustomAttribute<AsDictionaryAttribute>() != null)
+            if (parameter.SourceValue.GetType().GetTypeInfo().GetCustomAttribute<ContentAsDictionaryAttribute>() != null)
             {
                 return true;
             }

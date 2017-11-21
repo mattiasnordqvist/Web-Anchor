@@ -1,5 +1,4 @@
 ﻿using System;
-
 using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic

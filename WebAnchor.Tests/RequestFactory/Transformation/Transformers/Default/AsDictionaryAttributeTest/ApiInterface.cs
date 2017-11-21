@@ -4,7 +4,7 @@ using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.AsDictionaryAttributeTest
 {
-    [AsDictionary]
+    [ContentAsDictionary]
     public interface IApiInterfaceWithAttribute
     {
         [Post("")]
@@ -17,10 +17,10 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.AsD
         void NoAttribute([Content] object unknown);
 
         [Post("")]
-        void AttributeOnParameter([Content][AsDictionary] object unknown);
+        void AttributeOnParameter([Content][ContentAsDictionary] object unknown);
 
         [Post("")]
-        [AsDictionary]
+        [ContentAsDictionary]
         void AttributeOnMethod([Content] object unknown);
     }
 }
