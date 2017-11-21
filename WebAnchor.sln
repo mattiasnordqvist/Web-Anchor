@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAnchor", "WebAnchor\WebAnchor.csproj", "{B1DD962D-1A42-435C-8FBD-0DDF3390BE53}"
 EndProject
@@ -9,7 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAnchor.Tests", "WebAncho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{83C966CB-11D4-4542-8EB3-2061E74647E4}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
 		ProductAssemblyInfo.cs = ProductAssemblyInfo.cs
 	EndProjectSection
 EndProject
@@ -50,5 +49,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A2F671E-85DD-4867-B2F0-860A2E5C8D83}
 	EndGlobalSection
 EndGlobal
