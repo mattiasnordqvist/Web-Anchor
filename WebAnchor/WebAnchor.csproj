@@ -4,7 +4,20 @@
     <TargetFramework>netstandard1.5</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <PackageVersion>4.0.0</PackageVersion>
+    <PackageId>WebAnchor</PackageId>
+    <Title>WebAnchor</Title>
+    <Authors>mattiasnordqvist;carl_berg</Authors>
+    <Description>A type-safe .NET-library for consuming web APIs</Description>
+    <Copyright>Copyright © Spinit AB, Mattias Nordqvist, Carl Berg and contributors 2017</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/mattiasnordqvist/web-anchor/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/mattiasnordqvist/Web-Anchor</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mattiasnordqvist/Web-Anchor.git</RepositoryUrl>
+    <PackageIconUrl>https://github.com/mattiasnordqvist/Web-Anchor/raw/master/logo.png</PackageIconUrl>
+    <PackageTags>REST HTTP API JSON</PackageTags>
+    <PackageReleaseNotes>now targeting .Net standard 1.5</PackageReleaseNotes>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ProductAssemblyInfo.cs" Link="Properties\ProductAssemblyInfo.cs" />
   </ItemGroup>
