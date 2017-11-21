@@ -3,6 +3,9 @@
 [![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)  
 Web Anchor provides type-safe, testable and flexible access to web resources.
 
+# NB v4.0.0
+If you are using version 4.0.0 of Web Anchor, you must also Install `System.Reflection.TypeExtension`
+
 ## Install
 To install Web Anchor, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
 <p><code>PM&gt; Install-Package WebAnchor</code></p>
