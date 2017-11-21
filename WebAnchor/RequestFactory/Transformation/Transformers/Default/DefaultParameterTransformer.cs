@@ -58,7 +58,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         private bool IsParameterDeclaredWithAsDictionary(Parameter parameter)
         {
-            if (parameter.SourceValue.GetType().HasAttribute<ContentAsDictionaryAttribute>())
+            if (parameter.SourceValue.GetType().GetAttribute<ContentAsDictionaryAttribute>() != null)
             {
                 return true;
             }

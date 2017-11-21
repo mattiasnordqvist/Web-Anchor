@@ -30,7 +30,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures
 
         private List<PropertyInfo> GetPropertiesWithHeaderAttribute<T>(T t)
         {
-            return t.GetType().GetProperties().Where(x => x.HasAttribute<HeaderAttribute>()).ToList();
+            return t.GetType().GetProperties().Where(x => x.GetAttribute<HeaderAttribute>() != null).ToList();
         }
     }
 }
