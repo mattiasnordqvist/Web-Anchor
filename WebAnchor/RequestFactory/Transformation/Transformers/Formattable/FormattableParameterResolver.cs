@@ -19,8 +19,11 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 
         public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            parameters.ForEach(Resolve);
-            return parameters;
+            foreach(var parameter in parameters)
+            {
+                Resolve(parameter);
+                yield return parameter;
+            }
         }
     }
 }

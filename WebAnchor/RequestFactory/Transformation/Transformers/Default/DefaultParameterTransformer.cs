@@ -27,8 +27,11 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            parameters.ForEach(x => Resolve(x, parameterTransformContext));
-            return parameters;
+            foreach(var parameter in parameters)
+            {
+                Resolve(parameter, parameterTransformContext);
+                yield return parameter;
+            }
         }
 
         public void ValidateApi(Type type)
