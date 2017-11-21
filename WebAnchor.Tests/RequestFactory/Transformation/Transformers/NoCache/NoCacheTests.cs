@@ -17,7 +17,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache
                 req =>
                     {
                         Assert.Equal(HttpMethod.Get, req.Method);
-                        Assert.True(req.RequestUri.ToString().Contains("_="));
+                        Assert.Contains("_=", req.RequestUri.ToString());
                     });
         }
 
@@ -41,7 +41,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.NoCache
                 req =>
                 {
                     Assert.Equal(HttpMethod.Get, req.Method);
-                    Assert.True(req.RequestUri.ToString().Contains("_="));
+                    Assert.Contains("_=", req.RequestUri.ToString());
                 });
         }
     }

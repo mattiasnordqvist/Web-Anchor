@@ -15,7 +15,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.Obj
             
             Assert.Equal(2, dictionary.Keys.Count);
             Assert.Equal(1, dictionary["Id"]);
-            Assert.Equal(null, dictionary["Name"]);
+            Assert.Null(dictionary["Name"]);
         }
 
         [Fact]
