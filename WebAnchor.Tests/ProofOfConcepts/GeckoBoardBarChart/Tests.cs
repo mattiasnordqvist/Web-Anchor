@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using NUnit.Framework;
-
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 using WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart.BarChart;
 
+using Xunit;
+
 namespace WebAnchor.Tests.ProofOfConcepts.GeckoBoardBarChart
 {
-    [TestFixture]
     public class Tests
     {
-        [Test]
+        [Fact]
         public void Test1()
         {
             var dict = BarChartTest().ToDictionary();
             var shouldBeAListOfObjects = (IEnumerable<object>)dict["series"];
             var shouldBeADictionary = (IDictionary<string, object>)shouldBeAListOfObjects.First();
-            Assert.IsTrue(shouldBeADictionary.ContainsKey("data"));
-            Assert.IsTrue(shouldBeADictionary["data"] is IEnumerable<int>);
+            Assert.True(shouldBeADictionary.ContainsKey("data"));
+            Assert.True(shouldBeADictionary["data"] is IEnumerable<int>);
         }
 
         private static MinimumOfGeckoBarChartToReproduceError BarChartTest()

@@ -2,13 +2,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using NUnit.Framework;
-
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.HttpAttributes;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic;
 using WebAnchor.Tests.TestUtils;
+
+using Xunit;
 
 namespace WebAnchor.Tests.RequestFactory.Headers
 {
@@ -37,7 +37,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
             Task<HttpResponseMessage> Get();
         }
 
-        [Test]
+        [Fact]
         public void TestAddHeaderTransformer()
         {
             TestTheRequest<IApi>(
@@ -45,36 +45,36 @@ namespace WebAnchor.Tests.RequestFactory.Headers
                 settings: new ApiSettings1(), 
                 assertHttpRequestMessage: request =>
                     {
-                        Assert.That(request.Headers.Contains("Authorization"));
-                        Assert.AreEqual("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
+                        Assert.True(request.Headers.Contains("Authorization"));
+                        Assert.Equal("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                     });
         }
 
-        [Test]
+        [Fact]
         public void TestAddHeaderAttributeOnApiTransformer()
         {
             TestTheRequest<IApi2>(
                 api => api.Get(),
                 assertHttpRequestMessage: request =>
                 {
-                    Assert.That(request.Headers.Contains("Authorization"));
-                    Assert.AreEqual("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
+                    Assert.True(request.Headers.Contains("Authorization"));
+                    Assert.Equal("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                 });
         }
 
-        [Test]
+        [Fact]
         public void TestAddHeaderAttributeOnMethodTransformer()
         {
             TestTheRequest<IApi3>(
                 api => api.Get(),
                 assertHttpRequestMessage: request =>
                 {
-                    Assert.That(request.Headers.Contains("Authorization"));
-                    Assert.AreEqual("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
+                    Assert.True(request.Headers.Contains("Authorization"));
+                    Assert.Equal("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                 });
         }
 
-        [Test]
+        [Fact]
         public void TestAddAuthorizationTransformer()
         {
             TestTheRequest<IApi>(
@@ -82,8 +82,8 @@ namespace WebAnchor.Tests.RequestFactory.Headers
                 settings: new ApiSettings2(),
                 assertHttpRequestMessage: request =>
                     {
-                        Assert.That(request.Headers.Contains("Authorization"));
-                        Assert.AreEqual("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
+                        Assert.True(request.Headers.Contains("Authorization"));
+                        Assert.Equal("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                     });
         }
 

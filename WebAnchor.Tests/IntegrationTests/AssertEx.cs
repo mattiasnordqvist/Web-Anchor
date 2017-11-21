@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-using NUnit.Framework;
+using Xunit;
 
 namespace WebAnchor.Tests.IntegrationTests
 {
@@ -27,7 +27,7 @@ namespace WebAnchor.Tests.IntegrationTests
                 actual = e.GetType();
             }
 
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
             action(exception);
         }
     }

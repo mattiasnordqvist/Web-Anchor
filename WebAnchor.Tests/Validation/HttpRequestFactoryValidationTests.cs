@@ -1,17 +1,16 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace WebAnchor.Tests.Validation
 {
-    [TestFixture]
     public class HttpRequestFactoryValidationTests
     {
-        [Test]
+        [Fact]
         public void MethodWithoutHttpMethodAttributeThrowsExceptions()
         {
             Assert.Throws<WebAnchorException>(() => Api.For<IApiWithoutHttpMethodAttribute>("http://localhost/"));
         }
 
-        [Test]
+        [Fact]
         public void MethodWithDuplicatedContentAttributesThrowsExceptions()
         {
             Assert.Throws<WebAnchorException>(() => Api.For<IApiWithMethodWithDuplicatedContentAttributes>("http://localhost/"));

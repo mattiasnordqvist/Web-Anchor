@@ -1,19 +1,18 @@
 ﻿using System;
 
-using NUnit.Framework;
+using Xunit;
 
 namespace WebAnchor.Tests.Validation
 {
-    [TestFixture]
     public class MisuseTests
     {
-        [Test]
+        [Fact]
         public void ApiForConcreteClassThrowsWebAnchorException()
         {
             Assert.Throws<WebAnchorException>(() => Api.For<ConcreteClass>("http://localhost:1111"));
         }
 
-        [Test]
+        [Fact]
         public void ApiForMumboJumboUrlThrowsUriFormatException()
         {
             Assert.Throws<UriFormatException>(() => Api.For<IInterface>("asdfnoin"));

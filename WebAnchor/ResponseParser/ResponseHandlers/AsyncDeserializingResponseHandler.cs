@@ -18,7 +18,7 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
 
         public bool CanHandle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
         {
-            return invocation.Method.ReturnType.IsGenericType && invocation.Method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
+            return invocation.Method.ReturnType.GetTypeInfo().IsGenericType && invocation.Method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
         }
 
         public void Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)

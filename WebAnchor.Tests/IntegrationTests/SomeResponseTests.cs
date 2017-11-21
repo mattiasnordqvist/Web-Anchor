@@ -5,25 +5,24 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-using NUnit.Framework;
-
 using WebAnchor.ResponseParser;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.TestUtils;
 
+using Xunit;
+
 namespace WebAnchor.Tests.IntegrationTests
 {
-    [TestFixture]
     public class SomeResponseTests : WebAnchorTest
     {
-        [Test]
+        [Fact]
         public async Task CreatingASimpleGetRequest2()
         {
             var result = await GetResponse<ITestApi, Task<HttpResponseMessage>>(api => api.GetCustomer(9), new HttpResponseMessage(HttpStatusCode.OK));
-            Assert.That(result.IsSuccessStatusCode);
+            Assert.True(result.IsSuccessStatusCode);
         }
 
-        [Test]
+        [Fact]
         public async Task ParsingAJsonResponse()
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK)
@@ -32,20 +31,20 @@ namespace WebAnchor.Tests.IntegrationTests
             };
 
             var result = await GetResponse<ITestApi, Task<Customer>>(api => api.GetCustomer3(9), response);
-            Assert.AreEqual("Black Bull", result.Name);
-            Assert.AreEqual(9, result.Id);
+            Assert.Equal("Black Bull", result.Name);
+            Assert.Equal(9, result.Id);
         }
 
-        [Test]
+        [Fact]
         public async Task RetrievingA404_WithTaskOFHttpResponseMessage()
         {
             var response = new HttpResponseMessage(HttpStatusCode.NotFound);
 
            var result = await GetResponse<ITestApi, Task<HttpResponseMessage>>(api => api.Get404(), response);
-            Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
+            Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
         }
 
-        [Test]
+        [Fact]
         public async Task RetrievingA404_WithTaskOfT_ThrowsException()
         {
             var response = new HttpResponseMessage(HttpStatusCode.NotFound);
@@ -55,7 +54,7 @@ namespace WebAnchor.Tests.IntegrationTests
                     async () => await GetResponse<ITestApi, Task<Customer>>(api => api.Get404Customer(), response));
         }
 
-        [Test]
+        [Fact]
         public async Task ExpectedDataButServerReturnsNothingInContent()
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Hello World!") };

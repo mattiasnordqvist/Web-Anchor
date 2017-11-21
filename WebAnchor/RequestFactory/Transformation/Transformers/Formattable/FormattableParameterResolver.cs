@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -19,7 +19,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 
         public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            foreach(var parameter in parameters)
+            foreach (var parameter in parameters)
             {
                 Resolve(parameter);
                 yield return parameter;

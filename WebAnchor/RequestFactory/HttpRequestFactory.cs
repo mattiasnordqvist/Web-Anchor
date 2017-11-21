@@ -115,7 +115,7 @@ namespace WebAnchor.RequestFactory
         {
             var methodInfo = invocation.Method;
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
-            var baseAttribute = methodInfo.DeclaringType.GetCustomAttribute<BaseLocationAttribute>();
+            var baseAttribute = methodInfo.DeclaringType.GetTypeInfo().GetCustomAttribute<BaseLocationAttribute>();
 
             var resolvedUrl = ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
             resolvedUrl = resolvedUrl.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));

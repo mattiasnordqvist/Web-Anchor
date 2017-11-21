@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
@@ -39,7 +40,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         private static bool IsPrimitive(object value)
         {
-            return value == null || value.GetType().IsPrimitive || value is string;
+            return value == null || value.GetType().GetTypeInfo().IsPrimitive || value is string;
         }
 
         private static void Add(string name, object value, Dictionary<string, object> dictionary)

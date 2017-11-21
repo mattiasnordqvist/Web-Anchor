@@ -1,16 +1,14 @@
-using Castle.DynamicProxy;
 using FakeItEasy;
-
-using NUnit.Framework;
 
 using WebAnchor.Tests.TestUtils;
 
+using Xunit;
+
 namespace WebAnchor.Tests.Disposable
 {
-    [TestFixture]
     public class DisposableTests : WebAnchorTest
     {
-        [Test]
+        [Fact]
         public void ShouldDisposeHttpClient_WhenHttpClientIsCreatedInternally()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
@@ -19,7 +17,7 @@ namespace WebAnchor.Tests.Disposable
             A.CallTo(() => fakeHttpClient.Dispose()).MustHaveHappened();
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotDisposeHttpClient_WhenHttpClientIsProvidedByConsumer()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
@@ -28,7 +26,7 @@ namespace WebAnchor.Tests.Disposable
             A.CallTo(() => fakeHttpClient.Dispose()).MustNotHaveHappened();
         }
 
-        [Test]
+        [Fact]
         public void ShouldNeverDisposeHttpClient_WhenDisposeIsNotInvokedOnIApi()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();

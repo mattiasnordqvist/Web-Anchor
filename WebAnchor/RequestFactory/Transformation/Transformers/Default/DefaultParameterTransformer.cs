@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 using Castle.Core.Internal;
 
@@ -27,7 +28,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
-            foreach(var parameter in parameters)
+            foreach (var parameter in parameters)
             {
                 Resolve(parameter, parameterTransformContext);
                 yield return parameter;
@@ -36,7 +37,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         public void ValidateApi(Type type)
         {
-            foreach (var method in type.GetMethods())
+            foreach (var method in type.GetTypeInfo().GetMethods())
             {
                 if (method.GetParameters()
                     .Count(x => x.GetCustomAttributes(typeof(ContentAttribute), false).Any()) > 1)
@@ -58,7 +59,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
         private bool IsParameterDeclaredWithAsDictionary(Parameter parameter)
         {
-            if (parameter.SourceValue.GetType().GetAttribute<ContentAsDictionaryAttribute>() != null)
+            if (parameter.SourceValue.GetType().GetTypeInfo().GetCustomAttribute<ContentAsDictionaryAttribute>() != null)
             {
                 return true;
             }

@@ -19,7 +19,8 @@ namespace WebAnchor.RequestFactory
 
         public static T GetFirstAttributeInChain<T>(this Type @this) where T : Attribute
         {
-            return @this.GetCustomAttributes<T>().Any() ? @this.GetCustomAttributes<T>().First() : null;
+            var typeInfo = @this.GetTypeInfo();
+            return typeInfo.GetCustomAttributes<T>().Any() ? typeInfo.GetCustomAttributes<T>().First() : null;
         }
 
         public static IEnumerable<T> GetAttributesChain<T>(this ParameterInfo @this) where T : Attribute
@@ -34,7 +35,7 @@ namespace WebAnchor.RequestFactory
 
         private static IEnumerable<T> GetAttributesChain<T>(this Type @this) where T : Attribute
         {
-            return @this.GetCustomAttributes<T>();
+            return @this.GetTypeInfo().GetCustomAttributes<T>();
         }
     }
 }

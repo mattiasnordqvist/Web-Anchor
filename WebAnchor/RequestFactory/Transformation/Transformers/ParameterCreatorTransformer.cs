@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Castle.Core.Internal;
@@ -28,7 +28,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
 
         protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)
         {
-            if (parameterInfo.GetAttribute<ContentAttribute>() != null)
+            if (parameterInfo.GetCustomAttribute<ContentAttribute>() != null)
             {
                 return ParameterType.Content;
             }

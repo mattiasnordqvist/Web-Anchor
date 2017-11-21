@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 
 using Castle.Core.Internal;
@@ -29,7 +30,7 @@ namespace WebAnchor.RequestFactory
             }
 
             var value = content.Value;
-            if (content.SourceParameterInfo.GetAttribute<ContentAttribute>().Type == ContentType.FormUrlEncoded)
+            if (content.SourceParameterInfo.GetCustomAttribute<ContentAttribute>().Type == ContentType.FormUrlEncoded)
             {
                 var pairs = value as IEnumerable<KeyValuePair<string, string>> ?? value.GetType().GetProperties().ToDictionary(x => x.Name, x => (x.GetGetMethod().Invoke(value, null) == null ? string.Empty : x.GetGetMethod().Invoke(value, null).ToString()));
                 return new FormUrlEncodedContent(pairs);

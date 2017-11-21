@@ -1,31 +1,28 @@
-﻿using NUnit.Framework;
-
-using WebAnchor.RequestFactory.HttpAttributes;
+﻿using Xunit;
 
 namespace WebAnchor.Tests.Validation
 {
-    [TestFixture]
     public class HttpResponseParserValidationTests
     {
-        [Test]
+        [Fact]
         public void MethodsWithVoidAreNotAllowed()
         {
             Assert.Throws<WebAnchorException>(() => Api.For<IApiWithVoid>("http://localhost/"));
         }
 
-        [Test]
+        [Fact]
         public void MethodsWithTaskOfHttpResponseMessageAreAllowed()
         {
             Api.For<IApiWithTaskOfHttpResponseMessage>("http://localhost/");
         }
 
-        [Test]
+        [Fact]
         public void MethodsWithTaskOfTAreAllowed()
         {
             Api.For<IApiWithTaskOfT>("http://localhost/");
         }
 
-        [Test]
+        [Fact]
         public void MethodsWithTaskOnlyAreNotAllowed()
         {
             Assert.Throws<WebAnchorException>(() => Api.For<IApiWithTaskOnly>("http://localhost/"));

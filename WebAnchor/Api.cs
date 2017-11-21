@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
+
 using Castle.DynamicProxy;
 
 namespace WebAnchor
@@ -20,7 +22,7 @@ namespace WebAnchor
         /// <returns></returns>
         public static T For<T>(string baseUri, ISettings settings = null) where T : class
         {
-            if (!typeof(T).IsInterface)
+            if (!typeof(T).GetTypeInfo().IsInterface)
             {
                 throw new WebAnchorException(typeof(T).FullName + " is not an interface and cannot be used with Web Anchor");
             }
