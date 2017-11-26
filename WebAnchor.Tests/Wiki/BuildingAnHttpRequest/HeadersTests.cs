@@ -8,7 +8,7 @@ using Xunit;
 
 namespace WebAnchor.Tests.Wiki
 {
-    public class Headers : WebAnchorTest
+    public class HeadersTests : WebAnchorTest
     {
         [BaseLocation("api")]
         public interface IApi

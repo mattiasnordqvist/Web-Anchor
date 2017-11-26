@@ -6,7 +6,7 @@ using Xunit;
 
 namespace WebAnchor.Tests.Wiki
 {
-    public class Substitutions : WebAnchorTest
+    public class SubstitutionsTests : WebAnchorTest
     {
         [BaseLocation("api/{resource}")]
         public interface IMyApi

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebAnchor.Attributes.Parameters;
 using WebAnchor.Attributes.URL;
-using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
 
 namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures

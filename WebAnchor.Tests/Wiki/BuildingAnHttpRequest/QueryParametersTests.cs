@@ -7,7 +7,7 @@ using Xunit;
 
 namespace WebAnchor.Tests.Wiki
 {
-    public class QueryParameters : WebAnchorTest
+    public class QueryParametersTests : WebAnchorTest
     {
         [BaseLocation("posts")]
         public interface ITypicodeApi
