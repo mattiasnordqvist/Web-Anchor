@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using WebAnchor.Attributes.URL;
 using WebAnchor.Tests.TestUtils;
@@ -9,6 +8,12 @@ namespace WebAnchor.Tests.Wiki
 {
     public class Substitutions : WebAnchorTest
     {
+        [BaseLocation("api/{resource}")]
+        public interface IMyApi
+        {
+            [Get("{id}")]
+            Task<HttpResponseMessage> Get(string resource, int id);
+        }
 
         [Fact]
         public void TestGetPosts()
@@ -21,14 +26,5 @@ namespace WebAnchor.Tests.Wiki
                    Assert.Equal("api/posts/82", assertMe.RequestUri.ToString());
                });
         }
-
-        [BaseLocation("api/{resource}")]
-        public interface IMyApi
-        {
-            [Get("{id}")]
-            Task<HttpResponseMessage> Get(string resource, int id);
-        }
     }
-
-  
 }

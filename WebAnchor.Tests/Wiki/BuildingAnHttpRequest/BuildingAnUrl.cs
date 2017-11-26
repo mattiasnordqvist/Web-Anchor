@@ -9,6 +9,18 @@ namespace WebAnchor.Tests.Wiki
 {
     public class BuildingAnUrl : WebAnchorTest
     {
+        [BaseLocation("posts")]
+        public interface ITypicodeApi
+        {
+            [Get("")]
+            Task<List<Post>> GetPosts();
+
+            [Get("{id}")]
+            Task<Post> GetPost(int id);
+
+            [Delete("{id}")]
+            Task<HttpResponseMessage> DeletePost(int id);
+        }
 
         [Fact]
         public void TestGetPosts()
@@ -46,23 +58,8 @@ namespace WebAnchor.Tests.Wiki
                });
         }
 
-        [BaseLocation("posts")]
-        public interface ITypicodeApi
-        {
-            [Get("")]
-            Task<List<Post>> GetPosts();
-
-            [Get("{id}")]
-            Task<Post> GetPost(int id);
-
-            [Delete("{id}")]
-            Task<HttpResponseMessage> DeletePost(int id);
-        }
-
         public class Post
         {
         }
     }
-
-  
 }
