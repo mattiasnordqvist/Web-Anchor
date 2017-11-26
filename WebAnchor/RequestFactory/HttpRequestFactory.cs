@@ -112,7 +112,7 @@ namespace WebAnchor.RequestFactory
         {
             if (ResolvedParameters.Content != null)
             {
-                return requestTransformContext.ContentCreator.Serialize(ResolvedParameters.Content);
+                return requestTransformContext.ContentSerializer.Serialize(ResolvedParameters.Content);
             }
 
             return null;

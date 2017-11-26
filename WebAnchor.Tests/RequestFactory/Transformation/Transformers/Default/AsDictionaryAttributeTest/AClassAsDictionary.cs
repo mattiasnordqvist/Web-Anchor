@@ -1,4 +1,4 @@
-﻿using WebAnchor.RequestFactory.Transformation.Transformers.Default;
+﻿using static WebAnchor.Attributes.Content.ContentAttribute;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.AsDictionaryAttributeTest
 {

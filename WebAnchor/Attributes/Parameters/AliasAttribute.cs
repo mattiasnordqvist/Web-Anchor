@@ -14,7 +14,7 @@ namespace WebAnchor.Attributes.Parameters
 
         public string Alias { get; private set; }
 
-        public override void Apply(Parameter parameter)
+        public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
         {
             parameter.Name = Alias;
         }

@@ -24,16 +24,16 @@ namespace WebAnchor.Attributes.Content
 
         public ContentType Type { get; set; }
 
-        public override void Apply(Parameter parameter)
+        public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
         {
             parameter.Value = ShouldCreateDictionaryFromContent(parameter) ? parameter.SourceValue.ToDictionary() : parameter.SourceValue;
             if (Type == ContentType.FormUrlEncoded)
             {
-                Context.ContentCreator = new FormUrlEncodedSerializer();
+                requestTransformContext.ContentSerializer = new FormUrlEncodedSerializer();
             }
             else
             {
-                Context.ContentCreator = new JsonContentSerializer(new JsonSerializer());
+                requestTransformContext.ContentSerializer = new JsonContentSerializer(new JsonSerializer());
             }
         }
 
@@ -41,7 +41,7 @@ namespace WebAnchor.Attributes.Content
         {
             if (method.GetParameters().Count(x => x.GetCustomAttributes(typeof(ContentAttribute), false).Any()) > 1)
             {
-                throw new WebAnchorException($"The method {method.Name} in {method.DeclaringType.FullName} cannot have more than one {typeof(ContentAttribute).FullName}");
+                throw new WebAnchorException($"The method {method.Name} in {type.FullName} cannot have more than one {typeof(ContentAttribute).FullName}");
             }
         }
 
@@ -64,5 +64,7 @@ namespace WebAnchor.Attributes.Content
 
             return parameter.ParentParameter != null && IsParameterDeclaredWithAsDictionary(parameter.ParentParameter);
         }
+
+        public class ContentAsDictionaryAttribute : Attribute { }
     }
 }

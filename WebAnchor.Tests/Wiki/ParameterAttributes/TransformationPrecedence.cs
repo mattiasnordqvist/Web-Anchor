@@ -64,7 +64,7 @@ namespace WebAnchor.Tests.Wiki
                 _prefix = prefix;
             }
 
-            public override void Apply(Parameter parameter)
+            public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
             {
                 parameter.Name = _prefix + parameter.Name;
             }

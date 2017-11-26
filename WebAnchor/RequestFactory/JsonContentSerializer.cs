@@ -22,8 +22,6 @@ namespace WebAnchor.RequestFactory
                 return null;
             }
 
-            var value = content.Value;
-
             var json = new StringBuilder();
             _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), content.Value);
             return new StringContent(json.ToString(), Encoding.UTF8, "application/json");

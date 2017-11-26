@@ -14,7 +14,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
             return parameter.Value is string;
         }
 
-        public override void Apply(Parameter parameter)
+        public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
         {
             if (CanHandle(parameter))
             {
@@ -22,11 +22,11 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
             }
         }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             foreach (var parameter in parameters)
             {
-                Apply(parameter);
+                Apply(parameter, requestTransformContext);
             }
 
             return parameters;

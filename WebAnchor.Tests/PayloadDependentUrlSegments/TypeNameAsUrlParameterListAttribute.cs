@@ -9,7 +9,7 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {
     public class TypeNameAsUrlParameterListAttribute : ParameterListTransformerAttribute
     {
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             var list = parameters.ToList();
             var content = list.First(x => x.ParameterType == ParameterType.Content);

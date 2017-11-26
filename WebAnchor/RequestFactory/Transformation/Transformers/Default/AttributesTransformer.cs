@@ -20,29 +20,27 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
             foreach (var transformer in listTransformersOnInterface)
             {
-                transformedParameters = transformer.TransformParameters(transformedParameters, parameterTransformContext);
+                transformedParameters = transformer.Apply(transformedParameters, parameterTransformContext);
             }
 
             foreach (var transformer in parameterTransformersOnInterface)
             {
                 foreach (var parameter in transformedParameters)
                 {
-                    transformer.Context = parameterTransformContext;
-                    transformer.Apply(parameter);
+                    transformer.Apply(parameter, parameterTransformContext);
                 }
             }
 
             foreach (var transformer in listTransformersOnMethod)
             {
-                transformedParameters = transformer.TransformParameters(transformedParameters, parameterTransformContext);
+                transformedParameters = transformer.Apply(transformedParameters, parameterTransformContext);
             }
 
             foreach (var transformer in parameterTransformersOnMethod)
             {
                 foreach (var parameter in transformedParameters)
                 {
-                    transformer.Context = parameterTransformContext;
-                    transformer.Apply(parameter);
+                    transformer.Apply(parameter, parameterTransformContext);
                 }
             }
 
@@ -51,8 +49,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
                 var attributes = parameter.GetAttributesChain();
                 foreach (var attribute in attributes)
                 {
-                    attribute.Context = parameterTransformContext;
-                    attribute.Apply(parameter);
+                    attribute.Apply(parameter, parameterTransformContext);
                 }
             }
 
@@ -66,7 +63,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
             foreach (var listTransformer in listTransformersOnInterface)
             {
-                listTransformer.ValidateApi(type);
+                listTransformer.ValidateApi(type, null);
             }
 
             foreach (var listTransformer in parameterTransformersOnInterface)
@@ -81,7 +78,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
                 foreach (var listTransformer in listTransformersOnMethod)
                 {
-                    listTransformer.ValidateApi(type);
+                    listTransformer.ValidateApi(type, method);
                 }
 
                 foreach (var listTransformer in parameterTransformersOnMethod)

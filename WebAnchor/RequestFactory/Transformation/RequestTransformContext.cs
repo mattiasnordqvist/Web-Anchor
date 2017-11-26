@@ -13,6 +13,6 @@ namespace WebAnchor.RequestFactory.Transformation
         public MethodInfo MethodInfo { get; private set; }
         public ApiInvocation ApiInvocation { get; private set; }
         public string UrlTemplate { get; internal set; }
-        public IContentSerializer ContentCreator { get; set; }
+        public IContentSerializer ContentSerializer { get; set; }
     }
 }
