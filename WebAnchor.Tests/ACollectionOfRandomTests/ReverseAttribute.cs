@@ -4,20 +4,19 @@ using System.Linq;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures
 {
     public class ReverseAttribute : ParameterTransformerAttribute, IParameterListTransformer
     {
-        public bool CanResolve(Parameter parameter)
+        public bool CanHandle(Parameter parameter)
         {
             return parameter.SourceValue is string;
         }
 
         public override void Apply(Parameter parameter)
         {
-            if (CanResolve(parameter))
+            if (CanHandle(parameter))
             {
                 parameter.Value = parameter.Value.ToString().Reverse().Aggregate(string.Empty, (x, y) => x + y);
             }

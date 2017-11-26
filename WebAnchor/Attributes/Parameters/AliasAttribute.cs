@@ -1,6 +1,6 @@
 ﻿using System;
 using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
+using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Attributes.Parameters
 {
