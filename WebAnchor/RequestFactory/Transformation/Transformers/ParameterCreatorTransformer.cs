@@ -14,7 +14,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
         {
             Context = requestTransformContext;
             return
-                Context.MethodInfo.GetParameters()
+                Context.ApiInvocation.Method.GetParameters()
                    .Select((x, i) => new { Index = i, ParameterInfo = x })
                    .Where(x => Context.ApiInvocation.GetArgumentValue(x.Index) != null)
                    .Select(x => new Parameter(x.ParameterInfo, Context.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, requestTransformContext.UrlTemplate)))

@@ -10,11 +10,11 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
     {
         public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            var listTransformersOnInterface = requestTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterListTransformerAttribute>();
-            var parameterTransformersOnInterface = requestTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterTransformerAttribute>();
+            var listTransformersOnInterface = requestTransformContext.ApiInvocation.Method.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterListTransformerAttribute>();
+            var parameterTransformersOnInterface = requestTransformContext.ApiInvocation.Method.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterTransformerAttribute>();
 
-            var listTransformersOnMethod = requestTransformContext.MethodInfo.GetCustomAttributes<ParameterListTransformerAttribute>();
-            var parameterTransformersOnMethod = requestTransformContext.MethodInfo.GetCustomAttributes<ParameterTransformerAttribute>();
+            var listTransformersOnMethod = requestTransformContext.ApiInvocation.Method.GetCustomAttributes<ParameterListTransformerAttribute>();
+            var parameterTransformersOnMethod = requestTransformContext.ApiInvocation.Method.GetCustomAttributes<ParameterTransformerAttribute>();
 
             IEnumerable<Parameter> transformedParameters = parameters.ToList();
 
