@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-using Castle.Core.Internal;
-
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
 {
-    public class FormattableParameterResolver : ParameterListTransformerBase
+    public class FormattableParameterResolver : IParameterListTransformer
     {
         public void Resolve(Parameter parameter)
         {
@@ -17,13 +15,17 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Formattable
             }
         }
 
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             foreach (var parameter in parameters)
             {
                 Resolve(parameter);
                 yield return parameter;
             }
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
     }
 }

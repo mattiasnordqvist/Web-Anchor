@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
 {
-    public class AddHeaderTransformer : ParameterListTransformerBase
+    public class AddHeaderTransformer : IParameterListTransformer
     {
         public AddHeaderTransformer(string name, string value)
         {
@@ -13,18 +14,18 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
         public string Name { get; set; }
         public object Value { get; private set; }
         
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             foreach (var p in parameters)
             {
                 yield return p;
             }
 
-            yield return new Parameter(null, Value, ParameterType.Header)
-            {
-                Name = Name,
-                Value = Value
-            };
+            yield return new Parameter(Name, Value, ParameterType.Header);
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
 
         protected virtual void SetValue(string value)

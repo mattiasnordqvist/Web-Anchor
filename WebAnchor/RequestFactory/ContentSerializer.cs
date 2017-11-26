@@ -7,6 +7,7 @@ using System.Text;
 
 using Newtonsoft.Json;
 using WebAnchor.Attributes.Content;
+using static WebAnchor.Attributes.Content.ContentAttribute;
 
 namespace WebAnchor.RequestFactory
 {

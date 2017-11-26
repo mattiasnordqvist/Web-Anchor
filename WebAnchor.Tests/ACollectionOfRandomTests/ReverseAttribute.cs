@@ -11,7 +11,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
     {
         public bool CanHandle(Parameter parameter)
         {
-            return parameter.SourceValue is string;
+            return parameter.Value is string;
         }
 
         public override void Apply(Parameter parameter)

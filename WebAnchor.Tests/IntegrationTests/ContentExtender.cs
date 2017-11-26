@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using WebAnchor.RequestFactory;
@@ -6,9 +7,9 @@ using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
 namespace WebAnchor.Tests.IntegrationTests
 {
-    public class ContentExtender : ParameterListTransformerBase
+    public class ContentExtender : IParameterListTransformer
     {
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             foreach (var parameter in parameters)
             {
@@ -20,6 +21,10 @@ namespace WebAnchor.Tests.IntegrationTests
             }
 
             return parameters;
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
     }
 }

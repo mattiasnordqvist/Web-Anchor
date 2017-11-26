@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace WebAnchor.RequestFactory.Transformation
 {
@@ -7,5 +8,6 @@ namespace WebAnchor.RequestFactory.Transformation
     {
         public ParameterTransformContext Context { get; set; }
         public abstract void Apply(Parameter parameter);
+        public virtual void ValidateApi(Type type, MethodInfo method, ParameterInfo parameter) { }
     }
 }

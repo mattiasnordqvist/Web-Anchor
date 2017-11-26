@@ -7,5 +7,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List
     public abstract class ParameterListTransformerAttribute : System.Attribute
     {
         public abstract IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext);
+
+        public virtual void ValidateApi(Type type) { }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -5,11 +6,11 @@ using WebAnchor.Attributes.Content;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers
 {
-    public class ParameterCreatorTransformer : ParameterListTransformerBase
+    public class ParameterCreatorTransformer : IParameterListTransformer
     {
         public ParameterTransformContext Context { get; set; }
 
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             Context = parameterTransformContext;
             return
@@ -23,6 +24,10 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
         public virtual string CreateRouteSegmentId(string name)
         {
             return "{" + name + "}";
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
 
         protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)

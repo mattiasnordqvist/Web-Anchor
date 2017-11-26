@@ -6,7 +6,7 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests.TestUtils
 {
-    public class TestTransformer : ParameterListTransformerBase
+    public class TestTransformer : IParameterListTransformer
     {
         private readonly Action<IEnumerable<Parameter>, ParameterTransformContext> _testAction;
 
@@ -15,10 +15,14 @@ namespace WebAnchor.Tests.TestUtils
             _testAction = testAction;
         }
 
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             _testAction(parameters, parameterTransformContext);
             return parameters;
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
     }
 }

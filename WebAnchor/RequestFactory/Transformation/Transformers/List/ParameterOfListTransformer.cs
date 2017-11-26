@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 {
-    public class ParameterOfListTransformer : ParameterListTransformerBase
+    public class ParameterOfListTransformer : IParameterListTransformer
     {
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             foreach (var parameter in parameters)
             {
@@ -22,6 +23,10 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
                     yield return parameter;
                 }
             }
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
 
         protected bool ParameterIsEnumerable(Parameter parameter)
