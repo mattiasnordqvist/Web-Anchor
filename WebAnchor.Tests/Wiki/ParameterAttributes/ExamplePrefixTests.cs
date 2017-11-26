@@ -1,6 +1,5 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using WebAnchor.Attributes.Parameters;
 using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
@@ -11,24 +10,7 @@ namespace WebAnchor.Tests.Wiki
 {
     public class ExamplePrefixTests : WebAnchorTest
     {
-        #region the attribute
-        public class PrefixAttribute : ParameterTransformerAttribute
-        {
-            private readonly string _prefix;
-
-            public PrefixAttribute(string prefix)
-            {
-                _prefix = prefix;
-            }
-
-            public override void Apply(Parameter parameter)
-            {
-                parameter.Name = _prefix + parameter.SourceParameterInfo.Name;
-            }
-        }
-        #endregion
-
-        #region usage on parameter
+        #region usages
         [BaseLocation("api/customer")]
         public interface ICustomerApi
         {
@@ -36,6 +18,28 @@ namespace WebAnchor.Tests.Wiki
             Task<HttpResponseMessage> GetCustomers([Prefix("p_")]string filter = null);
         }
 
+        [BaseLocation("api/customer")]
+        public interface ICustomerApi2
+        {
+            [Get("")]
+            [Prefix("p_")]
+            Task<HttpResponseMessage> GetCustomers(string filter = null, int? age = null);
+
+            [Get("")]
+            Task<HttpResponseMessage> GetCustomersNoPrefixes(string filter = null, int? age = null);
+        }
+
+        [BaseLocation("api/customer")]
+        [Prefix("p_")]
+        public interface ICustomerApi3
+        {
+            [Get("")]
+            Task<HttpResponseMessage> GetCustomers(string filter = null, int? age = null);
+        }
+        #endregion
+
+        #region usage on parameter
+        
         [Fact]
         public void TestExplicitPrefixAttribute()
         {
@@ -51,16 +55,6 @@ namespace WebAnchor.Tests.Wiki
         #endregion
 
         #region usage on method
-        [BaseLocation("api/customer")]
-        public interface ICustomerApi2
-        {
-            [Get("")]
-            [Prefix("p_")]
-            Task<HttpResponseMessage> GetCustomers(string filter = null, int? age = null);
-
-            [Get("")]
-            Task<HttpResponseMessage> GetCustomersNoPrefixes(string filter = null, int? age = null);
-        }
 
         [Fact]
         public void TestImplicitPrefixAttribute()
@@ -88,14 +82,6 @@ namespace WebAnchor.Tests.Wiki
         #endregion
 
         #region usage on interface
-        [BaseLocation("api/customer")]
-        [Prefix("p_")]
-        public interface ICustomerApi3
-        {
-            [Get("")]
-            Task<HttpResponseMessage> GetCustomers(string filter = null, int? age = null);
-        }
-
         [Fact]
         public void TestImplicitPrefixAttributeOnInterface()
         {
@@ -106,6 +92,23 @@ namespace WebAnchor.Tests.Wiki
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
                    Assert.Equal("api/customer?p_filter=new&p_age=28", assertMe.RequestUri.ToString());
                });
+        }
+        #endregion
+
+        #region the attribute
+        public class PrefixAttribute : ParameterTransformerAttribute
+        {
+            private readonly string _prefix;
+
+            public PrefixAttribute(string prefix)
+            {
+                _prefix = prefix;
+            }
+
+            public override void Apply(Parameter parameter)
+            {
+                parameter.Name = _prefix + parameter.SourceParameterInfo.Name;
+            }
         }
         #endregion
     }
