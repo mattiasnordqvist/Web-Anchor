@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace WebAnchor.RequestFactory.HttpAttributes
+namespace WebAnchor.Attributes.URL
 {
     public class PutAttribute : HttpAttribute
     {

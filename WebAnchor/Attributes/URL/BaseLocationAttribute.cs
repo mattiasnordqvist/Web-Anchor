@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.Attributes.URL
 {
     [AttributeUsage(AttributeTargets.Interface)]
     public class BaseLocationAttribute : Attribute

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.Attributes.URL
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public abstract class HttpAttribute : Attribute
+    public class HttpAttribute : Attribute
     {
-        protected HttpAttribute(HttpMethod method, string url)
+        public HttpAttribute(HttpMethod method, string url)
         {
             Method = method;
             URL = url;

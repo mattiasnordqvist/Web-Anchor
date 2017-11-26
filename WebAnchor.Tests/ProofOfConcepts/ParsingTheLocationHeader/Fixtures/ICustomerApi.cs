@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
-
-using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.HttpAttributes;
+using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 

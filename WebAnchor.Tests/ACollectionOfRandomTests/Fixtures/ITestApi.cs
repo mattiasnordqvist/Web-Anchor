@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.HttpAttributes;
+using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
 

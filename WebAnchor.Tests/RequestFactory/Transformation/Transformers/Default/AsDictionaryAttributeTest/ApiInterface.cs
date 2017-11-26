@@ -1,4 +1,4 @@
-﻿using WebAnchor.RequestFactory.HttpAttributes;
+﻿using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 

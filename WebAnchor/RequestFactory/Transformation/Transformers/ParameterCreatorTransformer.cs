@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Castle.Core.Internal;
+using WebAnchor.Attributes.URL;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers
 {
@@ -12,12 +12,11 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
         public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
         {
             Context = parameterTransformContext;
-            var url = Context.MethodInfo.GetCustomAttribute<HttpAttribute>().URL;
             return
                 Context.MethodInfo.GetParameters()
                    .Select((x, i) => new { Index = i, ParameterInfo = x })
                    .Where(x => Context.ApiInvocation.GetArgumentValue(x.Index) != null)
-                   .Select(x => new Parameter(x.ParameterInfo, Context.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
+                   .Select(x => new Parameter(x.ParameterInfo, Context.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, parameterTransformContext.UrlTemplate)))
                    .ToList();
         }
 

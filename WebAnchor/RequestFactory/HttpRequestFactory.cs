@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Reflection;
 
 using Castle.DynamicProxy;
+using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.RequestFactory
@@ -56,9 +57,11 @@ namespace WebAnchor.RequestFactory
 
         public virtual HttpRequestMessage Create(IInvocation invocation)
         {
-            ResolvedParameters = ResolveParameters(invocation);
+            var urlTemplate = ResolveUrlTemplate(invocation);
+
+            ResolvedParameters = ResolveParameters(invocation, urlTemplate);
              
-            var resolvedUrl = ResolveUrlRoute(invocation);
+            var resolvedUrl = ResolveUrl(urlTemplate);
             var resolvedMethod = ResolveHttpMethod(invocation);
 
             var request = new HttpRequestMessage(resolvedMethod, resolvedUrl);
@@ -92,11 +95,11 @@ namespace WebAnchor.RequestFactory
             return request;
         }
 
-        protected virtual Parameters ResolveParameters(IInvocation invocation)
+        protected virtual Parameters ResolveParameters(IInvocation invocation, string urlTemplate)
         {
             var parameters = new List<Parameter>();
             var transformedParameters = ParameterListTransformers.Aggregate(parameters,
-                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(new ApiInvocation(invocation)))
+                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(new ApiInvocation(invocation)) { UrlTemplate = urlTemplate })
                                                      .ToList());
 
             return new Parameters(
@@ -111,16 +114,20 @@ namespace WebAnchor.RequestFactory
             return ContentSerializer.Serialize(ResolvedParameters.Content);
         }
 
-        protected virtual string ResolveUrlRoute(IInvocation invocation)
+        protected virtual string ResolveUrlTemplate(IInvocation invocation)
         {
             var methodInfo = invocation.Method;
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
             var baseAttribute = methodInfo.DeclaringType.GetTypeInfo().GetCustomAttribute<BaseLocationAttribute>();
 
-            var resolvedUrl = ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
-            resolvedUrl = resolvedUrl.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
-            resolvedUrl = AppendUrlParams(resolvedUrl, ResolvedParameters.QueryParameters);
-            return resolvedUrl;
+            return ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
+        }
+
+        protected virtual string ResolveUrl(string urlTemplate)
+        {
+            urlTemplate = urlTemplate.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
+            urlTemplate = AppendUrlParams(urlTemplate, ResolvedParameters.QueryParameters);
+            return urlTemplate;
         }
 
         protected virtual string AppendUrlParams(string url, IEnumerable<Parameter> queryParameters)
