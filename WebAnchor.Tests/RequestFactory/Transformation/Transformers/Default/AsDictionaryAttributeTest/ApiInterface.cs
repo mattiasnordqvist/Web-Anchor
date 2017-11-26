@@ -1,5 +1,5 @@
-﻿using WebAnchor.Attributes.URL;
-using WebAnchor.RequestFactory.Transformation.Transformers;
+﻿using WebAnchor.Attributes.Content;
+using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Default.AsDictionaryAttributeTest

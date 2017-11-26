@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic
+namespace WebAnchor.Attributes.Header
 {
     [AttributeUsage(AttributeTargets.Parameter)]
     public class AuthorizationAttribute : HeaderAttribute

@@ -5,11 +5,8 @@ using System.Net.Http;
 using System.Reflection;
 using System.Text;
 
-using Castle.Core.Internal;
-
 using Newtonsoft.Json;
-
-using WebAnchor.RequestFactory.Transformation.Transformers;
+using WebAnchor.Attributes.Content;
 
 namespace WebAnchor.RequestFactory
 {

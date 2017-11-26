@@ -1,7 +1,8 @@
 ﻿using System;
+using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation.Transformers.Attribute;
 
-namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic
+namespace WebAnchor.Attributes.Header
 {
     [AttributeUsage(AttributeTargets.Parameter)]
     public class HeaderAttribute : ParameterTransformerAttribute

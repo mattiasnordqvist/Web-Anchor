@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-using Castle.Core.Internal;
+using WebAnchor.Attributes.Content;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {

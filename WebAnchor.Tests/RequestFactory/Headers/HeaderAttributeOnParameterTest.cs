@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebAnchor.Attributes.Header;
 using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic;
 using WebAnchor.Tests.TestUtils;
