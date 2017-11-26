@@ -9,7 +9,6 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Method)]
     public class HeaderAttribute : ParameterListTransformerAttribute
     {
-
         public HeaderAttribute(string headerName, string value)
         {
             HeaderName = headerName;

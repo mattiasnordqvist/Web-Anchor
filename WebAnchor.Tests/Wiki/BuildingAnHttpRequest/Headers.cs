@@ -28,8 +28,6 @@ namespace WebAnchor.Tests.Wiki
                    Assert.Equal("api/resource", assertMe.RequestUri.ToString());
                    Assert.Equal("Basic 987asdg676g", assertMe.Headers.GetValues("Authorization").First());
                });
-
-            
         }
     }
 }
