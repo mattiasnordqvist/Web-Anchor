@@ -13,15 +13,13 @@ namespace WebAnchor.RequestFactory
 {
     public class HttpRequestFactory : IHttpRequestFactory
     {
-        public HttpRequestFactory(IContentSerializer contentSerializer, IList<IParameterListTransformer> transformers)
+        public HttpRequestFactory(IList<IParameterListTransformer> transformers)
         {
-            ContentSerializer = contentSerializer;
             ParameterListTransformers = transformers ?? new List<IParameterListTransformer>();
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
             TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = true;
         }
 
-        public IContentSerializer ContentSerializer { get; set; }
         public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
         public bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
@@ -57,18 +55,19 @@ namespace WebAnchor.RequestFactory
 
         public virtual HttpRequestMessage Create(IInvocation invocation)
         {
-            var urlTemplate = ResolveUrlTemplate(invocation);
+            var requestTransformContext = new RequestTransformContext(new ApiInvocation(invocation));
+            requestTransformContext.UrlTemplate = ResolveUrlTemplate(invocation);
 
-            ResolvedParameters = ResolveParameters(invocation, urlTemplate);
-             
-            var resolvedUrl = ResolveUrl(urlTemplate);
+            ResolvedParameters = ResolveParameters(requestTransformContext);
+
+            var resolvedUrl = ResolveUrl(requestTransformContext.UrlTemplate);
             var resolvedMethod = ResolveHttpMethod(invocation);
 
             var request = new HttpRequestMessage(resolvedMethod, resolvedUrl);
 
             if (resolvedMethod == HttpMethod.Post || resolvedMethod == HttpMethod.Put)
             {
-                request.Content = ResolveContent(invocation);
+                request.Content = ResolveContent(requestTransformContext);
             }
 
             foreach (var headerParameter in ResolvedParameters.HeaderParameters)
@@ -95,11 +94,11 @@ namespace WebAnchor.RequestFactory
             return request;
         }
 
-        protected virtual Parameters ResolveParameters(IInvocation invocation, string urlTemplate)
+        protected virtual Parameters ResolveParameters(RequestTransformContext requestTransformContext)
         {
             var parameters = new List<Parameter>();
             var transformedParameters = ParameterListTransformers.Aggregate(parameters,
-                (current, transformer) => transformer.TransformParameters(current, new RequestTransformContext(new ApiInvocation(invocation)) { UrlTemplate = urlTemplate })
+                (current, transformer) => transformer.TransformParameters(current, requestTransformContext)
                                                      .ToList());
 
             return new Parameters(
@@ -109,9 +108,14 @@ namespace WebAnchor.RequestFactory
                 transformedParameters.FirstOrDefault(x => x.ParameterType == ParameterType.Content));
         }
 
-        protected virtual HttpContent ResolveContent(IInvocation invocation)
+        protected virtual HttpContent ResolveContent(RequestTransformContext requestTransformContext)
         {
-            return ContentSerializer.Serialize(ResolvedParameters.Content);
+            if (ResolvedParameters.Content != null)
+            {
+                return requestTransformContext.ContentCreator.Serialize(ResolvedParameters.Content);
+            }
+
+            return null;
         }
 
         protected virtual string ResolveUrlTemplate(IInvocation invocation)
@@ -155,8 +159,8 @@ namespace WebAnchor.RequestFactory
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
             var value = parameter.Value?.ToString() ?? parameter.SourceValue.ToString();
-            return TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators 
-                ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode)) 
+            return TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
+                ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
                 : WebUtility.UrlEncode(value);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
@@ -25,9 +26,14 @@ namespace WebAnchor.Attributes.Content
 
         public override void Apply(Parameter parameter)
         {
-            if (parameter.ParameterType == ParameterType.Content)
+            parameter.Value = ShouldCreateDictionaryFromContent(parameter) ? parameter.SourceValue.ToDictionary() : parameter.SourceValue;
+            if (Type == ContentType.FormUrlEncoded)
             {
-                parameter.Value = ShouldCreateDictionaryFromContent(parameter) ? parameter.SourceValue.ToDictionary() : parameter.SourceValue;
+                Context.ContentCreator = new FormUrlEncodedSerializer();
+            }
+            else
+            {
+                Context.ContentCreator = new JsonContentSerializer(new JsonSerializer());
             }
         }
 

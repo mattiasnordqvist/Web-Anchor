@@ -14,21 +14,19 @@ namespace WebAnchor
         {
             ParameterListTransformers = new DefaultParameterListTransformers();
             ResponseHandlers = new DefaultResponseHandlers();
-            ContentSerializer = new ContentSerializer(new JsonSerializer());
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
             PreservePathInUrlSegmentParameters = true;
         }
 
         public virtual List<IParameterListTransformer> ParameterListTransformers { get; set; }
         public virtual List<IResponseHandler> ResponseHandlers { get; set; }
-        public virtual IContentSerializer ContentSerializer { get; set; }
 
         public virtual bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
         public virtual bool PreservePathInUrlSegmentParameters { get; set; }
 
         public IHttpRequestFactory GetRequestFactory()
         {
-            var requestFactory = new HttpRequestFactory(ContentSerializer, ParameterListTransformers)
+            var requestFactory = new HttpRequestFactory(ParameterListTransformers)
             {
                 InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl,
                 TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = PreservePathInUrlSegmentParameters
