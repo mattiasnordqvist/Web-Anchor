@@ -18,7 +18,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
         public string HeaderName { get; set; }
         public string Value { get; set; }
 
-        public override IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             var p = parameters.ToList();
             p.Add(new Parameter(HeaderName, Value, ParameterType.Header));

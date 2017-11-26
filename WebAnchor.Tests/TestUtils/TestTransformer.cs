@@ -15,9 +15,9 @@ namespace WebAnchor.Tests.TestUtils
             _testAction = testAction;
         }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            _testAction(parameters, parameterTransformContext);
+            _testAction(parameters, requestTransformContext);
             return parameters;
         }
 

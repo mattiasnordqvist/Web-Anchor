@@ -8,39 +8,39 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
     public class AttributesTransformer : IParameterListTransformer
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            var listTransformersOnInterface = parameterTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterListTransformerAttribute>();
-            var parameterTransformersOnInterface = parameterTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterTransformerAttribute>();
+            var listTransformersOnInterface = requestTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterListTransformerAttribute>();
+            var parameterTransformersOnInterface = requestTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterTransformerAttribute>();
 
-            var listTransformersOnMethod = parameterTransformContext.MethodInfo.GetCustomAttributes<ParameterListTransformerAttribute>();
-            var parameterTransformersOnMethod = parameterTransformContext.MethodInfo.GetCustomAttributes<ParameterTransformerAttribute>();
+            var listTransformersOnMethod = requestTransformContext.MethodInfo.GetCustomAttributes<ParameterListTransformerAttribute>();
+            var parameterTransformersOnMethod = requestTransformContext.MethodInfo.GetCustomAttributes<ParameterTransformerAttribute>();
 
             IEnumerable<Parameter> transformedParameters = parameters.ToList();
 
             foreach (var transformer in listTransformersOnInterface)
             {
-                transformedParameters = transformer.Apply(transformedParameters, parameterTransformContext);
+                transformedParameters = transformer.Apply(transformedParameters, requestTransformContext);
             }
 
             foreach (var transformer in parameterTransformersOnInterface)
             {
                 foreach (var parameter in transformedParameters)
                 {
-                    transformer.Apply(parameter, parameterTransformContext);
+                    transformer.Apply(parameter, requestTransformContext);
                 }
             }
 
             foreach (var transformer in listTransformersOnMethod)
             {
-                transformedParameters = transformer.Apply(transformedParameters, parameterTransformContext);
+                transformedParameters = transformer.Apply(transformedParameters, requestTransformContext);
             }
 
             foreach (var transformer in parameterTransformersOnMethod)
             {
                 foreach (var parameter in transformedParameters)
                 {
-                    transformer.Apply(parameter, parameterTransformContext);
+                    transformer.Apply(parameter, requestTransformContext);
                 }
             }
 
@@ -49,7 +49,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
                 var attributes = parameter.GetAttributesChain();
                 foreach (var attribute in attributes)
                 {
-                    attribute.Apply(parameter, parameterTransformContext);
+                    attribute.Apply(parameter, requestTransformContext);
                 }
             }
 

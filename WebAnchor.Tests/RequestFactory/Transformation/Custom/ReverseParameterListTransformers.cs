@@ -9,7 +9,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {
     public class ReverseParameterListTransformers : IParameterListTransformer
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             return parameters.Reverse();
         }

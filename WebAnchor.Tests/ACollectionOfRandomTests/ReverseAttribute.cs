@@ -22,7 +22,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
             }
         }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             foreach (var parameter in parameters)
             {

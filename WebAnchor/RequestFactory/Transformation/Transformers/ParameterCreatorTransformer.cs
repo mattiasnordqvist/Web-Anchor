@@ -10,14 +10,14 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
     {
         public RequestTransformContext Context { get; set; }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            Context = parameterTransformContext;
+            Context = requestTransformContext;
             return
                 Context.MethodInfo.GetParameters()
                    .Select((x, i) => new { Index = i, ParameterInfo = x })
                    .Where(x => Context.ApiInvocation.GetArgumentValue(x.Index) != null)
-                   .Select(x => new Parameter(x.ParameterInfo, Context.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, parameterTransformContext.UrlTemplate)))
+                   .Select(x => new Parameter(x.ParameterInfo, Context.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, requestTransformContext.UrlTemplate)))
                    .ToList();
         }
 

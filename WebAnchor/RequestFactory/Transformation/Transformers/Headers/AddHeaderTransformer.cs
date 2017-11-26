@@ -14,7 +14,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
         public string Name { get; set; }
         public object Value { get; private set; }
         
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             foreach (var p in parameters)
             {

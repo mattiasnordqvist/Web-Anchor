@@ -6,9 +6,9 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.NoCache
 {
     public class NoCacheAttribute : ParameterListTransformerAttribute
     {
-        public override IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            return new NoCacheListTransformer().TransformParameters(parameters, parameterTransformContext);
+            return new NoCacheListTransformer().Apply(parameters, requestTransformContext);
         }
     }
 }

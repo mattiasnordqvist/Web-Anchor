@@ -20,7 +20,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
             _type = type;
         }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             var parameterList = parameters.ToList();
             parameterList.Add(new Parameter(_name, _value, _type));
