@@ -6,7 +6,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.NoCache
 {
     public class NoCacheListTransformer : IParameterListTransformer
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             var parameterList = parameters.ToList();
             parameterList.Add(new Parameter("_", Guid.NewGuid(), ParameterType.Query));

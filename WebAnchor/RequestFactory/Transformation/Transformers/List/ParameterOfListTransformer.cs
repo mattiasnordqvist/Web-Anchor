@@ -7,7 +7,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 {
     public class ParameterOfListTransformer : IParameterListTransformer
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             foreach (var parameter in parameters)
             {

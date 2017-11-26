@@ -15,11 +15,11 @@ namespace WebAnchor.Tests.TestUtils
 
         private readonly Action<HttpRequestFactory> _configure;
 
-        private readonly Action<IEnumerable<Parameter>, ParameterTransformContext> _pipelineAction;
+        private readonly Action<IEnumerable<Parameter>, RequestTransformContext> _pipelineAction;
 
         private readonly ApiSettings _settings;
 
-        public RequestTester(Action<HttpRequestMessage> assert = null, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> pipelineAction = null, ApiSettings settings = null)
+        public RequestTester(Action<HttpRequestMessage> assert = null, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, RequestTransformContext> pipelineAction = null, ApiSettings settings = null)
         {
             _settings = settings ?? new ApiSettings();
             _assert = assert ?? (a => { });

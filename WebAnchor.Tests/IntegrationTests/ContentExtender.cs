@@ -9,7 +9,7 @@ namespace WebAnchor.Tests.IntegrationTests
 {
     public class ContentExtender : IParameterListTransformer
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             foreach (var parameter in parameters)
             {

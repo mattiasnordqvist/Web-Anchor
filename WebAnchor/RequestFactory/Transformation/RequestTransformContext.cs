@@ -1,10 +1,10 @@
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace WebAnchor.RequestFactory.Transformation
 {
-    public class ParameterTransformContext
+    public class RequestTransformContext
     {
-        public ParameterTransformContext(ApiInvocation apiInvocation)
+        public RequestTransformContext(ApiInvocation apiInvocation)
         {
             MethodInfo = apiInvocation.Method;
             ApiInvocation = apiInvocation;

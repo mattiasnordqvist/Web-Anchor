@@ -8,14 +8,14 @@ namespace WebAnchor.Tests.TestUtils
 {
     public class TestTransformer : IParameterListTransformer
     {
-        private readonly Action<IEnumerable<Parameter>, ParameterTransformContext> _testAction;
+        private readonly Action<IEnumerable<Parameter>, RequestTransformContext> _testAction;
 
-        public TestTransformer(Action<IEnumerable<Parameter>, ParameterTransformContext> testAction)
+        public TestTransformer(Action<IEnumerable<Parameter>, RequestTransformContext> testAction)
         {
             _testAction = testAction;
         }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             _testAction(parameters, parameterTransformContext);
             return parameters;

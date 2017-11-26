@@ -5,7 +5,7 @@ namespace WebAnchor.RequestFactory.Transformation
 {
     public interface IParameterListTransformer
     {
-        IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext);
+        IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext);
 
         void ValidateApi(Type type);
     }

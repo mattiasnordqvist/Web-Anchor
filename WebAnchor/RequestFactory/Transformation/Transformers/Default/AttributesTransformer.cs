@@ -8,7 +8,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
     public class AttributesTransformer : IParameterListTransformer
     {
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             var listTransformersOnInterface = parameterTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterListTransformerAttribute>();
             var parameterTransformersOnInterface = parameterTransformContext.MethodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes<ParameterTransformerAttribute>();

@@ -99,7 +99,7 @@ namespace WebAnchor.RequestFactory
         {
             var parameters = new List<Parameter>();
             var transformedParameters = ParameterListTransformers.Aggregate(parameters,
-                (current, transformer) => transformer.TransformParameters(current, new ParameterTransformContext(new ApiInvocation(invocation)) { UrlTemplate = urlTemplate })
+                (current, transformer) => transformer.TransformParameters(current, new RequestTransformContext(new ApiInvocation(invocation)) { UrlTemplate = urlTemplate })
                                                      .ToList());
 
             return new Parameters(

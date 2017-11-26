@@ -31,9 +31,6 @@ namespace WebAnchor.Attributes.Content
             }
         }
 
-        /*
-         * TODO: Make sure this is used: #73
-         */
         public override void ValidateApi(Type type, MethodInfo method, ParameterInfo parameter)
         {
             if (method.GetParameters().Count(x => x.GetCustomAttributes(typeof(ContentAttribute), false).Any()) > 1)

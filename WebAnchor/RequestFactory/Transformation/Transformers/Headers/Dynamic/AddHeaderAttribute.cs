@@ -14,7 +14,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic
             _transformer = new AddHeaderTransformer(name, value);
         }
 
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             return _transformer.TransformParameters(parameters, parameterTransformContext);
         }

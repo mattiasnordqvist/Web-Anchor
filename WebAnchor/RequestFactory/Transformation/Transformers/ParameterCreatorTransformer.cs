@@ -8,9 +8,9 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
 {
     public class ParameterCreatorTransformer : IParameterListTransformer
     {
-        public ParameterTransformContext Context { get; set; }
+        public RequestTransformContext Context { get; set; }
 
-        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, RequestTransformContext parameterTransformContext)
         {
             Context = parameterTransformContext;
             return
