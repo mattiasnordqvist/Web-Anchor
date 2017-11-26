@@ -20,6 +20,15 @@ namespace WebAnchor.Tests.Wiki
             Task<HttpResponseMessage> GetCustomers([Alias("f")]string filter = null, int? age = null);
         }
 
+        [BaseLocation("api/customer")]
+        [Prefix("api_")]
+        public interface ICustomerApi2
+        {
+            [Get("")]
+            [Prefix("method_")]
+            Task<HttpResponseMessage> GetCustomers([Prefix("parameter_")]string filter = null);
+        }
+
         [Fact]
         public void TestPrecedence()
         {
@@ -31,8 +40,20 @@ namespace WebAnchor.Tests.Wiki
                    Assert.Equal("api/customer?f=new&p_age=28", assertMe.RequestUri.ToString());
                });
         }
+
+        [Fact]
+        public void TestPrecedenceAnotherExample()
+        {
+            TestTheRequest<ICustomerApi2>(
+               api => api.GetCustomers("new"),
+               assertMe =>
+               {
+                   Assert.Equal(HttpMethod.Get, assertMe.Method);
+                   Assert.Equal("api/customer?parameter_method_api_filter=new", assertMe.RequestUri.ToString());
+               });
+        }
         #endregion
-        
+
         #region the attribute
         public class PrefixAttribute : ParameterTransformerAttribute
         {
@@ -45,7 +66,7 @@ namespace WebAnchor.Tests.Wiki
 
             public override void Apply(Parameter parameter)
             {
-                parameter.Name = _prefix + parameter.SourceParameterInfo.Name;
+                parameter.Name = _prefix + parameter.Name;
             }
         }
         #endregion

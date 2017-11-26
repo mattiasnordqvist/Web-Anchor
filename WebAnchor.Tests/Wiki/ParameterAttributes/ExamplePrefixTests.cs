@@ -107,7 +107,7 @@ namespace WebAnchor.Tests.Wiki
 
             public override void Apply(Parameter parameter)
             {
-                parameter.Name = _prefix + parameter.SourceParameterInfo.Name;
+                parameter.Name = _prefix + parameter.Name;
             }
         }
         #endregion
