@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -31,6 +32,7 @@ namespace WebAnchor.RequestFactory
         /// seperator, set this setting to false.
         /// </summary>
         public bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
+        public bool FormatFormattables { get; internal set; }
 
         public virtual void ValidateApi(Type type)
         {
@@ -158,15 +160,21 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
-            var value = parameter.Value?.ToString() ?? parameter.SourceValue.ToString();
+            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue);
             return TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
                 : WebUtility.UrlEncode(value);
         }
 
+        protected virtual string FormatFormattable(object value)
+        {
+            return FormatFormattables && value is IFormattable ? ((IFormattable)value)
+                   .ToString(null, CultureInfo.InvariantCulture) : value.ToString();
+        }
+
         protected virtual string CreateUrlParameter(Parameter parameter)
         {
-            var value = parameter.Value?.ToString() ?? parameter.SourceValue.ToString();
+            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue);
             return $"{parameter.Name}={WebUtility.UrlEncode(value)}";
         }
     }

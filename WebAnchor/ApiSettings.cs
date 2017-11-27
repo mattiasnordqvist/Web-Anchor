@@ -16,6 +16,7 @@ namespace WebAnchor
             ResponseHandlers = new DefaultResponseHandlers();
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
             PreservePathInUrlSegmentParameters = true;
+            FormatFormattables = true;
         }
 
         public virtual List<IParameterListTransformer> ParameterListTransformers { get; set; }
@@ -23,13 +24,15 @@ namespace WebAnchor
 
         public virtual bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
         public virtual bool PreservePathInUrlSegmentParameters { get; set; }
+        public virtual bool FormatFormattables { get; set; }
 
         public IHttpRequestFactory GetRequestFactory()
         {
             var requestFactory = new HttpRequestFactory(ParameterListTransformers)
             {
                 InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl,
-                TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = PreservePathInUrlSegmentParameters
+                TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = PreservePathInUrlSegmentParameters,
+                FormatFormattables = FormatFormattables,
             };
             return requestFactory;
         }
