@@ -20,7 +20,6 @@ namespace WebAnchor
         public virtual bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
         public virtual bool FormatFormattables { get; set; }
         public virtual bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
-        public IDictionary<string, object> CustomSettings { get; set; } = new Dictionary<string, object>();
-        public IContentSerializer ContentSerializer { get; set; }
+        public virtual IContentSerializer ContentSerializer { get; set; }
     }
 }

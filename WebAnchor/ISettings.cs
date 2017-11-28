@@ -17,20 +17,17 @@ namespace WebAnchor
         bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
         bool FormatFormattables { get; set; }
         List<IParameterListTransformer> ParameterListTransformers { get; set; }
-        IDictionary<string, object> CustomSettings { get; set; }
         IContentSerializer ContentSerializer { get; set; }
     }
 
     public interface IApiResponeSettings
     {
         List<IResponseHandler> ResponseHandlers { get; set; }
-        IDictionary<string, object> CustomSettings { get; set; }
     }
 
     public interface IApiSettings
     {
         IApiRequestSettings Request { get; set; }
         IApiResponeSettings Response { get; set; }
-        IDictionary<string, object> CustomSettings { get; set; }
     }
 }
