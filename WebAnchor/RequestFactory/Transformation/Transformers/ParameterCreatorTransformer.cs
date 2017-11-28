@@ -12,9 +12,9 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
         {
             return
                 requestTransformContext.ApiInvocation.Method.GetParameters()
-                   .Select((x, i) => new { Index = i, ParameterInfo = x })
-                   .Where(x => requestTransformContext.ApiInvocation.GetArgumentValue(x.Index) != null)
-                   .Select(x => new Parameter(x.ParameterInfo, requestTransformContext.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, requestTransformContext.UrlTemplate)))
+                   .Select((x, i) => new { ParameterInfo = x, ArgumentValue = requestTransformContext.ApiInvocation.GetArgumentValue(i)})
+                   .Where(x => x.ArgumentValue != null)
+                   .Select(x => new Parameter(x.ParameterInfo, x.ArgumentValue, ResolveParameterType(x.ParameterInfo, requestTransformContext.UrlTemplate)))
                    .ToList();
         }
 
