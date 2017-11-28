@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.ResponseParser;
 
@@ -17,6 +18,7 @@ namespace WebAnchor
         bool FormatFormattables { get; set; }
         List<IParameterListTransformer> ParameterListTransformers { get; set; }
         IDictionary<string, object> CustomSettings { get; set; }
+        IContentSerializer ContentSerializer { get; set; }
     }
 
     public interface IApiResponeSettings

@@ -7,21 +7,18 @@ using WebAnchor.RequestFactory.Transformation;
 namespace WebAnchor.Attributes.Content
 {
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class ContentAttribute : ParameterTransformerAttribute
+    public class FormUrlEncodedAttribute : ParameterTransformerAttribute
     {
-        public ContentAttribute()
-        {
-        }
-
         public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
         {
+            requestTransformContext.ContentSerializer = new FormUrlEncodedSerializer();
         }
 
         public override void ValidateApi(Type type, MethodInfo method, ParameterInfo parameter)
         {
-            if (method.GetParameters().Count(x => x.GetCustomAttributes(typeof(ContentAttribute), false).Any()) > 1)
+            if (!parameter.GetCustomAttributes(typeof(ContentAttribute), false).Any())
             {
-                throw new WebAnchorException($"The method {method.Name} in {type.FullName} cannot have more than one {typeof(ContentAttribute).FullName}");
+                throw new WebAnchorException($"The attribute {nameof(FormUrlEncodedAttribute)} cannot be used on parameter {parameter.Name} because it does not have a {nameof(ContentAttribute)}");
             }
         }
     }

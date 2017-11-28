@@ -47,11 +47,11 @@ namespace WebAnchor.RequestFactory
         public virtual HttpRequestMessage Create(IInvocation invocation)
         {
             var requestTransformContext = new RequestTransformContext(new ApiInvocation(invocation), _settings);
-            requestTransformContext.UrlTemplate = ResolveUrlTemplate(invocation);
+            requestTransformContext.UrlTemplate = ResolveUrlTemplate(invocation, requestTransformContext);
 
             ResolvedParameters = ResolveParameters(requestTransformContext);
 
-            var resolvedUrl = ResolveUrl(requestTransformContext.UrlTemplate);
+            var resolvedUrl = ResolveUrl(requestTransformContext.UrlTemplate, requestTransformContext);
             var resolvedMethod = ResolveHttpMethod(invocation);
 
             var request = new HttpRequestMessage(resolvedMethod, resolvedUrl);
@@ -88,7 +88,7 @@ namespace WebAnchor.RequestFactory
         protected virtual Parameters ResolveParameters(RequestTransformContext requestTransformContext)
         {
             var parameters = new List<Parameter>();
-            var transformedParameters = requestTransformContext.Settings.Request.ParameterListTransformers.Aggregate(parameters,
+            var transformedParameters = requestTransformContext.ParameterListTransformers.Aggregate(parameters,
                 (current, transformer) => transformer.Apply(current, requestTransformContext)
                                                      .ToList());
 
@@ -109,27 +109,27 @@ namespace WebAnchor.RequestFactory
             return null;
         }
 
-        protected virtual string ResolveUrlTemplate(IInvocation invocation)
+        protected virtual string ResolveUrlTemplate(IInvocation invocation, RequestTransformContext requestTransformContext)
         {
             var methodInfo = invocation.Method;
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
             var baseAttribute = methodInfo.DeclaringType.GetTypeInfo().GetCustomAttribute<BaseLocationAttribute>();
 
-            return ((baseAttribute != null ? baseAttribute.BaseUrl + (_settings.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
+            return ((baseAttribute != null ? baseAttribute.BaseUrl + (requestTransformContext.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
         }
 
-        protected virtual string ResolveUrl(string urlTemplate)
+        protected virtual string ResolveUrl(string urlTemplate, RequestTransformContext requestTransformContext)
         {
-            urlTemplate = urlTemplate.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), CreateRouteSegmentValue));
-            urlTemplate = AppendUrlParams(urlTemplate, ResolvedParameters.QueryParameters);
+            urlTemplate = urlTemplate.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), x => CreateRouteSegmentValue(x, requestTransformContext)));
+            urlTemplate = AppendUrlParams(urlTemplate, ResolvedParameters.QueryParameters, requestTransformContext);
             return urlTemplate;
         }
 
-        protected virtual string AppendUrlParams(string url, IEnumerable<Parameter> queryParameters)
+        protected virtual string AppendUrlParams(string url, IEnumerable<Parameter> queryParameters, RequestTransformContext requestTransformContext)
         {
             var urlParams = ResolvedParameters.QueryParameters.Any()
                                 ? (url.Contains("?") ? "&" : "?")
-                                  + string.Join("&", ResolvedParameters.QueryParameters.Select(CreateUrlParameter))
+                                  + string.Join("&", ResolvedParameters.QueryParameters.Select(x => CreateUrlParameter(x, requestTransformContext)))
                                 : string.Empty;
             return url + urlParams;
         }
@@ -147,23 +147,23 @@ namespace WebAnchor.RequestFactory
             return "{" + name + "}";
         }
 
-        protected virtual string CreateRouteSegmentValue(Parameter parameter)
+        protected virtual string CreateRouteSegmentValue(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue);
-            return _settings.Request.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
+            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue, requestTransformContext);
+            return requestTransformContext.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
                 : WebUtility.UrlEncode(value);
         }
 
-        protected virtual string FormatFormattable(object value)
+        protected virtual string FormatFormattable(object value, RequestTransformContext requestTransformContext)
         {
-            return _settings.Request.FormatFormattables && value is IFormattable ? ((IFormattable)value)
+            return requestTransformContext.FormatFormattables && value is IFormattable ? ((IFormattable)value)
                    .ToString(null, CultureInfo.InvariantCulture) : value.ToString();
         }
 
-        protected virtual string CreateUrlParameter(Parameter parameter)
+        protected virtual string CreateUrlParameter(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue);
+            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue, requestTransformContext);
             return $"{parameter.Name}={WebUtility.UrlEncode(value)}";
         }
     }
