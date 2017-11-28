@@ -12,31 +12,20 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.RequestFactory
 {
-    public class HttpRequestFactory : IHttpRequestFactory
+    public class HttpRequestFactory
     {
-        public HttpRequestFactory(IList<IParameterListTransformer> transformers)
+        private readonly IApiSettings _settings;
+
+        public HttpRequestFactory(IApiSettings settings)
         {
-            ParameterListTransformers = transformers ?? new List<IParameterListTransformer>();
-            InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
-            TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = true;
+            _settings = settings;
         }
 
-        public IList<IParameterListTransformer> ParameterListTransformers { get; set; }
         public Parameters ResolvedParameters { get; set; }
-        public bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
-
-        /// <summary>
-        /// Decides if path seperators ("/") in url segment parameters should be considered a part of the url AS PATH SEPERATORS or just as characters.
-        /// If you use [BaseLocation({location})] and location is replaced by "api/v2" by some substitution, you probably want the "/" to seperate one path segment "api"
-        /// from path segment "v2". If that is how you like it, leave this setting as it is (true). If you want the "/" to be encoded as "%2F" and not look like a path segments 
-        /// seperator, set this setting to false.
-        /// </summary>
-        public bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
-        public bool FormatFormattables { get; internal set; }
 
         public virtual void ValidateApi(Type type)
         {
-            foreach (var parameterListTransformer in ParameterListTransformers)
+            foreach (var parameterListTransformer in _settings.Request.ParameterListTransformers)
             {
                 parameterListTransformer.ValidateApi(type);
             }
@@ -57,7 +46,7 @@ namespace WebAnchor.RequestFactory
 
         public virtual HttpRequestMessage Create(IInvocation invocation)
         {
-            var requestTransformContext = new RequestTransformContext(new ApiInvocation(invocation));
+            var requestTransformContext = new RequestTransformContext(new ApiInvocation(invocation), _settings);
             requestTransformContext.UrlTemplate = ResolveUrlTemplate(invocation);
 
             ResolvedParameters = ResolveParameters(requestTransformContext);
@@ -99,7 +88,7 @@ namespace WebAnchor.RequestFactory
         protected virtual Parameters ResolveParameters(RequestTransformContext requestTransformContext)
         {
             var parameters = new List<Parameter>();
-            var transformedParameters = ParameterListTransformers.Aggregate(parameters,
+            var transformedParameters = requestTransformContext.Settings.Request.ParameterListTransformers.Aggregate(parameters,
                 (current, transformer) => transformer.Apply(current, requestTransformContext)
                                                      .ToList());
 
@@ -126,7 +115,7 @@ namespace WebAnchor.RequestFactory
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
             var baseAttribute = methodInfo.DeclaringType.GetTypeInfo().GetCustomAttribute<BaseLocationAttribute>();
 
-            return ((baseAttribute != null ? baseAttribute.BaseUrl + (InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
+            return ((baseAttribute != null ? baseAttribute.BaseUrl + (_settings.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
         }
 
         protected virtual string ResolveUrl(string urlTemplate)
@@ -161,14 +150,14 @@ namespace WebAnchor.RequestFactory
         protected virtual string CreateRouteSegmentValue(Parameter parameter)
         {
             var value = FormatFormattable(parameter.Value ?? parameter.SourceValue);
-            return TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
+            return _settings.Request.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
                 : WebUtility.UrlEncode(value);
         }
 
         protected virtual string FormatFormattable(object value)
         {
-            return FormatFormattables && value is IFormattable ? ((IFormattable)value)
+            return _settings.Request.FormatFormattables && value is IFormattable ? ((IFormattable)value)
                    .ToString(null, CultureInfo.InvariantCulture) : value.ToString();
         }
 

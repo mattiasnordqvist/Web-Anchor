@@ -46,7 +46,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 
             foreach (var parameter in transformedParameters)
             {
-                var attributes = parameter.GetAttributesChain();
+                var attributes = parameter.GetAttributesChain<ParameterTransformerAttribute>();
                 foreach (var attribute in attributes)
                 {
                     attribute.Apply(parameter, requestTransformContext);

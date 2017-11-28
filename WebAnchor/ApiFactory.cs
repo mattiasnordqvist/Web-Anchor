@@ -1,4 +1,6 @@
 using Castle.DynamicProxy;
+using WebAnchor.RequestFactory;
+using WebAnchor.ResponseParser;
 
 namespace WebAnchor
 {
@@ -10,11 +12,11 @@ namespace WebAnchor
         private static ProxyGenerator _proxyGenerator;
         protected static ProxyGenerator ProxyGenerator => _proxyGenerator ?? (_proxyGenerator = new ProxyGenerator());
 
-        public T Create<T>(IHttpClient httpClient, bool shouldDisposeHttpClient, ISettings settings) where T : class
+        public T Create<T>(IHttpClient httpClient, bool shouldDisposeHttpClient, IApiSettings settings) where T : class
         {
-            var requestFactory = settings.GetRequestFactory();
+            var requestFactory = new HttpRequestFactory(settings);
             requestFactory.ValidateApi(typeof(T));
-            var responseParser = settings.GetResponseParser();
+            var responseParser = new HttpResponseParser(settings);
             responseParser.ValidateApi(typeof(T));
             var anchor = new Anchor(httpClient, requestFactory, responseParser, shouldDisposeHttpClient);
             var api = ProxyGenerator.CreateInterfaceProxyWithoutTarget<T>(anchor);

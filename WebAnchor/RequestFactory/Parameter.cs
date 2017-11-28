@@ -67,17 +67,17 @@ namespace WebAnchor.RequestFactory
         /// </summary>
         public object Value { get; set; }
 
-        public IEnumerable<ParameterTransformerAttribute> GetAttributesChain()
+        public IEnumerable<T> GetAttributesChain<T>() where T : Attribute
         {
-            var attributes = new List<ParameterTransformerAttribute>();
+            var attributes = new List<T>();
             if (ParentParameter != null)
             {
-                attributes.AddRange(ParentParameter.GetAttributesChain());
+                attributes.AddRange(ParentParameter.GetAttributesChain<T>());
             }
 
             if (SourceParameterInfo != null)
             {
-                attributes.AddRange(SourceParameterInfo.GetCustomAttributes<ParameterTransformerAttribute>());
+                attributes.AddRange(SourceParameterInfo.GetCustomAttributes<T>());
             }
 
             return attributes;

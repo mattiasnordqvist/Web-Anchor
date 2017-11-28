@@ -8,16 +8,13 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers
 {
     public class ParameterCreatorTransformer : IParameterListTransformer
     {
-        public RequestTransformContext Context { get; set; }
-
         public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            Context = requestTransformContext;
             return
-                Context.ApiInvocation.Method.GetParameters()
+                requestTransformContext.ApiInvocation.Method.GetParameters()
                    .Select((x, i) => new { Index = i, ParameterInfo = x })
-                   .Where(x => Context.ApiInvocation.GetArgumentValue(x.Index) != null)
-                   .Select(x => new Parameter(x.ParameterInfo, Context.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, requestTransformContext.UrlTemplate)))
+                   .Where(x => requestTransformContext.ApiInvocation.GetArgumentValue(x.Index) != null)
+                   .Select(x => new Parameter(x.ParameterInfo, requestTransformContext.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, requestTransformContext.UrlTemplate)))
                    .ToList();
         }
 
