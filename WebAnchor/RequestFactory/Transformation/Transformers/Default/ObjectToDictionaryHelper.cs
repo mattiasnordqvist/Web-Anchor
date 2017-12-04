@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Reflection;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
 {
+    [Obsolete("The ContentAsDictionaryAttribute will be removed in a future version. You can implement it yourself if you really need it, but maybe you can modify your content object before you send it to webanchor?")]
     public static class ObjectToDictionaryHelper
     {
         public static IDictionary<string, object> ToDictionary(this object source)

@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>4.1.0</PackageVersion>
+    <PackageVersion>4.1.1</PackageVersion>
     <PackageId>WebAnchor</PackageId>
     <Title>WebAnchor</Title>
     <Authors>mattiasnordqvist;carl_berg</Authors>
@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/mattiasnordqvist/Web-Anchor.git</RepositoryUrl>
     <PackageIconUrl>https://github.com/mattiasnordqvist/Web-Anchor/raw/master/logo.png</PackageIconUrl>
     <PackageTags>REST HTTP API JSON</PackageTags>
-    <PackageReleaseNotes>net standard and framework targets</PackageReleaseNotes>
+    <PackageReleaseNotes>Prepare yourself for 5.0.0</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
