@@ -1,10 +1,10 @@
 namespace WebAnchor.Tests.RequestFactory.Url
 {
-    public class UrlEncodeSlashesSettings : ApiSettings
+    public class UrlEncodeSlashesSettings : DefaultApiSettings
     {
         public UrlEncodeSlashesSettings()
         {
-            PreservePathInUrlSegmentParameters = false;
+            Request.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = false;
         }
     }
 }

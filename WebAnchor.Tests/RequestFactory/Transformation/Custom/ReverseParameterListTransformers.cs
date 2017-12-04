@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using WebAnchor.RequestFactory;
@@ -6,11 +7,15 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {
-    public class ReverseParameterListTransformers : ParameterListTransformerBase
+    public class ReverseParameterListTransformers : IParameterListTransformer
     {
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             return parameters.Reverse();
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
     }
 }

@@ -12,7 +12,7 @@ namespace WebAnchor.Tests.Disposable
         public void ShouldDisposeHttpClient_WhenHttpClientIsCreatedInternally()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
-            var api = new ApiFactory().Create<IApi>(fakeHttpClient, true, new ApiSettings());
+            var api = new ApiFactory().Create<IApi>(fakeHttpClient, true, new DefaultApiSettings());
             api.Dispose();
             A.CallTo(() => fakeHttpClient.Dispose()).MustHaveHappened();
         }
@@ -21,7 +21,7 @@ namespace WebAnchor.Tests.Disposable
         public void ShouldNotDisposeHttpClient_WhenHttpClientIsProvidedByConsumer()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
-            var api = new ApiFactory().Create<IApi>(fakeHttpClient, false, new ApiSettings());
+            var api = new ApiFactory().Create<IApi>(fakeHttpClient, false, new DefaultApiSettings());
             api.Dispose();
             A.CallTo(() => fakeHttpClient.Dispose()).MustNotHaveHappened();
         }
@@ -30,7 +30,7 @@ namespace WebAnchor.Tests.Disposable
         public void ShouldNeverDisposeHttpClient_WhenDisposeIsNotInvokedOnIApi()
         {
             var fakeHttpClient = A.Fake<IHttpClient>();
-            new ApiFactory().Create<IApi>(fakeHttpClient, true, new ApiSettings());
+            new ApiFactory().Create<IApi>(fakeHttpClient, true, new DefaultApiSettings());
             A.CallTo(() => fakeHttpClient.Dispose()).MustNotHaveHappened();
         }
     }

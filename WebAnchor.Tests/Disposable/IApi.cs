@@ -1,6 +1,5 @@
 using System;
-
-using WebAnchor.RequestFactory;
+using WebAnchor.Attributes.URL;
 
 namespace WebAnchor.Tests.Disposable
 {

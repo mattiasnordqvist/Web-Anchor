@@ -1,25 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.RequestFactory
 {
     public class Parameter
     {
+        public Parameter(string name, object value, ParameterType type)
+        {
+            Name = name;
+            Value = value;
+            ParameterType = type;
+        }
+
         public Parameter(Parameter parentParameter, object parameterValue)
         {
             ParentParameter = parentParameter;
-            SourceParameterInfo = parentParameter.SourceParameterInfo;
-            SourceValue = parameterValue;
-            SourceType = parameterValue.GetType();
             ParameterType = parentParameter.ParameterType;
+            Name = parentParameter.Name;
+            Value = parameterValue;
         }
 
-        public Parameter(ParameterInfo parameterInfo, object parameterValue, ParameterType parameterType)
+        internal Parameter(ParameterInfo sourceParameterInfo, object sourceValue, ParameterType parameterType)
         {
-            SourceParameterInfo = parameterInfo;
-            SourceValue = parameterValue;
+            SourceParameterInfo = sourceParameterInfo;
+            SourceValue = sourceValue;
             ParameterType = parameterType;
-            SourceType = parameterValue.GetType();
+            SourceType = sourceValue.GetType();
+            Name = sourceParameterInfo.Name;
+            Value = sourceValue;
         }
 
         /// <summary>
@@ -56,5 +66,21 @@ namespace WebAnchor.RequestFactory
         /// The value that will probably be ToString()ed and used in the actual http request, or maybe serialized as json and used as content.
         /// </summary>
         public object Value { get; set; }
+
+        public IEnumerable<T> GetAttributesChain<T>() where T : Attribute
+        {
+            var attributes = new List<T>();
+            if (ParentParameter != null)
+            {
+                attributes.AddRange(ParentParameter.GetAttributesChain<T>());
+            }
+
+            if (SourceParameterInfo != null)
+            {
+                attributes.AddRange(SourceParameterInfo.GetCustomAttributes<T>());
+            }
+
+            return attributes;
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-
-using WebAnchor.RequestFactory.HttpAttributes;
+using WebAnchor.Attributes.URL;
 
 namespace WebAnchor.Tests.Validation
 {

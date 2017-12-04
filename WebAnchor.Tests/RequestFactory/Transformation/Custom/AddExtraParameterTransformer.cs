@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using WebAnchor.RequestFactory;
@@ -6,7 +7,7 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {
-    public class AddExtraParameterTransformer : ParameterListTransformerBase
+    public class AddExtraParameterTransformer : IParameterListTransformer
     {
         private readonly string _name;
         private readonly object _value;
@@ -19,11 +20,15 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
             _type = type;
         }
 
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             var parameterList = parameters.ToList();
-            parameterList.Add(new Parameter(null, _value, _type) { Name = _name, Value = _value });
+            parameterList.Add(new Parameter(_name, _value, _type));
             return parameterList;
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
     }
 }

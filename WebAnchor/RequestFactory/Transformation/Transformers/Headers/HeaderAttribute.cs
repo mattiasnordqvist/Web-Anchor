@@ -18,14 +18,10 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
         public string HeaderName { get; set; }
         public string Value { get; set; }
 
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             var p = parameters.ToList();
-            p.Add(new Parameter(null, Value, ParameterType.Header)
-            {
-                Name = HeaderName,
-                Value = Value,
-            });
+            p.Add(new Parameter(HeaderName, Value, ParameterType.Header));
             return p;
         }
     }

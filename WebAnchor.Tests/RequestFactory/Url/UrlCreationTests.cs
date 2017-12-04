@@ -67,10 +67,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                     Assert.Equal(HttpMethod.Get, m.Method);
                     Assert.Equal("basepath2", m.RequestUri.ToString());
                 },
-                settings: new ApiSettings
-                {
-                    InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = false
-                });
+                configure: x => x.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = false);
         }
     }
 }

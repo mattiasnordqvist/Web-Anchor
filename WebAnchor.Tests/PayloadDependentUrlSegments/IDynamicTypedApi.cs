@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.HttpAttributes;
-using WebAnchor.RequestFactory.Transformation.Transformers;
+using WebAnchor.Attributes.Content;
+using WebAnchor.Attributes.URL;
 
 namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {

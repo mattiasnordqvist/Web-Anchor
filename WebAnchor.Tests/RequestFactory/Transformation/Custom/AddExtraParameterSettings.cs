@@ -1,10 +1,10 @@
 ﻿namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {
-    public class AddExtraParameterSettings : ApiSettings
+    public class AddExtraParameterSettings : DefaultApiSettings
     {
         public AddExtraParameterSettings()
         {
-            ParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3));
+            Request.ParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3));
         }
     }
 }

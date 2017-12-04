@@ -13,15 +13,15 @@ namespace WebAnchor.Tests.TestUtils
     {
         private readonly Action<HttpRequestMessage> _assert;
 
-        private readonly Action<HttpRequestFactory> _configure;
+        private readonly Action<IApiSettings> _configure;
 
-        private readonly Action<IEnumerable<Parameter>, ParameterTransformContext> _pipelineAction;
+        private readonly Action<IEnumerable<Parameter>, RequestTransformContext> _pipelineAction;
 
-        private readonly ApiSettings _settings;
+        private readonly DefaultApiSettings _settings;
 
-        public RequestTester(Action<HttpRequestMessage> assert = null, Action<HttpRequestFactory> configure = null, Action<IEnumerable<Parameter>, ParameterTransformContext> pipelineAction = null, ApiSettings settings = null)
+        public RequestTester(Action<HttpRequestMessage> assert = null, Action<IApiSettings> configure = null, Action<IEnumerable<Parameter>, RequestTransformContext> pipelineAction = null, DefaultApiSettings settings = null)
         {
-            _settings = settings ?? new ApiSettings();
+            _settings = settings ?? new DefaultApiSettings();
             _assert = assert ?? (a => { });
             _configure = configure ?? (a => { });
             _pipelineAction = pipelineAction ?? ((a, b) => { });
@@ -29,9 +29,9 @@ namespace WebAnchor.Tests.TestUtils
 
         public void Intercept(IInvocation invocation)
         {
-            _settings.ParameterListTransformers.Add(new TestTransformer(_pipelineAction));
-            var factory = (HttpRequestFactory)_settings.GetRequestFactory();
-            _configure(factory);
+            _configure(_settings);
+            _settings.Request.ParameterListTransformers.Add(new TestTransformer(_pipelineAction));
+            var factory = new HttpRequestFactory(_settings);
             var httpRequest = factory.Create(invocation);
             _assert(httpRequest);
         }

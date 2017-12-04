@@ -1,9 +1,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.HttpAttributes;
+using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic;
 using WebAnchor.Tests.TestUtils;
@@ -87,19 +85,19 @@ namespace WebAnchor.Tests.RequestFactory.Headers
                     });
         }
 
-        public class ApiSettings1 : ApiSettings
+        public class ApiSettings1 : DefaultApiSettings
         {
             public ApiSettings1()
             {
-                ParameterListTransformers.Add(new AddHeaderTransformer("Authorization", "Basic 79iou342qkras9"));
+                Request.ParameterListTransformers.Add(new AddHeaderTransformer("Authorization", "Basic 79iou342qkras9"));
             }
         }
 
-        public class ApiSettings2 : ApiSettings
+        public class ApiSettings2 : DefaultApiSettings
         {
             public ApiSettings2()
             {
-                ParameterListTransformers.Add(new AddAuthorizationTransformer("Basic 79iou342qkras9"));
+                Request.ParameterListTransformers.Add(new AddAuthorizationTransformer("Basic 79iou342qkras9"));
             }
         }
     }

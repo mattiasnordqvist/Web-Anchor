@@ -8,13 +8,13 @@ using Castle.DynamicProxy;
 
 namespace WebAnchor.ResponseParser
 {
-    public class HttpResponseParser : IHttpResponseParser
+    public class HttpResponseParser
     {
-        private readonly IList<IResponseHandler> _responseHandlers;
+        private readonly List<IResponseHandler> _responseHandlers;
 
-        public HttpResponseParser(IList<IResponseHandler> responseHandlers)
+        public HttpResponseParser(IApiSettings settings)
         {
-            _responseHandlers = responseHandlers;
+            _responseHandlers = settings.Response.ResponseHandlers;
         }
 
         public virtual void ValidateApi(Type type)

@@ -1,29 +1,30 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Castle.Core.Internal;
+using WebAnchor.Attributes.Content;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers
 {
-    public class ParameterCreatorTransformer : ParameterListTransformerBase
+    public class ParameterCreatorTransformer : IParameterListTransformer
     {
-        public ParameterTransformContext Context { get; set; }
-
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            Context = parameterTransformContext;
-            var url = Context.MethodInfo.GetCustomAttribute<HttpAttribute>().URL;
             return
-                Context.MethodInfo.GetParameters()
-                   .Select((x, i) => new { Index = i, ParameterInfo = x })
-                   .Where(x => Context.ApiInvocation.GetArgumentValue(x.Index) != null)
-                   .Select(x => new Parameter(x.ParameterInfo, Context.ApiInvocation.GetArgumentValue(x.Index), ResolveParameterType(x.ParameterInfo, url)))
+                requestTransformContext.ApiInvocation.Method.GetParameters()
+                   .Select((x, i) => new { ParameterInfo = x, ArgumentValue = requestTransformContext.ApiInvocation.GetArgumentValue(i) })
+                   .Where(x => x.ArgumentValue != null)
+                   .Select(x => new Parameter(x.ParameterInfo, x.ArgumentValue, ResolveParameterType(x.ParameterInfo, requestTransformContext.UrlTemplate)))
                    .ToList();
         }
 
         public virtual string CreateRouteSegmentId(string name)
         {
             return "{" + name + "}";
+        }
+
+        public void ValidateApi(Type type)
+        {
         }
 
         protected virtual ParameterType ResolveParameterType(ParameterInfo parameterInfo, string url)

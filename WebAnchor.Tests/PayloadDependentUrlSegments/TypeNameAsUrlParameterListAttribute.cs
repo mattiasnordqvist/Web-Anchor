@@ -9,14 +9,11 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
 {
     public class TypeNameAsUrlParameterListAttribute : ParameterListTransformerAttribute
     {
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public override IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             var list = parameters.ToList();
             var content = list.First(x => x.ParameterType == ParameterType.Content);
-            list.Add(new Parameter(null, content.SourceValue.GetType().Name.ToLower(), ParameterType.Route)
-            {
-                Name = "type"
-            });
+            list.Add(new Parameter("type", content.SourceValue.GetType().Name.ToLower(), ParameterType.Route));
 
             return list;
         }

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using WebAnchor.RequestFactory.HttpAttributes;
-using WebAnchor.RequestFactory.Transformation.Transformers.Alias;
+using WebAnchor.Attributes.Parameters;
+using WebAnchor.Attributes.URL;
 
 namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765.Fixtures
 {

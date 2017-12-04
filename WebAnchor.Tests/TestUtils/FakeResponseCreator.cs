@@ -2,6 +2,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using Castle.DynamicProxy;
+using WebAnchor.ResponseParser;
 
 namespace WebAnchor.Tests.TestUtils
 {
@@ -9,17 +10,17 @@ namespace WebAnchor.Tests.TestUtils
     {
         private readonly HttpResponseMessage _response;
 
-        private readonly ApiSettings _settings;
+        private readonly IApiSettings _settings;
 
-        public FakeResponseCreator(HttpResponseMessage response, ApiSettings settings = null)
+        public FakeResponseCreator(HttpResponseMessage response, IApiSettings settings = null)
         {
             _response = response;
-            _settings = settings ?? new ApiSettings();
+            _settings = settings ?? new DefaultApiSettings();
         }
 
         public void Intercept(IInvocation invocation)
         {
-             _settings.GetResponseParser().Parse(Task.FromResult(_response), invocation);
+             new HttpResponseParser(_settings).Parse(Task.FromResult(_response), invocation);
         }
     }
 }

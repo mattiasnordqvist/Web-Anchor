@@ -19,9 +19,9 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
         [Fact]
         public async Task ParsingTheLocationHeaderFromResponseBodyViaCustomResponseParser()
         {
-            var settings = new ApiSettings();
-            var index = settings.ResponseHandlers.FindIndex(x => x is AsyncDeserializingResponseHandler);
-            settings.ResponseHandlers[index] = new AsyncDeserializingResponseHandler(new HeaderEnabledContentDeserializer(new JsonSerializer()));
+            var settings = new DefaultApiSettings();
+            var index = settings.Response.ResponseHandlers.FindIndex(x => x is AsyncDeserializingResponseHandler);
+            settings.Response.ResponseHandlers[index] = new AsyncDeserializingResponseHandler(new HeaderEnabledContentDeserializer(new JsonSerializer()));
 
             var fakedResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {

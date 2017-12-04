@@ -1,18 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace WebAnchor.RequestFactory.Transformation.Transformers.List
 {
-    public class ParameterOfListTransformer : ParameterListTransformerBase
+    public class ParameterOfListTransformer : IParameterListTransformer
     {
-        public override IEnumerable<Parameter> TransformParameters(IEnumerable<Parameter> parameters, ParameterTransformContext parameterTransformContext)
+        public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             foreach (var parameter in parameters)
             {
-                if (ParameterIsEnumerable(parameter) && parameter.ParameterType != ParameterType.Content)
+                if (ParameterIsEnumerable(parameter) && (parameter.ParameterType == ParameterType.Query || parameter.ParameterType == ParameterType.Header))
                 {
-                    foreach (var value in (IEnumerable)parameter.SourceValue)
+                    foreach (var value in (IEnumerable)parameter.Value)
                     {
                         yield return new Parameter(parameter, value);
                     }
@@ -24,9 +25,13 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.List
             }
         }
 
+        public void ValidateApi(Type type)
+        {
+        }
+
         protected bool ParameterIsEnumerable(Parameter parameter)
         {
-            return parameter.SourceValue is IEnumerable && (parameter.SourceType.GetTypeInfo().IsGenericType || parameter.SourceType.IsArray);
+            return parameter.Value is IEnumerable && (parameter.Value.GetType().GetTypeInfo().IsGenericType || parameter.Value.GetType().IsArray);
         }
     }
 }
