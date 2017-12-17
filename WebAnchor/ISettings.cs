@@ -16,7 +16,7 @@ namespace WebAnchor
         /// seperator, set this setting to false.
         /// </summary>
         bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
-        Func<object, Parameter, string> ParameterValueToString { get; set; }
+        IParameterValueFormatter ParameterValueFormatter { get; set; }
         List<IParameterListTransformer> ParameterListTransformers { get; set; }
         IContentSerializer ContentSerializer { get; set; }
         IQueryParamaterListStrategy QueryParameterListStrategy { get; set; }

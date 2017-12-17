@@ -10,7 +10,7 @@ namespace WebAnchor.RequestFactory.Transformation
         {
             ApiInvocation = apiInvocation;
             ContentSerializer = settings.Request.ContentSerializer;
-            ParameterValueToString = settings.Request.ParameterValueToString;
+            ParameterValueFormatter = settings.Request.ParameterValueFormatter;
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = settings.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl;
             TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = settings.Request.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators;
             ParameterListTransformers = settings.Request.ParameterListTransformers.ToList();
@@ -20,7 +20,7 @@ namespace WebAnchor.RequestFactory.Transformation
         public ApiInvocation ApiInvocation { get; private set; }
         public string UrlTemplate { get; internal set; }
         public IContentSerializer ContentSerializer { get; set; }
-        public Func<object, Parameter, string> ParameterValueToString { get; set; }
+        public IParameterValueFormatter ParameterValueFormatter { get; set; }
         public bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
         public bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
         public List<IParameterListTransformer> ParameterListTransformers { get; set; }

@@ -64,7 +64,7 @@ namespace WebAnchor.RequestFactory
 
             foreach (var headerParameter in ResolvedParameters.HeaderParameters)
             {
-                var headerValues = headerParameter.Values.Select(x => requestTransformContext.ParameterValueToString(x, headerParameter)).ToList();
+                var headerValues = headerParameter.Values.Select(x => requestTransformContext.ParameterValueFormatter.Format(x, headerParameter)).ToList();
                 request.Headers.Add(headerParameter.Name, headerValues);
             }
 
@@ -135,7 +135,7 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            var value = requestTransformContext.ParameterValueToString(parameter.Values.First(), parameter);
+            var value = requestTransformContext.ParameterValueFormatter.Format(parameter.Values.First(), parameter);
             return requestTransformContext.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
                 : WebUtility.UrlEncode(value);
@@ -147,7 +147,7 @@ namespace WebAnchor.RequestFactory
             List<string> values = new List<string>();
             foreach (var value in (IEnumerable)parameter.Values)
             {
-                values.Add(WebUtility.UrlEncode(requestTransformContext.ParameterValueToString(value, parameter)));
+                values.Add(WebUtility.UrlEncode(requestTransformContext.ParameterValueFormatter.Format(value, parameter)));
             }
 
             nameValuePairs = requestTransformContext.QueryParameterListStrategy.CreateNameValuePairs(parameter, values).ToList();
