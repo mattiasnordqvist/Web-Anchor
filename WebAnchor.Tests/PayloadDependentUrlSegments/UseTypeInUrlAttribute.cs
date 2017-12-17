@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;

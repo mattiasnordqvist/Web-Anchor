@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.RequestFactory
 {
@@ -35,12 +34,12 @@ namespace WebAnchor.RequestFactory
         /// <summary>
         /// The type of the SourceValue.
         /// </summary>
-        public Type SourceType { get; private set; }
+        public Type SourceType { get; }
 
         /// <summary>
         /// The source value from api method parameters.
         /// </summary>
-        public object SourceValue { get; private set; }
+        public object SourceValue { get; }
 
         /// <summary>
         /// The parameterinfo of the SourceValue.
@@ -50,7 +49,7 @@ namespace WebAnchor.RequestFactory
         /// <summary>
         /// If this parameter was created from another parameter, that other parameter would be the parent parameter
         /// </summary>
-        public Parameter ParentParameter { get; private set; }
+        public Parameter ParentParameter { get; }
 
         /// <summary>
         /// Defines where this parameter will be used.
