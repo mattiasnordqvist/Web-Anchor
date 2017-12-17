@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -149,21 +150,15 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue, requestTransformContext);
+            var value = requestTransformContext.ParameterToString(parameter);
             return requestTransformContext.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
                 : WebUtility.UrlEncode(value);
         }
 
-        protected virtual string FormatFormattable(object value, RequestTransformContext requestTransformContext)
-        {
-            return requestTransformContext.FormatFormattables && value is IFormattable ? ((IFormattable)value)
-                   .ToString(null, CultureInfo.InvariantCulture) : value.ToString();
-        }
-
         protected virtual string CreateUrlParameter(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            var value = FormatFormattable(parameter.Value ?? parameter.SourceValue, requestTransformContext);
+            var value = requestTransformContext.ParameterToString(parameter);
             return $"{parameter.Name}={WebUtility.UrlEncode(value)}";
         }
     }

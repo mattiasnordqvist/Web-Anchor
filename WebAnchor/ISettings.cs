@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.ResponseParser;
@@ -15,7 +16,7 @@ namespace WebAnchor
         /// seperator, set this setting to false.
         /// </summary>
         bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
-        bool FormatFormattables { get; set; }
+        Func<Parameter, string> ParameterToString { get; set; }
         List<IParameterListTransformer> ParameterListTransformers { get; set; }
         IContentSerializer ContentSerializer { get; set; }
     }
