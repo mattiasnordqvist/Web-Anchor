@@ -64,23 +64,8 @@ namespace WebAnchor.RequestFactory
 
             foreach (var headerParameter in ResolvedParameters.HeaderParameters)
             {
-                var headerValue = headerParameter.Value as string;
-                if (headerValue != null)
-                {
-                    request.Headers.Add(headerParameter.Name, headerValue);
-                }
-                else
-                {
-                    var headerValues = headerParameter.Value as IEnumerable<string>;
-                    if (headerValues != null)
-                    {
-                        request.Headers.Add(headerParameter.Name, headerValues);
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("A header value can be of type string or IEnumerable<string>, not " + headerParameter.Value.GetType());
-                    }
-                }
+                var headerValues = headerParameter.Values.Select(x => requestTransformContext.ParameterValueToString(x, headerParameter)).ToList();
+                request.Headers.Add(headerParameter.Name, headerValues);
             }
 
             return request;
@@ -104,7 +89,7 @@ namespace WebAnchor.RequestFactory
         {
             if (ResolvedParameters.Content != null)
             {
-                return requestTransformContext.ContentSerializer.Serialize(ResolvedParameters.Content);
+                return requestTransformContext.ContentSerializer.Serialize(ResolvedParameters.Content.Values.First(), ResolvedParameters.Content);
             }
 
             return null;
@@ -130,7 +115,7 @@ namespace WebAnchor.RequestFactory
         {
             var urlParams = ResolvedParameters.QueryParameters.Any()
                                 ? (url.Contains("?") ? "&" : "?")
-                                  + string.Join("&", ResolvedParameters.QueryParameters.Select(x => CreateUrlParameter(x, requestTransformContext)))
+                                  + string.Join("&", ResolvedParameters.QueryParameters.SelectMany(x => CreateUrlParameter(x, requestTransformContext)))
                                 : string.Empty;
             return url + urlParams;
         }
@@ -150,16 +135,23 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string CreateRouteSegmentValue(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            var value = requestTransformContext.ParameterToString(parameter);
+            var value = requestTransformContext.ParameterValueToString(parameter.Values.First(), parameter);
             return requestTransformContext.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
                 ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
                 : WebUtility.UrlEncode(value);
         }
 
-        protected virtual string CreateUrlParameter(Parameter parameter, RequestTransformContext requestTransformContext)
+        protected virtual List<string> CreateUrlParameter(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            var value = requestTransformContext.ParameterToString(parameter);
-            return $"{parameter.Name}={WebUtility.UrlEncode(value)}";
+            List<Tuple<string, string>> nameValuePairs;
+            List<string> values = new List<string>();
+            foreach (var value in (IEnumerable)parameter.Values)
+            {
+                values.Add(WebUtility.UrlEncode(requestTransformContext.ParameterValueToString(value, parameter)));
+            }
+
+            nameValuePairs = requestTransformContext.QueryParameterListStrategy.CreateNameValuePairs(parameter, values).ToList();
+            return nameValuePairs.Select(x => $"{x.Item1}={x.Item2}").ToList();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
             if (requestTransformContext.ApiInvocation.Method.DeclaringType.GetGenericArguments().Any())
             {
                 var value = requestTransformContext.ApiInvocation.Method.DeclaringType.GetGenericArguments().First().Name.ToLower();
-                list.Add(new Parameter("type", value, ParameterType.Route));
+                list.Add(Parameter.CreateRouteParameter("type", value));
             }
 
             return list;

@@ -4,6 +4,6 @@ namespace WebAnchor.RequestFactory
 {
     public interface IContentSerializer
     {
-        HttpContent Serialize(Parameter content);
+        HttpContent Serialize(object value, Parameter content);
     }
 }

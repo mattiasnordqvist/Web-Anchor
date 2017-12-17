@@ -17,7 +17,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
                 Assert.Equal(HttpMethod.Get, m.Method);
                 Assert.Equal("api/customer?filter=test&extra=3", m.RequestUri.ToString());
             },
-            x => x.Request.ParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3)));
+            x => x.Request.ParameterListTransformers.Add(new AddExtraQueryParameterTransformer("extra", new object[] { 3 })));
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
                 m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);
-                    Assert.Equal("api/customer?names=cde&names=bcd&names=abc", m.RequestUri.ToString());
+                    Assert.Equal("api/customer?names=abc&names=bcd&names=cde", m.RequestUri.ToString());
                 },
                 x => x.Request.ParameterListTransformers.Add(new ReverseParameterListTransformers()));
         }

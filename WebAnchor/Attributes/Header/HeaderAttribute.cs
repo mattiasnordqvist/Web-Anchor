@@ -1,11 +1,10 @@
 ﻿using System;
 using WebAnchor.RequestFactory;
-using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Attributes.Header
 {
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class HeaderAttribute : ParameterTransformerAttribute
+    public class HeaderAttribute : Attribute
     {
         public HeaderAttribute()
         {
@@ -19,12 +18,11 @@ namespace WebAnchor.Attributes.Header
 
         public string HeaderName { get; set; }
 
-        public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
+        public void Apply(Parameter p)
         {
-            parameter.ParameterType = ParameterType.Header;
             if (HeaderName != null)
             {
-                parameter.Name = HeaderName;
+                p.Name = HeaderName;
             }
         }
     }

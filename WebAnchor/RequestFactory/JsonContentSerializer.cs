@@ -15,7 +15,7 @@ namespace WebAnchor.RequestFactory
             _jsonSerializer = jsonSerializer;
         }
 
-        public HttpContent Serialize(Parameter content)
+        public HttpContent Serialize(object value, Parameter content)
         {
             if (content == null)
             {
@@ -23,7 +23,7 @@ namespace WebAnchor.RequestFactory
             }
 
             var json = new StringBuilder();
-            _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), content.Value);
+            _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), value);
             return new StringContent(json.ToString(), Encoding.UTF8, "application/json");
         }
     }

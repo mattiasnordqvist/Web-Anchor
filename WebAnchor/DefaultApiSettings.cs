@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using WebAnchor.RequestFactory;
+using WebAnchor.ResponseParser;
 
 namespace WebAnchor
 {
@@ -6,6 +8,5 @@ namespace WebAnchor
     {
         public IApiRequestSettings Request { get; set; } = new DefaultApiRequestSettings();
         public IApiResponeSettings Response { get; set; } = new DefaultApiResponseSettings();
-        public IDictionary<string, object> CustomSettings { get; set; } = new Dictionary<string, object>();
     }
 }

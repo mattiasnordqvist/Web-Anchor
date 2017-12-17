@@ -4,7 +4,7 @@
     {
         public AddExtraParameterSettings()
         {
-            Request.ParameterListTransformers.Add(new AddExtraParameterTransformer("extra", 3));
+            Request.ParameterListTransformers.Add(new AddExtraQueryParameterTransformer("extra", new object[] { 3 }));
         }
     }
 }

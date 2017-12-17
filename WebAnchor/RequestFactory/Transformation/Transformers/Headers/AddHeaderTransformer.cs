@@ -21,7 +21,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
                 yield return p;
             }
 
-            yield return new Parameter(Name, Value, ParameterType.Header);
+            yield return Parameter.CreateHeaderParameter(Name, new object[] { Value });
         }
 
         public void ValidateApi(Type type)

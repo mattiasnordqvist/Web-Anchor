@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebAnchor.ResponseParser;
 
-namespace WebAnchor
+namespace WebAnchor.ResponseParser
 {
     public class DefaultApiResponseSettings : IApiResponeSettings
     {

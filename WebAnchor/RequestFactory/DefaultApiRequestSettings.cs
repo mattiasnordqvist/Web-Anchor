@@ -5,7 +5,7 @@ using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.RequestFactory.Transformation.Transformers.Default;
 
-namespace WebAnchor
+namespace WebAnchor.RequestFactory
 {
     public class DefaultApiRequestSettings : IApiRequestSettings
     {
@@ -15,11 +15,11 @@ namespace WebAnchor
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
             TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = true;
             ContentSerializer = new JsonContentSerializer(new Newtonsoft.Json.JsonSerializer());
-            ParameterToString = parameter =>
+            ParameterValueToString = (value, originalParameter) =>
             {
-                var value = (parameter.Value ?? parameter.SourceValue);
                 return value is IFormattable ? ((IFormattable)value).ToString(null, CultureInfo.InvariantCulture) : value.ToString();
             };
+            QueryParameterListStrategy = new NormalQueryParamaterListStrategy();
         }
 
         public virtual List<IParameterListTransformer> ParameterListTransformers { get; set; }
@@ -27,6 +27,7 @@ namespace WebAnchor
 
         public virtual bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
         public virtual IContentSerializer ContentSerializer { get; set; }
-        public Func<Parameter, string> ParameterToString { get; set; }
+        public virtual Func<object, Parameter, string> ParameterValueToString { get; set; }
+        public virtual IQueryParamaterListStrategy QueryParameterListStrategy { get; set; }
     }
 }

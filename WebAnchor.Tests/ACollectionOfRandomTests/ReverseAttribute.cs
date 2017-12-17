@@ -9,17 +9,9 @@ namespace WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.F
 {
     public class ReverseAttribute : ParameterTransformerAttribute, IParameterListTransformer
     {
-        public bool CanHandle(Parameter parameter)
-        {
-            return parameter.Value is string;
-        }
-
         public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            if (CanHandle(parameter))
-            {
-                parameter.Value = parameter.Value.ToString().Reverse().Aggregate(string.Empty, (x, y) => x + y);
-            }
+            parameter.Values = parameter.Values.Select(s => ((string)s).Reverse().Aggregate(string.Empty, (x, y) => x + y)).ToList();
         }
 
         public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)

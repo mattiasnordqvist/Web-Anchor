@@ -7,23 +7,21 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Tests.RequestFactory.Transformation.Custom
 {
-    public class AddExtraParameterTransformer : IParameterListTransformer
+    public class AddExtraQueryParameterTransformer : IParameterListTransformer
     {
         private readonly string _name;
-        private readonly object _value;
-        private readonly ParameterType _type;
+        private readonly IEnumerable<object> _values;
 
-        public AddExtraParameterTransformer(string name, object value, ParameterType type = ParameterType.Query)
+        public AddExtraQueryParameterTransformer(string name, IEnumerable<object> values)
         {
             _name = name;
-            _value = value;
-            _type = type;
+            _values = values;
         }
 
         public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
             var parameterList = parameters.ToList();
-            parameterList.Add(new Parameter(_name, _value, _type));
+            parameterList.Add(Parameter.CreateQueryParameter(_name, _values));
             return parameterList;
         }
 

@@ -50,7 +50,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
         public void BaseLocationSubstitution()
         {
             TestTheRequest<IBaseLocationSubstitution>(api => api.Get(),
-                configure: x => x.Request.ParameterListTransformers.Add(new AddExtraParameterTransformer("version", "v2", ParameterType.Route)),
+                configure: x => x.Request.ParameterListTransformers.Add(new AddExtraRouteParameterTransformer("version", "v2")),
                 assertHttpRequestMessage: m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);

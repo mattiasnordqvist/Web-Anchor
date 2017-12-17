@@ -4,7 +4,7 @@ namespace WebAnchor.Attributes.URL
 {
     public class DeleteAttribute : HttpAttribute
     {
-        public DeleteAttribute() : this("") { }
+        public DeleteAttribute() : this(string.Empty) { }
 
         public DeleteAttribute(string url)
             : base(HttpMethod.Delete, url)

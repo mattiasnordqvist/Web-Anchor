@@ -6,50 +6,24 @@ namespace WebAnchor.RequestFactory
 {
     public class Parameter
     {
-        public Parameter(string name, object value, ParameterType type)
+        private Parameter()
         {
-            Name = name;
-            Value = value;
-            ParameterType = type;
         }
-
-        public Parameter(Parameter parentParameter, object parameterValue)
-        {
-            ParentParameter = parentParameter;
-            ParameterType = parentParameter.ParameterType;
-            Name = parentParameter.Name;
-            Value = parameterValue;
-        }
-
-        internal Parameter(ParameterInfo sourceParameterInfo, object sourceValue, ParameterType parameterType)
-        {
-            SourceParameterInfo = sourceParameterInfo;
-            SourceValue = sourceValue;
-            ParameterType = parameterType;
-            SourceType = sourceValue.GetType();
-            Name = sourceParameterInfo.Name;
-            Value = sourceValue;
-        }
-
-        /// <summary>
-        /// The type of the SourceValue.
-        /// </summary>
-        public Type SourceType { get; }
 
         /// <summary>
         /// The source value from api method parameters.
         /// </summary>
-        public object SourceValue { get; }
+        public IEnumerable<object> SourceValues { get; private set; }
 
         /// <summary>
         /// The parameterinfo of the SourceValue.
         /// </summary>
-        public ParameterInfo SourceParameterInfo { get; }
+        public ParameterInfo SourceParameterInfo { get; private set; }
 
         /// <summary>
         /// If this parameter was created from another parameter, that other parameter would be the parent parameter
         /// </summary>
-        public Parameter ParentParameter { get; }
+        public Parameter ParentParameter { get; set; }
 
         /// <summary>
         /// Defines where this parameter will be used.
@@ -64,7 +38,47 @@ namespace WebAnchor.RequestFactory
         /// <summary>
         /// The value that will probably be ToString()ed and used in the actual http request, or maybe serialized as json and used as content.
         /// </summary>
-        public object Value { get; set; }
+        public IEnumerable<object> Values { get; set; }
+
+        public static Parameter CreateContentParameter(string name, object value)
+        {
+            return new Parameter()
+            {
+                Values = new object[] { value },
+                ParameterType = ParameterType.Content,
+                Name = name,
+            };
+        }
+
+        public static Parameter CreateRouteParameter(string name, object value)
+        {
+            return new Parameter()
+            {
+                Values = new object[] { value },
+                ParameterType = ParameterType.Route,
+                Name = name,
+            };
+        }
+
+        public static Parameter CreateHeaderParameter(string name, IEnumerable<object> values)
+        {
+            return new Parameter()
+            {
+                ParameterType = ParameterType.Header,
+                Values = values,
+                Name = name,
+            };
+        }
+
+        public static Parameter CreateQueryParameter(string name, IEnumerable<object> values)
+        {
+            return new Parameter()
+            {
+                ParameterType = ParameterType.Query,
+                Values = values,
+                Name = name,
+            };
+        }
 
         public IEnumerable<T> GetAttributesChain<T>() where T : Attribute
         {
@@ -80,6 +94,50 @@ namespace WebAnchor.RequestFactory
             }
 
             return attributes;
+        }
+
+        internal static Parameter CreateContentParameter(ParameterInfo parameterInfo, object value)
+        {
+            return new Parameter()
+            {
+                SourceParameterInfo = parameterInfo,
+                Values = new object[] { value },
+                ParameterType = ParameterType.Content,
+                Name = parameterInfo.Name,
+            };
+        }
+
+        internal static Parameter CreateRouteParameter(ParameterInfo parameterInfo, object value)
+        {
+            return new Parameter()
+            {
+                SourceParameterInfo = parameterInfo,
+                Values = new object[] { value },
+                ParameterType = ParameterType.Route,
+                Name = parameterInfo.Name,
+            };
+        }
+
+        internal static Parameter CreateHeaderParameter(ParameterInfo parameterInfo, IEnumerable<object> values)
+        {
+            return new Parameter()
+            {
+                SourceParameterInfo = parameterInfo,
+                ParameterType = ParameterType.Header,
+                Values = values,
+                Name = parameterInfo.Name,
+            };
+        }
+
+        internal static Parameter CreateQueryParameter(ParameterInfo parameterInfo, IEnumerable<object> values)
+        {
+            return new Parameter()
+            {
+                SourceParameterInfo = parameterInfo,
+                ParameterType = ParameterType.Query,
+                Values = values,
+                Name = parameterInfo.Name,
+            };
         }
     }
 }

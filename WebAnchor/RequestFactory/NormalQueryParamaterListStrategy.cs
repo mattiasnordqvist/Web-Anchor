@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using WebAnchor.RequestFactory;
+
+namespace WebAnchor.RequestFactory
+{
+    public class NormalQueryParamaterListStrategy : IQueryParamaterListStrategy
+    {
+        public NormalQueryParamaterListStrategy()
+        {
+        }
+
+        public IEnumerable<Tuple<string, string>> CreateNameValuePairs(Parameter parameter, IEnumerable<string> values)
+        {
+            foreach (var value in values)
+            {
+                yield return Tuple.Create(parameter.Name, value);
+            }
+        }
+    }
+}
