@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace WebAnchor.RequestFactory
@@ -13,7 +15,7 @@ namespace WebAnchor.RequestFactory
         /// <summary>
         /// The source value from api method parameters.
         /// </summary>
-        public IEnumerable<object> SourceValues { get; private set; }
+        public object SourceValue { get; private set; }
 
         /// <summary>
         /// The parameterinfo of the SourceValue.
@@ -96,32 +98,37 @@ namespace WebAnchor.RequestFactory
             return attributes;
         }
 
-        internal static Parameter CreateContentParameter(ParameterInfo parameterInfo, object value)
+        internal static Parameter CreateContentParameter(ParameterInfo parameterInfo, object sourceValue)
         {
             return new Parameter()
             {
+                SourceValue = sourceValue,
                 SourceParameterInfo = parameterInfo,
-                Values = new object[] { value },
+                Values = new object[] { sourceValue },
                 ParameterType = ParameterType.Content,
                 Name = parameterInfo.Name,
             };
         }
 
-        internal static Parameter CreateRouteParameter(ParameterInfo parameterInfo, object value)
+        internal static Parameter CreateRouteParameter(ParameterInfo parameterInfo, object sourceValue)
         {
+
             return new Parameter()
             {
+                SourceValue = sourceValue,
                 SourceParameterInfo = parameterInfo,
-                Values = new object[] { value },
+                Values = new object[] { sourceValue },
                 ParameterType = ParameterType.Route,
                 Name = parameterInfo.Name,
             };
         }
 
-        internal static Parameter CreateHeaderParameter(ParameterInfo parameterInfo, IEnumerable<object> values)
+        internal static Parameter CreateHeaderParameter(ParameterInfo parameterInfo, object sourceValue)
         {
+            var values = IsEnumerable(sourceValue) ? ((IEnumerable)sourceValue).Cast<object>() : new object[] { sourceValue };
             return new Parameter()
             {
+                SourceValue = sourceValue,
                 SourceParameterInfo = parameterInfo,
                 ParameterType = ParameterType.Header,
                 Values = values,
@@ -129,15 +136,19 @@ namespace WebAnchor.RequestFactory
             };
         }
 
-        internal static Parameter CreateQueryParameter(ParameterInfo parameterInfo, IEnumerable<object> values)
+        internal static Parameter CreateQueryParameter(ParameterInfo parameterInfo, object sourceValue)
         {
+            var values = IsEnumerable(sourceValue) ? ((IEnumerable)sourceValue).Cast<object>() : new object[] { sourceValue };
             return new Parameter()
             {
+                SourceValue = sourceValue,
                 SourceParameterInfo = parameterInfo,
                 ParameterType = ParameterType.Query,
                 Values = values,
                 Name = parameterInfo.Name,
             };
         }
+
+        private static bool IsEnumerable(object value) => value is IEnumerable && (value.GetType().GetTypeInfo().IsGenericType || value.GetType().IsArray);
     }
 }

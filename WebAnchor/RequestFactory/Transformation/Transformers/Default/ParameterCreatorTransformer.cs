@@ -36,10 +36,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
             }
         }
 
-        protected bool IsEnumerable(object value)
-        {
-            return value is IEnumerable && (value.GetType().GetTypeInfo().IsGenericType || value.GetType().IsArray);
-        }
+      
 
         protected virtual Parameter ResolveParameter(ParameterInfo parameterInfo, object value, RequestTransformContext requestTransformContext)
         {
@@ -49,8 +46,7 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
             }
             else if (parameterInfo.GetCustomAttribute<HeaderAttribute>() != null)
             {
-                var values = IsEnumerable(value) ? ((IEnumerable)value).Cast<object>() : new object[] { value };
-                var p = Parameter.CreateHeaderParameter(parameterInfo, values);
+                var p = Parameter.CreateHeaderParameter(parameterInfo, value);
                 parameterInfo.GetCustomAttribute<HeaderAttribute>().Apply(p);
                 return p;
             }
@@ -62,8 +58,8 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
                 }
                 else
                 {
-                    var values = IsEnumerable(value) ? ((IEnumerable)value).Cast<object>() : new object[] { value };
-                    return Parameter.CreateQueryParameter(parameterInfo, values);
+                    
+                    return Parameter.CreateQueryParameter(parameterInfo, value);
                 }
             }
         }
