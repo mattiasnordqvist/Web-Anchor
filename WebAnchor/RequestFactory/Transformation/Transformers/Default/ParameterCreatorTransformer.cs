@@ -36,8 +36,6 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
             }
         }
 
-      
-
         protected virtual Parameter ResolveParameter(ParameterInfo parameterInfo, object value, RequestTransformContext requestTransformContext)
         {
             if (parameterInfo.GetCustomAttribute<ContentAttribute>() != null)
@@ -58,7 +56,6 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
                 }
                 else
                 {
-                    
                     return Parameter.CreateQueryParameter(parameterInfo, value);
                 }
             }
