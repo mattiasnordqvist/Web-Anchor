@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.ValueFormatting
 {
     public class DefaultParameterValueFormatter : IParameterValueFormatter
     {

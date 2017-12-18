@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using WebAnchor.Attributes.Parameters;
 using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.ValueFormatting;
 using WebAnchor.Tests.TestUtils;
 
 using Xunit;

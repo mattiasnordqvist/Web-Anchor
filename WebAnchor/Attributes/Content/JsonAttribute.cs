@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.Attributes.Content

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.ValueFormatting;
 
 namespace WebAnchor.RequestFactory
 {
@@ -20,7 +19,6 @@ namespace WebAnchor.RequestFactory
 
         public virtual List<IParameterListTransformer> ParameterListTransformers { get; set; }
         public virtual bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
-
         public virtual bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
         public virtual IContentSerializer ContentSerializer { get; set; }
         public virtual IParameterValueFormatter ParameterValueFormatter { get; set; }

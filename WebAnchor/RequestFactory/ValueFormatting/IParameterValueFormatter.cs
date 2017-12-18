@@ -1,4 +1,4 @@
-﻿namespace WebAnchor.RequestFactory
+﻿namespace WebAnchor.RequestFactory.ValueFormatting
 {
     public interface IParameterValueFormatter
     {

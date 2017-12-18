@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using WebAnchor.RequestFactory;
+﻿using System.Collections.Generic;
 using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
-using WebAnchor.ResponseParser;
+using WebAnchor.RequestFactory.ValueFormatting;
 
-namespace WebAnchor
+namespace WebAnchor.RequestFactory
 {
     public interface IApiRequestSettings
     {
@@ -21,16 +19,5 @@ namespace WebAnchor
         List<IParameterListTransformer> ParameterListTransformers { get; set; }
         IContentSerializer ContentSerializer { get; set; }
         IQueryParamaterListStrategy QueryParameterListStrategy { get; set; }
-    }
-
-    public interface IApiResponeSettings
-    {
-        List<IResponseHandler> ResponseHandlers { get; set; }
-    }
-
-    public interface IApiSettings
-    {
-        IApiRequestSettings Request { get; set; }
-        IApiResponeSettings Response { get; set; }
     }
 }

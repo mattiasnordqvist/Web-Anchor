@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebAnchor.RequestFactory;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.ValueFormatting
 {
     public class NormalQueryParamaterListStrategy : IQueryParamaterListStrategy
     {
