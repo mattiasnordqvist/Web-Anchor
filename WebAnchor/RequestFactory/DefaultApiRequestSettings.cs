@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.RequestFactory

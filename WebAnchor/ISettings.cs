@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.ResponseParser;
 

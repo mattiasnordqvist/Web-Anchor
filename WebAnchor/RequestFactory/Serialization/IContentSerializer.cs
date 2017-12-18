@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.Serialization
 {
     public interface IContentSerializer
     {

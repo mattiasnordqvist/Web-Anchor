@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 
-namespace WebAnchor.RequestFactory
+namespace WebAnchor.RequestFactory.Serialization
 {
     public class FormUrlEncodedSerializer : IContentSerializer
     {
