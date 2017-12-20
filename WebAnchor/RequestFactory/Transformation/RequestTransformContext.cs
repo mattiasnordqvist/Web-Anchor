@@ -14,7 +14,7 @@ namespace WebAnchor.RequestFactory.Transformation
             ContentSerializer = settings.Request.ContentSerializer;
             ParameterValueFormatter = settings.Request.ParameterValueFormatter;
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = settings.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl;
-            TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = settings.Request.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators;
+            EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions = settings.Request.EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions;
             ParameterListTransformers = settings.Request.ParameterListTransformers.ToList();
             QueryParameterListStrategy = settings.Request.QueryParameterListStrategy;
         }
@@ -24,7 +24,7 @@ namespace WebAnchor.RequestFactory.Transformation
         public IContentSerializer ContentSerializer { get; set; }
         public IParameterValueFormatter ParameterValueFormatter { get; set; }
         public bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
-        public bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
+        public bool EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions { get; set; }
         public List<IParameterListTransformer> ParameterListTransformers { get; set; }
         public IQueryParamaterListStrategy QueryParameterListStrategy { get; set; }
     }

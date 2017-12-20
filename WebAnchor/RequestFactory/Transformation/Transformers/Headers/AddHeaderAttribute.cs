@@ -7,9 +7,9 @@ using WebAnchor.RequestFactory.Transformation.Transformers.Attribute.List;
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
 {
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Method)]
-    public class HeaderAttribute : ParameterListTransformerAttribute
+    public class AddHeaderAttribute : ParameterListTransformerAttribute
     {
-        public HeaderAttribute(string headerName, string value)
+        public AddHeaderAttribute(string headerName, string value)
         {
             HeaderName = headerName;
             Value = value;

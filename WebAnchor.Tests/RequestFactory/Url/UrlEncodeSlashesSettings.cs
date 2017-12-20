@@ -4,7 +4,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
     {
         public UrlEncodeSlashesSettings()
         {
-            Request.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = false;
+            Request.EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions = true;
         }
     }
 }

@@ -3,9 +3,9 @@ using System;
 namespace WebAnchor.RequestFactory.Transformation.Transformers.Headers
 {
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Method)]
-    public class AuthorizationAttribute : HeaderAttribute
+    public class AddAuthorizationAttribute : AddHeaderAttribute
     {
-        public AuthorizationAttribute(string value)
+        public AddAuthorizationAttribute(string value)
             : base("Authorization", value)
         {
         }

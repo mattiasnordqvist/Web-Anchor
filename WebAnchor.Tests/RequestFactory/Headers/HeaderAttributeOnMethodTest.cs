@@ -15,11 +15,11 @@ namespace WebAnchor.Tests.RequestFactory.Headers
         public interface IApi
         {
             [Get("resource")]
-            [Header("Authorization", "Basic 79iou342qkras9")]
+            [AddHeader("Authorization", "Basic 79iou342qkras9")]
             Task<HttpResponseMessage> Get();
 
             [Get("resource")]
-            [Authorization("Basic 79iou342qkras9")]
+            [AddAuthorization("Basic 79iou342qkras9")]
             Task<HttpResponseMessage> Get2();
         }
 

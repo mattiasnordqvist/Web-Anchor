@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers;
-using WebAnchor.RequestFactory.Transformation.Transformers.Headers.Dynamic;
 using WebAnchor.Tests.TestUtils;
 
 using Xunit;
@@ -89,7 +88,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
         {
             public ApiSettings1()
             {
-                Request.ParameterListTransformers.Add(new AddHeaderTransformer("Authorization", "Basic 79iou342qkras9"));
+                Request.ParameterListTransformers.Add(new AddHeaderAttribute("Authorization", "Basic 79iou342qkras9"));
             }
         }
 
@@ -97,7 +96,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
         {
             public ApiSettings2()
             {
-                Request.ParameterListTransformers.Add(new AddAuthorizationTransformer("Basic 79iou342qkras9"));
+                Request.ParameterListTransformers.Add(new AddAuthorizationAttribute("Basic 79iou342qkras9"));
             }
         }
     }

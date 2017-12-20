@@ -136,9 +136,9 @@ namespace WebAnchor.RequestFactory
         protected virtual string CreateRouteSegmentValue(Parameter parameter, RequestTransformContext requestTransformContext)
         {
             var value = requestTransformContext.ParameterValueFormatter.Format(parameter.Values.First(), parameter);
-            return requestTransformContext.TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators
-                ? string.Join("/", value.Split('/').Select(WebUtility.UrlEncode))
-                : WebUtility.UrlEncode(value);
+            return requestTransformContext.EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions
+                ? WebUtility.UrlEncode(value)
+                : string.Join("/", value.Split('/').Select(WebUtility.UrlEncode));
         }
 
         protected virtual List<string> CreateUrlParameter(Parameter parameter, RequestTransformContext requestTransformContext)

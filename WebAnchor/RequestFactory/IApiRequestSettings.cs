@@ -11,10 +11,10 @@ namespace WebAnchor.RequestFactory
         /// <summary>
         /// Decides if path seperators ("/") in url segment parameters should be considered a part of the url AS PATH SEPERATORS or just as characters.
         /// If you use [BaseLocation({location})] and location is replaced by "api/v2" by some substitution, you probably want the "/" to seperate one path segment "api"
-        /// from path segment "v2". If that is how you like it, leave this setting as it is (true). If you want the "/" to be encoded as "%2F" and not look like a path segments 
-        /// seperator, set this setting to false.
+        /// from path segment "v2". If that is how you like it, leave this setting as it is (false). If you want the "/" to be encoded as "%2F" and not look like a path segments 
+        /// seperator, set this setting to true.
         /// </summary>
-        bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
+        bool EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions { get; set; }
         IParameterValueFormatter ParameterValueFormatter { get; set; }
         List<IParameterListTransformer> ParameterListTransformers { get; set; }
         IContentSerializer ContentSerializer { get; set; }

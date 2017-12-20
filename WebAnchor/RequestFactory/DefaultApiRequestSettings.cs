@@ -11,7 +11,7 @@ namespace WebAnchor.RequestFactory
         {
             ParameterListTransformers = new DefaultParameterListTransformers();
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
-            TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators = true;
+            EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions = false;
             ContentSerializer = new JsonContentSerializer(new Newtonsoft.Json.JsonSerializer());
             ParameterValueFormatter = new DefaultParameterValueFormatter();
             QueryParameterListStrategy = new NormalQueryParamaterListStrategy();
@@ -19,7 +19,7 @@ namespace WebAnchor.RequestFactory
 
         public virtual List<IParameterListTransformer> ParameterListTransformers { get; set; }
         public virtual bool InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl { get; set; }
-        public virtual bool TreatUrlSegmentSeparatorsInUrlSegmentSubstitutionsAsUrlSegmentSeparators { get; set; }
+        public virtual bool EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions { get; set; }
         public virtual IContentSerializer ContentSerializer { get; set; }
         public virtual IParameterValueFormatter ParameterValueFormatter { get; set; }
         public virtual IQueryParamaterListStrategy QueryParameterListStrategy { get; set; }

@@ -12,7 +12,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
     public class HeaderAttributeOnInterfaceTest : WebAnchorTest
     {
         [BaseLocation("location")]
-        [Header("Authorization", "Basic 79iou342qkras9")]
+        [AddHeader("Authorization", "Basic 79iou342qkras9")]
         public interface IApi
         {
             [Get("resource")]
@@ -20,7 +20,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
         }
 
         [BaseLocation("location")]
-        [Authorization("Basic 79iou342qkras9")]
+        [AddAuthorizationAttribute("Basic 79iou342qkras9")]
         public interface IApi2
         {
             [Get("resource")]
