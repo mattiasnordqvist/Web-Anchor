@@ -22,7 +22,14 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
         {
             invocation.ReturnValue = task.Then(httpResponseMessage =>
             {
-                return httpResponseMessage.Content.ReadAsStreamAsync();
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    return httpResponseMessage.Content.ReadAsStreamAsync();
+                }
+                else
+                {
+                    throw new ApiException(httpResponseMessage);
+                }
             });
         }
     }
