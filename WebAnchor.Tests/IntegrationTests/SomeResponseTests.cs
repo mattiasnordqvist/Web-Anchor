@@ -40,7 +40,7 @@ namespace WebAnchor.Tests.IntegrationTests
         {
             var response = new HttpResponseMessage(HttpStatusCode.NotFound);
 
-           var result = await GetResponse<ITestApi, Task<HttpResponseMessage>>(api => api.Get404(), response);
+            var result = await GetResponse<ITestApi, Task<HttpResponseMessage>>(api => api.Get404(), response);
             Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
         }
 
@@ -61,6 +61,23 @@ namespace WebAnchor.Tests.IntegrationTests
             await
                 AssertEx.ThrowsAsync<JsonReaderException>(
                     async () => await GetResponse<ITestApi, Task<Customer>>(async api => await api.GetAnObject(), response));
+        }
+
+        [Fact]
+        public async Task SimpleTaskResponse()
+        {
+            var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Hello World!") };
+            var task = GetResponse<ITestApi, Task>(async api => await api.GetJustTask(), response);
+            await task;
+            Assert.True(task.IsCompleted);
+        }
+
+        [Fact]
+        public async Task SimpleTaskResponseWithException()
+        {
+            var response = new HttpResponseMessage(HttpStatusCode.NotFound) { };
+            var task = GetResponse<ITestApi, Task>(async api => await api.GetJustTask(), response);
+            await AssertEx.ThrowsAsync<ApiException>(async () => await task);
         }
     }
 }

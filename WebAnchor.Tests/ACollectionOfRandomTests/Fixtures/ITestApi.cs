@@ -70,5 +70,8 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests.Fixtures
         
         [Get("/returnnonjson")]
         Task<Customer> GetAnObject();
+
+        [Get("/returnnonjson")]
+        Task GetJustTask();
     }
 }
