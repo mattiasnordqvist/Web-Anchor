@@ -58,10 +58,9 @@ namespace WebAnchor.Tests.IntegrationTests
         public async Task ExpectedDataButServerReturnsNothingInContent()
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Hello World!") };
-
             await
                 AssertEx.ThrowsAsync<JsonReaderException>(
-                    async () => await GetResponse<ITestApi, Task<Customer>>(api => api.GetAnObject(), response));
+                    async () => await GetResponse<ITestApi, Task<Customer>>(async api => await api.GetAnObject(), response));
         }
     }
 }

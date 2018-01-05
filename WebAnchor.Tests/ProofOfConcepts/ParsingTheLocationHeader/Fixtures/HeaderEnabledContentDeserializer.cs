@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-
+using System.Threading.Tasks;
 using Castle.Core.Internal;
 
 using Newtonsoft.Json;
@@ -20,12 +21,16 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures
         {
         }
 
-        public override T Deserialize<T>(StreamReader streamReader, HttpResponseMessage message)
+        public override Task<object> Deserialize(Stream stream, Type t, HttpResponseMessage message)
         {
-            var t = base.Deserialize<T>(streamReader, message);
-            GetPropertiesWithHeaderAttribute(t).ForEach(
-                x => x.SetValue(t, message.Headers.GetValues(x.GetAttribute<HeaderAttribute>().Header).First()));
-            return t;
+            var o = base.Deserialize(stream, t, message).Then(x =>
+            {
+                GetPropertiesWithHeaderAttribute(x).ForEach(
+                y => y.SetValue(x, message.Headers.GetValues(y.GetAttribute<HeaderAttribute>().Header).First()));
+                return Task.FromResult(x);
+            });
+
+            return o;
         }
 
         private List<PropertyInfo> GetPropertiesWithHeaderAttribute<T>(T t)

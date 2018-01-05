@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
@@ -24,28 +25,49 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
         public void Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
         {
             var genericArgument = invocation.Method.ReturnType.GetGenericArguments()[0];
-
             const BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic;
 
-            var method = typeof(AsyncDeserializingResponseHandler).GetMethod("InternalDeserialize", Flags).MakeGenericMethod(genericArgument);
-
-            invocation.ReturnValue = method.Invoke(this, new[] { httpResponseMessage });
+            var method = typeof(AsyncDeserializingResponseHandler).GetMethod("Convert", Flags).MakeGenericMethod(genericArgument);
+            invocation.ReturnValue = method.Invoke(this, new[] { InternalDeserialize(httpResponseMessage, genericArgument) });
         }
 
-        private async Task<T> InternalDeserialize<T>(Task<HttpResponseMessage> task)
+        private Task<object> InternalDeserialize(Task<HttpResponseMessage> task, Type type)
         {
-            var httpResponseMessage = await task.ConfigureAwait(false);
-            if (httpResponseMessage.IsSuccessStatusCode)
+            return task.Then(httpResponseMessage =>
             {
-                using (var tr = new StreamReader(await httpResponseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false)))
+                if (httpResponseMessage.IsSuccessStatusCode)
                 {
-                    return ContentDeserializer.Deserialize<T>(tr, task.Result);
+                    return httpResponseMessage.Content.ReadAsStreamAsync()
+                      .Then(stream => ContentDeserializer.Deserialize(stream, type, httpResponseMessage));
                 }
-            }
-            else
+                else
+                {
+                    throw new ApiException(httpResponseMessage);
+                }
+            });
+        }
+
+        private Task<T> Convert<T>(Task<object> task)
+        {
+            TaskCompletionSource<T> res = new TaskCompletionSource<T>();
+
+            return task.ContinueWith(t =>
             {
-                throw new ApiException(httpResponseMessage);
-            }
+                if (t.IsCanceled)
+                {
+                    res.TrySetCanceled();
+                }
+                else if (t.IsFaulted)
+                {
+                    res.TrySetException(t.Exception.InnerExceptions);
+                }
+                else
+                {
+                    res.TrySetResult((T)t.Result);
+                }
+
+                return res.Task;
+            }, TaskContinuationOptions.ExecuteSynchronously).Unwrap();
         }
     }
 }
