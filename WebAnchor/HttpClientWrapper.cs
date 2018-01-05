@@ -14,7 +14,7 @@ namespace WebAnchor
 
         public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
         {
-            return await _httpClient.SendAsync(request).ConfigureAwait(false);
+            return await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
         public void Dispose()

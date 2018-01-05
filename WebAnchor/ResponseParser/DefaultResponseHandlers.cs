@@ -11,6 +11,7 @@ namespace WebAnchor.ResponseParser
         public DefaultResponseHandlers()
         {
             Add(new AsyncTaskHandler());
+            Add(new AsyncStreamHandler());
             Add(new AsyncHttpResponseMessageResponseHandler());
             Add(new AsyncDeserializingResponseHandler(new JsonContentDeserializer(new JsonSerializer())));
         }
