@@ -11,6 +11,11 @@ namespace WebAnchor.ResponseParser
             HttpResponseMessage = httpResponseMessage;
         }
 
+        public ApiException(string customMessage)
+        : base(customMessage)
+        {
+        }
+
         public HttpResponseMessage HttpResponseMessage { get; set; }
     }
 }

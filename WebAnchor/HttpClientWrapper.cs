@@ -9,7 +9,7 @@ namespace WebAnchor
 {
     public class HttpClientWrapper : IHttpClient
     {
-        private readonly HttpClient _httpClient;
+        protected readonly HttpClient _httpClient;
 
         public HttpClientWrapper(HttpClient httpClient)
         {

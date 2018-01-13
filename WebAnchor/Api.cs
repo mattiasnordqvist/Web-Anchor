@@ -56,7 +56,7 @@ namespace WebAnchor
         /// <returns></returns>
         public static T For<T>(HttpClient httpClient, IApiSettings settings = null) where T : class
         {
-            return new ApiFactory().Create<T>(new AuthorizingHttpClientWrapper(httpClient), false, settings ?? new DefaultApiSettings());
+            return new ApiFactory().Create<T>(new HttpClientWrapper(httpClient), false, settings ?? new DefaultApiSettings());
         }
 
         /// <summary>
@@ -68,6 +68,34 @@ namespace WebAnchor
         /// <param name="configure">Offers you a convenient option to configure a default ApiSettings</param>
         /// <returns></returns>
         public static T For<T>(HttpClient httpClient, Action<DefaultApiSettings> configure) where T : class
+        {
+            var settings = new DefaultApiSettings();
+            configure?.Invoke(settings);
+            return For<T>(httpClient, settings);
+        }
+
+        /// <summary>
+        /// Creates an api of type T. T must be an interface that looks like a web anchor api.
+        /// With this method you can supply your own httpClient. You will be responsible to dispose this HttpClient yourself.
+        /// </summary>
+        /// <typeparam name="T">An interface for your Api.</typeparam>
+        /// <param name="httpClient">A HttpClient that you can modify the way you like. You must also handle disposing of this HttpClient yourself.</param>
+        /// <param name="settings">Contains everything about how your http requests are constructed and parsed. If not passed, ApiSettings will be used.</param>
+        /// <returns></returns>
+        public static T For<T>(IHttpClient httpClient, IApiSettings settings = null) where T : class
+        {
+            return new ApiFactory().Create<T>(httpClient, false, settings ?? new DefaultApiSettings());
+        }
+
+        /// <summary>
+        /// Creates an api of type T. T must be an interface that looks like a web anchor api.
+        /// With this method you can supply your own httpClient. You will be responsible to dispose this HttpClient yourself.
+        /// </summary>
+        /// <typeparam name="T">An interface for your Api.</typeparam>
+        /// <param name="httpClient">A HttpClient that you can modify the way you like. You must also handle disposing of this HttpClient yourself.</param>
+        /// <param name="configure">Offers you a convenient option to configure a default ApiSettings</param>
+        /// <returns></returns>
+        public static T For<T>(IHttpClient httpClient, Action<DefaultApiSettings> configure) where T : class
         {
             var settings = new DefaultApiSettings();
             configure?.Invoke(settings);
