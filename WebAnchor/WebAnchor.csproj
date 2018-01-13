@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>6.0.0-pre2</PackageVersion>
+    <PackageVersion>6.0.0-pre3</PackageVersion>
     <PackageId>WebAnchor</PackageId>
     <Title>WebAnchor</Title>
     <Authors>mattiasnordqvist;carl_berg</Authors>
