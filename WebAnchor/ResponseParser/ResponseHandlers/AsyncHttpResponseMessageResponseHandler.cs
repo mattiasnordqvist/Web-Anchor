@@ -7,7 +7,9 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
 {
     public class AsyncHttpResponseMessageResponseHandler : IResponseHandler
     {
-        public bool CanHandle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
+        public HttpCompletionOption HttpCompletionOptions => HttpCompletionOption.ResponseContentRead;
+
+        public bool CanHandle(IInvocation invocation)
         {
             return invocation.Method.ReturnType == typeof(Task<HttpResponseMessage>);
         }

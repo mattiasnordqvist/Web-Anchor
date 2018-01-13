@@ -12,7 +12,9 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
         {
         }
 
-        public bool CanHandle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
+        public HttpCompletionOption HttpCompletionOptions => HttpCompletionOption.ResponseContentRead;
+
+        public bool CanHandle(IInvocation invocation)
         {
             return !invocation.Method.ReturnType.GetTypeInfo().IsGenericType && invocation.Method.ReturnType == typeof(Task);
         }

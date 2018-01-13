@@ -16,9 +16,9 @@ namespace WebAnchor
         {
             var requestFactory = new HttpRequestFactory(settings);
             requestFactory.ValidateApi(typeof(T));
-            var responseParser = new HttpResponseParser(settings);
-            responseParser.ValidateApi(typeof(T));
-            var anchor = new Anchor(httpClient, requestFactory, responseParser, shouldDisposeHttpClient);
+            var responseHandlersList = new HttpResponseHandlersList(settings);
+            responseHandlersList.ValidateApi(typeof(T));
+            var anchor = new Anchor(httpClient, requestFactory, responseHandlersList, shouldDisposeHttpClient);
             var api = ProxyGenerator.CreateInterfaceProxyWithoutTarget<T>(anchor);
             return api;
         }

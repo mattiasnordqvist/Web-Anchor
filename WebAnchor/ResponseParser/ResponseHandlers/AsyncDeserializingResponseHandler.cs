@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -17,7 +16,9 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
             ContentDeserializer = contentDeserializer;
         }
 
-        public bool CanHandle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
+        public HttpCompletionOption HttpCompletionOptions => HttpCompletionOption.ResponseContentRead;
+
+        public bool CanHandle(IInvocation invocation)
         {
             return invocation.Method.ReturnType.GetTypeInfo().IsGenericType && invocation.Method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
         }

@@ -20,7 +20,7 @@ namespace WebAnchor.Tests.TestUtils
 
         public void Intercept(IInvocation invocation)
         {
-             new HttpResponseParser(_settings).Parse(Task.FromResult(_response), invocation);
+             new HttpResponseHandlersList(_settings).FindHandler(invocation).Handle(Task.FromResult(_response), invocation);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading.Tasks;
 
 using Castle.DynamicProxy;
@@ -13,7 +12,9 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
         {
         }
 
-        public bool CanHandle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
+        public HttpCompletionOption HttpCompletionOptions => HttpCompletionOption.ResponseHeadersRead;
+
+        public bool CanHandle(IInvocation invocation)
         {
             return invocation.Method.ReturnType == typeof(Task<Stream>);
         }

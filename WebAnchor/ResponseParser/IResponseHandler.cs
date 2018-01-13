@@ -7,7 +7,9 @@ namespace WebAnchor.ResponseParser
 {
     public interface IResponseHandler
     {
-        bool CanHandle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation);
+        HttpCompletionOption HttpCompletionOptions { get; }
+
+        bool CanHandle(IInvocation invocation);
 
         /// <summary>
         /// Should set the invocation.ReturnValue to the expected result.

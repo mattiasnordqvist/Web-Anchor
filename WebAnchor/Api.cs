@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace WebAnchor
 {
@@ -55,7 +56,7 @@ namespace WebAnchor
         /// <returns></returns>
         public static T For<T>(HttpClient httpClient, IApiSettings settings = null) where T : class
         {
-            return new ApiFactory().Create<T>(new HttpClientWrapper(httpClient), false, settings ?? new DefaultApiSettings());
+            return new ApiFactory().Create<T>(new AuthorizingHttpClientWrapper(httpClient), false, settings ?? new DefaultApiSettings());
         }
 
         /// <summary>
