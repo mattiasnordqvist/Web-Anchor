@@ -9,6 +9,11 @@ namespace WebAnchor.ResponseParser
     {
         bool CanHandle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation);
 
+        /// <summary>
+        /// Should set the invocation.ReturnValue to the expected result.
+        /// </summary>
+        /// <param name="httpResponseMessage"></param>
+        /// <param name="invocation"></param>
         void Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation);
     }
 }

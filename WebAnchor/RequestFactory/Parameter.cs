@@ -42,6 +42,12 @@ namespace WebAnchor.RequestFactory
         /// </summary>
         public IEnumerable<object> Values { get; set; }
 
+        /// <summary>
+        /// value should be a single value, not a list or any other enumerable
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Parameter CreateContentParameter(string name, object value)
         {
             return new Parameter()
@@ -52,6 +58,12 @@ namespace WebAnchor.RequestFactory
             };
         }
 
+        /// <summary>
+        /// value should be a single value, not a list or any other enumerable
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Parameter CreateRouteParameter(string name, object value)
         {
             return new Parameter()
@@ -62,6 +74,12 @@ namespace WebAnchor.RequestFactory
             };
         }
 
+        /// <summary>
+        /// value should be an enumerable of one or more values
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public static Parameter CreateHeaderParameter(string name, IEnumerable<object> values)
         {
             return new Parameter()
@@ -72,6 +90,12 @@ namespace WebAnchor.RequestFactory
             };
         }
 
+        /// <summary>
+        /// value should be an enumerable of one or more values
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public static Parameter CreateQueryParameter(string name, IEnumerable<object> values)
         {
             return new Parameter()

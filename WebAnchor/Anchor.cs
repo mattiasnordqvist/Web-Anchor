@@ -28,8 +28,8 @@ namespace WebAnchor
             if (HttpRequestBuilder.IsHttpRequestInvocation(invocation))
             {
                 var request = HttpRequestBuilder.Create(invocation);
-                var httpResponseMessage = HttpClient.SendAsync(request);
-                HttpResponseParser.Parse(httpResponseMessage, invocation);
+                var httpResponseMessageTask = HttpClient.SendAsync(request, System.Net.Http.HttpCompletionOption.ResponseHeadersRead);
+                HttpResponseParser.Parse(httpResponseMessageTask, invocation);
             }
             else
             {
