@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
-using WebAnchor.Tests.TestUtils;
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.Wiki

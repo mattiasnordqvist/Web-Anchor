@@ -7,7 +7,7 @@ using Castle.DynamicProxy;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 
-namespace WebAnchor.Tests.TestUtils
+namespace WebAnchor.TestUtils
 {
     public class RequestTester : IInterceptor
     {

@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 
-using WebAnchor.Tests.TestUtils;
-
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.RequestFactory.Url

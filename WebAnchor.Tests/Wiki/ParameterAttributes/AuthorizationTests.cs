@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WebAnchor.Attributes.Header;
 using WebAnchor.Attributes.URL;
-using WebAnchor.Tests.TestUtils;
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.Wiki

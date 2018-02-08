@@ -7,8 +7,7 @@ using Newtonsoft.Json;
 
 using WebAnchor.ResponseParser;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
-using WebAnchor.Tests.TestUtils;
-
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.IntegrationTests

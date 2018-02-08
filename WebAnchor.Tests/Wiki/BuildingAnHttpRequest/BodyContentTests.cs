@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WebAnchor.Attributes.Content;
 using WebAnchor.Attributes.URL;
-using WebAnchor.Tests.TestUtils;
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.Wiki

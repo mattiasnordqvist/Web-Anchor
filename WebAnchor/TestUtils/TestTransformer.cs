@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Transformation;
 
-namespace WebAnchor.Tests.TestUtils
+namespace WebAnchor.TestUtils
 {
     public class TestTransformer : IParameterListTransformer
     {

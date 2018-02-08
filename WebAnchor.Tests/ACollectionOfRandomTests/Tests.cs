@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
-
-using WebAnchor.RequestFactory;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.RequestFactory.Transformation.Custom;
 using WebAnchor.Tests.RequestFactory.Transformation.Transformers.Attribute.Fixtures;
-using WebAnchor.Tests.TestUtils;
-
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.ACollectionOfRandomTests

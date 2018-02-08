@@ -8,8 +8,7 @@ using Newtonsoft.Json;
 using WebAnchor.ResponseParser.ResponseHandlers;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures;
-using WebAnchor.Tests.TestUtils;
-
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader

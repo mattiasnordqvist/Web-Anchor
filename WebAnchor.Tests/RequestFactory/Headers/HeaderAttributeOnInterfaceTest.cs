@@ -3,8 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation.Transformers.Headers;
-using WebAnchor.Tests.TestUtils;
-
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.RequestFactory.Headers

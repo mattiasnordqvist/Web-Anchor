@@ -1,8 +1,7 @@
 ﻿using System.Net.Http;
 
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
-using WebAnchor.Tests.TestUtils;
-
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.PayloadDependentUrlSegments

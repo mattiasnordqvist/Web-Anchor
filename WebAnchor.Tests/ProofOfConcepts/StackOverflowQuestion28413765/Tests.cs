@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 
 using WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765.Fixtures;
-using WebAnchor.Tests.TestUtils;
-
+using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.ProofOfConcepts.StackOverflowQuestion28413765

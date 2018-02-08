@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Castle.DynamicProxy;
 using WebAnchor.ResponseParser;
 
-namespace WebAnchor.Tests.TestUtils
+namespace WebAnchor.TestUtils
 {
     public class FakeResponseCreator : IInterceptor
     {
