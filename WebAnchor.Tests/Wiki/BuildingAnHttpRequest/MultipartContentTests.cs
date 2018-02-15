@@ -1,5 +1,9 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+
 using WebAnchor.Attributes.Content;
 using WebAnchor.Attributes.URL;
 using WebAnchor.TestUtils;
@@ -7,11 +11,6 @@ using Xunit;
 
 namespace WebAnchor.Tests.Wiki
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
     public class MultipartContentTests : WebAnchorTest
     {
         [BaseLocation("api")]
@@ -37,12 +36,12 @@ namespace WebAnchor.Tests.Wiki
                    Assert.Equal(HttpMethod.Post, assertMe.Method);
                    Assert.Equal("api", assertMe.RequestUri.ToString());
                    var body = assertMe.Content.ReadAsStringAsync().Result;
-                   Assert.True(Regex.IsMatch(body, @"--(?<id>[0-9a-f\-]*)
+                   Assert.Matches(@"--(?<id>[0-9a-f\-]*)
 Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test\.txt; filename\*=utf-8''test\.txt
 
 Content
---\k<id>--"));
+--\k<id>--", body);
                });
         }
 
@@ -58,12 +57,12 @@ Content
                         Assert.Equal(HttpMethod.Post, assertMe.Method);
                         Assert.Equal("api", assertMe.RequestUri.ToString());
                         var body = assertMe.Content.ReadAsStringAsync().Result;
-                        Assert.True(Regex.IsMatch(body, @"--(?<id>[0-9a-f\-]*)
+                        Assert.Matches(@"--(?<id>[0-9a-f\-]*)
 Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test\.txt; filename\*=utf-8''test\.txt
 
 From a stream
---\k<id>--"));
+--\k<id>--", body);
                     });
         }
 
@@ -77,12 +76,12 @@ From a stream
                         Assert.Equal(HttpMethod.Post, assertMe.Method);
                         Assert.Equal("api", assertMe.RequestUri.ToString());
                         var body = assertMe.Content.ReadAsStringAsync().Result;
-                        Assert.True(Regex.IsMatch(body, @"--(?<id>[0-9a-f\-]*)
+                        Assert.Matches(@"--(?<id>[0-9a-f\-]*)
 Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test\.txt; filename\*=utf-8''test\.txt
 
 From bytes
---\k<id>--"));
+--\k<id>--", body);
                     });
         }
 
@@ -98,7 +97,7 @@ From bytes
                         Assert.Equal(HttpMethod.Post, assertMe.Method);
                         Assert.Equal("api", assertMe.RequestUri.ToString());
                         var body = assertMe.Content.ReadAsStringAsync().Result;
-                        Assert.True(Regex.IsMatch(body, @"--(?<id>[0-9a-f\-]*)
+                        Assert.Matches(@"--(?<id>[0-9a-f\-]*)
 Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test\.txt; filename\*=utf-8''test\.txt
 
@@ -108,7 +107,7 @@ Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test\.txt; filename\*=utf-8''test\.txt
 
 From bytes
---\k<id>--"));
+--\k<id>--", body);
                     });
         }
 
@@ -116,10 +115,10 @@ From bytes
         public void TestPostWithEnumerableTypeContentParts()
         {
             var listData = new List<ContentPartBase>
-                           {
-                               new StringContentPart("Content", "Field1", "test.txt") { ContentType = "text/plain" },
-                               new ByteArrayContentPart(Encoding.UTF8.GetBytes("From bytes"), "Field1", "test.txt") { ContentType = "text/plain" }
-                           };
+            {
+                new StringContentPart("Content", "Field1", "test.txt") { ContentType = "text/plain" },
+                new ByteArrayContentPart(Encoding.UTF8.GetBytes("From bytes"), "Field1", "test.txt") { ContentType = "text/plain" }
+            };
 
             TestTheRequest<IApi>(
                 api => api.PostListMultipart(listData),
@@ -128,7 +127,7 @@ From bytes
                         Assert.Equal(HttpMethod.Post, assertMe.Method);
                         Assert.Equal("api", assertMe.RequestUri.ToString());
                         var body = assertMe.Content.ReadAsStringAsync().Result;
-                        Assert.True(Regex.IsMatch(body, @"--(?<id>[0-9a-f\-]*)
+                        Assert.Matches(@"--(?<id>[0-9a-f\-]*)
 Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test\.txt; filename\*=utf-8''test\.txt
 
@@ -138,7 +137,7 @@ Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test\.txt; filename\*=utf-8''test\.txt
 
 From bytes
---\k<id>--"));
+--\k<id>--", body);
                     });
         }
 
