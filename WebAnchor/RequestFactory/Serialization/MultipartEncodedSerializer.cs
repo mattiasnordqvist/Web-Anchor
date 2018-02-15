@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 
 namespace WebAnchor.RequestFactory.Serialization
 {
@@ -11,19 +12,27 @@ namespace WebAnchor.RequestFactory.Serialization
                 return null;
             }
 
-            if (!(value is MultipartContentData multipartContentData))
-            {
-                throw new WebAnchorException($"Unexpected parameter type {value.GetType()} when serializing multipart data - only {nameof(MultipartContentData)} is supported");
-            }
-
             var form = new MultipartFormDataContent();
 
-            foreach (var part in multipartContentData.Parts)
+            foreach (var part in GetContentParts(value))
             {
                 form.Add(part.CreateContent());
             }
 
             return form;
+        }
+
+        private IEnumerable<ContentPartBase> GetContentParts(object value)
+        {
+            switch (value)
+            {
+                case ContentPartBase singleContentPart:
+                    return new[] { singleContentPart };
+                case IEnumerable<ContentPartBase> enumerableContentParts:
+                    return enumerableContentParts;
+            }
+
+            throw new WebAnchorException($"Unexpected parameter type {value.GetType()} when serializing multipart data - only types deriving from {nameof(ContentPartBase)} or IEnumerable<{nameof(ContentPartBase)}> are supported");
         }
     }
 }
