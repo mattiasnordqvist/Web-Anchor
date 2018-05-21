@@ -16,7 +16,8 @@
     <RepositoryUrl>https://github.com/mattiasnordqvist/Web-Anchor.git</RepositoryUrl>
     <PackageIconUrl>https://github.com/mattiasnordqvist/Web-Anchor/raw/master/logo.png</PackageIconUrl>
     <PackageTags>REST HTTP API JSON</PackageTags>
-    <PackageReleaseNotes>New multipart attribute</PackageReleaseNotes>
+    <PackageReleaseNotes>AddHeader-attribute is now "AllowMultiple"
+ParameterCreatorTransformer does not clear list of parameters.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

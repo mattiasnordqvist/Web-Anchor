@@ -11,12 +11,23 @@ namespace WebAnchor.RequestFactory.Transformation.Transformers.Default
     {
         public IEnumerable<Parameter> Apply(IEnumerable<Parameter> parameters, RequestTransformContext requestTransformContext)
         {
-            return
+            foreach(Parameter p in parameters)
+            {
+                yield return p;
+            }
+
+            var newParameters = 
                 requestTransformContext.ApiInvocation.Method.GetParameters()
                    .Select((x, i) => new { ParameterInfo = x, ArgumentValue = requestTransformContext.ApiInvocation.GetArgumentValue(i) })
                    .Where(x => x.ArgumentValue != null)
                    .Select(x => ResolveParameter(x.ParameterInfo, x.ArgumentValue, requestTransformContext))
                    .ToList();
+
+            foreach (Parameter p in newParameters)
+            {
+                yield return p;
+            }
+
         }
 
         public virtual string CreateRouteSegmentId(string name)
