@@ -43,7 +43,7 @@ namespace WebAnchor.RequestFactory
         public IEnumerable<object> Values { get; set; }
 
         /// <summary>
-        /// value should be a single value, not a list or any other enumerable
+        /// value should be an object, not a list or any other enumerable though.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -55,6 +55,20 @@ namespace WebAnchor.RequestFactory
                 Values = new object[] { value },
                 ParameterType = ParameterType.Content,
                 Name = name,
+            };
+        }
+
+        /// <summary>
+        /// value should be an object, not a list or any other enumerable though.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Parameter CreateContentParameter(object value)
+        {
+            return new Parameter()
+            {
+                Values = new object[] { value },
+                ParameterType = ParameterType.Content,
             };
         }
 
