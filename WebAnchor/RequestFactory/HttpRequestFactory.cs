@@ -51,11 +51,12 @@ namespace WebAnchor.RequestFactory
             ResolvedParameters = ResolveParameters(requestTransformContext);
 
             var resolvedUrl = ResolveUrl(requestTransformContext.UrlTemplate, requestTransformContext);
-            var resolvedMethod = ResolveHttpMethod(invocation);
+            var resolvedHttpAttribute = ResolveHttpMethodAttribute(invocation);
+            var resolvedMethod = resolvedHttpAttribute.Method;
 
             var request = new HttpRequestMessage(resolvedMethod, resolvedUrl);
 
-            if (resolvedMethod == HttpMethod.Post || resolvedMethod == HttpMethod.Put)
+            if (resolvedHttpAttribute.IncludeContentInRequest)
             {
                 request.Content = ResolveContent(requestTransformContext);
             }
@@ -118,12 +119,11 @@ namespace WebAnchor.RequestFactory
             return url + urlParams;
         }
 
-        protected virtual HttpMethod ResolveHttpMethod(IInvocation invocation)
+        protected virtual HttpAttribute ResolveHttpMethodAttribute(IInvocation invocation)
         {
             var methodInfo = invocation.Method;
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
-            var resolvedMethod = methodAttribute.Method;
-            return resolvedMethod;
+            return methodAttribute;
         }
 
         protected virtual string CreateRouteSegmentId(string name)

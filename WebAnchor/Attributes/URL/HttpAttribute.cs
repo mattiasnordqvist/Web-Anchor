@@ -14,5 +14,6 @@ namespace WebAnchor.Attributes.URL
 
         public string URL { get; set; }
         public HttpMethod Method { get; set; }
+        public virtual bool IncludeContentInRequest => false;
     }
 }

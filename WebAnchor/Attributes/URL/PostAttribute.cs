@@ -11,5 +11,7 @@ namespace WebAnchor.Attributes.URL
         {
             URL = url;
         }
+
+        public override bool IncludeContentInRequest => true;
     }
 }
