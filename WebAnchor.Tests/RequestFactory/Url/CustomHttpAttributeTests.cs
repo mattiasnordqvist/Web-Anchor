@@ -1,5 +1,4 @@
-﻿
-using WebAnchor.TestUtils;
+﻿using WebAnchor.TestUtils;
 using Xunit;
 
 namespace WebAnchor.Tests.RequestFactory.Url
