@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>6.2.2</PackageVersion>
+    <PackageVersion>6.3.0-pre1</PackageVersion>
     <PackageId>WebAnchor</PackageId>
     <Title>WebAnchor</Title>
     <Authors>mattiasnordqvist;carl_berg</Authors>
@@ -16,8 +16,7 @@
     <RepositoryUrl>https://github.com/mattiasnordqvist/Web-Anchor.git</RepositoryUrl>
     <PackageIconUrl>https://github.com/mattiasnordqvist/Web-Anchor/raw/master/logo.png</PackageIconUrl>
     <PackageTags>REST HTTP API JSON</PackageTags>
-    <PackageReleaseNotes>Added Data-dictionary to ApiSettings
-Can now create ContentParameter without name</PackageReleaseNotes>
+    <PackageReleaseNotes>HttpAttribute dictates inclusion of content</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
