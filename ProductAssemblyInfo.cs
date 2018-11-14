@@ -8,4 +8,4 @@ using System.Reflection;
 /* File versions are set by CI build */
 [assembly: AssemblyVersion("6.3.0")]
 [assembly: AssemblyFileVersion("6.3.0")]
-[assembly: AssemblyInformationalVersion("6.3.0-pre1")]
+[assembly: AssemblyInformationalVersion("6.3.0")]
