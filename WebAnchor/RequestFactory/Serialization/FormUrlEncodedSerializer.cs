@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using WebAnchor.Attributes.Content;
 
 namespace WebAnchor.RequestFactory.Serialization
 {
@@ -14,8 +14,20 @@ namespace WebAnchor.RequestFactory.Serialization
                 return null;
             }
 
-            var pairs = value as IEnumerable<KeyValuePair<string, string>> ?? value.GetType().GetProperties().ToDictionary(x => x.Name, x => (x.GetGetMethod().Invoke(value, null) == null ? string.Empty : x.GetGetMethod().Invoke(value, null).ToString()));
+            var pairs = value as IEnumerable<KeyValuePair<string, string>> ?? GetKeyValues(value);
             return new FormUrlEncodedContent(pairs);
+        }
+
+        protected IEnumerable<KeyValuePair<string, string>> GetKeyValues(object content)
+        {
+            foreach (var property in content.GetType().GetProperties())
+            {
+                var name = property.GetCustomAttribute<FormUrlEncodedPropertyAttribute>(true)?.ParameterName ?? property.Name;
+                var value = property.GetGetMethod().Invoke(content, null)?.ToString() ?? string.Empty;
+                yield return new KeyValuePair<string, string>(name, value);
+            }
+
+            yield break;
         }
     }
 }
