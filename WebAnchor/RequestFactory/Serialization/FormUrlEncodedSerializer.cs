@@ -26,8 +26,6 @@ namespace WebAnchor.RequestFactory.Serialization
                 var value = property.GetGetMethod().Invoke(content, null)?.ToString() ?? string.Empty;
                 yield return new KeyValuePair<string, string>(name, value);
             }
-
-            yield break;
         }
     }
 }
