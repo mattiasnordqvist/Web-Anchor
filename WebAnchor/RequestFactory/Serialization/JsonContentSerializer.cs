@@ -15,7 +15,7 @@ namespace WebAnchor.RequestFactory.Serialization
             _jsonSerializer = jsonSerializer;
         }
 
-        public HttpContent Serialize(object value, Parameter content)
+        public virtual HttpContent Serialize(object value, Parameter content)
         {
             if (content == null)
             {

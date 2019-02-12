@@ -7,7 +7,7 @@ namespace WebAnchor.RequestFactory.Serialization
 {
     public class FormUrlEncodedSerializer : IContentSerializer
     {
-        public HttpContent Serialize(object value, Parameter content)
+        public virtual HttpContent Serialize(object value, Parameter content)
         {
             if (content == null)
             {

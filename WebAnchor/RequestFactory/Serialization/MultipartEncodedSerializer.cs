@@ -5,7 +5,7 @@ namespace WebAnchor.RequestFactory.Serialization
 {
     public class MultipartEncodedSerializer : IContentSerializer
     {
-        public HttpContent Serialize(object value, Parameter content)
+        public virtual HttpContent Serialize(object value, Parameter content)
         {
             if (content == null)
             {
@@ -22,7 +22,7 @@ namespace WebAnchor.RequestFactory.Serialization
             return form;
         }
 
-        private IEnumerable<ContentPartBase> GetContentParts(object value)
+        protected IEnumerable<ContentPartBase> GetContentParts(object value)
         {
             switch (value)
             {
