@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461;net462;net47</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup>
-    <PackageVersion>6.3.0</PackageVersion>
+    <PackageVersion>6.4.0</PackageVersion>
     <PackageId>WebAnchor</PackageId>
     <Title>WebAnchor</Title>
     <Authors>mattiasnordqvist;carl_berg</Authors>
