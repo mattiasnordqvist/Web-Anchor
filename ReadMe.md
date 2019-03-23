@@ -34,7 +34,7 @@ Also, if you like (or hate) Web Anchor so much that you would like to contribute
 
 ## Alternatives
 
-Although Web Anchor is off course the best framework for accessing web apis, there are alternatives in the .Net ecosystem you might be interested in. Web Anchor is more or less inspired by [ReFit](https://github.com/paulcbetts/refit/). ReFit uses a completely different approach on how the implementation of your api interfaces is created. While Web Anchor generates an implementation in `runtime` using Castle Windsor DynamicProxy (which means Web Anchor won't work in code distributed through the Windows Phone App Store or whatever it is called), ReFit generates code at `compile time`. There is also [RestSharp](http://restsharp.org/) which I have never tried. It seems to work in a very different way from both ReFit and Web Anchor
+Although Web Anchor is off course the best framework for accessing web apis, there are alternatives in the .Net ecosystem you might be interested in. Web Anchor is more or less inspired by [ReFit](https://github.com/paulcbetts/refit/). ReFit uses a completely different approach on how the implementation of your api interfaces is created. While Web Anchor generates an implementation in `runtime` using Castle Windsor DynamicProxy (which means Web Anchor won't work in code distributed through the Windows Phone App Store or whatever it is called), ReFit generates code at `compile time`. There is also [RestSharp](http://restsharp.org/) which I have never tried. It seems to work in a very different way from both ReFit and Web Anchor and it doesn't look extensible at all! (https://github.com/restsharp/RestSharp/issues/932)
 
 ## Caveats
 
