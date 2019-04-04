@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebAnchor.Analyzer {
+namespace WebAnchor.Analyzers {
     using System;
     using System.Reflection;
     
@@ -40,7 +40,7 @@ namespace WebAnchor.Analyzer {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WebAnchor.Analyzer.Resources", typeof(Resources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WebAnchor.Analyzers.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -80,7 +80,7 @@ namespace WebAnchor.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Api methods should be Tasks.
+        ///   Looks up a localized string similar to Api methods should return Tasks.
         /// </summary>
         internal static string AnalyzerTitle {
             get {

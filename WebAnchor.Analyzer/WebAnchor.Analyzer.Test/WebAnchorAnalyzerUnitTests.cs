@@ -4,9 +4,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TestHelper;
-using WebAnchor.Analyzer;
 
-namespace WebAnchor.Analyzer.Test
+namespace WebAnchor.Analyzers.Test
 {
     [TestClass]
     public class UnitTest : CodeFixVerifier
@@ -71,12 +70,12 @@ namespace WebAnchor.Analyzer.Test
 
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
-            return new WebAnchorAnalyzerCodeFixProvider();
+            return new ReturnTypeShouldBeTaskCodeFixProvider();
         }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
-            return new WebAnchorAnalyzerAnalyzer();
+            return new ReturnTypeShouldBeTaskAnalyzer();
         }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
@@ -7,19 +7,25 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>WebAnchor.Analyzer</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
-    <Authors>mnor</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <PackageId>WebAnchor.Analyzers</PackageId>
+    <PackageVersion>0.1.0.0</PackageVersion>
+    <Authors>Mattias Nordqvist</Authors>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <RepositoryUrl></RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>WebAnchor.Analyzer</Description>
+    <Description>WebAnchor.Analyzers</Description>
     <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
-    <PackageTags>WebAnchor.Analyzer, analyzers</PackageTags>
+    <PackageTags>WebAnchor.Analyzers, analyzers</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <Version>0.1.0</Version>
+    <Product>WebAnchor.Analyzers</Product>
+    <AssemblyName>WebAnchor.Analyzers</AssemblyName>
+    <RootNamespace>WebAnchor.Analyzers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

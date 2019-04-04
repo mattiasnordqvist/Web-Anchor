@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
@@ -10,24 +8,21 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
 
-namespace WebAnchor.Analyzer
+namespace WebAnchor.Analyzers
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(WebAnchorAnalyzerCodeFixProvider)), Shared]
-    public class WebAnchorAnalyzerCodeFixProvider : CodeFixProvider
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ReturnTypeShouldBeTaskCodeFixProvider)), Shared]
+    public class ReturnTypeShouldBeTaskCodeFixProvider : CodeFixProvider
     {
-        private const string title = "Make task";
+        private const string title = "Allow the internet to be asynchronous!";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(WebAnchorAnalyzerAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(ReturnTypeShouldBeTaskAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
         {
-            // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
             return WellKnownFixAllProviders.BatchFixer;
         }
 
@@ -38,8 +33,6 @@ namespace WebAnchor.Analyzer
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            // Find the type declaration identified by the diagnostic.
-            var t = root.FindToken(diagnosticSpan.Start);
             var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<MethodDeclarationSyntax>().First();
 
            context.RegisterCodeFix(

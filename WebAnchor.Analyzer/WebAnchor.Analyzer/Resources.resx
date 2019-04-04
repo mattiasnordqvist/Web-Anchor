@@ -124,6 +124,6 @@
     <value>Return type '{0}' does not inherit from Task or Task&lt;T&gt;</value>
   </data>
   <data name="AnalyzerTitle" xml:space="preserve">
-    <value>Api methods should be Tasks</value>
+    <value>Api methods should return Tasks</value>
   </data>
 </root>
