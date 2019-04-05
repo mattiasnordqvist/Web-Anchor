@@ -52,7 +52,7 @@ namespace WebAnchor.Analyzers
                         if (node != null)
                         {
                             var location = Location.Create(methodSymbol.DeclaringSyntaxReferences[0].SyntaxTree, node.ReturnType.Span);
-                            var diagnostic = Diagnostic.Create(Rule, location, returnType.Name);
+                            var diagnostic = Diagnostic.Create(Rule, location, returnType.ToString());
                             context.ReportDiagnostic(diagnostic);
                         }
                     }
