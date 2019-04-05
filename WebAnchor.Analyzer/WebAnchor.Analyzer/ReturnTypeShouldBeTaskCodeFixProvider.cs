@@ -57,7 +57,7 @@ namespace WebAnchor.Analyzers
             }
             else
             {
-                var newRoot = root.ReplaceNode(returnType, SyntaxFactory.ParseTypeName($"Task<{methodDecl.ReturnType.GetFirstToken().Text}>").WithLeadingTrivia(returnType.GetLeadingTrivia()).WithTrailingTrivia(returnType.GetTrailingTrivia()));
+                var newRoot = root.ReplaceNode(returnType, SyntaxFactory.ParseTypeName($"Task<{methodDecl.ReturnType.ToString()}>").WithLeadingTrivia(returnType.GetLeadingTrivia()).WithTrailingTrivia(returnType.GetTrailingTrivia()));
                 var newDocument = document.WithSyntaxRoot(newRoot);
                 return newDocument;
             }

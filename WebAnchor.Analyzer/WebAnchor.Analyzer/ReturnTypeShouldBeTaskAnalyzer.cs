@@ -43,7 +43,7 @@ namespace WebAnchor.Analyzers
             var methodSymbol = (IMethodSymbol)context.Symbol;
             if (methodSymbol.GetAttributes().Any(x => IsOrInheritsFrom(x.AttributeClass, HttpAttribute)))
             {
-                var returnType = methodSymbol.ReturnType as INamedTypeSymbol;
+                var returnType = methodSymbol.ReturnType as ITypeSymbol;
                 if (returnType != null)
                 {
                     if (!(IsOrInheritsFrom(returnType, Task) || IsOrInheritsFrom(returnType, TaskOfT)))
@@ -60,7 +60,7 @@ namespace WebAnchor.Analyzers
             }
         }
 
-        private static bool IsOrInheritsFrom(INamedTypeSymbol symbol, ITypeSymbol type)
+        private static bool IsOrInheritsFrom(ITypeSymbol symbol, ITypeSymbol type)
         {
             var baseType = symbol;
             while (baseType != null)
