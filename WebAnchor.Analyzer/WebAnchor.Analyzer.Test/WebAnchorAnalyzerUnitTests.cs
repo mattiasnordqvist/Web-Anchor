@@ -75,7 +75,7 @@ namespace WebAnchor.Analyzers.Test
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
-            return new ReturnTypeShouldBeTaskAnalyzer();
+            return new WebAnchorAnalyzer();
         }
     }
 }

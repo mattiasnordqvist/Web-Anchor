@@ -18,7 +18,7 @@ namespace WebAnchor.Analyzers
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(ReturnTypeShouldBeTaskAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(WebAnchorAnalyzer.ReturnTypeShouldBeTaskDiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
