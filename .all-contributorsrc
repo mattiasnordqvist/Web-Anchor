@@ -24,6 +24,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mikegoatly",
+      "name": "Mike Goatly",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4577868?v=4",
+      "profile": "http://www.goatly.net",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
