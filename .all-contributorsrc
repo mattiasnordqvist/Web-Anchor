@@ -15,6 +15,15 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "spinit-moom",
+      "name": "Martin Oom",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/19834760?v=4",
+      "profile": "https://github.com/spinit-moom",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
