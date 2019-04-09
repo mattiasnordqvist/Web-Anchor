@@ -1,6 +1,7 @@
 # Web Anchor
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 [![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)  
-Web Anchor provides type-safe, testable and flexible access to web resources.
+Web Anchor provides type-safe, testable and flexible, runtime-generated access to web resources.
 
 ## Install
 To install Web Anchor, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
@@ -40,3 +41,15 @@ Although Web Anchor is off course the best framework for accessing web apis, the
 When working with HttpClient in any way, you should know some things. Read up on how the HttpClient works and how it is intended to be used, because your intuition is probably wrong.  
 http://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/  
 http://byterot.blogspot.se/2016/07/singleton-httpclient-dns.html  
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table><tr><td align="center"><a href="https://www.carl-berg.se"><img src="https://avatars0.githubusercontent.com/u/209010?v=4" width="100px;" alt="Carl Berg"/><br /><sub><b>Carl Berg</b></sub></a><br /><a href="#ideas-carl-berg" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=carl-berg" title="Code">💻</a> <a href="#review-carl-berg" title="Reviewed Pull Requests">👀</a></td><td align="center"><a href="https://github.com/spinit-moom"><img src="https://avatars2.githubusercontent.com/u/19834760?v=4" width="100px;" alt="Martin Oom"/><br /><sub><b>Martin Oom</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=spinit-moom" title="Code">💻</a></td><td align="center"><a href="http://www.goatly.net"><img src="https://avatars2.githubusercontent.com/u/4577868?v=4" width="100px;" alt="Mike Goatly"/><br /><sub><b>Mike Goatly</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=mikegoatly" title="Code">💻</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=mikegoatly" title="Tests">⚠️</a></td><td align="center"><a href="https://github.com/mikaelrjohansson"><img src="https://avatars2.githubusercontent.com/u/17408292?v=4" width="100px;" alt="Mikael Johansson"/><br /><sub><b>Mikael Johansson</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/issues?q=author%3Amikaelrjohansson" title="Bug reports">🐛</a></td></tr></table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
