@@ -12,6 +12,7 @@ namespace WebAnchor.Analyzers
     {
         public const string ReturnTypeShouldBeTaskDiagnosticId = "ReturnTypeShouldBeTaskDiagnosticId";
         public const string GetOrDeleteCantHaveContentDiagnosticId = "GetOrDeleteCantHaveContentDiagnosticId";
+        public const string CantHaveMultipleHttpAttributesOnOneMethodDiagnosticId = "CantHaveMultipleHttpAttributesOnOneMethodDiagnosticId";
 
         private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Resources.AnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(Resources.AnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
@@ -20,8 +21,9 @@ namespace WebAnchor.Analyzers
 
         private static DiagnosticDescriptor ReturnTypeShouldBeTaskRule = new DiagnosticDescriptor(ReturnTypeShouldBeTaskDiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Error, isEnabledByDefault: true, description: Description);
         private static DiagnosticDescriptor GetOrDeleteCantHaveContentRule = new DiagnosticDescriptor(GetOrDeleteCantHaveContentDiagnosticId, "Some http methods does not support Content", "{0} can't have Content", Category, DiagnosticSeverity.Warning, isEnabledByDefault: true);
+        private static DiagnosticDescriptor CantHaveMultipleHttpAttributesOnOneMethodRule = new DiagnosticDescriptor(CantHaveMultipleHttpAttributesOnOneMethodDiagnosticId, "Can only be one HTTP-attribute on a method", "You can't have more than one HTTP-attribute", Category, DiagnosticSeverity.Error, isEnabledByDefault: true);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(ReturnTypeShouldBeTaskRule, GetOrDeleteCantHaveContentRule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(ReturnTypeShouldBeTaskRule, GetOrDeleteCantHaveContentRule, CantHaveMultipleHttpAttributesOnOneMethodRule); } }
 
         public override void Initialize(AnalysisContext context)
         {
@@ -40,13 +42,27 @@ namespace WebAnchor.Analyzers
         {
             AnalyzeReturnTypeShouldBeTask(context);
             AnalyzeGetCantHaveContent(context);
+            AnalyzeCantHaveMultipleHttpAttributesOnOneMethod(context);
+        }
+
+        private void AnalyzeCantHaveMultipleHttpAttributesOnOneMethod(SymbolAnalysisContext context)
+        {
+            var HttpAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.HttpAttribute");
+            var methodSymbol = (IMethodSymbol)context.Symbol;
+            if (methodSymbol.GetAttributes().Count(x => IsOrInheritsFrom(x.AttributeClass, HttpAttribute)) > 1)
+            {
+                var offendingAttribute = methodSymbol.GetAttributes().Last(a => IsOrInheritsFrom(a.AttributeClass, HttpAttribute));
+                var location = Location.Create(offendingAttribute.ApplicationSyntaxReference.SyntaxTree, offendingAttribute.ApplicationSyntaxReference.Span);
+                var diagnostic = Diagnostic.Create(CantHaveMultipleHttpAttributesOnOneMethodRule, location, offendingAttribute.AttributeClass.ToString());
+                context.ReportDiagnostic(diagnostic);
+            }
         }
 
         private void AnalyzeReturnTypeShouldBeTask(SymbolAnalysisContext context)
         {
-            INamedTypeSymbol TaskOfT = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1");
-            INamedTypeSymbol Task = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task");
-            INamedTypeSymbol HttpAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.HttpAttribute");
+            var TaskOfT = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1");
+            var Task = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task");
+            var HttpAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.HttpAttribute");
             var methodSymbol = (IMethodSymbol)context.Symbol;
             if (methodSymbol.GetAttributes().Any(x => IsOrInheritsFrom(x.AttributeClass, HttpAttribute)))
             {
@@ -69,22 +85,21 @@ namespace WebAnchor.Analyzers
 
         private void AnalyzeGetCantHaveContent(SymbolAnalysisContext context)
         {
-            INamedTypeSymbol TaskOfT = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1");
-            INamedTypeSymbol Task = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task");
-            INamedTypeSymbol GetAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.GetAttribute");
-            INamedTypeSymbol DeleteAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.DeleteAttribute");
-            INamedTypeSymbol ContentAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.Content.ContentAttribute");
+            var TaskOfT = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1");
+            var Task = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task");
+            var GetAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.GetAttribute");
+            var DeleteAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.DeleteAttribute");
+            var ContentAttribute = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.Content.ContentAttribute");
             var methodSymbol = (IMethodSymbol)context.Symbol;
             if (methodSymbol.GetAttributes().Any(x => IsOrInheritsFrom(x.AttributeClass, GetAttribute) || IsOrInheritsFrom(x.AttributeClass, DeleteAttribute)))
             {
                 foreach (var offendingAttribute in methodSymbol.Parameters.SelectMany(x => x.GetAttributes().Where(a => IsOrInheritsFrom(a.AttributeClass, ContentAttribute))))
                 {
                     var location = Location.Create(offendingAttribute.ApplicationSyntaxReference.SyntaxTree, offendingAttribute.ApplicationSyntaxReference.Span);
-                    var diagnostic = Diagnostic.Create(GetOrDeleteCantHaveContentRule, location, 
+                    var diagnostic = Diagnostic.Create(GetOrDeleteCantHaveContentRule, location,
                         methodSymbol.GetAttributes().First(x => IsOrInheritsFrom(x.AttributeClass, GetAttribute) || IsOrInheritsFrom(x.AttributeClass, DeleteAttribute)).AttributeClass.ToString());
                     context.ReportDiagnostic(diagnostic);
                 }
-
             }
         }
 
