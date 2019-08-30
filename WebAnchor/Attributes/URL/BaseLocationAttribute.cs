@@ -2,7 +2,7 @@
 
 namespace WebAnchor.Attributes.URL
 {
-    [AttributeUsage(AttributeTargets.Interface)]
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class)]
     public class BaseLocationAttribute : Attribute
     {
         public BaseLocationAttribute(string baseUrl)

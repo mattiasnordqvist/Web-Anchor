@@ -17,6 +17,14 @@ namespace WebAnchor.TestUtils
             apiCall(api);
         }
 
+        protected void TestTheRequest<T, TMetadata>(Action<T> apiCall, Action<HttpRequestMessage> assertHttpRequestMessage, Action<IApiSettings> configure = null, Action<IEnumerable<Parameter>, RequestTransformContext> assertParametersAndContext = null, DefaultApiSettings settings = null)
+            where T : class
+            where TMetadata : class, T
+        {
+            var api = new ProxyGenerator().CreateClassProxy<TMetadata>(new RequestTester(assertHttpRequestMessage, configure, assertParametersAndContext, settings));
+            apiCall(api);
+        }
+
         protected TReturn GetResponse<T, TReturn>(Func<T, TReturn> apiCall, HttpResponseMessage responseMessage, DefaultApiSettings settings = null)
             where T : class
         {
