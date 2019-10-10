@@ -6,6 +6,6 @@ using System.Reflection;
 [assembly: AssemblyCulture("")]
 
 /* File versions are set by CI build */
-[assembly: AssemblyVersion("6.5.3")]
-[assembly: AssemblyFileVersion("6.5.3")]
-[assembly: AssemblyInformationalVersion("6.5.3")]
+[assembly: AssemblyVersion("6.6.0")]
+[assembly: AssemblyFileVersion("6.6.0")]
+[assembly: AssemblyInformationalVersion("6.6.0-pre2")]
