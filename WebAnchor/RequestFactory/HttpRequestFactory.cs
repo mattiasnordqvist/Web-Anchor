@@ -105,9 +105,13 @@ namespace WebAnchor.RequestFactory
 
         protected virtual string ResolveUrl(string urlTemplate, RequestTransformContext requestTransformContext)
         {
-            urlTemplate = urlTemplate.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), x => CreateRouteSegmentValue(x, requestTransformContext)));
-            urlTemplate = AppendUrlParams(urlTemplate, ResolvedParameters.QueryParameters, requestTransformContext);
-            return urlTemplate;
+            var resolvedUrl = urlTemplate.Replace(ResolvedParameters.RouteParameters.ToDictionary(x => CreateRouteSegmentId(x.Name), x => CreateRouteSegmentValue(x, requestTransformContext)));
+            resolvedUrl = AppendUrlParams(resolvedUrl, ResolvedParameters.QueryParameters, requestTransformContext);
+            foreach(var normalizer in requestTransformContext.UrlNormalizers)
+            {
+                resolvedUrl = normalizer.Normalize(resolvedUrl);
+            }
+            return resolvedUrl;
         }
 
         protected virtual string AppendUrlParams(string url, IEnumerable<Parameter> queryParameters, RequestTransformContext requestTransformContext)

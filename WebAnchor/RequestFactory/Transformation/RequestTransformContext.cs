@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebAnchor.RequestFactory.Serialization;
+using WebAnchor.RequestFactory.UrlNormalization;
 using WebAnchor.RequestFactory.ValueFormatting;
 
 namespace WebAnchor.RequestFactory.Transformation
@@ -17,6 +18,7 @@ namespace WebAnchor.RequestFactory.Transformation
             EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions = settings.Request.EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions;
             ParameterListTransformers = settings.Request.ParameterListTransformers.ToList();
             QueryParameterListStrategy = settings.Request.QueryParameterListStrategy;
+            UrlNormalizers = settings.Request.UrlNormalizers;
         }
 
         public ApiInvocation ApiInvocation { get; private set; }
@@ -28,5 +30,6 @@ namespace WebAnchor.RequestFactory.Transformation
         public bool EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions { get; set; }
         public List<IParameterListTransformer> ParameterListTransformers { get; set; }
         public IQueryParamaterListStrategy QueryParameterListStrategy { get; set; }
+        public List<IUrlNormalizer> UrlNormalizers { get; set; }
     }
 }
