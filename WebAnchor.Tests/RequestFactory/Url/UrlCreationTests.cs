@@ -68,5 +68,17 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 },
                 configure: x => x.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = false);
         }
+
+        [Fact]
+        public void DuplicateSlashesInCaseOfEmptySegments()
+        {
+            TestTheRequest<IApi>(
+                api => api.Get4(""),
+                a =>
+                {
+                    Assert.Equal(HttpMethod.Get, a.Method);
+                    Assert.Equal("base/a//c", a.RequestUri.ToString());
+                });
+        }
     }
 }

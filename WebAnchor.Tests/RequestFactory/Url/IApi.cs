@@ -17,6 +17,9 @@ namespace WebAnchor.Tests.RequestFactory.Url
         [Get("{path}")]
         Task<HttpResponseMessage> Get3(string path);
 
+        [Get("a/{b}/c")]
+        Task<HttpResponseMessage> Get4(string b);
+
         [TestVerb()]
         Task<HttpResponseMessage> TestVerb();
 
