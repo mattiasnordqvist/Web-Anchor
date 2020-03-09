@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
+using WebAnchor.RequestFactory.UrlNormalization;
 using WebAnchor.RequestFactory.ValueFormatting;
 
 namespace WebAnchor.RequestFactory
@@ -19,5 +20,6 @@ namespace WebAnchor.RequestFactory
         List<IParameterListTransformer> ParameterListTransformers { get; set; }
         IContentSerializer ContentSerializer { get; set; }
         IQueryParamaterListStrategy QueryParameterListStrategy { get; set; }
+        List<IUrlNormalizer> UrlNormalizers { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
-
+using WebAnchor.RequestFactory;
+using WebAnchor.RequestFactory.UrlNormalization;
 using WebAnchor.TestUtils;
 using Xunit;
 
@@ -67,6 +68,56 @@ namespace WebAnchor.Tests.RequestFactory.Url
                     Assert.Equal("basepath2", m.RequestUri.ToString());
                 },
                 configure: x => x.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = false);
+        }
+
+        [Fact]
+        public void DuplicateSlashesInCaseOfEmptySegments()
+        {
+            TestTheRequest<IApi>(
+                api => api.Get4("","c"),
+                a =>
+                {
+                    Assert.Equal(HttpMethod.Get, a.Method);
+                    Assert.Equal("base/a//c/d", a.RequestUri.ToString());
+                });
+        }
+
+        [Fact]
+        public void DuplicateSlashesInCaseOfEmptySegments2()
+        {
+            TestTheRequest<IApi>(
+                api => api.Get4("",""),
+                a =>
+                {
+                    Assert.Equal(HttpMethod.Get, a.Method);
+                    Assert.Equal("base/a///d", a.RequestUri.ToString());
+                });
+        }
+
+        [Fact]
+        public void NormalizeDuplicateSlashesInCaseOfEmptySegments()
+        {
+            TestTheRequest<IApi>(
+                api => api.Get4("",""),
+                a =>
+                {
+                    Assert.Equal(HttpMethod.Get, a.Method);
+                    Assert.Equal("base/a/d", a.RequestUri.ToString());
+                },
+                configure: settings => settings.Request.UrlNormalizers.Add(new RemoveDuplicateSlashes()));
+        }
+
+        [Fact]
+        public void NormalizeDuplicateSlashesInCaseOfEmptySegments2()
+        {
+            TestTheRequest<IApi>(
+                api => api.Get4("","c"),
+                a =>
+                {
+                    Assert.Equal(HttpMethod.Get, a.Method);
+                    Assert.Equal("base/a/c/d", a.RequestUri.ToString());
+                },
+                configure: settings => settings.Request.UrlNormalizers.Add(new RemoveDuplicateSlashes()));
         }
     }
 }
