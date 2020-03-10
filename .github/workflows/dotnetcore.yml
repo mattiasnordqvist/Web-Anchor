@@ -22,4 +22,10 @@ jobs:
     - name: Build with dotnet
       run: dotnet build WebAnchor/WebAnchor.csproj --configuration Debug --no-restore
     - name: Test
-      run: dotnet test WebAnchor.Tests/WebAnchor.Tests.csproj 
+      run: dotnet test WebAnchor.Tests/WebAnchor.Tests.csproj /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v1.0.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./WebAnchor.Tests/TestResults/coverage.info 
+
