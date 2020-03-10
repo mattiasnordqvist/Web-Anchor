@@ -1,5 +1,6 @@
 # Web Anchor
 ![.NET Core](https://github.com/mattiasnordqvist/Web-Anchor/workflows/.NET%20Core/badge.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/mattiasnordqvist/Web-Anchor/badge.svg?branch=master)](https://coveralls.io/github/mattiasnordqvist/Web-Anchor?branch=master)
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 [![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)  
 Web Anchor provides type-safe, testable and flexible, runtime-generated access to web resources.
