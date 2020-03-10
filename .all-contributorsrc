@@ -13,7 +13,8 @@
       "contributions": [
         "ideas",
         "code",
-        "review"
+        "review",
+        "bug"
       ]
     },
     {
@@ -49,5 +50,6 @@
   "projectName": "Web-Anchor",
   "projectOwner": "mattiasnordqvist",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
