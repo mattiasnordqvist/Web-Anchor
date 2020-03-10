@@ -21,3 +21,5 @@ jobs:
       run: dotnet restore /p:RestoreUseSkipNonexistentTargets="false"
     - name: Build with dotnet
       run: dotnet build WebAnchor/WebAnchor.csproj --configuration Debug --no-restore
+    - name: Test
+      run: dotnet test WebAnchor.Tests/WebAnchor.Tests.csproj 
