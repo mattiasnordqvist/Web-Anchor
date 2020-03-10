@@ -1,4 +1,5 @@
 # Web Anchor
+![.NET Core](https://github.com/mattiasnordqvist/Web-Anchor/workflows/.NET%20Core/badge.svg?branch=master)
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 [![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)  
 Web Anchor provides type-safe, testable and flexible, runtime-generated access to web resources.
@@ -47,9 +48,19 @@ http://byterot.blogspot.se/2016/07/singleton-httpclient-dns.html
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://www.carl-berg.se"><img src="https://avatars0.githubusercontent.com/u/209010?v=4" width="100px;" alt="Carl Berg"/><br /><sub><b>Carl Berg</b></sub></a><br /><a href="#ideas-carl-berg" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=carl-berg" title="Code">💻</a> <a href="#review-carl-berg" title="Reviewed Pull Requests">👀</a></td><td align="center"><a href="https://github.com/spinit-moom"><img src="https://avatars2.githubusercontent.com/u/19834760?v=4" width="100px;" alt="Martin Oom"/><br /><sub><b>Martin Oom</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=spinit-moom" title="Code">💻</a></td><td align="center"><a href="http://www.goatly.net"><img src="https://avatars2.githubusercontent.com/u/4577868?v=4" width="100px;" alt="Mike Goatly"/><br /><sub><b>Mike Goatly</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=mikegoatly" title="Code">💻</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=mikegoatly" title="Tests">⚠️</a></td><td align="center"><a href="https://github.com/mikaelrjohansson"><img src="https://avatars2.githubusercontent.com/u/17408292?v=4" width="100px;" alt="Mikael Johansson"/><br /><sub><b>Mikael Johansson</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/issues?q=author%3Amikaelrjohansson" title="Bug reports">🐛</a></td></tr></table>
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.carl-berg.se"><img src="https://avatars0.githubusercontent.com/u/209010?v=4" width="100px;" alt=""/><br /><sub><b>Carl Berg</b></sub></a><br /><a href="#ideas-carl-berg" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=carl-berg" title="Code">💻</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/pulls?q=is%3Apr+reviewed-by%3Acarl-berg" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/issues?q=author%3Acarl-berg" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/spinit-moom"><img src="https://avatars2.githubusercontent.com/u/19834760?v=4" width="100px;" alt=""/><br /><sub><b>Martin Oom</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=spinit-moom" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mikaelrjohansson"><img src="https://avatars2.githubusercontent.com/u/17408292?v=4" width="100px;" alt=""/><br /><sub><b>Mikael Johansson</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/issues?q=author%3Amikaelrjohansson" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://www.goatly.net"><img src="https://avatars2.githubusercontent.com/u/4577868?v=4" width="100px;" alt=""/><br /><sub><b>Mike Goatly</b></sub></a><br /><a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=mikegoatly" title="Code">💻</a> <a href="https://github.com/mattiasnordqvist/Web-Anchor/commits?author=mikegoatly" title="Tests">⚠️</a></td>
+  </tr>
+</table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
