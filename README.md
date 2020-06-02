@@ -1,5 +1,6 @@
 # Web Anchor
 ![.NET Core](https://github.com/mattiasnordqvist/Web-Anchor/workflows/.NET%20Core/badge.svg?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1413bab9e9d4ee0b2a9d329b395b1a8)](https://app.codacy.com/manual/mattiasnordqvist/Web-Anchor?utm_source=github.com&utm_medium=referral&utm_content=mattiasnordqvist/Web-Anchor&utm_campaign=Badge_Grade_Dashboard)
 [![Coverage Status](https://coveralls.io/repos/github/mattiasnordqvist/Web-Anchor/badge.svg?branch=master)](https://coveralls.io/github/mattiasnordqvist/Web-Anchor?branch=master)
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 [![NuGet version](https://badge.fury.io/nu/webanchor.svg)](http://badge.fury.io/nu/webanchor)  
