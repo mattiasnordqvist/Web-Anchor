@@ -1,7 +1,6 @@
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
-
-using Castle.DynamicProxy;
 
 namespace WebAnchor.ResponseParser
 {
@@ -9,13 +8,8 @@ namespace WebAnchor.ResponseParser
     {
         HttpCompletionOption HttpCompletionOptions { get; }
 
-        bool CanHandle(IInvocation invocation);
+        bool CanHandle(MethodInfo methodInfo);
 
-        /// <summary>
-        /// Should set the invocation.ReturnValue to the expected result.
-        /// </summary>
-        /// <param name="httpResponseMessage"></param>
-        /// <param name="invocation"></param>
-        void Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation);
+        Task<T> HandleAsync<T>(HttpResponseMessage httpResponseMessage, MethodInfo methodInfo);
     }
 }

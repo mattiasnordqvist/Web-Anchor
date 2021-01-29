@@ -2,8 +2,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using Castle.DynamicProxy;
-
 namespace WebAnchor.ResponseParser.ResponseHandlers
 {
     public class AsyncTaskHandler : IResponseHandler
@@ -14,24 +12,18 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
 
         public HttpCompletionOption HttpCompletionOptions => HttpCompletionOption.ResponseContentRead;
 
-        public bool CanHandle(IInvocation invocation)
+        public bool CanHandle(MethodInfo methodInfo)
         {
-            return !invocation.Method.ReturnType.GetTypeInfo().IsGenericType && invocation.Method.ReturnType == typeof(Task);
+            return !methodInfo.ReturnType.GetTypeInfo().IsGenericType && methodInfo.ReturnType == typeof(Task);
         }
 
-        public void Handle(Task<HttpResponseMessage> task, IInvocation invocation)
+        public Task<T> HandleAsync<T>(HttpResponseMessage httpResponseMessage, MethodInfo methodInfo)
         {
-            invocation.ReturnValue = task.Then(httpResponseMessage =>
+            if (!httpResponseMessage.IsSuccessStatusCode)
             {
-                if (httpResponseMessage.IsSuccessStatusCode)
-                {
-                    return Task.CompletedTask;
-                }
-                else
-                {
-                    throw new ApiException(httpResponseMessage);
-                }
-            });
+                throw new ApiException(httpResponseMessage);
+            }
+            return Task.FromResult(default(T));
         }
     }
 }

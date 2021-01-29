@@ -1,13 +1,13 @@
 ﻿using System;
-
-using Castle.DynamicProxy;
+using System.Reflection;
+using System.Threading.Tasks;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.ResponseParser;
 
 namespace WebAnchor
 {
-    internal class Anchor : IInterceptor
+    public class Anchor : IDisposable
     {
         private readonly bool _shouldDisposeHttpClient;
 
@@ -23,30 +23,25 @@ namespace WebAnchor
         public HttpRequestFactory HttpRequestBuilder { get; set; }
         public HttpResponseHandlersList HttpResponseParser { get; set; }
 
-        public void Intercept(IInvocation invocation)
+        public void Dispose()
         {
-            if (HttpRequestBuilder.IsHttpRequestInvocation(invocation))
+            if (_shouldDisposeHttpClient)
             {
-                var request = HttpRequestBuilder.Create(invocation);
-                var handler = HttpResponseParser.FindHandler(invocation);
-                if (handler == null)
-                {
-                    throw new WebAnchorException($"Return type of method {invocation.Method.Name} in {invocation.Method.DeclaringType.FullName} cannot be handled by any of the registered response handlers.");
-                }
+                HttpClient.Dispose();
+            }
+        }
 
-                var httpResponseMessageTask = HttpClient.SendAsync(request, handler.HttpCompletionOptions);
-                handler.Handle(httpResponseMessageTask, invocation);
-            }
-            else
+        public async Task<T> Intercept<T>(MethodInfo methodInfo, object[] parameters)
+        {
+            var request = HttpRequestBuilder.Create(methodInfo, parameters);
+            var handler = HttpResponseParser.FindHandler(methodInfo);
+            if (handler == null)
             {
-                if (invocation.Method.GetBaseDefinition().DeclaringType == typeof(IDisposable))
-                {
-                    if (_shouldDisposeHttpClient)
-                    {
-                        HttpClient.Dispose();
-                    }
-                }
+                throw new WebAnchorException($"Return type of method {methodInfo.Name} in {methodInfo.DeclaringType.FullName} cannot be handled by any of the registered response handlers.");
             }
+
+            var httpResponseMessage = await HttpClient.SendAsync(request, handler.HttpCompletionOptions);
+            return await handler.HandleAsync<T>(httpResponseMessage, methodInfo);
         }
     }
 }

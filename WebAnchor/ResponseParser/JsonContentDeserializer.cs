@@ -15,13 +15,13 @@ namespace WebAnchor.ResponseParser
             _jsonSerializer = jsonSerializer;
         }
 
-        public virtual Task<object> Deserialize(Stream stream, Type t, HttpResponseMessage message)
+        public virtual T Deserialize<T>(Stream stream, HttpResponseMessage message)
         {
             using (var streamReader = new StreamReader(stream))
             using (var jr = new JsonTextReader(streamReader))
             {
-                var u = _jsonSerializer.Deserialize(jr, t);
-                return Task.FromResult(u);
+                var u = _jsonSerializer.Deserialize<T>(jr);
+                return u;
             }
         }
     }

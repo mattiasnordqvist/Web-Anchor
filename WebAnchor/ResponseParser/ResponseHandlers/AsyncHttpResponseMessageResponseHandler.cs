@@ -1,7 +1,7 @@
+using System;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
-
-using Castle.DynamicProxy;
 
 namespace WebAnchor.ResponseParser.ResponseHandlers
 {
@@ -9,14 +9,18 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
     {
         public HttpCompletionOption HttpCompletionOptions => HttpCompletionOption.ResponseContentRead;
 
-        public bool CanHandle(IInvocation invocation)
+        public bool CanHandle(MethodInfo methodInfo)
         {
-            return invocation.Method.ReturnType == typeof(Task<HttpResponseMessage>);
+            return methodInfo.ReturnType == typeof(Task<HttpResponseMessage>);
         }
 
-        public void Handle(Task<HttpResponseMessage> httpResponseMessage, IInvocation invocation)
+        public async Task<T> HandleAsync<T>(HttpResponseMessage httpResponseMessage, MethodInfo methodInfo)
         {
-            invocation.ReturnValue = httpResponseMessage;
+            return Task.FromResult(httpResponseMessage) switch
+            {
+                Task<T> t => await t.ConfigureAwait(false),
+                _ => throw new Exception()
+            };
         }
     }
 }

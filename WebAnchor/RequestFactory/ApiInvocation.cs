@@ -1,23 +1,23 @@
 using System.Reflection;
 
-using Castle.DynamicProxy;
-
 namespace WebAnchor.RequestFactory
 {
     public class ApiInvocation
     {
-        private readonly IInvocation _invocation;
+        private readonly MethodBase _methodBase;
+        private readonly object[] _parameters;
 
-        public ApiInvocation(IInvocation invocation)
+        public ApiInvocation(MethodBase methodBase, object[] parameters)
         {
-            _invocation = invocation;
+            _methodBase = methodBase;
+            this._parameters = parameters;
         }
 
-        public MethodInfo Method => _invocation.Method;
+        public MethodBase Method => _methodBase;
 
         public object GetArgumentValue(int index)
         {
-            return _invocation.GetArgumentValue(index);
+            return _parameters[index];
         }
     }
 }

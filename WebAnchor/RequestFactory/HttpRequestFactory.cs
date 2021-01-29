@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
-using Castle.DynamicProxy;
 using WebAnchor.Attributes.URL;
 using WebAnchor.RequestFactory.Transformation;
 
@@ -38,20 +37,20 @@ namespace WebAnchor.RequestFactory
             }
         }
 
-        public bool IsHttpRequestInvocation(IInvocation invocation)
+        public bool IsHttpRequestInvocation(MethodInfo methodInfo)
         {
-            return invocation.Method.IsDefined(typeof(HttpAttribute), false);
+            return methodInfo.IsDefined(typeof(HttpAttribute), false);
         }
 
-        public virtual HttpRequestMessage Create(IInvocation invocation)
+        public virtual HttpRequestMessage Create(MethodBase methodBase, object[] parameters)
         {
-            var requestTransformContext = new RequestTransformContext(new ApiInvocation(invocation), _settings);
-            requestTransformContext.UrlTemplate = ResolveUrlTemplate(invocation, requestTransformContext);
+            var requestTransformContext = new RequestTransformContext(new ApiInvocation(methodBase, parameters), _settings);
+            requestTransformContext.UrlTemplate = ResolveUrlTemplate(methodBase, requestTransformContext);
 
             ResolvedParameters = ResolveParameters(requestTransformContext);
 
             var resolvedUrl = ResolveUrl(requestTransformContext.UrlTemplate, requestTransformContext);
-            var resolvedHttpAttribute = ResolveHttpMethodAttribute(invocation);
+            var resolvedHttpAttribute = ResolveHttpMethodAttribute(methodBase);
             var resolvedMethod = resolvedHttpAttribute.Method;
 
             var request = new HttpRequestMessage(resolvedMethod, resolvedUrl);
@@ -94,11 +93,11 @@ namespace WebAnchor.RequestFactory
             return null;
         }
 
-        protected virtual string ResolveUrlTemplate(IInvocation invocation, RequestTransformContext requestTransformContext)
+        protected virtual string ResolveUrlTemplate(MethodBase methodBase, RequestTransformContext requestTransformContext)
         {
-            var methodInfo = invocation.Method;
-            var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
-            var baseAttribute = methodInfo.DeclaringType.GetTypeInfo().GetCustomAttribute<BaseLocationAttribute>();
+            
+            var methodAttribute = methodBase.GetCustomAttribute<HttpAttribute>();
+            var baseAttribute = methodBase.DeclaringType.GetTypeInfo().GetCustomAttribute<BaseLocationAttribute>();
 
             return ((baseAttribute != null ? baseAttribute.BaseUrl + (requestTransformContext.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl ? "/" : string.Empty) : string.Empty) + methodAttribute.URL).CleanUpUrlString();
         }
@@ -123,9 +122,8 @@ namespace WebAnchor.RequestFactory
             return url + urlParams;
         }
 
-        protected virtual HttpAttribute ResolveHttpMethodAttribute(IInvocation invocation)
+        protected virtual HttpAttribute ResolveHttpMethodAttribute(MethodBase methodInfo)
         {
-            var methodInfo = invocation.Method;
             var methodAttribute = methodInfo.GetCustomAttribute<HttpAttribute>();
             return methodAttribute;
         }
