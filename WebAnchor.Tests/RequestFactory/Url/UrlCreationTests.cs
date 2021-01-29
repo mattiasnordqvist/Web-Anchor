@@ -25,7 +25,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
         {
             TestTheRequest<IApi>(
                 api => api.Get3("a/path/with/url/encoded/slashes"),
-                settings: new UrlEncodeSlashesSettings(), 
+                settings: new UrlEncodeSlashesSettings(),
                 assertHttpRequestMessage: a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
@@ -74,7 +74,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
         public void DuplicateSlashesInCaseOfEmptySegments()
         {
             TestTheRequest<IApi>(
-                api => api.Get4("","c"),
+                api => api.Get4("", "c"),
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
@@ -86,7 +86,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
         public void DuplicateSlashesInCaseOfEmptySegments2()
         {
             TestTheRequest<IApi>(
-                api => api.Get4("",""),
+                api => api.Get4("", ""),
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
@@ -98,7 +98,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
         public void NormalizeDuplicateSlashesInCaseOfEmptySegments()
         {
             TestTheRequest<IApi>(
-                api => api.Get4("",""),
+                api => api.Get4("", ""),
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
@@ -111,7 +111,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
         public void NormalizeDuplicateSlashesInCaseOfEmptySegments2()
         {
             TestTheRequest<IApi>(
-                api => api.Get4("","c"),
+                api => api.Get4("", "c"),
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);

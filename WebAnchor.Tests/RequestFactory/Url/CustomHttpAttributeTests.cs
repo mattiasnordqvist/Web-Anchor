@@ -8,7 +8,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
         [Fact]
         public void CustomVerb()
         {
-            TestTheRequest<IApi>(api => api.TestVerb(), m => 
+            TestTheRequest<IApi>(api => api.TestVerb(), m =>
             {
                 Assert.Equal("TEST", m.Method.Method);
                 Assert.Null(m.Content);

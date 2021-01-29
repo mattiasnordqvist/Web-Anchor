@@ -7,6 +7,7 @@ using WebAnchor.RequestFactory.Transformation;
 
 namespace WebAnchor.TestUtils
 {
+
     //public class RequestTester : IInterceptor
     //{
     //    private readonly Action<HttpRequestMessage> _assert;
