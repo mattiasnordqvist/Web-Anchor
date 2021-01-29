@@ -27,7 +27,7 @@ namespace WebAnchor
             }
 
             var httpClient = new HttpClient { BaseAddress = new Uri(baseUri) };
-            return new ApiFactory2().Create<T>(new HttpClientWrapper(httpClient), true, settings ?? new DefaultApiSettings());
+            return new ApiFactory().Create<T>(new HttpClientWrapper(httpClient), true, settings ?? new DefaultApiSettings());
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace WebAnchor
         /// <returns></returns>
         public static T For<T>(HttpClient httpClient, IApiSettings settings = null) where T : class
         {
-            return new ApiFactory2().Create<T>(new HttpClientWrapper(httpClient), false, settings ?? new DefaultApiSettings());
+            return new ApiFactory().Create<T>(new HttpClientWrapper(httpClient), false, settings ?? new DefaultApiSettings());
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace WebAnchor
         /// <returns></returns>
         public static T For<T>(IHttpClient httpClient, IApiSettings settings = null) where T : class
         {
-            return new ApiFactory2().Create<T>(httpClient, false, settings ?? new DefaultApiSettings());
+            return new ApiFactory().Create<T>(httpClient, false, settings ?? new DefaultApiSettings());
         }
 
         /// <summary>

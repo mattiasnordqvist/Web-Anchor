@@ -8,7 +8,7 @@ using System;
 namespace WebAnchor
 {
 
-    public class ApiFactory2
+    public class ApiFactory
     {
         public T Create<T>(IHttpClient httpClient, bool shouldDisposeHttpClient, IApiSettings settings) where T : class
         {
