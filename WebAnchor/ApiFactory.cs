@@ -17,8 +17,7 @@ namespace WebAnchor
             var responseHandlersList = new HttpResponseHandlersList(settings);
             responseHandlersList.ValidateApi(typeof(T));
 
-            var types = Assembly.GetEntryAssembly()
-                .GetTypes();
+            var types = Assembly.GetAssembly(typeof(T)).GetTypes();
             var implementor = types
                 .First(x => x.IsClass && typeof(T).IsAssignableFrom(x));
             var anchor = new Anchor(httpClient, requestFactory, responseHandlersList, shouldDisposeHttpClient);
@@ -28,25 +27,4 @@ namespace WebAnchor
             return api;
         }
     }
-
-    //public class ApiImplementation : IApi
-    //{
-    //    private readonly Anchor2 anchor;
-
-    //    public ApiImplementation(Anchor2 anchor)
-    //    {
-    //        this.anchor = anchor;
-    //    }
-
-    //    public async Task<T> GetCustomer(int id)
-    //    {
-    //        return await anchor.Intercept<T>(metadata);
-    //    }
-
-    //    public void Dispose()
-    //    {
-    //        this.anchor.Dispose();
-
-    //    }
-    //}
 }

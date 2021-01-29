@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -61,13 +63,13 @@ $@"{string.Join(Environment.NewLine, i.Value.Item1.Union(new[] { "System", "Syst
 
 namespace {namespaceName}
 {{
-    public class {apiName} : {i.Key.Name} 
+    public class {apiName}{Regex.Match(i.Key.ToString(), "<.*>").Groups[0].Value} : {i.Key} 
     {{
         private Anchor _anchor;
 
         public {apiName} (Anchor anchor) => _anchor = anchor;                           
                                 
-        {BuildMethods(i.Key.Name, i.Value.Item2)}
+        {BuildMethods(i.Key.ToString(), i.Value.Item2)}
 
         public void Dispose() 
         {{
@@ -76,7 +78,7 @@ namespace {namespaceName}
     }} 
 }}";
                 context.AddSource(
-                    i.Key.Name+".implementation",
+                    namespaceName+"."+i.Key.Name+".implementation",
                     SourceText.From(source, Encoding.UTF8)
                 );
             }
@@ -90,17 +92,22 @@ namespace {namespaceName}
         private string BuildMethod(string apiName, IMethodSymbol methodSymbol)
         {
             var returnType = methodSymbol.ReturnType.ToString();
-            var returnGenericParam = returnType.TrimEnd('>').Replace("System.Threading.Tasks.Task<", "");
-            if (returnGenericParam == returnType)
+            var match = Regex.Match(returnType, "System.Threading.Tasks.Task<(.*)>");
+            string returnGenericParam;
+            if (!match.Success)
             {
                 returnGenericParam = null;
+            }
+            else
+            {
+                returnGenericParam = match.Groups[1].Value;
             }
             var methodName = methodSymbol.Name;
             var parameters = string.Join(", ",methodSymbol.Parameters.Select(x => x.Type+ " " +x.Name));
             var parameterValues = "new object[]{" + string.Join(", ", methodSymbol.Parameters.Select(x => x.Name)) + "}";
             var parameterTypes = "new Type[]{" + string.Join(", ", methodSymbol.Parameters.Select(x => "typeof("+x.Type+")")) + "}";
             return $@"
-public async {returnType} {methodName} ({parameters}) 
+        public async {returnType} {methodName} ({parameters}) 
         {{
             var methodInfo = typeof({apiName}).GetMethod(""{methodName}"", {parameterTypes});
             var parameters = {parameterValues};
