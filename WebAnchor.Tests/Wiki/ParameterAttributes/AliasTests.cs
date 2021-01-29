@@ -14,7 +14,7 @@ namespace WebAnchor.Tests.Wiki
         public interface ICustomerApi
         {
             [Get("")]
-            Task<HttpResponseMessage> GetCustomer([Alias("order-by")]string orderBy);
+            Task<HttpResponseMessage> GetCustomer([Alias("order-by")] string orderBy);
         }
 
         [Fact]
