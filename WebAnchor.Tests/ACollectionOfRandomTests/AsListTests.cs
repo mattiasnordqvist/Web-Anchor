@@ -20,7 +20,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             Task<HttpResponseMessage> Get2(string[] values);
 
             [Get("")]
-            Task<HttpResponseMessage> Get3([Alias("v")]string[] values);
+            Task<HttpResponseMessage> Get3([Alias("v")] string[] values);
 
             [Get("")]
             Task<HttpResponseMessage> Get4(decimal[] values);
@@ -29,7 +29,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             Task<HttpResponseMessage> Get5(decimal[] values);
 
             [Get("")]
-            Task<HttpResponseMessage> Get6([Alias("v")]string[] values);
+            Task<HttpResponseMessage> Get6([Alias("v")] string[] values);
         }
 
         [Fact]
