@@ -38,7 +38,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
         {
             TestTheRequest<IApi>(
                 api => api.Get(),
-                settings: new ApiSettings1(), 
+                settings: new ApiSettings1(),
                 assertHttpRequestMessage: request =>
                     {
                         Assert.True(request.Headers.Contains("Authorization"));

@@ -15,7 +15,7 @@ namespace WebAnchor.Tests.Wiki
         public interface ICustomerApi
         {
             [Get("")]
-            Task<HttpResponseMessage> GetCustomers([Prefix("p_")]string filter = null);
+            Task<HttpResponseMessage> GetCustomers([Prefix("p_")] string filter = null);
         }
 
         [BaseLocation("api/customer")]
@@ -39,7 +39,7 @@ namespace WebAnchor.Tests.Wiki
         #endregion
 
         #region usage on parameter
-        
+
         [Fact]
         public void TestExplicitPrefixAttribute()
         {

@@ -18,13 +18,13 @@ namespace WebAnchor.Tests.Wiki
         public interface IApi
         {
             [Post("")]
-            Task<HttpResponseMessage> PostSingleMultipart([Content][Multipart]ContentPartBase data);
+            Task<HttpResponseMessage> PostSingleMultipart([Content][Multipart] ContentPartBase data);
 
             [Post("")]
-            Task<HttpResponseMessage> PostParamArrayMultipart([Content][Multipart]params ContentPartBase[] data);
+            Task<HttpResponseMessage> PostParamArrayMultipart([Content][Multipart] params ContentPartBase[] data);
 
             [Post("")]
-            Task<HttpResponseMessage> PostListMultipart([Content][Multipart]List<ContentPartBase> data);
+            Task<HttpResponseMessage> PostListMultipart([Content][Multipart] List<ContentPartBase> data);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ Content
                 assertMe =>
                     {
                         VerifyMultipartRequest(
-                            assertMe, 
+                            assertMe,
                             @"--{boundary}
 Content-Type: text/plain
 Content-Disposition: form-data; name=Field1; filename=test.txt; filename*=utf-8''test.txt
@@ -153,8 +153,8 @@ From bytes
 
             var body = assertMe.Content.ReadAsStringAsync().Result;
             Assert.Equal(
-                expectedContent.Replace("{boundary}", boundary.Trim('"')), 
-                body, 
+                expectedContent.Replace("{boundary}", boundary.Trim('"')),
+                body,
                 ignoreLineEndingDifferences: true);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using WebAnchor.Attributes.Content;
 using WebAnchor.Attributes.URL;
 
@@ -11,7 +12,7 @@ namespace WebAnchor.Tests.PayloadDependentUrlSegments
     public interface IDynamicTypedApi2<in T>
     {
         [Post("/{type}")]
-        Task<HttpResponseMessage> PostThis([Content]T t);
+        Task<HttpResponseMessage> PostThis([Content] T t);
     }
 
     [BaseLocation("/api")]

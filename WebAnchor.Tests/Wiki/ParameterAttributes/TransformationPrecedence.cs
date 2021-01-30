@@ -17,7 +17,7 @@ namespace WebAnchor.Tests.Wiki
         public interface ICustomerApi
         {
             [Get("")]
-            Task<HttpResponseMessage> GetCustomers([Alias("f")]string filter = null, int? age = null);
+            Task<HttpResponseMessage> GetCustomers([Alias("f")] string filter = null, int? age = null);
         }
 
         [BaseLocation("api/customer")]
@@ -26,7 +26,7 @@ namespace WebAnchor.Tests.Wiki
         {
             [Get("")]
             [Prefix("method_")]
-            Task<HttpResponseMessage> GetCustomers([Prefix("parameter_")]string filter = null);
+            Task<HttpResponseMessage> GetCustomers([Prefix("parameter_")] string filter = null);
         }
 
         [Fact]

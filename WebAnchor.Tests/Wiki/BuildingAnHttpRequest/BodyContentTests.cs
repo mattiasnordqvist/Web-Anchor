@@ -13,7 +13,7 @@ namespace WebAnchor.Tests.Wiki
         public interface IApi
         {
             [Post("")]
-            Task<HttpResponseMessage> PostPost([Content]Post post);
+            Task<HttpResponseMessage> PostPost([Content] Post post);
         }
 
         [Fact]

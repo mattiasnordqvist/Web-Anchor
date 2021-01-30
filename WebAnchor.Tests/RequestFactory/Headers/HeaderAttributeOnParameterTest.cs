@@ -14,13 +14,13 @@ namespace WebAnchor.Tests.RequestFactory.Headers
         public interface IApi
         {
             [Get("resource")]
-            Task<HttpResponseMessage> Get([Header]string authorization);
+            Task<HttpResponseMessage> Get([Header] string authorization);
 
             [Get("resource")]
-            Task<HttpResponseMessage> Get2([Header("Authorization")]string value);
+            Task<HttpResponseMessage> Get2([Header("Authorization")] string value);
 
             [Get("resource")]
-            Task<HttpResponseMessage> Get3([Authorization]string value);
+            Task<HttpResponseMessage> Get3([Authorization] string value);
         }
 
         [Fact]

@@ -16,6 +16,12 @@ namespace WebAnchor.Generators
     {
         public void Initialize(GeneratorInitializationContext context)
         {
+//#if DEBUG
+//            if (!Debugger.IsAttached)
+//            {
+//                Debugger.Launch();
+//            }
+//#endif 
             context.RegisterForSyntaxNotifications(() => new FindApisSyntaxReceiver());
         }
 
@@ -57,9 +63,9 @@ namespace WebAnchor.Generators
             foreach (var i in interfaces)
             {
                 var namespaceName = i.Key.ContainingNamespace;
-                var apiName = i.Key.Name.TrimStart('I') + "Implementation";
+                var apiName = i.Key.Name.TrimStart('I') + "Implementation"+Guid.NewGuid().ToString().Substring(0, 8);
                 var source =
-$@"{string.Join(Environment.NewLine, i.Value.Item1.Union(new[] { "System", "System.Reflection", "WebAnchor" }).Select(x => $"using {x};"))}
+$@"{string.Join(Environment.NewLine, i.Value.Item1.Union(new[] { namespaceName.ToString(), "System", "System.Reflection", "WebAnchor" }).Select(x => $"using {x};"))}
 
 namespace {namespaceName}
 {{
@@ -77,8 +83,13 @@ namespace {namespaceName}
         }}
     }} 
 }}";
+                var hintName = "WebAnchor.Generated."+i.Key.ToString() + ".implementation";
+                foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+                {
+                    hintName = hintName.Replace(c, '_');
+                }
                 context.AddSource(
-                    namespaceName+"."+i.Key.Name+".implementation",
+                    hintName,
                     SourceText.From(source, Encoding.UTF8)
                 );
             }

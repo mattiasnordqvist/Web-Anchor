@@ -17,6 +17,7 @@ namespace WebAnchor
             var responseHandlersList = new HttpResponseHandlersList(settings);
             responseHandlersList.ValidateApi(typeof(T));
 
+            // This code can't find (or probably actually create) generic interface implementations.
             var types = Assembly.GetAssembly(typeof(T)).GetTypes();
             var implementor = types
                 .First(x => x.IsClass && typeof(T).IsAssignableFrom(x));
