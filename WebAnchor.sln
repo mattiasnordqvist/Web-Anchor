@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnchor.Analyzer.Vsix", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAnchor.Generators", "WebAnchor.Generators\WebAnchor.Generators.csproj", "{1B4BA14F-5300-4FBF-9EF5-DA1E25CC51D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,18 +102,6 @@ Global
 		{1B4BA14F-5300-4FBF-9EF5-DA1E25CC51D3}.Release|x64.Build.0 = Release|Any CPU
 		{1B4BA14F-5300-4FBF-9EF5-DA1E25CC51D3}.Release|x86.ActiveCfg = Release|Any CPU
 		{1B4BA14F-5300-4FBF-9EF5-DA1E25CC51D3}.Release|x86.Build.0 = Release|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Debug|x64.Build.0 = Debug|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Debug|x86.Build.0 = Debug|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Release|x64.ActiveCfg = Release|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Release|x64.Build.0 = Release|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Release|x86.ActiveCfg = Release|Any CPU
-		{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
