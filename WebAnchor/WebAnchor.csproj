@@ -1,34 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
-  <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
-    <PackageVersion>6.6.1</PackageVersion>
-    <PackageId>WebAnchor</PackageId>
-    <Title>WebAnchor</Title>
-    <Authors>mattiasnordqvist;carl_berg</Authors>
-    <Description>A type-safe .NET-library for consuming web APIs</Description>
-    <Copyright>Copyright © Spinit AB, Mattias Nordqvist, Carl Berg and contributors 2017</Copyright>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/mattiasnordqvist/web-anchor/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/mattiasnordqvist/Web-Anchor</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mattiasnordqvist/Web-Anchor.git</RepositoryUrl>
-    <PackageIconUrl>https://github.com/mattiasnordqvist/Web-Anchor/raw/master/logo.png</PackageIconUrl>
-    <PackageTags>REST HTTP API JSON</PackageTags>
-    <PackageReleaseNotes>Added first opt-in url-normalization.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>7.0.0-pre4</Version>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="..\ProductAssemblyInfo.cs" Link="Properties\ProductAssemblyInfo.cs" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="WebAnchor.Analyzers" Version="0.5.0" />
+    <ProjectReference Include="..\WebAnchor.Analyzer\WebAnchor.Analyzer\WebAnchor.Analyzer.csproj" />
+    <ProjectReference Include="..\WebAnchor.Generators\WebAnchor.Generators.csproj" />
   </ItemGroup>
 
- 
-  
 </Project>
