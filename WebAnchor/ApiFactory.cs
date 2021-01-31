@@ -2,7 +2,6 @@ using System.Reflection;
 
 using WebAnchor.RequestFactory;
 using WebAnchor.ResponseParser;
-using System.Linq;
 using System;
 
 namespace WebAnchor
@@ -19,8 +18,7 @@ namespace WebAnchor
 
             // This code can't find (or probably actually create) generic interface implementations.
             var types = Assembly.GetAssembly(typeof(T)).GetTypes();
-            var implementor = types
-                .First(x => x.IsClass && typeof(T).IsAssignableFrom(x));
+            var implementor = new ImplementationFinder().FindMatch(types, typeof(T));
             var anchor = new Anchor(httpClient, requestFactory, responseHandlersList, shouldDisposeHttpClient);
 
             var api = (T)Activator.CreateInstance(implementor, anchor);

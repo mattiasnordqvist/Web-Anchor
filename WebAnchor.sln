@@ -18,9 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAnchor.Analyzer.Test", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnchor.Analyzer.Vsix", "WebAnchor.Analyzer\WebAnchor.Analyzer.Vsix\WebAnchor.Analyzer.Vsix.csproj", "{903D3C9D-3560-47C4-934E-35F0AEA2124E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAnchor.Generators", "WebAnchor.Generators\WebAnchor.Generators.csproj", "{1B4BA14F-5300-4FBF-9EF5-DA1E25CC51D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAnchor.Generators", "WebAnchor.Generators\WebAnchor.Generators.csproj", "{1B4BA14F-5300-4FBF-9EF5-DA1E25CC51D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{17D02F15-6E03-45A8-B5F8-1B80504AE0DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
