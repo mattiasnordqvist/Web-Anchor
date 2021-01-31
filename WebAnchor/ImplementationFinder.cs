@@ -25,7 +25,7 @@ namespace WebAnchor
                             return goodCandidate;
                         }
                     }
-                    catch (ArgumentException ae)
+                    catch (ArgumentException)
                     { // Catch and swallow. Easiest way... }
                     }
 
