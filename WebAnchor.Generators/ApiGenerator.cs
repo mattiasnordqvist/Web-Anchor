@@ -16,12 +16,6 @@ namespace WebAnchor.Generators
     {
         public void Initialize(GeneratorInitializationContext context)
         {
-#if DEBUG
-            if (!Debugger.IsAttached)
-            {
-                Debugger.Launch();
-            }
-#endif 
             context.RegisterForSyntaxNotifications(() => new FindApisSyntaxReceiver());
         }
 

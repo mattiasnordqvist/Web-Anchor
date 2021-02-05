@@ -22,7 +22,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
 
             var fakedResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(@"{id: 1, name: ""Mighty Gazelle""}", Encoding.UTF8, "application/json"),
+                Content = new StringContent(@"{""Id"": 1, ""Name"": ""Mighty Gazelle""}", Encoding.UTF8, "application/json"),
             };
             fakedResponse.Headers.Add("location", "api/customer/1");
 

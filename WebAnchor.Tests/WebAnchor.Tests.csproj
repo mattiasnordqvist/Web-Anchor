@@ -31,4 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebAnchor\WebAnchor.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebAnchor.Generators\WebAnchor.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 </Project>

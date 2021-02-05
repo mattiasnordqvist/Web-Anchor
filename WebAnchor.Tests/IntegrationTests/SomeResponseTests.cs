@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using WebAnchor.ResponseParser;
@@ -25,7 +26,7 @@ namespace WebAnchor.Tests.IntegrationTests
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(@"{id: 9, name: ""Black Bull""}", Encoding.UTF8, "application/json")
+                Content = new StringContent(@"{""Id"": 9, ""Name"": ""Black Bull""}", Encoding.UTF8, "application/json")
             };
 
             var result = await GetResponse<ITestApi, Task<Customer>>(api => api.GetCustomer3(9), response);
@@ -57,7 +58,7 @@ namespace WebAnchor.Tests.IntegrationTests
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Hello World!") };
             await
-                AssertEx.ThrowsAsync<Exception>(
+                AssertEx.ThrowsAsync<JsonException>(
                     async () => await GetResponse<ITestApi, Task<Customer>>(async api => await api.GetAnObject(), response));
         }
 
