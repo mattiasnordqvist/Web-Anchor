@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace WebAnchor
 {
@@ -10,7 +10,7 @@ namespace WebAnchor
         public static async Task<TReturn> Content<T, TReturn>(this HttpResponseMessage @this, Func<T, TReturn> projection)
         {
             var result = await @this.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var content = JsonConvert.DeserializeObject<T>(result);
+            var content = JsonSerializer.Deserialize<T>(result);
             return projection(content);
         }
     }

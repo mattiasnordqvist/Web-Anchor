@@ -1,9 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
-using Newtonsoft.Json;
 
 using WebAnchor.ResponseParser;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
@@ -58,7 +57,7 @@ namespace WebAnchor.Tests.IntegrationTests
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent("Hello World!") };
             await
-                AssertEx.ThrowsAsync<JsonReaderException>(
+                AssertEx.ThrowsAsync<Exception>(
                     async () => await GetResponse<ITestApi, Task<Customer>>(async api => await api.GetAnObject(), response));
         }
 

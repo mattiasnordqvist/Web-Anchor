@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 using WebAnchor.RequestFactory;
 using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
@@ -8,11 +9,11 @@ using WebAnchor.RequestFactory.Transformation;
 namespace WebAnchor.Attributes.Content
 {
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class JsonAttribute : ParameterTransformerAttribute
+    public class NewtonsoftJsonAttribute : ParameterTransformerAttribute
     {
         public override void Apply(Parameter parameter, RequestTransformContext requestTransformContext)
         {
-            requestTransformContext.ContentSerializer = new JsonContentSerializer(); // TODO: how about the options?
+            requestTransformContext.ContentSerializer = new NewtonsoftJsonContentSerializer(new JsonSerializer());
         }
 
         public override void ValidateApi(Type type, MethodInfo method, ParameterInfo parameter)

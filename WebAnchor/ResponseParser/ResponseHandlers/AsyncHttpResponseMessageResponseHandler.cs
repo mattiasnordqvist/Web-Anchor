@@ -14,11 +14,11 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
             return methodInfo.ReturnType == typeof(Task<HttpResponseMessage>);
         }
 
-        public async Task<T> HandleAsync<T>(HttpResponseMessage httpResponseMessage, MethodInfo methodInfo)
+        public Task<T> HandleAsync<T>(HttpResponseMessage httpResponseMessage, MethodInfo methodInfo)
         {
             return Task.FromResult(httpResponseMessage) switch
             {
-                Task<T> t => await t.ConfigureAwait(false),
+                Task<T> t => t,
                 _ => throw new Exception()
             };
         }

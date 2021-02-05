@@ -1,18 +1,16 @@
-﻿using System.IO;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
-
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace WebAnchor.RequestFactory.Serialization
 {
     public class JsonContentSerializer : IContentSerializer
     {
-        private readonly JsonSerializer _jsonSerializer;
+        private readonly JsonSerializerOptions _options;
 
-        public JsonContentSerializer(JsonSerializer jsonSerializer)
+        public JsonContentSerializer(JsonSerializerOptions options = null)
         {
-            _jsonSerializer = jsonSerializer;
+            _options = options;
         }
 
         public virtual HttpContent Serialize(object value, Parameter content)
@@ -22,8 +20,7 @@ namespace WebAnchor.RequestFactory.Serialization
                 return null;
             }
 
-            var json = new StringBuilder();
-            _jsonSerializer.Serialize(new JsonTextWriter(new StringWriter(json)), value);
+            var json = JsonSerializer.Serialize(value, _options);
             return new StringContent(json.ToString(), Encoding.UTF8, "application/json");
         }
     }

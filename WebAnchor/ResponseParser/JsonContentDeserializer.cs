@@ -1,28 +1,22 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace WebAnchor.ResponseParser
 {
     public class JsonContentDeserializer : IContentDeserializer
     {
-        private readonly JsonSerializer _jsonSerializer;
+        private readonly JsonSerializerOptions _options;
 
-        public JsonContentDeserializer(JsonSerializer jsonSerializer)
+        public JsonContentDeserializer(JsonSerializerOptions options = null)
         {
-            _jsonSerializer = jsonSerializer;
+            _options = options;
         }
 
-        public virtual T Deserialize<T>(Stream stream, HttpResponseMessage message)
+        public virtual async Task<T> Deserialize<T>(Stream stream, HttpResponseMessage message)
         {
-            using (var streamReader = new StreamReader(stream))
-            using (var jr = new JsonTextReader(streamReader))
-            {
-                var u = _jsonSerializer.Deserialize<T>(jr);
-                return u;
-            }
+            return await JsonSerializer.DeserializeAsync<T>(stream, _options).ConfigureAwait(false);
         }
     }
 }

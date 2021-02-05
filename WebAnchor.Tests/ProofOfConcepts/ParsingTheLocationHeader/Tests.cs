@@ -3,8 +3,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using Newtonsoft.Json;
-
 using WebAnchor.ResponseParser.ResponseHandlers;
 using WebAnchor.Tests.ACollectionOfRandomTests.Fixtures;
 using WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader.Fixtures;
@@ -20,7 +18,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
         {
             var settings = new DefaultApiSettings();
             var index = settings.Response.ResponseHandlers.FindIndex(x => x is AsyncDeserializingResponseHandler);
-            settings.Response.ResponseHandlers[index] = new AsyncDeserializingResponseHandler(new HeaderEnabledContentDeserializer(new JsonSerializer()));
+            settings.Response.ResponseHandlers[index] = new AsyncDeserializingResponseHandler(new HeaderEnabledContentDeserializer());
 
             var fakedResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {

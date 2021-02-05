@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace WebAnchor.ResponseParser
 {
     public interface IContentDeserializer
     {
-        T Deserialize<T>(Stream stream,  HttpResponseMessage httpResponseMessage);
+        Task<T> Deserialize<T>(Stream stream,  HttpResponseMessage httpResponseMessage);
     }
 }

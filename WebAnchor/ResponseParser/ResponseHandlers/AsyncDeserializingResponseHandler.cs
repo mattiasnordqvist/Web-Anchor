@@ -26,7 +26,7 @@ namespace WebAnchor.ResponseParser.ResponseHandlers
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
-                return ContentDeserializer.Deserialize<T>(stream, httpResponseMessage);
+                return await ContentDeserializer.Deserialize<T>(stream, httpResponseMessage);
             }
             else
             {
