@@ -65,7 +65,7 @@ namespace WebAnchor.Generators
                 var namespaceName = i.Key.ContainingNamespace;
                 var apiName = i.Key.Name.TrimStart('I') + "Implementation"+Guid.NewGuid().ToString().Substring(0, 8);
                 var source =
-$@"{string.Join(Environment.NewLine, (i.Value.Item1.Union(new[] { namespaceName.ToString(), "global::System", "global::System.Reflection", "WebAnchor" })).Distinct().Select(x => $"using {x};"))}
+$@"{string.Join(Environment.NewLine, (i.Value.Item1.Union(new[] { namespaceName.ToString(), "global::System", "global::System.Reflection", "global::WebAnchor" })).Distinct().Select(x => $"using {x};"))}
 
 namespace {namespaceName}
 {{
