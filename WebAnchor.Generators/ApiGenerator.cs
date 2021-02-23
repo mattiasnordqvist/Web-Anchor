@@ -84,7 +84,7 @@ namespace {namespaceName}
     }} 
 }}";
                 var hintName = "WebAnchor.Generated."+i.Key.ToString() + ".implementation";
-                foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+                foreach (char c in System.IO.Path.GetInvalidFileNameChars().Union(new char[] { '<', '>' }))
                 {
                     hintName = hintName.Replace(c, '_');
                 }
