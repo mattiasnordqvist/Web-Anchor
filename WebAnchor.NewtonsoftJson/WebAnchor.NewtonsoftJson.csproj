@@ -8,12 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="5.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebAnchor.Analyzer\WebAnchor.Analyzer\WebAnchor.Analyzer.csproj" />
-    <ProjectReference Include="..\WebAnchor.Generators\WebAnchor.Generators.csproj" />
+    <ProjectReference Include="..\WebAnchor\WebAnchor.csproj" />
   </ItemGroup>
 
 </Project>

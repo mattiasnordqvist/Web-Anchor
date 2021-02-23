@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-
-using Newtonsoft.Json;
+using System.Text.Json;
 
 using WebAnchor.ResponseParser.ResponseHandlers;
 
@@ -13,7 +12,7 @@ namespace WebAnchor.ResponseParser
             Add(new AsyncTaskHandler());
             Add(new AsyncStreamHandler());
             Add(new AsyncHttpResponseMessageResponseHandler());
-            Add(new AsyncDeserializingResponseHandler(new JsonContentDeserializer(new JsonSerializer())));
+            Add(new AsyncDeserializingResponseHandler(new JsonContentDeserializer(new JsonSerializerOptions())));
         }
     }
 }

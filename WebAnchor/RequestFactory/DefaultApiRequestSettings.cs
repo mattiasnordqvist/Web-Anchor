@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json;
 using WebAnchor.RequestFactory.Serialization;
 using WebAnchor.RequestFactory.Transformation;
 using WebAnchor.RequestFactory.UrlNormalization;
@@ -13,7 +14,7 @@ namespace WebAnchor.RequestFactory
             ParameterListTransformers = new DefaultParameterListTransformers();
             InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = true;
             EncodeUrlSegmentSeparatorsInUrlSegmentSubstitutions = false;
-            ContentSerializer = new JsonContentSerializer(new Newtonsoft.Json.JsonSerializer());
+            ContentSerializer = new JsonContentSerializer(new JsonSerializerOptions());
             ParameterValueFormatter = new DefaultParameterValueFormatter();
             QueryParameterListStrategy = new NormalQueryParamaterListStrategy();
             UrlNormalizers = new List<IUrlNormalizer>();
