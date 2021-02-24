@@ -27,7 +27,7 @@ namespace WebAnchor.Generators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            Dictionary<ITypeSymbol, (List<string>, List<IMethodSymbol>)> interfaces = new Dictionary<ITypeSymbol, (List<string>, List<IMethodSymbol>)>();
+            Dictionary<ITypeSymbol, (List<string>, List<IMethodSymbol>)> interfaces = new Dictionary<ITypeSymbol, (List<string>, List<IMethodSymbol>)>(SymbolEqualityComparer.Default);
             var attributeSymbol = context.Compilation.GetTypeByMetadataName("WebAnchor.Attributes.URL.HttpAttribute");
             var nodes = ((FindApisSyntaxReceiver)context.SyntaxReceiver).Nodes;
             foreach (InterfaceDeclarationSyntax candidate in nodes)
