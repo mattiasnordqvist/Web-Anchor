@@ -116,7 +116,7 @@ namespace {namespaceName}
             var methodName = methodSymbol.Name;
             var parameters = string.Join(", ",methodSymbol.Parameters.Select(x => x.Type+ " " +x.Name));
             var parameterValues = "new object[]{" + string.Join(", ", methodSymbol.Parameters.Select(x => x.Name)) + "}";
-            var parameterTypes = "new Type[]{" + string.Join(", ", methodSymbol.Parameters.Select(x => "typeof("+x.Type+")")) + "}";
+            var parameterTypes = "new Type[]{" + string.Join(", ", methodSymbol.Parameters.Select(x => "typeof("+x.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated)+")")) + "}";
             return $@"
         public async {returnType} {methodName} ({parameters}) 
         {{

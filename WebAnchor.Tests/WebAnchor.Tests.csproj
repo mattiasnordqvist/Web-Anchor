@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net5</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

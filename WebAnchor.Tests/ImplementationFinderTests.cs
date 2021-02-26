@@ -7,6 +7,7 @@ namespace WebAnchor.ApiGenerator.Tests
         [Fact]
         public void MatchExists()
         {
+            
             var sut = new ImplementationFinder();
             var match = sut.FindMatch(new System.Type[] { typeof(Class1), typeof(Class2), typeof(Class3<>) }, typeof(Interface1));
             Assert.Equal(typeof(Class1), match);
