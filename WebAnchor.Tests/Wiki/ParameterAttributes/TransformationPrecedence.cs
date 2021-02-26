@@ -37,7 +37,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api/customer?f=new&p_age=28", assertMe.RequestUri.ToString());
+                   Assert.Equal("api/customer?f=new&p_age=28", assertMe.RequestUri?.ToString());
                });
         }
 
@@ -49,7 +49,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api/customer?parameter_method_api_filter=new", assertMe.RequestUri.ToString());
+                   Assert.Equal("api/customer?parameter_method_api_filter=new", assertMe.RequestUri?.ToString());
                });
         }
         #endregion

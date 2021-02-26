@@ -15,7 +15,7 @@ namespace WebAnchor.Tests.RequestFactory.NullableQueryStringParams
                 m =>
                     {
                         Assert.Equal(HttpMethod.Get, m.Method);
-                        Assert.Equal("base/path1", m.RequestUri.ToString());
+                        Assert.Equal("base/path1", m.RequestUri?.ToString());
                     });
         }
 
@@ -27,7 +27,7 @@ namespace WebAnchor.Tests.RequestFactory.NullableQueryStringParams
                 m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);
-                    Assert.Equal("base/path1?i=1", m.RequestUri.ToString());
+                    Assert.Equal("base/path1?i=1", m.RequestUri?.ToString());
                 });
         }
 
@@ -39,7 +39,7 @@ namespace WebAnchor.Tests.RequestFactory.NullableQueryStringParams
                 m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);
-                    Assert.Equal("base/path1", m.RequestUri.ToString());
+                    Assert.Equal("base/path1", m.RequestUri?.ToString());
                 });
         }
 
@@ -51,7 +51,7 @@ namespace WebAnchor.Tests.RequestFactory.NullableQueryStringParams
                 m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);
-                    Assert.Equal("base/path1?s=1", m.RequestUri.ToString());
+                    Assert.Equal("base/path1?s=1", m.RequestUri?.ToString());
                 });
         }
     }

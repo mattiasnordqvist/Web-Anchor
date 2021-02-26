@@ -27,7 +27,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("posts?userId=2", assertMe.RequestUri.ToString());
+                   Assert.Equal("posts?userId=2", assertMe.RequestUri?.ToString());
                });
 
             TestTheRequest<ITypicodeApi>(
@@ -35,7 +35,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("posts", assertMe.RequestUri.ToString());
+                   Assert.Equal("posts", assertMe.RequestUri?.ToString());
                });
 
             TestTheRequest<ITypicodeApi>(
@@ -43,7 +43,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("posts?userId=2", assertMe.RequestUri.ToString());
+                   Assert.Equal("posts?userId=2", assertMe.RequestUri?.ToString());
                });
         }
 

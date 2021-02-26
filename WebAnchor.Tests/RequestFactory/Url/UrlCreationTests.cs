@@ -16,7 +16,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 a =>
                     {
                         Assert.Equal(HttpMethod.Get, a.Method);
-                        Assert.Equal("base/a/path/with/preserved/slashes", a.RequestUri.ToString());
+                        Assert.Equal("base/a/path/with/preserved/slashes", a.RequestUri?.ToString());
                     });
         }
 
@@ -29,7 +29,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 assertHttpRequestMessage: a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
-                    Assert.Equal("base/a%2Fpath%2Fwith%2Furl%2Fencoded%2Fslashes", a.RequestUri.ToString());
+                    Assert.Equal("base/a%2Fpath%2Fwith%2Furl%2Fencoded%2Fslashes", a.RequestUri?.ToString());
                 });
         }
 
@@ -41,7 +41,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 m =>
                     {
                         Assert.Equal(HttpMethod.Get, m.Method);
-                        Assert.Equal("base/path1", m.RequestUri.ToString());
+                        Assert.Equal("base/path1", m.RequestUri?.ToString());
                     });
         }
 
@@ -53,7 +53,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);
-                    Assert.Equal("base/path2", m.RequestUri.ToString());
+                    Assert.Equal("base/path2", m.RequestUri?.ToString());
                 });
         }
 
@@ -65,7 +65,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);
-                    Assert.Equal("basepath2", m.RequestUri.ToString());
+                    Assert.Equal("basepath2", m.RequestUri?.ToString());
                 },
                 configure: x => x.Request.InsertMissingSlashBetweenBaseLocationAndVerbAttributeUrl = false);
         }
@@ -78,7 +78,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
-                    Assert.Equal("base/a//c/d", a.RequestUri.ToString());
+                    Assert.Equal("base/a//c/d", a.RequestUri?.ToString());
                 });
         }
 
@@ -90,7 +90,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
-                    Assert.Equal("base/a///d", a.RequestUri.ToString());
+                    Assert.Equal("base/a///d", a.RequestUri?.ToString());
                 });
         }
 
@@ -102,7 +102,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
-                    Assert.Equal("base/a/d", a.RequestUri.ToString());
+                    Assert.Equal("base/a/d", a.RequestUri?.ToString());
                 },
                 configure: settings => settings.Request.UrlNormalizers.Add(new RemoveDuplicateSlashes()));
         }
@@ -115,7 +115,7 @@ namespace WebAnchor.Tests.RequestFactory.Url
                 a =>
                 {
                     Assert.Equal(HttpMethod.Get, a.Method);
-                    Assert.Equal("base/a/c/d", a.RequestUri.ToString());
+                    Assert.Equal("base/a/c/d", a.RequestUri?.ToString());
                 },
                 configure: settings => settings.Request.UrlNormalizers.Add(new RemoveDuplicateSlashes()));
         }

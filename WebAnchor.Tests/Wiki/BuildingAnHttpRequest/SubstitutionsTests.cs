@@ -23,7 +23,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api/posts/82", assertMe.RequestUri.ToString());
+                   Assert.Equal("api/posts/82", assertMe.RequestUri?.ToString());
                });
         }
     }

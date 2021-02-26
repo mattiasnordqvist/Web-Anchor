@@ -40,7 +40,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api?values=abc&values=def&values=ghi", assertMe.RequestUri.ToString());
+                   Assert.Equal("api?values=abc&values=def&values=ghi", assertMe.RequestUri?.ToString());
                });
         }
 
@@ -52,7 +52,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api?v=abc&v=def&v=ghi", assertMe.RequestUri.ToString());
+                   Assert.Equal("api?v=abc&v=def&v=ghi", assertMe.RequestUri?.ToString());
                });
         }
 
@@ -64,7 +64,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api?values=abc,def,ghi", assertMe.RequestUri.ToString());
+                   Assert.Equal("api?values=abc,def,ghi", assertMe.RequestUri?.ToString());
                },
                x => x.Request.QueryParameterListStrategy = new DelimitedQueryParamaterListStrategy());
         }
@@ -77,7 +77,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api?v=abc,def,ghi", assertMe.RequestUri.ToString());
+                   Assert.Equal("api?v=abc,def,ghi", assertMe.RequestUri?.ToString());
                },
                x => x.Request.QueryParameterListStrategy = new DelimitedQueryParamaterListStrategy());
         }
@@ -90,7 +90,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api?values=1.2,2.4", assertMe.RequestUri.ToString());
+                   Assert.Equal("api?values=1.2,2.4", assertMe.RequestUri?.ToString());
                },
                x => x.Request.QueryParameterListStrategy = new DelimitedQueryParamaterListStrategy());
         }
@@ -103,7 +103,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api?values=1.2_2.4", assertMe.RequestUri.ToString());
+                   Assert.Equal("api?values=1.2_2.4", assertMe.RequestUri?.ToString());
                },
                x => x.Request.QueryParameterListStrategy = new DelimitedQueryParamaterListStrategy { Delimiter = "_" });
         }

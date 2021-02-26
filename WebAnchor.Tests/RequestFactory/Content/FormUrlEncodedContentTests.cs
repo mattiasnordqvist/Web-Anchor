@@ -26,7 +26,7 @@ namespace WebAnchor.Tests.RequestFactory.Content
                    api => api.Post(new Payload(1, "Test")),
                    request =>
                    {
-                       var content = request.Content.ReadAsStringAsync().Result;
+                       var content = request.Content?.ReadAsStringAsync().Result;
                        Assert.Equal("Id=1&Name=Test", content);
                    });
         }
@@ -38,7 +38,7 @@ namespace WebAnchor.Tests.RequestFactory.Content
                    api => api.PostCustomized(new CustomizedPayload(1, "Test")),
                    request =>
                    {
-                       var content = request.Content.ReadAsStringAsync().Result;
+                       var content = request.Content?.ReadAsStringAsync().Result;
                        Assert.Equal("Id=1&Name=Test&refresh_token=my-token", content);
                    });
         }

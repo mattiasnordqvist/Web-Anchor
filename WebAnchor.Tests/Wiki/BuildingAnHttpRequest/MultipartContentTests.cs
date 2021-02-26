@@ -145,15 +145,15 @@ From bytes
         private static void VerifyMultipartRequest(HttpRequestMessage assertMe, string expectedContent)
         {
             Assert.Equal(HttpMethod.Post, assertMe.Method);
-            Assert.Equal("api", assertMe.RequestUri.ToString());
+            Assert.Equal("api", assertMe.RequestUri?.ToString());
 
-            var boundary = assertMe.Content.Headers.ContentType.Parameters.SingleOrDefault(p => p.Name == "boundary")?.Value;
+            var boundary = assertMe.Content?.Headers.ContentType?.Parameters.SingleOrDefault(p => p.Name == "boundary")?.Value;
             Assert.NotNull(boundary);
             Assert.Matches(@"^""[0-9A-Fa-f]{8}[-]?([0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}""$", boundary);
 
-            var body = assertMe.Content.ReadAsStringAsync().Result;
+            var body = assertMe.Content?.ReadAsStringAsync().Result;
             Assert.Equal(
-                expectedContent.Replace("{boundary}", boundary.Trim('"')),
+                expectedContent.Replace("{boundary}", boundary!.Trim('"')),
                 body,
                 ignoreLineEndingDifferences: true);
         }

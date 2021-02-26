@@ -19,7 +19,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomers(), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer", m.RequestUri.ToString());
+                Assert.Equal("api/customer", m.RequestUri?.ToString());
             });
         }
 
@@ -29,7 +29,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.PostWithoutPayload(), m =>
             {
                 Assert.Equal(HttpMethod.Post, m.Method);
-                Assert.Equal("api/customer", m.RequestUri.ToString());
+                Assert.Equal("api/customer", m.RequestUri?.ToString());
             });
         }
 
@@ -39,7 +39,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomer(8), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer/8", m.RequestUri.ToString());
+                Assert.Equal("api/customer/8", m.RequestUri?.ToString());
             });
         }
 
@@ -51,7 +51,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                 assertHttpRequestMessage: m =>
                 {
                     Assert.Equal(HttpMethod.Get, m.Method);
-                    Assert.Equal("api/v2", m.RequestUri.ToString());
+                    Assert.Equal("api/v2", m.RequestUri?.ToString());
                 });
         }
 
@@ -61,7 +61,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomers7("hej"), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?extraParam=7&filter=hej", m.RequestUri.ToString());
+                Assert.Equal("api/customer?extraParam=7&filter=hej", m.RequestUri?.ToString());
             });
         }
 
@@ -71,7 +71,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomers(filter: "drunk"), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?filter=drunk", m.RequestUri.ToString());
+                Assert.Equal("api/customer?filter=drunk", m.RequestUri?.ToString());
             });
         }
 
@@ -81,7 +81,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomers5(filter: "drunk"), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?f=drunk", m.RequestUri.ToString());
+                Assert.Equal("api/customer?f=drunk", m.RequestUri?.ToString());
             });
         }
 
@@ -91,7 +91,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomers4(filter: "drunk"), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?filter=knurd", m.RequestUri.ToString());
+                Assert.Equal("api/customer?filter=knurd", m.RequestUri?.ToString());
             });
         }
 
@@ -101,7 +101,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<IReversedApi>(api => api.GetSomething(filter: "reverseme"), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/reversed?filter=emesrever", m.RequestUri.ToString());
+                Assert.Equal("api/reversed?filter=emesrever", m.RequestUri?.ToString());
             });
         }
 
@@ -111,7 +111,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.MethodWithListParameter(new List<string> { "abc", "bcd", "cde" }), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?names=abc&names=bcd&names=cde", m.RequestUri.ToString());
+                Assert.Equal("api/customer?names=abc&names=bcd&names=cde", m.RequestUri?.ToString());
             });
         }
 
@@ -121,7 +121,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.MethodWithIntegerListParameter(new List<int> { 1, 2, 3 }), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?values=1&values=2&values=3", m.RequestUri.ToString());
+                Assert.Equal("api/customer?values=1&values=2&values=3", m.RequestUri?.ToString());
             });
         }
 
@@ -131,7 +131,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.MethodWithIntegerArrayParameter(new[] { 1, 2, 3 }), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?values=1&values=2&values=3", m.RequestUri.ToString());
+                Assert.Equal("api/customer?values=1&values=2&values=3", m.RequestUri?.ToString());
             });
         }
 
@@ -143,7 +143,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
                 m =>
                     {
                         Assert.Equal(HttpMethod.Get, m.Method);
-                        Assert.Equal("api/customer?names=cba&names=dcb&names=edc", m.RequestUri.ToString());
+                        Assert.Equal("api/customer?names=cba&names=dcb&names=edc", m.RequestUri?.ToString());
                     },
             x => x.Request.ParameterListTransformers.Add(new ReverseAttribute()));
         }
@@ -154,7 +154,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomers("my filter?"), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer?filter=my+filter%3F", m.RequestUri.ToString());
+                Assert.Equal("api/customer?filter=my+filter%3F", m.RequestUri?.ToString());
             });
         }
 
@@ -164,7 +164,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             TestTheRequest<ITestApi>(api => api.GetCustomers6("my resource"), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal("api/customer/my+resource", m.RequestUri.ToString());
+                Assert.Equal("api/customer/my+resource", m.RequestUri?.ToString());
             });
         }
 
@@ -175,7 +175,7 @@ namespace WebAnchor.Tests.ACollectionOfRandomTests
             RunWithCulture("en-US", () => TestTheRequest<ITestApi>(api => api.GetCustomers(new DateTime(2014, 03, 07)), m =>
             {
                 Assert.Equal(HttpMethod.Get, m.Method);
-                Assert.Equal($"api/customer?from={expectedResult}", m.RequestUri.ToString());
+                Assert.Equal($"api/customer?from={expectedResult}", m.RequestUri?.ToString());
             }));
         }
 

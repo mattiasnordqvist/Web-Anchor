@@ -25,7 +25,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("api/resource", assertMe.RequestUri.ToString());
+                   Assert.Equal("api/resource", assertMe.RequestUri?.ToString());
                    Assert.Equal("Basic 987asdg676g", assertMe.Headers.GetValues("Authorization").First());
                });
         }

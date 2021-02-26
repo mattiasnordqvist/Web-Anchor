@@ -28,7 +28,7 @@ namespace WebAnchor.Tests.ProofOfConcepts.ParsingTheLocationHeader
             fakedResponse.Headers.Add("Location", "api/customer/1");
 
             var result = await GetResponse<ICustomerApi, Task<CustomerWithLocation>>(
-                x => x.CreateCustomer(new Customer { Id = 1, Name = "Mighty Gazelle" }),
+                x => x.CreateCustomer(new Customer(Id: 1, Name: "Mighty Gazelle")),
                 fakedResponse,
                 settings);
 

@@ -16,7 +16,7 @@ namespace WebAnchor.Tests.IntegrationTests
         {
             var exception = default(TException);
             var expected = typeof(TException);
-            Type actual = null;
+            Type? actual = null;
             try
             {
                 await func();

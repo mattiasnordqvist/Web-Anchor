@@ -11,6 +11,6 @@ namespace WebAnchor.Tests.RequestFactory.NullableQueryStringParams
         Task<HttpResponseMessage> Get(int? i);
 
         [Get("/path1")]
-        Task<HttpResponseMessage> Get2(string s);
+        Task<HttpResponseMessage> Get2(string? s);
     }
 }

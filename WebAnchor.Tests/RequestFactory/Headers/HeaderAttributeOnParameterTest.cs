@@ -30,7 +30,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
                    api => api.Get("Basic 79iou342qkras9"),
                    request =>
                    {
-                       Assert.Equal("location/resource", request.RequestUri.ToString());
+                       Assert.Equal("location/resource", request.RequestUri?.ToString());
                        Assert.True(request.Headers.Contains("Authorization"));
                        Assert.Equal("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                    });
@@ -43,7 +43,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
                    api => api.Get2("Basic 79iou342qkras9"),
                    request =>
                    {
-                       Assert.Equal("location/resource", request.RequestUri.ToString());
+                       Assert.Equal("location/resource", request.RequestUri?.ToString());
                        Assert.True(request.Headers.Contains("Authorization"));
                        Assert.Equal("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                    });
@@ -56,7 +56,7 @@ namespace WebAnchor.Tests.RequestFactory.Headers
                    api => api.Get2("Basic 79iou342qkras9"),
                    request =>
                    {
-                       Assert.Equal("location/resource", request.RequestUri.ToString());
+                       Assert.Equal("location/resource", request.RequestUri?.ToString());
                        Assert.True(request.Headers.Contains("Authorization"));
                        Assert.Equal("Basic 79iou342qkras9", request.Headers.GetValues("Authorization").Single());
                    });

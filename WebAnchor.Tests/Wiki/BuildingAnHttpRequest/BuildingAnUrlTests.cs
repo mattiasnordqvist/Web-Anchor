@@ -30,7 +30,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("posts", assertMe.RequestUri.ToString());
+                   Assert.Equal("posts", assertMe.RequestUri?.ToString());
                });
         }
 
@@ -42,7 +42,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Get, assertMe.Method);
-                   Assert.Equal("posts/291", assertMe.RequestUri.ToString());
+                   Assert.Equal("posts/291", assertMe.RequestUri?.ToString());
                });
         }
 
@@ -54,7 +54,7 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Delete, assertMe.Method);
-                   Assert.Equal("posts/291", assertMe.RequestUri.ToString());
+                   Assert.Equal("posts/291", assertMe.RequestUri?.ToString());
                });
         }
 

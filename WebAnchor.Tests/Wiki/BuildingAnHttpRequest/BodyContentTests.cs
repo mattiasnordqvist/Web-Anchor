@@ -24,8 +24,8 @@ namespace WebAnchor.Tests.Wiki
                assertMe =>
                {
                    Assert.Equal(HttpMethod.Post, assertMe.Method);
-                   Assert.Equal("api", assertMe.RequestUri.ToString());
-                   var body = assertMe.Content.ReadAsStringAsync().Result;
+                   Assert.Equal("api", assertMe.RequestUri?.ToString());
+                   var body = assertMe.Content?.ReadAsStringAsync().Result;
                    Assert.Equal(@"{""Id"":1,""UserId"":2}", body);
                });
         }
