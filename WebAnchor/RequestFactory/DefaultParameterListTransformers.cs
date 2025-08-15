@@ -9,6 +9,7 @@ namespace WebAnchor.RequestFactory
         public DefaultParameterListTransformers()
         {
             Add(new ParameterCreatorTransformer());
+            Add(new DictionaryParameterTransformer());
             Add(new AttributesTransformer());
         }
     }
