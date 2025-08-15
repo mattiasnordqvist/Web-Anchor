@@ -187,5 +187,18 @@ namespace WebAnchor.RequestFactory
         }
 
         private static bool IsEnumerable(object value) => value is IEnumerable && (value.GetType().GetTypeInfo().IsGenericType || value.GetType().IsArray);
+
+        internal static Parameter CreateQueryParameter(string name, IEnumerable<object> values, ParameterInfo sourceParameterInfo, object sourceValue, Parameter parentParameter)
+        {
+            return new Parameter()
+            {
+                SourceValue = sourceValue,
+                SourceParameterInfo = sourceParameterInfo,
+                ParentParameter = parentParameter,
+                ParameterType = ParameterType.Query,
+                Values = values,
+                Name = name,
+            };
+        }
     }
 }
